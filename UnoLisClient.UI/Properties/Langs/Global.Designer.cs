@@ -59,5 +59,275 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UNO-LIS.
+        /// </summary>
+        internal static string AppNameLabel {
+            get {
+                return ResourceManager.GetString("AppNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        internal static string ChatLabel {
+            get {
+                return ResourceManager.GetString("ChatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        internal static string CodeLabel {
+            get {
+                return ResourceManager.GetString("CodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coins Revo.
+        /// </summary>
+        internal static string CoinsLabel {
+            get {
+                return ResourceManager.GetString("CoinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation.
+        /// </summary>
+        internal static string ConfirmationLabel {
+            get {
+                return ResourceManager.GetString("ConfirmationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We&apos;ve sent you a confirmation code to your email. Please enter it below:.
+        /// </summary>
+        internal static string ConfirmationMessageLabel {
+            get {
+                return ResourceManager.GetString("ConfirmationMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Error.
+        /// </summary>
+        internal static string ConnectionErrorLabel {
+            get {
+                return ResourceManager.GetString("ConnectionErrorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to connect with the server. Check your internet connection and try again..
+        /// </summary>
+        internal static string ConnectionErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("ConnectionErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright Mauricio &amp; Erickmel.
+        /// </summary>
+        internal static string CopyrightLabel {
+            get {
+                return ResourceManager.GetString("CopyrightLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string EmailLabel {
+            get {
+                return ResourceManager.GetString("EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string ExitLabel {
+            get {
+                return ResourceManager.GetString("ExitLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friends.
+        /// </summary>
+        internal static string FriendsListLabel {
+            get {
+                return ResourceManager.GetString("FriendsListLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game settings.
+        /// </summary>
+        internal static string GameSettingsLabel {
+            get {
+                return ResourceManager.GetString("GameSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global points.
+        /// </summary>
+        internal static string GlobalPointsColumn {
+            get {
+                return ResourceManager.GetString("GlobalPointsColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go!.
+        /// </summary>
+        internal static string GoButton {
+            get {
+                return ResourceManager.GetString("GoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to play?.
+        /// </summary>
+        internal static string HowToPlayLabel {
+            get {
+                return ResourceManager.GetString("HowToPlayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches played.
+        /// </summary>
+        internal static string MatchesPlayedColumn {
+            get {
+                return ResourceManager.GetString("MatchesPlayedColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string NoButton {
+            get {
+                return ResourceManager.GetString("NoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No connection.
+        /// </summary>
+        internal static string NoConnectionLabel {
+            get {
+                return ResourceManager.GetString("NoConnectionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The game is currently unavailable, please try again later..
+        /// </summary>
+        internal static string NoConnectionMessageLabel {
+            get {
+                return ResourceManager.GetString("NoConnectionMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string PasswordLabel {
+            get {
+                return ResourceManager.GetString("PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        internal static string ProfileLabel {
+            get {
+                return ResourceManager.GetString("ProfileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string SaveButton {
+            get {
+                return ResourceManager.GetString("SaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsLabel {
+            get {
+                return ResourceManager.GetString("SettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shop.
+        /// </summary>
+        internal static string ShopLabel {
+            get {
+                return ResourceManager.GetString("ShopLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        internal static string StatisticsLabel {
+            get {
+                return ResourceManager.GetString("StatisticsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        internal static string VolumeLabel {
+            get {
+                return ResourceManager.GetString("VolumeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win rate.
+        /// </summary>
+        internal static string WinRateColumn {
+            get {
+                return ResourceManager.GetString("WinRateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string YesButton {
+            get {
+                return ResourceManager.GetString("YesButton", resourceCulture);
+            }
+        }
     }
 }

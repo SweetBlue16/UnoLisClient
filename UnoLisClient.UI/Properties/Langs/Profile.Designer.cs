@@ -59,5 +59,86 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change avatar.
+        /// </summary>
+        internal static string ChangeAvatarButton {
+            get {
+                return ResourceManager.GetString("ChangeAvatarButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an avatar.
+        /// </summary>
+        internal static string ChangeAvatarLabel {
+            get {
+                return ResourceManager.GetString("ChangeAvatarLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change date.
+        /// </summary>
+        internal static string ChangeDataButton {
+            get {
+                return ResourceManager.GetString("ChangeDataButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Epic skins.
+        /// </summary>
+        internal static string EpicSkinsLabel {
+            get {
+                return ResourceManager.GetString("EpicSkinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legendary skins.
+        /// </summary>
+        internal static string LegendarySkinsLabel {
+            get {
+                return ResourceManager.GetString("LegendarySkinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loses.
+        /// </summary>
+        internal static string LosesColumn {
+            get {
+                return ResourceManager.GetString("LosesColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Social media.
+        /// </summary>
+        internal static string SocialMediaLabel {
+            get {
+                return ResourceManager.GetString("SocialMediaLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special skins.
+        /// </summary>
+        internal static string SpecialSkinsLabel {
+            get {
+                return ResourceManager.GetString("SpecialSkinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wins.
+        /// </summary>
+        internal static string WinsColumn {
+            get {
+                return ResourceManager.GetString("WinsColumn", resourceCulture);
+            }
+        }
     }
 }

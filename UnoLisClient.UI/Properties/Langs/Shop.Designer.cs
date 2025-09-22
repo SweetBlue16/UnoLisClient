@@ -59,5 +59,68 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avatar shop.
+        /// </summary>
+        internal static string AvatarShopLabel {
+            get {
+                return ResourceManager.GetString("AvatarShopLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy.
+        /// </summary>
+        internal static string BuyButton {
+            get {
+                return ResourceManager.GetString("BuyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Epic box.
+        /// </summary>
+        internal static string EpicBoxLabel {
+            get {
+                return ResourceManager.GetString("EpicBoxLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legendary box.
+        /// </summary>
+        internal static string LegendaryBoxLabel {
+            get {
+                return ResourceManager.GetString("LegendaryBoxLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These are the icons you can get, are you sure you want to proceed?.
+        /// </summary>
+        internal static string PurchaseConfirmationLabel {
+            get {
+                return ResourceManager.GetString("PurchaseConfirmationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congrats, you&apos;ve got: {0}.
+        /// </summary>
+        internal static string RewardLabel {
+            get {
+                return ResourceManager.GetString("RewardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special box.
+        /// </summary>
+        internal static string SpecialBoxLabel {
+            get {
+                return ResourceManager.GetString("SpecialBoxLabel", resourceCulture);
+            }
+        }
     }
 }

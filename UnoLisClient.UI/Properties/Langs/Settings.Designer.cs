@@ -59,5 +59,68 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backgrounds.
+        /// </summary>
+        internal static string BackgroundsLabel {
+            get {
+                return ResourceManager.GetString("BackgroundsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string LanguageLabel {
+            get {
+                return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Music.
+        /// </summary>
+        internal static string MusicSettingsLabel {
+            get {
+                return ResourceManager.GetString("MusicSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        internal static string PlayerSettingsLabel {
+            get {
+                return ResourceManager.GetString("PlayerSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re-Shuffle Deck.
+        /// </summary>
+        internal static string ReShuffleDeckSettingsLabel {
+            get {
+                return ResourceManager.GetString("ReShuffleDeckSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound effects.
+        /// </summary>
+        internal static string SoundEffectsSettingsLabel {
+            get {
+                return ResourceManager.GetString("SoundEffectsSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special rules.
+        /// </summary>
+        internal static string SpecialRulesSettingsLabel {
+            get {
+                return ResourceManager.GetString("SpecialRulesSettingsLabel", resourceCulture);
+            }
+        }
     }
 }

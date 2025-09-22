@@ -59,5 +59,41 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add friend.
+        /// </summary>
+        internal static string AddFriendButton {
+            get {
+                return ResourceManager.GetString("AddFriendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your friend&apos;s nickname to add them to the list..
+        /// </summary>
+        internal static string EnterNicknameMessageLabel {
+            get {
+                return ResourceManager.GetString("EnterNicknameMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My friends.
+        /// </summary>
+        internal static string MyFriendsLabel {
+            get {
+                return ResourceManager.GetString("MyFriendsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove {0} from your friends list?.
+        /// </summary>
+        internal static string RemoveFriendMessageLabel {
+            get {
+                return ResourceManager.GetString("RemoveFriendMessageLabel", resourceCulture);
+            }
+        }
     }
 }

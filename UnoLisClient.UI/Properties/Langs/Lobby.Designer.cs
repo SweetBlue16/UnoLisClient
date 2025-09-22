@@ -59,5 +59,23 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to READY!.
+        /// </summary>
+        internal static string ReadyButton {
+            get {
+                return ResourceManager.GetString("ReadyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to START!.
+        /// </summary>
+        internal static string StartButton {
+            get {
+                return ResourceManager.GetString("StartButton", resourceCulture);
+            }
+        }
     }
 }

@@ -59,5 +59,113 @@ namespace UnoLisClient.UI.Properties.Langs {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write the reason for the report:.
+        /// </summary>
+        internal static string DescriptionReportLabel {
+            get {
+                return ResourceManager.GetString("DescriptionReportLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to leave the match?.
+        /// </summary>
+        internal static string ExitMatchConfirmationLabel {
+            get {
+                return ResourceManager.GetString("ExitMatchConfirmationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match Results.
+        /// </summary>
+        internal static string MatchResultsLabel {
+            get {
+                return ResourceManager.GetString("MatchResultsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        internal static string OptionsLabel {
+            get {
+                return ResourceManager.GetString("OptionsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Place.
+        /// </summary>
+        internal static string PlaceResultsColumn {
+            get {
+                return ResourceManager.GetString("PlaceResultsColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player.
+        /// </summary>
+        internal static string PlayerNameColumn {
+            get {
+                return ResourceManager.GetString("PlayerNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        internal static string RankColumn {
+            get {
+                return ResourceManager.GetString("RankColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report player.
+        /// </summary>
+        internal static string ReportPlayerLabel {
+            get {
+                return ResourceManager.GetString("ReportPlayerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        internal static string ScoreColumn {
+            get {
+                return ResourceManager.GetString("ScoreColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which player do you want to report?.
+        /// </summary>
+        internal static string SelectReportPlayer {
+            get {
+                return ResourceManager.GetString("SelectReportPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now playing {0}.
+        /// </summary>
+        internal static string TurnLabel {
+            get {
+                return ResourceManager.GetString("TurnLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The player {0} has won!.
+        /// </summary>
+        internal static string WinnerLabel {
+            get {
+                return ResourceManager.GetString("WinnerLabel", resourceCulture);
+            }
+        }
     }
 }
