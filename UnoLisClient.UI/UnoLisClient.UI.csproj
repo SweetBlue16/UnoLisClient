@@ -92,20 +92,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Langs\Leaderboards.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Leaderboards.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Langs\Lobby.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lobby.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Langs\Login.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Login.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Langs\Match.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -152,20 +142,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Langs\Leaderboards.es.resx" />
-    <EmbeddedResource Include="Properties\Langs\Leaderboards.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Leaderboards.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Lobby.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Lobby.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Lobby.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Langs\Login.es.resx" />
-    <EmbeddedResource Include="Properties\Langs\Login.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Login.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Match.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Match.resx">
@@ -204,7 +184,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="PopUpWindows\InputPopUpWindow.xaml">
       <SubType>Designer</SubType>
