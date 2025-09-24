@@ -223,6 +223,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string MessagePlaceholderLabel {
+            get {
+                return ResourceManager.GetString("MessagePlaceholderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string NoButton {
@@ -309,6 +318,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string StatisticsLabel {
             get {
                 return ResourceManager.GetString("StatisticsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string TitlePlaceholderLabel {
+            get {
+                return ResourceManager.GetString("TitlePlaceholderLabel", resourceCulture);
             }
         }
         

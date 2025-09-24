@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen" Background="#1B263B">
     <Grid>
         <Label x:Name="TitleLabel"
-               Content="{x:Static language:Global.EmailLabel}"
+               Content="{x:Static language:Global.TitlePlaceholderLabel}"
                HorizontalAlignment="Center"
                Margin="0,27,0,0"
                VerticalAlignment="Top"
@@ -20,16 +20,19 @@
         <TextBlock x:Name="MessageTextBlock"
                    HorizontalAlignment="Center"
                    TextWrapping="Wrap"
-                   Text="{x:Static language:Global.ConnectionErrorMessageLabel}"
+                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
                    VerticalAlignment="Center"
                    FontFamily="pack://application:,,,/Fonts/#Lato"
                    Foreground="White"
-                   FontSize="18" Height="51"/>
+                   FontSize="18"
+                   Height="51"/>
         <Button Content="{x:Static language:Global.OkButton}"
                 HorizontalAlignment="Center"
                 Margin="0,180,0,0"
                 VerticalAlignment="Top"
-                Style="{DynamicResource PrimaryButtonStyle}" Height="39" Width="154"
+                Style="{DynamicResource PrimaryButtonStyle}"
+                Height="39"
+                Width="154"
                 Click="ClickOkButton"/>
     </Grid>
 </Window>

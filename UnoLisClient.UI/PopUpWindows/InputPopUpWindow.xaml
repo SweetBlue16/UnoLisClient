@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnoLisClient.UI.PopUpWindows"
         mc:Ignorable="d"
-        Title="InputPopUpWindow" Height="450" Width="800">
+        xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+        Title="InputPopUpWindow" Height="310" Width="450"
+        WindowStartupLocation="CenterScreen" Background="#1B263B">
     <Grid>
-        
+        <Label x:Name="TitleLabel"
+               Content="{x:Static language:Global.TitlePlaceholderLabel}"
+               HorizontalAlignment="Center"
+               Margin="0,16,0,0"
+               VerticalAlignment="Top"
+               FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+               Foreground="White"
+               FontSize="40"/>
+        <TextBlock x:Name="MessageTextBlock"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"
+                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="18"
+                   Height="51"
+                   Margin="0,81,0,0"/>
+        <TextBox x:Name="InputTextBox"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Margin="54,141,54,68"
+                 Width="NaN"/>
+        <Button Content="{x:Static language:Global.GoButton}"
+                HorizontalAlignment="Center"
+                Margin="0,215,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource PrimaryButtonStyle}"
+                Height="56"
+                Width="154"
+                Click="ClickOkButton"/>
     </Grid>
 </Window>

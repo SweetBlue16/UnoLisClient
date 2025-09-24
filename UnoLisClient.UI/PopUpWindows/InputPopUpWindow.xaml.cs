@@ -19,9 +19,19 @@ namespace UnoLisClient.UI.PopUpWindows
     /// </summary>
     public partial class InputPopUpWindow : Window
     {
-        public InputPopUpWindow()
+        public InputPopUpWindow(string title, string message, string watermark)
         {
             InitializeComponent();
+            TitleLabel.Content = title;
+            MessageTextBlock.Text = message;
+            InputTextBox.Tag = watermark;
+        }
+
+        private void ClickOkButton(object sender, RoutedEventArgs e)
+        {
+            // TO-DO Logic with the text box
+            this.Close();
+            string userInput = InputTextBox.Text.Trim().ToUpper();
         }
     }
 }

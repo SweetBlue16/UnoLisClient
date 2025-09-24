@@ -171,6 +171,9 @@
   <data name="MatchesPlayedColumn" xml:space="preserve">
     <value>Partidas jugadas</value>
   </data>
+  <data name="MessagePlaceholderLabel" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
   <data name="NoButton" xml:space="preserve">
     <value>No</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="StatisticsLabel" xml:space="preserve">
     <value>Estadísticas</value>
+  </data>
+  <data name="TitlePlaceholderLabel" xml:space="preserve">
+    <value>Título</value>
   </data>
   <data name="VolumeLabel" xml:space="preserve">
     <value>Volumen</value>
