@@ -17,9 +17,11 @@ namespace UnoLisClient.UI
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            // UI Tests
             string title = UnoLisClient.UI.Properties.Langs.Global.ConnectionErrorLabel;
             string message = UnoLisClient.UI.Properties.Langs.Global.ConnectionErrorMessageLabel;
-            var win = new SimplePopUpWindow(title, message);
+            var win = new InputPopUpWindow();
             win.Title = UnoLisClient.UI.Properties.Langs.Global.ConnectionErrorLabel;
             win.Show();
         }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:UnoLisClient.UI">
     <Application.Resources>
+        <!-- Button Colors -->
         <SolidColorBrush x:Key="PrimaryYellowColor" Color="#FFD60A"/>
         <SolidColorBrush x:Key="PrimaryTextColor" Color="#121212"/>
         <SolidColorBrush x:Key="PrimaryButtonMouseOverColor" Color="#FFEA80"/>
@@ -13,6 +14,18 @@
         <SolidColorBrush x:Key="SecondaryButtonMouseOverColor" Color="#A7A7AD"/>
         <SolidColorBrush x:Key="SecondaryButtonPressedColor" Color="#787878"/>
         
+        <!-- TextBox Colors -->
+        <SolidColorBrush x:Key="DeselectedTextBoxBackgroundColor" Color="#F2F2F7"/>
+        <SolidColorBrush x:Key="DeselectedTextBoxBorderColor" Color="#444444"/>
+        <SolidColorBrush x:Key="DeselectedTextBoxTextColor" Color="#292929"/>
+
+        <SolidColorBrush x:Key="FocusedTextBoxBackgroundColor" Color="#F2F2F7"/>
+        <SolidColorBrush x:Key="FocusedTextBoxBorderColor" Color="#0A84FF"/>
+
+        <SolidColorBrush x:Key="DisabledTextBoxBackgroundColor" Color="#F2F2F7"/>
+        <SolidColorBrush x:Key="DisabledTextBoxBorderColor" Color="#38383A"/>
+        <SolidColorBrush x:Key="DisabledTextBoxTextColor" Color="#8E8E93"/>
+
         <!-- Starts PrimaryButtonStyle -->
         <Style x:Key="PrimaryButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="{DynamicResource PrimaryYellowColor}"/>
@@ -108,5 +121,78 @@
             </Setter>
         </Style>
         <!-- Ends SecondaryButtonStyle -->
+        
+        <!-- Starts TextBoxStyle -->
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource DeselectedTextBoxBackgroundColor}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DeselectedTextBoxBorderColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DeselectedTextBoxTextColor}"/>
+            <Setter Property="Padding" Value="5 3"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource DeselectedTextBoxTextColor}"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="TextBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                MaxHeight="{TemplateBinding MaxHeight}"
+                                MaxWidth="{TemplateBinding MaxWidth}"
+                                SnapsToDevicePixels="True">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Focusable="False"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden"
+                                              Margin="-2 2"/>
+                                <Label x:Name="WaterMarkerLabel"
+                                       Content="{TemplateBinding Tag}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                       Visibility="Collapsed"
+                                       Foreground="{DynamicResource DeselectedTextBoxTextColor}"
+                                       Padding="{TemplateBinding Padding}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility"
+                                        TargetName="WaterMarkerLabel"
+                                        Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="{DynamicResource FocusedTextBoxBorderColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="{DynamicResource FocusedTextBoxBorderColor}"/>
+                                <Setter TargetName="WaterMarkerLabel"
+                                        Property="Foreground"
+                                        Value="{DynamicResource DisabledTextBoxTextColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Ends TextBoxStyle -->
     </Application.Resources>
 </Application>
