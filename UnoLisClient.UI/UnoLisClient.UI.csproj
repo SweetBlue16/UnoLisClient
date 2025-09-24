@@ -134,48 +134,53 @@
     </Compile>
     <EmbeddedResource Include="Properties\Langs\FriendsList.es.resx" />
     <EmbeddedResource Include="Properties\Langs\FriendsList.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FriendsList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Global.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Global.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Lobby.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Lobby.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lobby.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Match.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Match.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Match.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Profile.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Settings.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Settings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Shop.es.resx" />
     <EmbeddedResource Include="Properties\Langs\Shop.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Shop.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\SignIn.es.resx" />
     <EmbeddedResource Include="Properties\Langs\SignIn.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SignIn.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\Profile.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Profile.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Bangers.ttf" />
+    <Resource Include="Fonts\Bubblegum-Sans.ttf" />
+    <Resource Include="Fonts\Lato.ttf" />
+    <Resource Include="Fonts\Luckiest-Guy.ttf" />
+    <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -184,9 +189,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fonts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="PopUpWindows\InputPopUpWindow.xaml">
       <SubType>Designer</SubType>

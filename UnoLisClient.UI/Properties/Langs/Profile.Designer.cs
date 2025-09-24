@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Profile {
+    public class Profile {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.Profile", typeof(Profile).Assembly);
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Change avatar.
         /// </summary>
-        internal static string ChangeAvatarButton {
+        public static string ChangeAvatarButton {
             get {
                 return ResourceManager.GetString("ChangeAvatarButton", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Select an avatar.
         /// </summary>
-        internal static string ChangeAvatarLabel {
+        public static string ChangeAvatarLabel {
             get {
                 return ResourceManager.GetString("ChangeAvatarLabel", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Change date.
         /// </summary>
-        internal static string ChangeDataButton {
+        public static string ChangeDataButton {
             get {
                 return ResourceManager.GetString("ChangeDataButton", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Epic skins.
         /// </summary>
-        internal static string EpicSkinsLabel {
+        public static string EpicSkinsLabel {
             get {
                 return ResourceManager.GetString("EpicSkinsLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Legendary skins.
         /// </summary>
-        internal static string LegendarySkinsLabel {
+        public static string LegendarySkinsLabel {
             get {
                 return ResourceManager.GetString("LegendarySkinsLabel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Loses.
         /// </summary>
-        internal static string LosesColumn {
+        public static string LosesColumn {
             get {
                 return ResourceManager.GetString("LosesColumn", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Social media.
         /// </summary>
-        internal static string SocialMediaLabel {
+        public static string SocialMediaLabel {
             get {
                 return ResourceManager.GetString("SocialMediaLabel", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Special skins.
         /// </summary>
-        internal static string SpecialSkinsLabel {
+        public static string SpecialSkinsLabel {
             get {
                 return ResourceManager.GetString("SpecialSkinsLabel", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Wins.
         /// </summary>
-        internal static string WinsColumn {
+        public static string WinsColumn {
             get {
                 return ResourceManager.GetString("WinsColumn", resourceCulture);
             }

@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Shop {
+    public class Shop {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.Shop", typeof(Shop).Assembly);
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Avatar shop.
         /// </summary>
-        internal static string AvatarShopLabel {
+        public static string AvatarShopLabel {
             get {
                 return ResourceManager.GetString("AvatarShopLabel", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Buy.
         /// </summary>
-        internal static string BuyButton {
+        public static string BuyButton {
             get {
                 return ResourceManager.GetString("BuyButton", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Epic box.
         /// </summary>
-        internal static string EpicBoxLabel {
+        public static string EpicBoxLabel {
             get {
                 return ResourceManager.GetString("EpicBoxLabel", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Legendary box.
         /// </summary>
-        internal static string LegendaryBoxLabel {
+        public static string LegendaryBoxLabel {
             get {
                 return ResourceManager.GetString("LegendaryBoxLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to These are the icons you can get, are you sure you want to proceed?.
         /// </summary>
-        internal static string PurchaseConfirmationLabel {
+        public static string PurchaseConfirmationLabel {
             get {
                 return ResourceManager.GetString("PurchaseConfirmationLabel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Congrats, you&apos;ve got: {0}.
         /// </summary>
-        internal static string RewardLabel {
+        public static string RewardLabel {
             get {
                 return ResourceManager.GetString("RewardLabel", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Special box.
         /// </summary>
-        internal static string SpecialBoxLabel {
+        public static string SpecialBoxLabel {
             get {
                 return ResourceManager.GetString("SpecialBoxLabel", resourceCulture);
             }

@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Global {
+    public class Global {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.Global", typeof(Global).Assembly);
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to UNO-LIS.
         /// </summary>
-        internal static string AppNameLabel {
+        public static string AppNameLabel {
             get {
                 return ResourceManager.GetString("AppNameLabel", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string CancelButton {
+        public static string CancelButton {
             get {
                 return ResourceManager.GetString("CancelButton", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Chat.
         /// </summary>
-        internal static string ChatLabel {
+        public static string ChatLabel {
             get {
                 return ResourceManager.GetString("ChatLabel", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
-        internal static string CodeLabel {
+        public static string CodeLabel {
             get {
                 return ResourceManager.GetString("CodeLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Coins Revo.
         /// </summary>
-        internal static string CoinsLabel {
+        public static string CoinsLabel {
             get {
                 return ResourceManager.GetString("CoinsLabel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Confirmation.
         /// </summary>
-        internal static string ConfirmationLabel {
+        public static string ConfirmationLabel {
             get {
                 return ResourceManager.GetString("ConfirmationLabel", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to We&apos;ve sent you a confirmation code to your email. Please enter it below:.
         /// </summary>
-        internal static string ConfirmationMessageLabel {
+        public static string ConfirmationMessageLabel {
             get {
                 return ResourceManager.GetString("ConfirmationMessageLabel", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Connection Error.
         /// </summary>
-        internal static string ConnectionErrorLabel {
+        public static string ConnectionErrorLabel {
             get {
                 return ResourceManager.GetString("ConnectionErrorLabel", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Unable to connect with the server. Check your internet connection and try again..
         /// </summary>
-        internal static string ConnectionErrorMessageLabel {
+        public static string ConnectionErrorMessageLabel {
             get {
                 return ResourceManager.GetString("ConnectionErrorMessageLabel", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Copyright Mauricio &amp; Erickmel.
         /// </summary>
-        internal static string CopyrightLabel {
+        public static string CopyrightLabel {
             get {
                 return ResourceManager.GetString("CopyrightLabel", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
-        internal static string EmailLabel {
+        public static string EmailLabel {
             get {
                 return ResourceManager.GetString("EmailLabel", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
-        internal static string ExitLabel {
+        public static string ExitLabel {
             get {
                 return ResourceManager.GetString("ExitLabel", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Friends.
         /// </summary>
-        internal static string FriendsListLabel {
+        public static string FriendsListLabel {
             get {
                 return ResourceManager.GetString("FriendsListLabel", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Game settings.
         /// </summary>
-        internal static string GameSettingsLabel {
+        public static string GameSettingsLabel {
             get {
                 return ResourceManager.GetString("GameSettingsLabel", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Global points.
         /// </summary>
-        internal static string GlobalPointsColumn {
+        public static string GlobalPointsColumn {
             get {
                 return ResourceManager.GetString("GlobalPointsColumn", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Go!.
         /// </summary>
-        internal static string GoButton {
+        public static string GoButton {
             get {
                 return ResourceManager.GetString("GoButton", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to How to play?.
         /// </summary>
-        internal static string HowToPlayLabel {
+        public static string HowToPlayLabel {
             get {
                 return ResourceManager.GetString("HowToPlayLabel", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Matches played.
         /// </summary>
-        internal static string MatchesPlayedColumn {
+        public static string MatchesPlayedColumn {
             get {
                 return ResourceManager.GetString("MatchesPlayedColumn", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string NoButton {
+        public static string NoButton {
             get {
                 return ResourceManager.GetString("NoButton", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to No connection.
         /// </summary>
-        internal static string NoConnectionLabel {
+        public static string NoConnectionLabel {
             get {
                 return ResourceManager.GetString("NoConnectionLabel", resourceCulture);
             }
@@ -243,16 +243,25 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to The game is currently unavailable, please try again later..
         /// </summary>
-        internal static string NoConnectionMessageLabel {
+        public static string NoConnectionMessageLabel {
             get {
                 return ResourceManager.GetString("NoConnectionMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OkButton {
+            get {
+                return ResourceManager.GetString("OkButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string PasswordLabel {
+        public static string PasswordLabel {
             get {
                 return ResourceManager.GetString("PasswordLabel", resourceCulture);
             }
@@ -261,7 +270,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Profile.
         /// </summary>
-        internal static string ProfileLabel {
+        public static string ProfileLabel {
             get {
                 return ResourceManager.GetString("ProfileLabel", resourceCulture);
             }
@@ -270,7 +279,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string SaveButton {
+        public static string SaveButton {
             get {
                 return ResourceManager.GetString("SaveButton", resourceCulture);
             }
@@ -279,7 +288,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        internal static string SettingsLabel {
+        public static string SettingsLabel {
             get {
                 return ResourceManager.GetString("SettingsLabel", resourceCulture);
             }
@@ -288,7 +297,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Shop.
         /// </summary>
-        internal static string ShopLabel {
+        public static string ShopLabel {
             get {
                 return ResourceManager.GetString("ShopLabel", resourceCulture);
             }
@@ -297,7 +306,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Statistics.
         /// </summary>
-        internal static string StatisticsLabel {
+        public static string StatisticsLabel {
             get {
                 return ResourceManager.GetString("StatisticsLabel", resourceCulture);
             }
@@ -306,7 +315,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Volume.
         /// </summary>
-        internal static string VolumeLabel {
+        public static string VolumeLabel {
             get {
                 return ResourceManager.GetString("VolumeLabel", resourceCulture);
             }
@@ -315,7 +324,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Win rate.
         /// </summary>
-        internal static string WinRateColumn {
+        public static string WinRateColumn {
             get {
                 return ResourceManager.GetString("WinRateColumn", resourceCulture);
             }
@@ -324,7 +333,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string YesButton {
+        public static string YesButton {
             get {
                 return ResourceManager.GetString("YesButton", resourceCulture);
             }

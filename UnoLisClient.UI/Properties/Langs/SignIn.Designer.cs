@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SignIn {
+    public class SignIn {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.SignIn", typeof(SignIn).Assembly);
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Full name.
         /// </summary>
-        internal static string FullNameLabel {
+        public static string FullNameLabel {
             get {
                 return ResourceManager.GetString("FullNameLabel", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string LoginButton {
+        public static string LoginButton {
             get {
                 return ResourceManager.GetString("LoginButton", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Nickname.
         /// </summary>
-        internal static string NicknameLabel {
+        public static string NicknameLabel {
             get {
                 return ResourceManager.GetString("NicknameLabel", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Password must be at least 8 characters long..
         /// </summary>
-        internal static string PasswordLengthLabel {
+        public static string PasswordLengthLabel {
             get {
                 return ResourceManager.GetString("PasswordLengthLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Passwords don&apos;t match..
         /// </summary>
-        internal static string PasswordsDontMatchLabel {
+        public static string PasswordsDontMatchLabel {
             get {
                 return ResourceManager.GetString("PasswordsDontMatchLabel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Play as guest.
         /// </summary>
-        internal static string PlayAsGuestButton {
+        public static string PlayAsGuestButton {
             get {
                 return ResourceManager.GetString("PlayAsGuestButton", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Register to UNO-LIS!.
         /// </summary>
-        internal static string RegisterLabel {
+        public static string RegisterLabel {
             get {
                 return ResourceManager.GetString("RegisterLabel", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Rewrite password.
         /// </summary>
-        internal static string RewritedPasswordLabel {
+        public static string RewritedPasswordLabel {
             get {
                 return ResourceManager.GetString("RewritedPasswordLabel", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Sign in.
         /// </summary>
-        internal static string SignInButton {
+        public static string SignInButton {
             get {
                 return ResourceManager.GetString("SignInButton", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to The user with the email/nickname given already exists..
         /// </summary>
-        internal static string UserDuplicatedLabel {
+        public static string UserDuplicatedLabel {
             get {
                 return ResourceManager.GetString("UserDuplicatedLabel", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Welcome to UNO-LIS!.
         /// </summary>
-        internal static string WelcomeLabel {
+        public static string WelcomeLabel {
             get {
                 return ResourceManager.GetString("WelcomeLabel", resourceCulture);
             }

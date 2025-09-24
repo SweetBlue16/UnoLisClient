@@ -132,10 +132,10 @@
   <data name="ReShuffleDeckSettingsLabel" xml:space="preserve">
     <value>Re-Shuffle Deck</value>
   </data>
-  <data name="SoundEffectsSettingsLabel" xml:space="preserve">
-    <value>Sound effects</value>
-  </data>
   <data name="SpecialRulesSettingsLabel" xml:space="preserve">
     <value>Special rules</value>
+  </data>
+  <data name="SoundEffectsSettingsLabel" xml:space="preserve">
+    <value>Sound effects</value>
   </data>
 </root>

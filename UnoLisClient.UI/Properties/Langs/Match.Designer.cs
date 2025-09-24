@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Match {
+    public class Match {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.Match", typeof(Match).Assembly);
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Write the reason for the report:.
         /// </summary>
-        internal static string DescriptionReportLabel {
+        public static string DescriptionReportLabel {
             get {
                 return ResourceManager.GetString("DescriptionReportLabel", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to leave the match?.
         /// </summary>
-        internal static string ExitMatchConfirmationLabel {
+        public static string ExitMatchConfirmationLabel {
             get {
                 return ResourceManager.GetString("ExitMatchConfirmationLabel", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Match Results.
         /// </summary>
-        internal static string MatchResultsLabel {
+        public static string MatchResultsLabel {
             get {
                 return ResourceManager.GetString("MatchResultsLabel", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
-        internal static string OptionsLabel {
+        public static string OptionsLabel {
             get {
                 return ResourceManager.GetString("OptionsLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Place.
         /// </summary>
-        internal static string PlaceResultsColumn {
+        public static string PlaceResultsColumn {
             get {
                 return ResourceManager.GetString("PlaceResultsColumn", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Player.
         /// </summary>
-        internal static string PlayerNameColumn {
+        public static string PlayerNameColumn {
             get {
                 return ResourceManager.GetString("PlayerNameColumn", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Rank.
         /// </summary>
-        internal static string RankColumn {
+        public static string RankColumn {
             get {
                 return ResourceManager.GetString("RankColumn", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Report player.
         /// </summary>
-        internal static string ReportPlayerLabel {
+        public static string ReportPlayerLabel {
             get {
                 return ResourceManager.GetString("ReportPlayerLabel", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Score.
         /// </summary>
-        internal static string ScoreColumn {
+        public static string ScoreColumn {
             get {
                 return ResourceManager.GetString("ScoreColumn", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Which player do you want to report?.
         /// </summary>
-        internal static string SelectReportPlayer {
+        public static string SelectReportPlayer {
             get {
                 return ResourceManager.GetString("SelectReportPlayer", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Now playing {0}.
         /// </summary>
-        internal static string TurnLabel {
+        public static string TurnLabel {
             get {
                 return ResourceManager.GetString("TurnLabel", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to The player {0} has won!.
         /// </summary>
-        internal static string WinnerLabel {
+        public static string WinnerLabel {
             get {
                 return ResourceManager.GetString("WinnerLabel", resourceCulture);
             }

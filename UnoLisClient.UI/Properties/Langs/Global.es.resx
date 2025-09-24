@@ -180,6 +180,9 @@
   <data name="NoConnectionMessageLabel" xml:space="preserve">
     <value>El juego no está disponible por el momento, por favor intenta más tarde.</value>
   </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>Vale</value>
+  </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Contraseña</value>
   </data>

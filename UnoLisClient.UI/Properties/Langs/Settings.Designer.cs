@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Settings {
+    public class Settings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.Settings", typeof(Settings).Assembly);
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Backgrounds.
         /// </summary>
-        internal static string BackgroundsLabel {
+        public static string BackgroundsLabel {
             get {
                 return ResourceManager.GetString("BackgroundsLabel", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
-        internal static string LanguageLabel {
+        public static string LanguageLabel {
             get {
                 return ResourceManager.GetString("LanguageLabel", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Music.
         /// </summary>
-        internal static string MusicSettingsLabel {
+        public static string MusicSettingsLabel {
             get {
                 return ResourceManager.GetString("MusicSettingsLabel", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Players.
         /// </summary>
-        internal static string PlayerSettingsLabel {
+        public static string PlayerSettingsLabel {
             get {
                 return ResourceManager.GetString("PlayerSettingsLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Re-Shuffle Deck.
         /// </summary>
-        internal static string ReShuffleDeckSettingsLabel {
+        public static string ReShuffleDeckSettingsLabel {
             get {
                 return ResourceManager.GetString("ReShuffleDeckSettingsLabel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Sound effects.
         /// </summary>
-        internal static string SoundEffectsSettingsLabel {
+        public static string SoundEffectsSettingsLabel {
             get {
                 return ResourceManager.GetString("SoundEffectsSettingsLabel", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         /// <summary>
         ///   Looks up a localized string similar to Special rules.
         /// </summary>
-        internal static string SpecialRulesSettingsLabel {
+        public static string SpecialRulesSettingsLabel {
             get {
                 return ResourceManager.GetString("SpecialRulesSettingsLabel", resourceCulture);
             }

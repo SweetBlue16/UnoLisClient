@@ -19,9 +19,16 @@ namespace UnoLisClient.UI.PopUpWindows
     /// </summary>
     public partial class SimplePopUpWindow : Window
     {
-        public SimplePopUpWindow()
+        public SimplePopUpWindow(string title, string message)
         {
             InitializeComponent();
+            TitleLabel.Content = title;
+            MessageTextBlock.Text = message;
+        }
+
+        private void ClickOkButton(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
