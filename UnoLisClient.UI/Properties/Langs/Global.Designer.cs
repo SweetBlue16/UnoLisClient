@@ -340,6 +340,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning!.
+        /// </summary>
+        public static string WarningLabel {
+            get {
+                return ResourceManager.GetString("WarningLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Win rate.
         /// </summary>
         public static string WinRateColumn {

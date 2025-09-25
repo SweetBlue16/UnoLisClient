@@ -210,6 +210,9 @@
   <data name="VolumeLabel" xml:space="preserve">
     <value>Volume</value>
   </data>
+  <data name="WarningLabel" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
   <data name="WinRateColumn" xml:space="preserve">
     <value>Win rate</value>
   </data>

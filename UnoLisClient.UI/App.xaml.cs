@@ -19,11 +19,11 @@ namespace UnoLisClient.UI
             base.OnStartup(e);
 
             // UI Tests
-            string title = UnoLisClient.UI.Properties.Langs.Global.ConfirmationLabel;
-            string message = UnoLisClient.UI.Properties.Langs.Global.ConfirmationMessageLabel;
+            string title = UnoLisClient.UI.Properties.Langs.Global.WarningLabel;
+            string message = string.Format(UnoLisClient.UI.Properties.Langs.FriendsList.RemoveFriendMessageLabel, "SweetBlue16"); 
             string watermark = UnoLisClient.UI.Properties.Langs.Global.CodeLabel;
-            var win = new SimplePopUpWindow(title, message);
-            win.Title = UnoLisClient.UI.Properties.Langs.Global.ConfirmationLabel;
+            var win = new QuestionPopUpWindow(title, message);
+            win.Title = UnoLisClient.UI.Properties.Langs.Global.WarningLabel.ToUpper();
             win.Show();
         }
     }
