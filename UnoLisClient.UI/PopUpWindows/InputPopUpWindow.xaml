@@ -9,35 +9,35 @@
         Title="InputPopUpWindow" Height="310" Width="450"
         WindowStartupLocation="CenterScreen" Background="#1B263B">
     <Grid>
-        <Label x:Name="TitleLabel"
-               Content="{x:Static language:Global.TitlePlaceholderLabel}"
-               HorizontalAlignment="Center"
-               Margin="0,16,0,0"
-               VerticalAlignment="Top"
-               FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-               Foreground="White"
-               FontSize="40"/>
-        <TextBlock x:Name="MessageTextBlock"
+        <StackPanel Margin="20">
+            <Label x:Name="TitleLabel"
+                   Content="{x:Static language:Global.TitlePlaceholderLabel}"
                    HorizontalAlignment="Center"
-                   TextWrapping="Wrap"
-                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                   Margin="0,0,0,16"
                    VerticalAlignment="Top"
-                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                    Foreground="White"
-                   FontSize="18"
-                   Height="51"
-                   Margin="0,81,0,0"/>
-        <TextBox x:Name="InputTextBox"
-                 Style="{DynamicResource TextBoxStyle}"
-                 Margin="54,141,54,68"
-                 Width="NaN"/>
-        <Button Content="{x:Static language:Global.GoButton}"
-                HorizontalAlignment="Center"
-                Margin="0,215,0,0"
-                VerticalAlignment="Top"
-                Style="{DynamicResource PrimaryButtonStyle}"
-                Height="56"
-                Width="154"
-                Click="ClickOkButton"/>
+                   FontSize="40"/>
+            <TextBlock x:Name="MessageTextBlock"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"
+                       Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                       VerticalAlignment="Top"
+                       FontFamily="pack://application:,,,/Fonts/#Lato"
+                       Foreground="White"
+                       FontSize="18"
+                       Margin="0,0,0,16"/>
+            <TextBox x:Name="InputTextBox"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="0,0,0,16"/>
+            <Button Content="{x:Static language:Global.GoButton}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Style="{DynamicResource PrimaryButtonStyle}"
+                    Height="56"
+                    Margin="0,0,0,0"
+                    Width="154"
+                    Click="ClickOkButton"/>
+        </StackPanel>
     </Grid>
 </Window>

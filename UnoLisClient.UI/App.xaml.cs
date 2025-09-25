@@ -22,7 +22,7 @@ namespace UnoLisClient.UI
             string title = UnoLisClient.UI.Properties.Langs.Global.ConfirmationLabel;
             string message = UnoLisClient.UI.Properties.Langs.Global.ConfirmationMessageLabel;
             string watermark = UnoLisClient.UI.Properties.Langs.Global.CodeLabel;
-            var win = new InputPopUpWindow(title, message, watermark);
+            var win = new SimplePopUpWindow(title, message);
             win.Title = UnoLisClient.UI.Properties.Langs.Global.ConfirmationLabel;
             win.Show();
         }

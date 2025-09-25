@@ -9,30 +9,33 @@
         Title="SimplePopUpWindow" Height="280" Width="450"
         WindowStartupLocation="CenterScreen" Background="#1B263B">
     <Grid>
-        <Label x:Name="TitleLabel"
-               Content="{x:Static language:Global.TitlePlaceholderLabel}"
-               HorizontalAlignment="Center"
-               Margin="0,27,0,0"
-               VerticalAlignment="Top"
-               FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-               Foreground="White"
-               FontSize="40"/>
-        <TextBlock x:Name="MessageTextBlock"
+        <StackPanel Margin="20">
+            <Label x:Name="TitleLabel"
+                   Content="{x:Static language:Global.TitlePlaceholderLabel}"
                    HorizontalAlignment="Center"
-                   TextWrapping="Wrap"
-                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
-                   VerticalAlignment="Center"
-                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Margin="0,0,0,16"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                    Foreground="White"
-                   FontSize="18"
-                   Height="51"/>
-        <Button Content="{x:Static language:Global.OkButton}"
-                HorizontalAlignment="Center"
-                Margin="0,180,0,0"
-                VerticalAlignment="Top"
-                Style="{DynamicResource PrimaryButtonStyle}"
-                Height="39"
-                Width="154"
-                Click="ClickOkButton"/>
+                   FontSize="40"/>
+            <TextBlock x:Name="MessageTextBlock"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"
+                       Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                       VerticalAlignment="Center"
+                       FontFamily="pack://application:,,,/Fonts/#Lato"
+                       Foreground="White"
+                       FontSize="18"
+                       Margin="0,0,0,24"
+                       Height="51"/>
+            <Button Content="{x:Static language:Global.OkButton}"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,24"
+                    VerticalAlignment="Top"
+                    Style="{DynamicResource PrimaryButtonStyle}"
+                    Height="39"
+                    Width="154"
+                    Click="ClickOkButton"/>
+        </StackPanel>
     </Grid>
 </Window>
