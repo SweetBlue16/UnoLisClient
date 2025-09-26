@@ -14,17 +14,26 @@
         <SolidColorBrush x:Key="SecondaryButtonMouseOverColor" Color="#A7A7AD"/>
         <SolidColorBrush x:Key="SecondaryButtonPressedColor" Color="#787878"/>
         
-        <!-- TextBox Colors -->
+        <!-- TextBox and PasswordBox Colors -->
         <SolidColorBrush x:Key="DeselectedTextBoxBackgroundColor" Color="#F2F2F7"/>
         <SolidColorBrush x:Key="DeselectedTextBoxBorderColor" Color="#444444"/>
         <SolidColorBrush x:Key="DeselectedTextBoxTextColor" Color="#292929"/>
 
         <SolidColorBrush x:Key="FocusedTextBoxBackgroundColor" Color="#F2F2F7"/>
         <SolidColorBrush x:Key="FocusedTextBoxBorderColor" Color="#0A84FF"/>
+        <SolidColorBrush x:Key="FocusedTextBoxTextColor" Color="#8E8E93"/>
+        
+        <!-- ComboBox Colors -->
+        <SolidColorBrush x:Key="DeselectedComboBoxBackgroundColor" Color="#F2F2F7"/>
+        <SolidColorBrush x:Key="DeselectedComboBoxBorderColor" Color="#555555"/>
+        <SolidColorBrush x:Key="DeselectedComboBoxTextColor" Color="#292929"/>
+        <SolidColorBrush x:Key="ComboBoxDropdownButtonColor" Color="#555555"/>
 
-        <SolidColorBrush x:Key="DisabledTextBoxBackgroundColor" Color="#F2F2F7"/>
-        <SolidColorBrush x:Key="DisabledTextBoxBorderColor" Color="#38383A"/>
-        <SolidColorBrush x:Key="DisabledTextBoxTextColor" Color="#8E8E93"/>
+        <SolidColorBrush x:Key="FocusedComboBoxBorderColor" Color="#0A84FF"/>
+        <SolidColorBrush x:Key="MouseOverComboBoxBorderColor" Color="#A7A7AD"/>
+
+        <SolidColorBrush x:Key="ComboBoxItemMouseOverColor" Color="#555555"/>
+        <SolidColorBrush x:Key="ComboBoxDropdownBackgroundColor" Color="#121212"/>
 
         <!-- Starts PrimaryButtonStyle -->
         <Style x:Key="PrimaryButtonStyle" TargetType="{x:Type Button}">
@@ -164,7 +173,7 @@
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                        Visibility="Collapsed"
-                                       Foreground="{DynamicResource DeselectedTextBoxTextColor}"
+                                       Foreground="{DynamicResource FocusedTextBoxTextColor}"
                                        Padding="{TemplateBinding Padding}"/>
                             </Grid>
                         </Border>
@@ -186,7 +195,7 @@
                                         Value="{DynamicResource FocusedTextBoxBorderColor}"/>
                                 <Setter TargetName="WaterMarkerLabel"
                                         Property="Foreground"
-                                        Value="{DynamicResource DisabledTextBoxTextColor}"/>
+                                        Value="{DynamicResource FocusedTextBoxTextColor}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -194,5 +203,175 @@
             </Setter>
         </Style>
         <!-- Ends TextBoxStyle -->
+        
+        <!-- Starts PasswordBoxStyle -->
+        <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+            <Setter Property="Background" Value="{DynamicResource DeselectedTextBoxBackgroundColor}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DeselectedTextBoxBorderColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DeselectedTextBoxTextColor}"/>
+            <Setter Property="Padding" Value="5 3"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource DeselectedTextBoxTextColor}"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="TextBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                MaxHeight="{TemplateBinding MaxHeight}"
+                                MaxWidth="{TemplateBinding MaxWidth}"
+                                SnapsToDevicePixels="True">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      Margin="-2 2"/>
+                                <Label x:Name="WaterMarkerLabel"
+                                       Content="{TemplateBinding Tag}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                       Visibility="Collapsed"
+                                       Foreground="{DynamicResource FocusedTextBoxTextColor}"
+                                       Padding="{TemplateBinding Padding}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="{DynamicResource FocusedTextBoxBorderColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="{DynamicResource FocusedTextBoxBorderColor}"/>
+                                <Setter TargetName="WaterMarkerLabel"
+                                        Property="Foreground"
+                                        Value="{DynamicResource FocusedTextBoxTextColor}"/>
+                                <!--Setter TargetName="WaterMarkerLabel"
+                                        Property="Visibility"
+                                        Value="Collapsed"/-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Ends PasswordBoxStyle -->
+        
+        <!-- Starts ComboBoxStyle -->
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="{DynamicResource DeselectedComboBoxBackgroundColor}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DeselectedComboBoxBorderColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DeselectedComboBoxTextColor}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="4,2"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="5"/>
+                            <Grid Margin="6,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter x:Name="ContentSite"
+                                                  Grid.Column="0"
+                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"
+                                                  Margin="2,0,0,0"
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  RecognizesAccessKey="True"/>
+                                <TextBlock x:Name="Watermark"
+                                           Grid.Column="0"
+                                           Text="{TemplateBinding Tag}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{DynamicResource DeselectedComboBoxTextColor}"
+                                           IsHitTestVisible="False"
+                                           Visibility="Collapsed"/>
+                                <ToggleButton x:Name="PART_DropDownToggle"
+                                              Grid.Column="1"
+                                              Focusable="True"
+                                              FocusVisualStyle="{x:Null}"
+                                              Background="Transparent"
+                                              BorderBrush="Transparent"
+                                              BorderThickness="0"
+                                              IsChecked="{Binding IsDropDownOpen,
+                                                          Mode=TwoWay,
+                                                          RelativeSource={RelativeSource TemplatedParent}}"
+                                              Padding="6,0"
+                                              ClickMode="Press">
+                                    <Path Data="M 0 0 L 4 4 L 8 0 Z"
+                                          Fill="{DynamicResource DeselectedComboBoxTextColor}"
+                                          Width="8"
+                                          Height="5"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"/>
+                                </ToggleButton>
+                            </Grid>
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Border Background="{DynamicResource DeselectedComboBoxBackgroundColor}"
+                                        BorderBrush="{DynamicResource FocusedComboBoxBorderColor}"
+                                        BorderThickness="1"
+                                        CornerRadius="5"
+                                        Padding="2">
+                                    <ScrollViewer>
+                                        <StackPanel IsItemsHost="True"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="SelectedIndex" Value="-1">
+                                <Setter TargetName="Watermark"
+                                        Property="Visibility"
+                                        Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border"
+                                        Property="BorderBrush"
+                                        Value="{DynamicResource FocusedComboBoxBorderColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="Border"
+                                        Property="BorderBrush"
+                                        Value="{DynamicResource FocusedComboBoxBorderColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Ends ComboBoxStyle -->
     </Application.Resources>
 </Application>
