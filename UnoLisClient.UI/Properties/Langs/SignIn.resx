@@ -121,7 +121,7 @@
     <value>Full name</value>
   </data>
   <data name="LoginButton" xml:space="preserve">
-    <value>Login</value>
+    <value>Log In</value>
   </data>
   <data name="NicknameLabel" xml:space="preserve">
     <value>Nickname</value>
@@ -142,7 +142,7 @@
     <value>Rewrite password</value>
   </data>
   <data name="SignInButton" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Sign In</value>
   </data>
   <data name="UserDuplicatedLabel" xml:space="preserve">
     <value>The user with the email/nickname given already exists.</value>

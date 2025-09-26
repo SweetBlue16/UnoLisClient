@@ -28,6 +28,5 @@
         <Frame x:Name="MainFrame"
                NavigationUIVisibility="Hidden"
                Background="Transparent"/>
-
     </Grid>
 </Window>
