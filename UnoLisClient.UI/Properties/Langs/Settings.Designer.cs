@@ -70,6 +70,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string EnglishComboItem {
+            get {
+                return ResourceManager.GetString("EnglishComboItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string LanguageLabel {
@@ -111,6 +120,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string SoundEffectsSettingsLabel {
             get {
                 return ResourceManager.GetString("SoundEffectsSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish.
+        /// </summary>
+        public static string SpanishComboItem {
+            get {
+                return ResourceManager.GetString("SpanishComboItem", resourceCulture);
             }
         }
         

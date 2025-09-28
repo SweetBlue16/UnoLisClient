@@ -1,0 +1,81 @@
+﻿<Page x:Class="UnoLisClient.UI.Pages.MainMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      mc:Ignorable="d"
+      Title="MainMenuPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header -->
+            <RowDefinition Height="*"/>
+            <!-- Centro -->
+            <RowDefinition Height="Auto"/>
+            <!-- Footer -->
+        </Grid.RowDefinitions>
+
+        <!-- 🔝 Header con 2 columnas -->
+        <Grid Grid.Row="0" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="ProfileLabel"
+                   Content="{x:Static language:Global.ProfileLabel}"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   HorizontalAlignment="Left"/>
+
+            <Label x:Name="FriendsLabel"
+                   Content="{x:Static language:Global.FriendsListLabel}"
+                   Grid.Column="1"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   HorizontalAlignment="Right"/>
+        </Grid>
+
+        <!-- 🟡 Centro -->
+        <StackPanel Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,40"
+                    >
+            <Label x:Name="TitleLabel"
+                   Content="{x:Static language:Global.AppNameLabel}"
+                   FontSize="36"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   HorizontalAlignment="Center"/>
+
+            <Button x:Name="PlayButton"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Content="{x:Static language:Global.PlayButton}"
+                    Cursor="Hand"
+                    Width="200"
+                    Height="60"
+                    FontSize="15"
+                    Click="PlayButton_Click"/>
+        </StackPanel>
+
+        <!-- 🔻 Footer -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,20">
+            <Label x:Name="ShopLabel" Content="{x:Static language:Global.ShopLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
+            <Label x:Name="SettingsLabel" Content="{x:Static language:Global.SettingsLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="SettingsLabel_MouseDoubleClick"/>
+            <Label x:Name="StatisticsLabel" Content="{x:Static language:Global.StatisticsLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
+            <Label x:Name="HowToPlayLabel" Content="{x:Static language:Global.HowToPlayLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
+            <Label x:Name="ExitLabel" Content="{x:Static language:Global.ExitLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

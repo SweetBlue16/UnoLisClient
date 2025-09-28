@@ -39,7 +39,7 @@ namespace UnoLisClient.UI
         }
         private void MusicPlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
-            MusicPlayer.Position = TimeSpan.Zero; // Reinicia la canción
+            MusicPlayer.Position = TimeSpan.Zero;
             MusicPlayer.Play();
         }
 

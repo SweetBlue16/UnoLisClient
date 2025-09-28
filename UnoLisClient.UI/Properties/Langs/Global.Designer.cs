@@ -61,7 +61,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UNO-LIS.
+        ///   Looks up a localized string similar to UNO LIS !.
         /// </summary>
         public static string AppNameLabel {
             get {
@@ -273,6 +273,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PasswordLabel {
             get {
                 return ResourceManager.GetString("PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLAY !.
+        /// </summary>
+        public static string PlayButton {
+            get {
+                return ResourceManager.GetString("PlayButton", resourceCulture);
             }
         }
         

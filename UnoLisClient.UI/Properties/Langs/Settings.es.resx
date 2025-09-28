@@ -138,4 +138,10 @@
   <data name="SoundEffectsSettingsLabel" xml:space="preserve">
     <value>Efectos de sonido</value>
   </data>
+  <data name="SpanishComboItem" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="EnglishComboItem" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
 </root>

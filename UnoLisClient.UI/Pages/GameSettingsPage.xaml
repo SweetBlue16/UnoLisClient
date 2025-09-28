@@ -1,0 +1,101 @@
+﻿<Page x:Class="UnoLisClient.UI.Pages.GameSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      mc:Ignorable="d"
+      Title="GameSettingsPage">
+
+    <Grid>
+        <!-- Contenedor central -->
+        <Border Background="#AA000000"
+                CornerRadius="15"
+                Padding="24"
+                MinWidth="350" MinHeight="300"
+                MaxWidth="600" MaxHeight="500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="4" Color="Black" Opacity="0.5"/>
+            </Border.Effect>
+
+            <StackPanel>
+                <!-- 🔝 Título -->
+                <TextBlock Text="{x:Static language:Global.GameSettingsLabel}"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+
+                <!-- 👥 Players -->
+                <StackPanel Orientation="Vertical" Margin="0,0,0,15">
+                    <Label Content="{x:Static language:Settings.PlayerSettingsLabel}" Foreground="White" FontSize="16"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton GroupName="Players" Content="2" Foreground="White"/>
+                        <RadioButton GroupName="Players" Content="3" Foreground="White"/>
+                        <RadioButton GroupName="Players" Content="4" Foreground="White"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Separator Margin="0,10"/>
+
+                <!-- 📋 Special Rules -->
+                <DockPanel Margin="0,5">
+                    <Label Content="{x:Static language:Settings.SpecialRulesSettingsLabel}" Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                    <CheckBox x:Name="SpecialRulesCheckBox"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <Separator Margin="0,10"/>
+
+                <!-- 🔀 Re-Shuffle Deck -->
+                <DockPanel Margin="0,5">
+                    <Label Content="{x:Static language:Settings.ReShuffleDeckSettingsLabel}" Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                    <CheckBox x:Name="ReshuffleDeckCheckBox"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <Separator Margin="0,10"/>
+
+                <!-- 🎵 Music -->
+                <DockPanel Margin="0,5">
+                    <Label Content="{x:Static language:Settings.MusicSettingsLabel}" Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                    <ToggleButton x:Name="MusicToggle"
+                                  Width="40" Height="40"
+                                  FontSize="20"
+                                  Foreground="White"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  HorizontalAlignment="Right"
+                                  Checked="MusicToggle_Checked"
+                                  Unchecked="MusicToggle_Unchecked">
+                        <TextBlock Text="🎵" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ToggleButton>
+                </DockPanel>
+
+                <Separator Margin="0,10"/>
+
+                <!-- 🔊 Sound Effects -->
+                <DockPanel Margin="0,5">
+                    <Label Content="{x:Static language:Settings.SoundEffectsSettingsLabel}" Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                    <ToggleButton x:Name="SoundToggle"
+                                  Width="40" Height="40"
+                                  FontSize="20"
+                                  Foreground="White"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  HorizontalAlignment="Right"
+                                  Checked="SoundToggle_Checked"
+                                  Unchecked="SoundToggle_Unchecked">
+                        <TextBlock Text="🔊" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ToggleButton>
+                </DockPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

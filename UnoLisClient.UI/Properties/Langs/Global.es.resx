@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppNameLabel" xml:space="preserve">
-    <value>UNO-LIS</value>
+    <value>UNO LIS !</value>
   </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancelar</value>
@@ -154,7 +154,7 @@
     <value>Salir</value>
   </data>
   <data name="FriendsListLabel" xml:space="preserve">
-    <value>Lista de amigos</value>
+    <value>Amigos</value>
   </data>
   <data name="GameSettingsLabel" xml:space="preserve">
     <value>Ajustes del juego</value>
@@ -188,6 +188,9 @@
   </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Contraseña</value>
+  </data>
+  <data name="PlayButton" xml:space="preserve">
+    <value>¡ JUGAR !</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Perfil</value>

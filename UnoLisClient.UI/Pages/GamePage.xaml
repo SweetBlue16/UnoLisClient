@@ -8,7 +8,7 @@
       Title="GamePage">
 
     <Grid>
-        <!-- 🎴 Logo UNO con animación -->
+        <!-- Logo UNO con animación -->
         <Image Source="/Assets/unoLogo.png"
                Width="248" Height="226"
                HorizontalAlignment="Center"
@@ -60,7 +60,7 @@
             </Image.Triggers>
         </Image>
 
-        <!-- 📌 Contenedor para botones -->
+        <!--  Contenedor para botones -->
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -82,7 +82,8 @@
                     Cursor="Hand"
                     FontSize="15"
                     Height="60"
-                    Width="230" RenderTransformOrigin="0.497,0.751"/>
+                    Width="230" RenderTransformOrigin="0.497,0.751"
+                    Click="PlayGuestButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

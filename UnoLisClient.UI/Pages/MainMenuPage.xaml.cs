@@ -16,18 +16,23 @@ using System.Windows.Shapes;
 namespace UnoLisClient.UI.Pages
 {
     /// <summary>
-    /// Interaction logic for GamePage.xaml
+    /// Interaction logic for MainMenuPage.xaml
     /// </summary>
-    public partial class GamePage : Page
+    public partial class MainMenuPage : Page
     {
-        public GamePage()
+        public MainMenuPage()
         {
             InitializeComponent();
         }
 
-        private void PlayGuestButton_Click(object sender, RoutedEventArgs e)
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new MainMenuPage());
+            NavigationService?.Navigate(new GameSettingsPage());
+        }
+
+        private void SettingsLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService?.Navigate(new SettingsPage());
         }
     }
 }
