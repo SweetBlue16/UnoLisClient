@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UnoLisClient.UI.UnoLisWindows
+namespace UnoLisClient.UI.Pages
 {
     /// <summary>
-    /// Interaction logic for SignInWindow.xaml
+    /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class SignInWindow : Window
+    public partial class LoginPage : Page
     {
-        public SignInWindow()
+        public LoginPage()
         {
             InitializeComponent();
         }

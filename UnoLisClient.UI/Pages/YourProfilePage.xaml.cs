@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UnoLisClient.UI.UnoLisWindows
+namespace UnoLisClient.UI.Pages
 {
     /// <summary>
-    /// Interaction logic for ProfileWindow.xaml
+    /// Interaction logic for YourProfilePage.xaml
     /// </summary>
-    public partial class ProfileWindow : Window
+    public partial class YourProfilePage : Page
     {
-        public ProfileWindow()
+        public YourProfilePage()
         {
             InitializeComponent();
         }
