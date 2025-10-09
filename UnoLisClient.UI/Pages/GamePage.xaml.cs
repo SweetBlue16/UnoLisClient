@@ -29,5 +29,10 @@ namespace UnoLisClient.UI.Pages
         {
             NavigationService?.Navigate(new MainMenuPage());
         }
+
+        private void LoginButtonClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new LoginPage());
+        }
     }
 }

@@ -60,8 +60,8 @@
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="ContentPresenter"
                                               Focusable="False"
-                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Margin="{TemplateBinding Padding}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               RecognizesAccessKey="True"/>
@@ -108,8 +108,8 @@
                         Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="ContentPresenter"
                                       Focusable="False"
-                                      HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                       Margin="{TemplateBinding Padding}"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                       RecognizesAccessKey="True"/>

@@ -71,9 +71,12 @@
                     Content="{x:Static Langs:SignIn.LoginButton}"
                     FontSize="15"
                     Cursor="Hand"
+                    HorizontalContentAlignment="Center"
                     Height="60"
                     Width="230"
-                    Margin="0,0,20,0" RenderTransformOrigin="0.505,0.772"/>
+                    Margin="0,0,20,0"
+                    RenderTransformOrigin="0.505,0.772"
+                    Click="LoginButtonClick"/>
 
             <!-- Botón Invitado -->
             <Button x:Name="PlayGuestButton"
@@ -81,8 +84,10 @@
                     Content="{x:Static Langs:SignIn.PlayAsGuestButton}"
                     Cursor="Hand"
                     FontSize="15"
+                    HorizontalContentAlignment="Center"
                     Height="60"
-                    Width="230" RenderTransformOrigin="0.497,0.751"
+                    Width="230"
+                    RenderTransformOrigin="0.497,0.751"
                     Click="PlayGuestButton_Click"/>
         </StackPanel>
     </Grid>

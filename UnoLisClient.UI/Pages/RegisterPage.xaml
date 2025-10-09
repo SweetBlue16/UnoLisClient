@@ -5,10 +5,93 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UnoLisClient.UI.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       Title="RegisterPage">
 
-    <Grid>
-        
-    </Grid>
+    <Border Background="#AA000000"
+		CornerRadius="15"
+		Padding="24"
+		MinWidth="350" MinHeight="300"
+		HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+        <StackPanel>
+            <Label Content="{x:Static language:SignIn.RegisterLabel}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,16"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                   Foreground="White"
+                   FontSize="30"/>
+            <Label Content="{x:Static language:SignIn.FullNameLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="16,0,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <TextBox x:Name="FullNameTextBox"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="0,0,0,16"/>
+            <Label Content="{x:Static language:SignIn.NicknameLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="16,0,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <TextBox x:Name="NicknameTextBox"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="0,0,0,16"/>
+            <Label Content="{x:Static language:Global.EmailLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="16,0,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <TextBox x:Name="EmailTextBox"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="0,0,0,16"/>
+            <Label Content="{x:Static language:Global.PasswordLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="16,0,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <PasswordBox x:Name="PasswordBox"
+                     Style="{DynamicResource PasswordBoxStyle}"
+                     Margin="0,0,0,16"/>
+            <Label Content="{x:Static language:SignIn.RewritedPasswordLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="16,0,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <PasswordBox x:Name="RewritedPasswordBox"
+                         Style="{DynamicResource PasswordBoxStyle}"
+                         Margin="0,0,0,16"/>
+            <DockPanel Margin="10,5">
+                <Button Content="{x:Static language:SignIn.SignInButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Height="56"
+                        Margin="0,0,15,0"
+                        Width="140"
+                        Cursor="Hand"
+                        Click="ClickSignInButton"/>
+                <Button Content="{x:Static language:Global.CancelButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Height="56"
+                        Margin="0,0,0,0"
+                        Width="140"
+                        Cursor="Hand"
+                        Click="ClickCancelButton"/>
+            </DockPanel>
+        </StackPanel>
+    </Border>
 </Page>

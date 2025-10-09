@@ -126,6 +126,9 @@
   <data name="NicknameLabel" xml:space="preserve">
     <value>Nickname</value>
   </data>
+  <data name="NotRegisteredLabel" xml:space="preserve">
+    <value>Not registered yet? Sign up here.</value>
+  </data>
   <data name="PasswordLengthLabel" xml:space="preserve">
     <value>Password must be at least 8 characters long.</value>
   </data>

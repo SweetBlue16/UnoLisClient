@@ -24,5 +24,15 @@ namespace UnoLisClient.UI.Pages
         {
             InitializeComponent();
         }
+
+        private void ClickCancelButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
+        private void ClickSignInButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new MainMenuPage());
+        }
     }
 }

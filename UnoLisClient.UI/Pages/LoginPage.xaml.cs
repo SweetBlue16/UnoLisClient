@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Properties.Langs;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -23,6 +25,23 @@ namespace UnoLisClient.UI.Pages
         public LoginPage()
         {
             InitializeComponent();
+        }
+
+        private void ClickLoginButton(object sender, RoutedEventArgs e)
+        {
+            string nickname = NicknameTextBox.Text;
+            string password = PasswordBox.Password;
+            NavigationService?.Navigate(new MainMenuPage());
+        }
+
+        private void ClickCancelButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
+        private void SignUpLabelMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService?.Navigate(new RegisterPage());
         }
     }
 }

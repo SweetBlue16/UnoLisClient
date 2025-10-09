@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnoLisClient.UI"
         mc:Ignorable="d"
-        Title="MainWindow"
+        xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+        Title="{x:Static language:Global.AppNameLabel}"
         Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         Loaded="MainWindow_Loaded">

@@ -126,6 +126,9 @@
   <data name="NicknameLabel" xml:space="preserve">
     <value>Nombre de jugador</value>
   </data>
+  <data name="NotRegisteredLabel" xml:space="preserve">
+    <value>¿Todavía no tienes una cuenta? Regístrate aquí.</value>
+  </data>
   <data name="PasswordLengthLabel" xml:space="preserve">
     <value>La contraseña debe tener una longitud de al menos 8 caracteres.</value>
   </data>

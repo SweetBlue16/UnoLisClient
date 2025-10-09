@@ -88,6 +88,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not registered yet? Sign up here..
+        /// </summary>
+        public static string NotRegisteredLabel {
+            get {
+                return ResourceManager.GetString("NotRegisteredLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password must be at least 8 characters long..
         /// </summary>
         public static string PasswordLengthLabel {
