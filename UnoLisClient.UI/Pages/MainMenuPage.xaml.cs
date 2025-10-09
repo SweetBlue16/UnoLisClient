@@ -34,5 +34,20 @@ namespace UnoLisClient.UI.Pages
         {
             NavigationService?.Navigate(new SettingsPage());
         }
+
+        private void ShopLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService?.Navigate(new AvatarShopPage());
+        }
+
+        private void ProfileLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService?.Navigate(new AvatarSelectionPage());
+        }
+
+        private void ExitLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService?.Navigate(new GamePage());
+        }
     }
 }

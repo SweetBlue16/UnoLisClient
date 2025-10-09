@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -13,19 +14,20 @@ namespace UnoLisClient.UI.Pages
         {
             InitializeComponent();
 
-            // 1) Cargar idioma guardado (fallback en-US)
             var saved = Properties.Settings.Default.languageCode;
             if (string.IsNullOrWhiteSpace(saved))
                 saved = "en-US";
 
-            // 2) Aplicar cultura global
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(saved);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(saved);
-
-            // 3) Seleccionar item en el combo
             SelectLanguageByCode(saved);
 
             _initializing = false;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new MainMenuPage());
         }
 
         private void SelectLanguageByCode(string code)
@@ -52,15 +54,12 @@ namespace UnoLisClient.UI.Pages
             {
                 if (Properties.Settings.Default.languageCode == newLangCode) return;
 
-                // Guardar preferencia
                 Properties.Settings.Default.languageCode = newLangCode;
                 Properties.Settings.Default.Save();
 
-                // ✅ Cambiar cultura global
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(newLangCode);
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(newLangCode);
 
-                // ✅ Recargar la página
                 Dispatcher.BeginInvoke(new System.Action(() =>
                 {
                     NavigationService?.Navigate(new SettingsPage());

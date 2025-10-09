@@ -129,8 +129,14 @@
   <data name="LegendaryBoxLabel" xml:space="preserve">
     <value>Caja legendaria</value>
   </data>
+  <data name="LisBoxesLabel" xml:space="preserve">
+    <value>Cajas LIS</value>
+  </data>
   <data name="PurchaseConfirmationLabel" xml:space="preserve">
     <value>Estos son los iconos que puedes obtener, ¿estás seguro de que quieres continuar?</value>
+  </data>
+  <data name="RevoCoinsLabel" xml:space="preserve">
+    <value>Revo Monedas</value>
   </data>
   <data name="RewardLabel" xml:space="preserve">
     <value>¡Felicidades, has obtenido: {0}!</value>

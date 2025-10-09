@@ -129,8 +129,14 @@
   <data name="LegendaryBoxLabel" xml:space="preserve">
     <value>Legendary box</value>
   </data>
+  <data name="LisBoxesLabel" xml:space="preserve">
+    <value>LIS Boxes</value>
+  </data>
   <data name="PurchaseConfirmationLabel" xml:space="preserve">
     <value>These are the icons you can get, are you sure you want to proceed?</value>
+  </data>
+  <data name="RevoCoinsLabel" xml:space="preserve">
+    <value>Revo Coins</value>
   </data>
   <data name="RewardLabel" xml:space="preserve">
     <value>Congrats, you've got: {0}</value>

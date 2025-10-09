@@ -10,7 +10,6 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
-using UnoLisClient.UI.UnoLisWindows;
 
 namespace UnoLisClient.UI
 {

@@ -25,6 +25,15 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
+        private void CreateGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Partida creada exitosamente!");
+        }
         private void MusicToggle_Checked(object sender, RoutedEventArgs e)
         {
             if (MusicToggle.Content is TextBlock tb)

@@ -31,7 +31,8 @@
                    FontSize="16"
                    FontWeight="Bold"
                    Foreground="White"
-                   HorizontalAlignment="Left"/>
+                   HorizontalAlignment="Left"
+                   MouseDoubleClick="ProfileLabel_MouseDoubleClick"/>
 
             <Label x:Name="FriendsLabel"
                    Content="{x:Static language:Global.FriendsListLabel}"
@@ -71,11 +72,11 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="0,20,0,20">
-            <Label x:Name="ShopLabel" Content="{x:Static language:Global.ShopLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
+            <Label x:Name="ShopLabel" Content="{x:Static language:Global.ShopLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="ShopLabel_MouseDoubleClick"/>
             <Label x:Name="SettingsLabel" Content="{x:Static language:Global.SettingsLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="SettingsLabel_MouseDoubleClick"/>
             <Label x:Name="StatisticsLabel" Content="{x:Static language:Global.StatisticsLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
             <Label x:Name="HowToPlayLabel" Content="{x:Static language:Global.HowToPlayLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
-            <Label x:Name="ExitLabel" Content="{x:Static language:Global.ExitLabel}" FontSize="14" Foreground="White" Margin="20,0"/>
+            <Label x:Name="ExitLabel" Content="{x:Static language:Global.ExitLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="ExitLabel_MouseDoubleClick"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -97,11 +97,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LIS Boxes.
+        /// </summary>
+        public static string LisBoxesLabel {
+            get {
+                return ResourceManager.GetString("LisBoxesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to These are the icons you can get, are you sure you want to proceed?.
         /// </summary>
         public static string PurchaseConfirmationLabel {
             get {
                 return ResourceManager.GetString("PurchaseConfirmationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revo Coins.
+        /// </summary>
+        public static string RevoCoinsLabel {
+            get {
+                return ResourceManager.GetString("RevoCoinsLabel", resourceCulture);
             }
         }
         

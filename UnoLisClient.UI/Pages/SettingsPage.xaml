@@ -8,14 +8,6 @@
       Title="SettingsPage">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <!-- 🔳 Border centrado y responsivo -->
         <Border Grid.Row="0" Grid.Column="0"
                 Background="#AA000000"
                 CornerRadius="15"
@@ -30,9 +22,10 @@
             </Border.Effect>
 
             <Grid>
+                <!-- 🧱 Definición de filas -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Título -->
+                    <!-- Header con título + botón -->
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
                     <!-- Language -->
@@ -41,15 +34,65 @@
                     <!-- Volume -->
                 </Grid.RowDefinitions>
 
-                <!-- Título -->
-                <Label x:Name="SettingsTitleLabel"
-                       Content="{x:Static language:Global.SettingsLabel}"
-                       FontSize="28" FontWeight="Bold"
-                       Foreground="White"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,10"/>
+                <!-- 🔝 Header: Título + botón de cerrar -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Idioma -->
+                    <Label x:Name="SettingsTitleLabel"
+                           Content="{x:Static language:Global.SettingsLabel}"
+                           FontSize="28" FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,10"/>
+
+                    <!-- Botón de cerrar -->
+                    <Button x:Name="CloseButton"
+                            Grid.Column="1"
+                            Content="✖"
+                            FontWeight="Bold"
+                            FontSize="18"
+                            Width="32" Height="32"
+                            Foreground="White"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Cursor="Hand"
+                            Click="CloseButton_Click">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="5"
+                                                    Padding="2">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#22FFFFFF"/>
+                                                    <Setter Property="Foreground" Value="#FFD60A"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#44FFFFFF"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+
+                <!-- 🌐 Idioma -->
                 <Grid Grid.Row="2" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -75,7 +118,7 @@
                     </ComboBox>
                 </Grid>
 
-                <!-- Volumen -->
+                <!-- 🔊 Volumen -->
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
