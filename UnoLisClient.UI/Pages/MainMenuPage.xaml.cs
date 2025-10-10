@@ -42,7 +42,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ProfileLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NavigationService?.Navigate(new AvatarSelectionPage());
+            NavigationService?.Navigate(new YourProfilePage());
         }
 
         private void ExitLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)

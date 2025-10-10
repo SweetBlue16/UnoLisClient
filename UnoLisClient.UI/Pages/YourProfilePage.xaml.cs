@@ -24,5 +24,20 @@ namespace UnoLisClient.UI.Pages
         {
             InitializeComponent();
         }
+
+        private void ClickChangeAvatarButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new AvatarSelectionPage());
+        }
+
+        private void ClickChangeDataButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new EditProfilePage());
+        }
+
+        private void ClickBackButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
     }
 }

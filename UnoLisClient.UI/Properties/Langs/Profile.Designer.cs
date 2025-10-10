@@ -79,7 +79,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change date.
+        ///   Looks up a localized string similar to Change data.
         /// </summary>
         public static string ChangeDataButton {
             get {

@@ -124,7 +124,7 @@
     <value>Select an avatar</value>
   </data>
   <data name="ChangeDataButton" xml:space="preserve">
-    <value>Change date</value>
+    <value>Change data</value>
   </data>
   <data name="EpicSkinsLabel" xml:space="preserve">
     <value>Epic skins</value>
