@@ -118,34 +118,23 @@
                            FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Foreground="White"
                            Margin="0,0,0,20"/>
-                <DataGrid AutoGenerateColumns="False"
-                          HeadersVisibility="Column"
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserResizeColumns="False"
-                          CanUserSortColumns="False"
-                          CanUserReorderColumns="False"
-                          GridLinesVisibility="All"
-                          BorderThickness="1"
-                          HorizontalAlignment="Stretch"
-                          ColumnHeaderHeight="40"
-                          RowHeight="35">
+                <DataGrid x:Name="PlayerStatisticsDataGrid"
+                          Style="{DynamicResource DataGridStyle}"
+                          ItemsSource="{Binding Statistics}"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*"
+                          MaxWidth="750">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="{x:Static language:Global.MatchesPlayedColumn}"
-                                            Binding="{Binding MatchesPlayed}"
-                                            Width="Auto"/>
+                                            Binding="{Binding MatchesPlayed}"/>
                         <DataGridTextColumn Header="{x:Static language:Profile.WinsColumn}"
-                                            Binding="{Binding Wins}"
-                                            Width="Auto"/>
+                                            Binding="{Binding Wins}"/>
                         <DataGridTextColumn Header="{x:Static language:Profile.LosesColumn}"
-                                            Binding="{Binding Loses}"
-                                            Width="Auto"/>
+                                            Binding="{Binding Loses}"/>
                         <DataGridTextColumn Header="{x:Static language:Global.GlobalPointsColumn}"
-                                            Binding="{Binding GlobalPoints}"
-                                            Width="Auto"/>
+                                            Binding="{Binding GlobalPoints}"/>
                         <DataGridTextColumn Header="{x:Static language:Global.WinRateColumn}"
-                                            Binding="{Binding WinRate}"
-                                            Width="Auto"/>
+                                            Binding="{Binding WinRate}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

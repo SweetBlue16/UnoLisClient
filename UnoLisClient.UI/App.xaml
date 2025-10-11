@@ -43,6 +43,22 @@
         <SolidColorBrush x:Key="ScrollBarThumbDragColor" Color="#FFFFC400"/>
         <SolidColorBrush x:Key="ScrollBarThumbDisabledColor" Color="#444444"/>
         <SolidColorBrush x:Key="ScrollBarBackgroundColor" Color="#FF000000"/>
+        
+        <!-- DataGrid Colors -->
+        <SolidColorBrush x:Key="DataGridBackgroundColor" Color="#1E1E2E"/>
+        <SolidColorBrush x:Key="DataGridRowColor" Color="#2D2F3A"/>
+        <SolidColorBrush x:Key="DataGridRowHoverColor" Color="#3D82F0"/>
+        <SolidColorBrush x:Key="DataGridRowSelectedColor" Color="#FFD369"/>
+        <SolidColorBrush x:Key="DataGridTextColor" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="DataGridTextSecondaryColor" Color="#B0B0B0"/>
+        <SolidColorBrush x:Key="DataGridScrollBarBaseColor" Color="#303344"/>
+        <LinearGradientBrush x:Key="DataGridGradientBackground"
+                             StartPoint="0,0"
+                             EndPoint="0,1"
+                             Opacity="0.9">
+            <GradientStop Color="#1E1E2E" Offset="0.0"/>
+            <GradientStop Color="#2D2F3A" Offset="1.0"/>
+        </LinearGradientBrush>
 
         <!-- Starts PrimaryButtonStyle -->
         <Style x:Key="PrimaryButtonStyle" TargetType="{x:Type Button}">
@@ -497,5 +513,96 @@
             </Setter>
         </Style>
         <!-- Ends ScrollBarStyle -->
+        
+        <!-- Starts DataGridStyle -->
+        <Style x:Key="DataGridCell" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource DataGridTextColor}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                CornerRadius="4">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background"
+                            Value="{StaticResource DataGridRowSelectedColor}"/>
+                    <Setter Property="Foreground"
+                            Value="{StaticResource DataGridBackgroundColor}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource DataGridRowHoverColor}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DataGridRow" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="{StaticResource DataGridRowColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource DataGridTextColor}"/>
+            <Setter Property="Margin" Value="0,2,0,2"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource DataGridRowHoverColor}"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource DataGridRowSelectedColor}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DataGridBackgroundColor}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DataGridHeader" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#2D2F3A"/>
+            <Setter Property="Foreground" Value="{StaticResource DataGridTextSecondaryColor}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Luckiest Guy"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#444"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="{StaticResource DataGridGradientBackground}"/>
+            <Setter Property="RowBackground" Value="{StaticResource DataGridRowColor}"/>
+            <Setter Property="AlternatingRowBackground" Value="#252737"/>
+            <Setter Property="Foreground" Value="{StaticResource DataGridTextColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="RowStyle" Value="{StaticResource DataGridRow}"/>
+            <Setter Property="CellStyle" Value="{StaticResource DataGridCell}"/>
+            <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridHeader}"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="RowHeight" Value="35"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#333"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#333"/>
+        </Style>
+        <!-- Ends DataGridStyle -->
     </Application.Resources>
 </Application>
