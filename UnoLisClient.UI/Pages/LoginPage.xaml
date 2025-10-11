@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:UnoLisClient.UI.Pages"
       mc:Ignorable="d" 
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      xmlns:controls="clr-namespace:UnoLisClient.UI"
       Title="LoginPage">
 
 	<Border Background="#AA000000"
@@ -24,24 +25,23 @@
                    FontSize="30"/>
             <Label Content="{x:Static language:SignIn.NicknameLabel}"
                    HorizontalAlignment="Left"
-                   Margin="16,0,0,0"
+                   Margin="0,0,34,0"
                    VerticalAlignment="Top"
                    FontFamily="pack://application:,,,/Fonts/#Lato"
                    Foreground="White"
                    FontSize="15"/>
             <TextBox x:Name="NicknameTextBox"
                      Style="{DynamicResource TextBoxStyle}"
-                     Margin="0,0,0,16"/>
+                     Margin="0,0,34,16"/>
             <Label Content="{x:Static language:Global.PasswordLabel}"
                    HorizontalAlignment="Left"
-                   Margin="16,0,0,0"
+                   Margin="0,0,34,0"
                    VerticalAlignment="Top"
                    FontFamily="pack://application:,,,/Fonts/#Lato"
                    Foreground="White"
                    FontSize="15"/>
-            <PasswordBox x:Name="PasswordBox"
-                         Style="{DynamicResource PasswordBoxStyle}"
-                         Margin="0,0,0,16"/>
+            <controls:VisiblePasswordField x:Name="PasswordField"
+                                           Margin="0,0,0,16"/>
             <DockPanel Margin="10,5">
                 <Button Content="{x:Static language:SignIn.LoginButton}"
                         HorizontalAlignment="Center"

@@ -30,7 +30,7 @@ namespace UnoLisClient.UI.Pages
         private void ClickLoginButton(object sender, RoutedEventArgs e)
         {
             string nickname = NicknameTextBox.Text;
-            string password = PasswordBox.Password;
+            string password = PasswordField.Password;
             NavigationService?.Navigate(new MainMenuPage());
         }
 

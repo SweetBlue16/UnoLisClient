@@ -53,7 +53,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickBackButton(object sender, RoutedEventArgs e)
         {
-            NavigationService?.GoBack();
+            NavigationService?.Navigate(new MainMenuPage());
         }
     }
 }

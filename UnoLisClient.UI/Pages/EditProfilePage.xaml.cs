@@ -24,5 +24,15 @@ namespace UnoLisClient.UI.Pages
         {
             InitializeComponent();
         }
+
+        private void ClickSaveButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new YourProfilePage());
+        }
+
+        private void ClickCancelButton(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new YourProfilePage());
+        }
     }
 }

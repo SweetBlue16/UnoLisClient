@@ -126,8 +126,17 @@
   <data name="ChangeDataButton" xml:space="preserve">
     <value>Cambiar datos</value>
   </data>
+  <data name="ChangeDataLabel" xml:space="preserve">
+    <value>Cambia la información del perfil</value>
+  </data>
   <data name="EpicSkinsLabel" xml:space="preserve">
     <value>Aspectos épicos</value>
+  </data>
+  <data name="FacebookLinkLabel" xml:space="preserve">
+    <value>Link de Facebook</value>
+  </data>
+  <data name="InstagramLinkLabel" xml:space="preserve">
+    <value>Link de Instagram</value>
   </data>
   <data name="LegendarySkinsLabel" xml:space="preserve">
     <value>Aspectos legendarios</value>
@@ -140,6 +149,9 @@
   </data>
   <data name="SpecialSkinsLabel" xml:space="preserve">
     <value>Aspectos especiales</value>
+  </data>
+  <data name="TikTokLinkLabel" xml:space="preserve">
+    <value>Link de TikTok</value>
   </data>
   <data name="WinsColumn" xml:space="preserve">
     <value>Victorias</value>

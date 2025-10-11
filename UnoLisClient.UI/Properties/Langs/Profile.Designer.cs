@@ -88,11 +88,38 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change profile information.
+        /// </summary>
+        public static string ChangeDataLabel {
+            get {
+                return ResourceManager.GetString("ChangeDataLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Epic skins.
         /// </summary>
         public static string EpicSkinsLabel {
             get {
                 return ResourceManager.GetString("EpicSkinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facebook link.
+        /// </summary>
+        public static string FacebookLinkLabel {
+            get {
+                return ResourceManager.GetString("FacebookLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instagram link.
+        /// </summary>
+        public static string InstagramLinkLabel {
+            get {
+                return ResourceManager.GetString("InstagramLinkLabel", resourceCulture);
             }
         }
         
@@ -129,6 +156,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string SpecialSkinsLabel {
             get {
                 return ResourceManager.GetString("SpecialSkinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TikTok label.
+        /// </summary>
+        public static string TikTokLinkLabel {
+            get {
+                return ResourceManager.GetString("TikTokLinkLabel", resourceCulture);
             }
         }
         
