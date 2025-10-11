@@ -22,6 +22,11 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
         private void BuySpecial_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("You bought a Special Box!");
