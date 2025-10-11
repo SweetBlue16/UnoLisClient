@@ -17,40 +17,48 @@
             <!-- Footer -->
         </Grid.RowDefinitions>
 
-        <!-- 🔝 Header con 2 columnas -->
+        <!-- 🔝 Header con íconos -->
         <Grid Grid.Row="0" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="ProfileLabel"
-                   Content="{x:Static language:Global.ProfileLabel}"
-                   Grid.Column="0"
-                   VerticalAlignment="Center"
-                   FontSize="16"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   HorizontalAlignment="Left"
-                   Cursor="Hand"
-                   MouseDoubleClick="ProfileLabel_MouseDoubleClick"/>
+            <!-- 👤 Perfil -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Cursor="Hand"
+                        MouseDown="ProfileLabel_MouseDoubleClick">
+                <Image Source="/Assets/profileIcon.png"
+                       Width="26" Height="26"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,0"/>
+                <Label x:Name="ProfileLabel"
+                       Content="{x:Static language:Global.ProfileLabel}"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       VerticalAlignment="Center"/>
+            </StackPanel>
 
-            <Label x:Name="FriendsLabel"
-                   Content="{x:Static language:Global.FriendsListLabel}"
-                   Grid.Column="1"
-                   VerticalAlignment="Center"
-                   FontSize="16"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   HorizontalAlignment="Right"/>
+            <!-- 👥 Amigos -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Image Source="/Assets/friendsIcon.png"
+                       Width="26" Height="26"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,0"/>
+                <Label x:Name="FriendsLabel"
+                       Content="{x:Static language:Global.FriendsListLabel}"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       VerticalAlignment="Center"/>
+            </StackPanel>
         </Grid>
 
         <!-- 🟡 Centro -->
         <StackPanel Grid.Row="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Margin="0,0,0,40"
-                    >
+                    Margin="0,0,0,40">
             <Label x:Name="TitleLabel"
                    Content="{x:Static language:Global.AppNameLabel}"
                    FontSize="36"
@@ -68,16 +76,72 @@
                     Click="PlayButton_Click"/>
         </StackPanel>
 
-        <!-- 🔻 Footer -->
+        <!-- 🔻 Footer con íconos -->
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
                     Margin="0,20,0,20">
-            <Label x:Name="ShopLabel" Content="{x:Static language:Global.ShopLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="ShopLabel_MouseDoubleClick" Cursor="Hand"/>
-            <Label x:Name="SettingsLabel" Content="{x:Static language:Global.SettingsLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="SettingsLabel_MouseDoubleClick" Cursor="Hand"/>
-            <Label x:Name="StatisticsLabel" Content="{x:Static language:Global.StatisticsLabel}" FontSize="14" Foreground="White" Margin="20,0" Cursor="Hand"/>
-            <Label x:Name="HowToPlayLabel" Content="{x:Static language:Global.HowToPlayLabel}" FontSize="14" Foreground="White" Margin="20,0" Cursor="Hand"/>
-            <Label x:Name="ExitLabel" Content="{x:Static language:Global.ExitLabel}" FontSize="14" Foreground="White" Margin="20,0" MouseDoubleClick="ExitLabel_MouseDoubleClick" Cursor="Hand"/>
+
+            <!-- 🛍️ Tienda -->
+            <StackPanel Cursor="Hand" MouseDown="ShopLabel_MouseDoubleClick" HorizontalAlignment="Center" Margin="20,0">
+                <Image Source="/Assets/shopIcon.png"
+                       Width="40" Height="40"
+                       HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <Label x:Name="ShopLabel"
+                       Content="{x:Static language:Global.ShopLabel}"
+                       FontSize="14"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- ⚙️ Ajustes -->
+            <StackPanel Cursor="Hand" MouseDown="SettingsLabel_MouseDoubleClick" HorizontalAlignment="Center" Margin="20,0">
+                <Image Source="/Assets/settingsIcon.png"
+                       Width="40" Height="40"
+                       HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <Label x:Name="SettingsLabel"
+                       Content="{x:Static language:Global.SettingsLabel}"
+                       FontSize="14"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- 📊 Estadísticas -->
+            <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <Image Source="/Assets/statsIcon.png"
+                       Width="40" Height="40"
+                       HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <Label x:Name="StatisticsLabel"
+                       Content="{x:Static language:Global.StatisticsLabel}"
+                       FontSize="14"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- ❓ Cómo jugar -->
+            <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <Image Source="/Assets/rulesIcon.png"
+                       Width="40" Height="40"
+                       HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <Label x:Name="HowToPlayLabel"
+                       Content="{x:Static language:Global.HowToPlayLabel}"
+                       FontSize="14"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- 🚪 Salir -->
+            <StackPanel Cursor="Hand" MouseDown="ExitLabel_MouseDoubleClick" HorizontalAlignment="Center" Margin="20,0">
+                <Image Source="/Assets/exitIcon.png"
+                       Width="40" Height="40"
+                       HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <Label x:Name="ExitLabel"
+                       Content="{x:Static language:Global.ExitLabel}"
+                       FontSize="14"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

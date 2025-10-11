@@ -247,12 +247,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\exitIcon.png" />
+    <Resource Include="Assets\friendsIcon.png" />
     <Content Include="Assets\marioDesktop.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\jazzBackground.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\profileIcon.png" />
+    <Resource Include="Assets\rulesIcon.png" />
+    <Resource Include="Assets\settingsIcon.png" />
+    <Resource Include="Assets\shopIcon.png" />
+    <Resource Include="Assets\statsIcon.png" />
     <Resource Include="unoLogo.ico" />
     <Resource Include="Assets\unoLogo.ico" />
     <Resource Include="Assets\unoLogo.png">
