@@ -61,7 +61,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UNO LIS !.
+        ///   Looks up a localized string similar to UNO LIS!.
         /// </summary>
         public static string AppNameLabel {
             get {
@@ -120,24 +120,6 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ConfirmationMessageLabel {
             get {
                 return ResourceManager.GetString("ConfirmationMessageLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection Error.
-        /// </summary>
-        public static string ConnectionErrorLabel {
-            get {
-                return ResourceManager.GetString("ConnectionErrorLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to connect with the server. Check your internet connection and try again..
-        /// </summary>
-        public static string ConnectionErrorMessageLabel {
-            get {
-                return ResourceManager.GetString("ConnectionErrorMessageLabel", resourceCulture);
             }
         }
         
@@ -241,15 +223,6 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No connection.
-        /// </summary>
-        public static string NoConnectionLabel {
-            get {
-                return ResourceManager.GetString("NoConnectionLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The game is currently unavailable, please try again later..
         /// </summary>
         public static string NoConnectionMessageLabel {
@@ -277,7 +250,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PLAY !.
+        ///   Looks up a localized string similar to PLAY!.
         /// </summary>
         public static string PlayButton {
             get {

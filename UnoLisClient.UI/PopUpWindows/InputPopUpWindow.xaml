@@ -29,15 +29,29 @@
                        Margin="0,0,0,16"/>
             <TextBox x:Name="InputTextBox"
                      Style="{DynamicResource TextBoxStyle}"
-                     Margin="0,0,0,16"/>
-            <Button Content="{x:Static language:Global.GoButton}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Style="{DynamicResource PrimaryButtonStyle}"
-                    Height="56"
-                    Margin="0,0,0,0"
-                    Width="154"
-                    Click="ClickOkButton"/>
+                     Margin="0,0,0,16"
+                     TextChanged="InputTextBoxTextChanged"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,10,0,0">
+                <Button x:Name="OkButton"
+                        Content="{x:Static language:Global.GoButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Height="56"
+                        Margin="0,0,16,0"
+                        Width="154"
+                        Click="ClickOkButton"/> 
+                <Button Content="{x:Static language:Global.CancelButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Height="56"
+                        Margin="0,0,0,0"
+                        Width="154"
+                        Click="ClickCancelButton"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

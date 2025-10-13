@@ -22,14 +22,14 @@ namespace UnoLisClient.UI.Properties.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SignIn {
+    public class ErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SignIn() {
+        internal ErrorMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.SignIn", typeof(SignIn).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UnoLisClient.UI.Properties.Langs.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,137 +61,128 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Full name.
+        ///   Looks up a localized string similar to Connection Error.
         /// </summary>
-        public static string FullNameLabel {
+        public static string ConnectionErrorHeaderLabel {
             get {
-                return ResourceManager.GetString("FullNameLabel", resourceCulture);
+                return ResourceManager.GetString("ConnectionErrorHeaderLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log In.
+        ///   Looks up a localized string similar to Unable to connect with the server. Check your internet connection and try again..
         /// </summary>
-        public static string LoginButton {
+        public static string ConnectionErrorMessageLabel {
             get {
-                return ResourceManager.GetString("LoginButton", resourceCulture);
+                return ResourceManager.GetString("ConnectionErrorMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nickname.
+        ///   Looks up a localized string similar to Email is required..
         /// </summary>
-        public static string NicknameLabel {
+        public static string EmailEmptyMessageLabel {
             get {
-                return ResourceManager.GetString("NicknameLabel", resourceCulture);
+                return ResourceManager.GetString("EmailEmptyMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not registered yet? Sign up here..
+        ///   Looks up a localized string similar to The email format is invalid..
         /// </summary>
-        public static string NotRegisteredLabel {
+        public static string EmailFormatMessageLabel {
             get {
-                return ResourceManager.GetString("NotRegisteredLabel", resourceCulture);
+                return ResourceManager.GetString("EmailFormatMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least one capital letter (A-Z)..
+        ///   Looks up a localized string similar to Full name can&apos;t exceed {0} characters..
         /// </summary>
-        public static string PasswordValidationCapitalLabel {
+        public static string FullNameLengthMessageLabel {
             get {
-                return ResourceManager.GetString("PasswordValidationCapitalLabel", resourceCulture);
+                return ResourceManager.GetString("FullNameLengthMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password must contain:.
+        ///   Looks up a localized string similar to New password can&apos;t be empty..
         /// </summary>
-        public static string PasswordValidationHeaderLabel {
+        public static string NewPasswordEmptyMessageLabel {
             get {
-                return ResourceManager.GetString("PasswordValidationHeaderLabel", resourceCulture);
+                return ResourceManager.GetString("NewPasswordEmptyMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • Between 8 and 16 characters..
+        ///   Looks up a localized string similar to Nickname is required..
         /// </summary>
-        public static string PasswordValidationLengthLabel {
+        public static string NicknameEmptyMessageLabel {
             get {
-                return ResourceManager.GetString("PasswordValidationLengthLabel", resourceCulture);
+                return ResourceManager.GetString("NicknameEmptyMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least lowercase letter (a-z)..
+        ///   Looks up a localized string similar to The game is currently unavailable, please try again later..
         /// </summary>
-        public static string PasswordValidationLowerLabel {
+        public static string NoConnectionMessageLabel {
             get {
-                return ResourceManager.GetString("PasswordValidationLowerLabel", resourceCulture);
+                return ResourceManager.GetString("NoConnectionMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least one number (0-9)..
+        ///   Looks up a localized string similar to Passwords don&apos;t match, please verify them..
         /// </summary>
-        public static string PasswordValidationNumberLabel {
+        public static string PasswordDontMatchLabel {
             get {
-                return ResourceManager.GetString("PasswordValidationNumberLabel", resourceCulture);
+                return ResourceManager.GetString("PasswordDontMatchLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least one special character (e.g., _, -)..
+        ///   Looks up a localized string similar to Password is required..
         /// </summary>
-        public static string PasswordValidationSpecialCharLabel {
+        public static string PasswordEmptyMessageLabel {
             get {
-                return ResourceManager.GetString("PasswordValidationSpecialCharLabel", resourceCulture);
+                return ResourceManager.GetString("PasswordEmptyMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play as guest.
+        ///   Looks up a localized string similar to The URL must belong to the {0} domain..
         /// </summary>
-        public static string PlayAsGuestButton {
+        public static string SocialLinkDomainMessageLabel {
             get {
-                return ResourceManager.GetString("PlayAsGuestButton", resourceCulture);
+                return ResourceManager.GetString("SocialLinkDomainMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register to UNO-LIS!.
+        ///   Looks up a localized string similar to The {0} link is not a valid URL..
         /// </summary>
-        public static string RegisterLabel {
+        public static string SocialLinkFormatMessageLabel {
             get {
-                return ResourceManager.GetString("RegisterLabel", resourceCulture);
+                return ResourceManager.GetString("SocialLinkFormatMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rewrite password.
+        ///   Looks up a localized string similar to The user with the nickname given already exists..
         /// </summary>
-        public static string RewritedPasswordLabel {
+        public static string UserDuplicatedLabel {
             get {
-                return ResourceManager.GetString("RewritedPasswordLabel", resourceCulture);
+                return ResourceManager.GetString("UserDuplicatedLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign In.
+        ///   Looks up a localized string similar to The new password is not secure, please check the requirements..
         /// </summary>
-        public static string SignInButton {
+        public static string WeakPasswordMessageLabel {
             get {
-                return ResourceManager.GetString("SignInButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome to UNO-LIS!.
-        /// </summary>
-        public static string WelcomeLabel {
-            get {
-                return ResourceManager.GetString("WelcomeLabel", resourceCulture);
+                return ResourceManager.GetString("WeakPasswordMessageLabel", resourceCulture);
             }
         }
     }

@@ -117,49 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FullNameLabel" xml:space="preserve">
-    <value>Nombre completo</value>
+  <data name="ConnectionErrorHeaderLabel" xml:space="preserve">
+    <value>Connection Error</value>
   </data>
-  <data name="LoginButton" xml:space="preserve">
-    <value>Ingresar</value>
+  <data name="ConnectionErrorMessageLabel" xml:space="preserve">
+    <value>Unable to connect with the server. Check your internet connection and try again.</value>
   </data>
-  <data name="NicknameLabel" xml:space="preserve">
-    <value>Nombre de jugador</value>
+  <data name="EmailEmptyMessageLabel" xml:space="preserve">
+    <value>Email is required.</value>
   </data>
-  <data name="NotRegisteredLabel" xml:space="preserve">
-    <value>¿Todavía no tienes una cuenta? Regístrate aquí.</value>
+  <data name="EmailFormatMessageLabel" xml:space="preserve">
+    <value>The email format is invalid.</value>
   </data>
-  <data name="PasswordValidationCapitalLabel" xml:space="preserve">
-    <value>• Al menos una letra mayúscula (A-Z).</value>
+  <data name="FullNameLengthMessageLabel" xml:space="preserve">
+    <value>Full name can't exceed {0} characters.</value>
   </data>
-  <data name="PasswordValidationLengthLabel" xml:space="preserve">
-    <value>• Entre 8 y 16 caracteres.</value>
+  <data name="NewPasswordEmptyMessageLabel" xml:space="preserve">
+    <value>New password can't be empty.</value>
   </data>
-  <data name="PasswordValidationHeaderLabel" xml:space="preserve">
-    <value>La contraseña debe contener:</value>
+  <data name="NicknameEmptyMessageLabel" xml:space="preserve">
+    <value>Nickname is required.</value>
   </data>
-  <data name="PlayAsGuestButton" xml:space="preserve">
-    <value>Jugar como invitado</value>
+  <data name="NoConnectionMessageLabel" xml:space="preserve">
+    <value>The game is currently unavailable, please try again later.</value>
   </data>
-  <data name="RegisterLabel" xml:space="preserve">
-    <value>¡Regístrate en UNO-LIS!</value>
+  <data name="PasswordDontMatchLabel" xml:space="preserve">
+    <value>Passwords don't match, please verify them.</value>
   </data>
-  <data name="RewritedPasswordLabel" xml:space="preserve">
-    <value>Reescribe la contraseña</value>
+  <data name="PasswordEmptyMessageLabel" xml:space="preserve">
+    <value>Password is required.</value>
   </data>
-  <data name="SignInButton" xml:space="preserve">
-    <value>Registrarse</value>
+  <data name="SocialLinkDomainMessageLabel" xml:space="preserve">
+    <value>The URL must belong to the {0} domain.</value>
   </data>
-  <data name="WelcomeLabel" xml:space="preserve">
-    <value>¡Bienvenido a UNO-LIS!</value>
+  <data name="SocialLinkFormatMessageLabel" xml:space="preserve">
+    <value>The {0} link is not a valid URL.</value>
   </data>
-  <data name="PasswordValidationLowerLabel" xml:space="preserve">
-    <value>• Al menos una letra minúscula (a-z).</value>
+  <data name="UserDuplicatedLabel" xml:space="preserve">
+    <value>The user with the nickname given already exists.</value>
   </data>
-  <data name="PasswordValidationNumberLabel" xml:space="preserve">
-    <value>• Al menos un número (0-9).</value>
-  </data>
-  <data name="PasswordValidationSpecialCharLabel" xml:space="preserve">
-    <value>• Al menos un carácter especial (ej: _, -).</value>
+  <data name="WeakPasswordMessageLabel" xml:space="preserve">
+    <value>The new password is not secure, please check the requirements.</value>
   </data>
 </root>

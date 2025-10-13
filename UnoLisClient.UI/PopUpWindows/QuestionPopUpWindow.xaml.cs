@@ -28,12 +28,12 @@ namespace UnoLisClient.UI.PopUpWindows
 
         private void ClickNoButton(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
 
         private void ClickYesButton(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = true;
         }
     }
 }

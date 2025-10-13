@@ -129,11 +129,14 @@
   <data name="NotRegisteredLabel" xml:space="preserve">
     <value>Not registered yet? Sign up here.</value>
   </data>
-  <data name="PasswordLengthLabel" xml:space="preserve">
-    <value>Password must be at least 8 characters long.</value>
+  <data name="PasswordValidationCapitalLabel" xml:space="preserve">
+    <value>• At least one capital letter (A-Z).</value>
   </data>
-  <data name="PasswordsDontMatchLabel" xml:space="preserve">
-    <value>Passwords don't match.</value>
+  <data name="PasswordValidationLengthLabel" xml:space="preserve">
+    <value>• Between 8 and 16 characters.</value>
+  </data>
+  <data name="PasswordValidationHeaderLabel" xml:space="preserve">
+    <value>The password must contain:</value>
   </data>
   <data name="PlayAsGuestButton" xml:space="preserve">
     <value>Play as guest</value>
@@ -147,10 +150,16 @@
   <data name="SignInButton" xml:space="preserve">
     <value>Sign In</value>
   </data>
-  <data name="UserDuplicatedLabel" xml:space="preserve">
-    <value>The user with the email/nickname given already exists.</value>
-  </data>
   <data name="WelcomeLabel" xml:space="preserve">
     <value>Welcome to UNO-LIS!</value>
+  </data>
+  <data name="PasswordValidationLowerLabel" xml:space="preserve">
+    <value>• At least lowercase letter (a-z).</value>
+  </data>
+  <data name="PasswordValidationNumberLabel" xml:space="preserve">
+    <value>• At least one number (0-9).</value>
+  </data>
+  <data name="PasswordValidationSpecialCharLabel" xml:space="preserve">
+    <value>• At least one special character (e.g., _, -).</value>
   </data>
 </root>

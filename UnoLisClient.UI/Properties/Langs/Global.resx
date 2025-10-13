@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppNameLabel" xml:space="preserve">
-    <value>UNO LIS !</value>
+    <value>UNO LIS!</value>
   </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
@@ -137,12 +137,6 @@
   </data>
   <data name="ConfirmationMessageLabel" xml:space="preserve">
     <value>We've sent you a confirmation code to your email. Please enter it below:</value>
-  </data>
-  <data name="ConnectionErrorLabel" xml:space="preserve">
-    <value>Connection Error</value>
-  </data>
-  <data name="ConnectionErrorMessageLabel" xml:space="preserve">
-    <value>Unable to connect with the server. Check your internet connection and try again.</value>
   </data>
   <data name="CopyrightLabel" xml:space="preserve">
     <value>Copyright Mauricio &amp; Erickmel</value>
@@ -177,9 +171,6 @@
   <data name="NoButton" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="NoConnectionLabel" xml:space="preserve">
-    <value>No connection</value>
-  </data>
   <data name="NoConnectionMessageLabel" xml:space="preserve">
     <value>The game is currently unavailable, please try again later.</value>
   </data>
@@ -190,7 +181,7 @@
     <value>Password</value>
   </data>
   <data name="PlayButton" xml:space="preserve">
-    <value>PLAY !</value>
+    <value>PLAY!</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Profile</value>

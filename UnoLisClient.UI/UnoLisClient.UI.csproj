@@ -119,12 +119,18 @@
     <Compile Include="PopUpWindows\GottenAvatarWindow.xaml.cs">
       <DependentUpon>GottenAvatarWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Langs\ErrorMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="UnoLisWindows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VisiblePasswordField.xaml.cs">
+    <Compile Include="CustomUserControls\VisiblePasswordField.xaml.cs">
       <DependentUpon>VisiblePasswordField.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validators\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PopUpWindows\InputPopUpWindow.xaml.cs">
@@ -189,6 +195,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Langs\ErrorMessages.es.resx" />
+    <EmbeddedResource Include="Properties\Langs\ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Langs\FriendsList.es.resx" />
     <EmbeddedResource Include="Properties\Langs\FriendsList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -355,7 +366,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VisiblePasswordField.xaml">
+    <Page Include="CustomUserControls\VisiblePasswordField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
