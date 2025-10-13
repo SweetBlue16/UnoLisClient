@@ -9,7 +9,7 @@
 
     <Grid>
         <!-- Logo UNO con animación -->
-        <Image Source="/Assets/unoLogo.png"
+        <Image Source="/Assets/unoLogoPixelArt.png"
                Width="248" Height="226"
                HorizontalAlignment="Center"
                VerticalAlignment="Top"
