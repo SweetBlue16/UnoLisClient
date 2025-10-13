@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ShopManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IShopManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IShopManager_GetShopItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShopItems" />
+  </wsdl:message>
+  <wsdl:message name="IShopManager_PurchaseItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:PurchaseItem" />
+  </wsdl:message>
+  <wsdl:message name="IShopManager_ShopItemsReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ShopItemsReceived" />
+  </wsdl:message>
+  <wsdl:message name="IShopManager_ShopItemsReceived_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ShopItemsReceivedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShopManager_PurchaseResponse_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PurchaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShopManager_PurchaseResponse_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PurchaseResponseResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IShopManager">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetShopItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/GetShopItems" message="tns:IShopManager_GetShopItems_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PurchaseItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/PurchaseItem" message="tns:IShopManager_PurchaseItem_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ShopItemsReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/IShopManager/ShopItemsReceived" message="tns:IShopManager_ShopItemsReceived_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/ShopItemsReceivedResponse" message="tns:IShopManager_ShopItemsReceived_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PurchaseResponse">
+      <wsdl:output wsaw:Action="http://tempuri.org/IShopManager/PurchaseResponse" message="tns:IShopManager_PurchaseResponse_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/PurchaseResponseResponse" message="tns:IShopManager_PurchaseResponse_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IShopManager" type="tns:IShopManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_IShopManager_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetShopItems">
+      <soap12:operation soapAction="http://tempuri.org/IShopManager/GetShopItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseItem">
+      <soap12:operation soapAction="http://tempuri.org/IShopManager/PurchaseItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ShopItemsReceived">
+      <soap12:operation soapAction="http://tempuri.org/IShopManager/ShopItemsReceived" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseResponse">
+      <soap12:operation soapAction="http://tempuri.org/IShopManager/PurchaseResponse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ShopManager">
+    <wsdl:port name="NetTcpBinding_IShopManager" binding="tns:NetTcpBinding_IShopManager">
+      <soap12:address location="net.tcp://localhost:8119/ShopManager" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8119/ShopManager</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

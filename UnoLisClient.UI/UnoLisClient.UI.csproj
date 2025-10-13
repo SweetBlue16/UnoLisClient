@@ -43,6 +43,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,6 +66,56 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Auth\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Chat\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Friends\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Gameplay\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Leaderboards\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Notifications\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.PartyClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.PartyHost\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Profile\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Shop\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Pages\AvatarSelectionPage.xaml.cs">
       <DependentUpon>AvatarSelectionPage.xaml</DependentUpon>
@@ -249,6 +301,106 @@
     <Resource Include="Fonts\Lato.ttf" />
     <Resource Include="Fonts\Luckiest-Guy.ttf" />
     <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
+    <None Include="Connected Services\UnoLisServerReference.Auth\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Auth\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Auth\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Auth\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Chat\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Chat\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Chat\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Chat\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Friends\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\UnoLisServer.Contracts.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Notifications\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Notifications\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Notifications\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Notifications\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Profile\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Profile\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Profile\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Profile\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Shop\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Shop\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Shop\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Shop\UnoLisServer.Contracts.DTOs.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -258,6 +410,66 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Shop\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Shop\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Shop\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Chat\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Chat\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Chat\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Notifications\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Notifications\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Notifications\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Friends\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Friends\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Profile\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Profile\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Profile\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Auth\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Auth\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Auth\configuration91.svcinfo" />
     <Resource Include="Assets\exitIcon.png" />
     <Resource Include="Assets\friendsIcon.png" />
     <Content Include="Assets\marioDesktop.mp4">
@@ -371,6 +583,20 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Auth\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Chat\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Friends\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Gameplay\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Leaderboards\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Notifications\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyClient\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyHost\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Profile\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Shop\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
