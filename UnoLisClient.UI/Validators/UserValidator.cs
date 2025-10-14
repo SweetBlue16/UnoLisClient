@@ -15,6 +15,8 @@ namespace UnoLisClient.UI.Validators
         private const int MinNicknameLength = 3;
         private const int MaxNicknameLength = 20;
         private const int MaxFullnameLength = 100;
+        private const int MinPasswordLength = 8;
+        private const int MaxPasswordLength = 16;
 
         private static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]+$");
         private static readonly Regex _strongPasswordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$");
@@ -28,7 +30,15 @@ namespace UnoLisClient.UI.Validators
             {
                 errors.Add(ErrorMessages.NicknameEmptyMessageLabel);
             }
-            
+            else if (!_nicknameRegex.IsMatch(nickname))
+            {
+                errors.Add(ErrorMessages.NicknameFormatMessageLabel);
+            }
+            else if (nickname.Length < MinNicknameLength || nickname.Length > MaxNicknameLength)
+            {
+                errors.Add(string.Format(ErrorMessages.NicknameLengthMessageLabel, MinNicknameLength, MaxNicknameLength));
+            }
+
             if (string.IsNullOrWhiteSpace(password))
             {
                 errors.Add(ErrorMessages.PasswordEmptyMessageLabel);
@@ -43,7 +53,11 @@ namespace UnoLisClient.UI.Validators
         {
             var errors = new List<string>();
 
-            if (string.IsNullOrWhiteSpace(fullName) && fullName.Length > MaxFullnameLength)
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                errors.Add(ErrorMessages.FullNameEmptyMessageLabel);
+            }
+            if (fullName.Length > MaxFullnameLength)
             {
                 errors.Add(string.Format(ErrorMessages.FullNameLengthMessageLabel, MaxFullnameLength));
             }
@@ -94,6 +108,15 @@ namespace UnoLisClient.UI.Validators
             else if (!_strongPasswordRegex.IsMatch(newPassword))
             {
                 errors.Add(ErrorMessages.WeakPasswordMessageLabel);
+            }
+            else if (newPassword.Length < MinPasswordLength || newPassword.Length > MaxPasswordLength)
+            {
+                errors.Add(string.Format(ErrorMessages.PasswordLengthMessageLabel, MinPasswordLength, MaxPasswordLength));
+            }
+
+            if (!string.IsNullOrWhiteSpace(currentPassword) && newPassword == currentPassword)
+            {
+                errors.Add(ErrorMessages.PasswordSameAsOldMessageLabel);
             }
             return errors;
         }

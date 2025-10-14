@@ -67,7 +67,6 @@
                        FontSize="15"/>
                 <TextBox x:Name="EmailTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         IsEnabled="False"
                          Margin="0,0,32,16"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"

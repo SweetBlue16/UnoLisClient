@@ -129,6 +129,9 @@
   <data name="EmailFormatMessageLabel" xml:space="preserve">
     <value>El formato del email no es válido.</value>
   </data>
+  <data name="FullNameEmptyMessageLabel" xml:space="preserve">
+    <value>El nombre completo es requerido.</value>
+  </data>
   <data name="FullNameLengthMessageLabel" xml:space="preserve">
     <value>El nombre completo no puede exceder los {0} caracteres.</value>
   </data>
@@ -138,6 +141,12 @@
   <data name="NicknameEmptyMessageLabel" xml:space="preserve">
     <value>El nombre de jugador es requerido.</value>
   </data>
+  <data name="NicknameFormatMessageLabel" xml:space="preserve">
+    <value>El nombre de jugador debe contener tener letras, números, guiones medios y bajos.</value>
+  </data>
+  <data name="NicknameLengthMessageLabel" xml:space="preserve">
+    <value>La longitud del nombre de jugador debe ser entre {0} y {1} caracteres.</value>
+  </data>
   <data name="NoConnectionMessageLabel" xml:space="preserve">
     <value>El juego no está disponible por el momento, por favor intenta más tarde.</value>
   </data>
@@ -146,6 +155,12 @@
   </data>
   <data name="PasswordEmptyMessageLabel" xml:space="preserve">
     <value>La contraseña es requerida.</value>
+  </data>
+  <data name="PasswordLengthMessageLabel" xml:space="preserve">
+    <value>La longitud de la contraseña debe ser entre {0} y {1} caracteres.</value>
+  </data>
+  <data name="PasswordSameAsOldMessageLabel" xml:space="preserve">
+    <value>La nueva contraseña es la misma que la anterior.</value>
   </data>
   <data name="SocialLinkDomainMessageLabel" xml:space="preserve">
     <value>La URL debe pertenecer al dominio de {0}.</value>
