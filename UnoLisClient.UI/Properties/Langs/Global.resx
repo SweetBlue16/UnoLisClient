@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppNameLabel" xml:space="preserve">
-    <value>UNO LIS!</value>
+    <value>UNO-LIS!</value>
   </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
@@ -159,6 +159,9 @@
   <data name="GoButton" xml:space="preserve">
     <value>Go!</value>
   </data>
+  <data name="GuestLabel" xml:space="preserve">
+    <value>Guest</value>
+  </data>
   <data name="HowToPlayLabel" xml:space="preserve">
     <value>How to play?</value>
   </data>
@@ -198,8 +201,14 @@
   <data name="StatisticsLabel" xml:space="preserve">
     <value>Statistics</value>
   </data>
+  <data name="SuccessLabel" xml:space="preserve">
+    <value>Success!</value>
+  </data>
   <data name="TitlePlaceholderLabel" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="UnsuccessfulLabel" xml:space="preserve">
+    <value>Unsuccessful</value>
   </data>
   <data name="VolumeLabel" xml:space="preserve">
     <value>Volume</value>

@@ -45,7 +45,8 @@
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
-                        <TextBlock Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                        <TextBlock x:Name="UserNicknameLabel"
+                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="18"/>
@@ -55,7 +56,8 @@
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
-                        <TextBlock Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                        <TextBlock x:Name="UserFullNameLabel"
+                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="18"/>
@@ -65,7 +67,8 @@
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
-                        <TextBlock Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                        <TextBlock x:Name="UserEmailLabel"
+                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="18"/>
@@ -76,15 +79,18 @@
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
                         <StackPanel Orientation="Horizontal" Margin="0">
-                            <Label Content="Facebook"
+                            <Label x:Name="UserFacebookLinkLabel"
+                                   Content="Facebook"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="15"/>
-                            <Label Content="Instagram"
+                            <Label x:Name="UserInstagramLinkLabel"
+                                   Content="Instagram"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="15"/>
-                            <Label Content="TikTok"
+                            <Label x:Name="UserTikTokLinkLabel"
+                                   Content="TikTok"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="15"/>

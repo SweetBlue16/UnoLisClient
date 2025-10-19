@@ -97,6 +97,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Full name is required..
+        /// </summary>
+        public static string FullNameEmptyMessageLabel {
+            get {
+                return ResourceManager.GetString("FullNameEmptyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full name can&apos;t exceed {0} characters..
         /// </summary>
         public static string FullNameLengthMessageLabel {
@@ -124,6 +133,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The nickname must contain letters, numbers, hyphens and underscores..
+        /// </summary>
+        public static string NicknameFormatMessageLabel {
+            get {
+                return ResourceManager.GetString("NicknameFormatMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The nickname length must be between {0} and {1} characters..
+        /// </summary>
+        public static string NicknameLengthMessageLabel {
+            get {
+                return ResourceManager.GetString("NicknameLengthMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The game is currently unavailable, please try again later..
         /// </summary>
         public static string NoConnectionMessageLabel {
@@ -147,6 +174,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PasswordEmptyMessageLabel {
             get {
                 return ResourceManager.GetString("PasswordEmptyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password length must be between {0} and {1} characters..
+        /// </summary>
+        public static string PasswordLengthMessageLabel {
+            get {
+                return ResourceManager.GetString("PasswordLengthMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The new password is the same as the old one..
+        /// </summary>
+        public static string PasswordSameAsOldMessageLabel {
+            get {
+                return ResourceManager.GetString("PasswordSameAsOldMessageLabel", resourceCulture);
             }
         }
         

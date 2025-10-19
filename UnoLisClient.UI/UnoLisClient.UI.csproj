@@ -117,6 +117,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Managers\SessionManager.cs" />
     <Compile Include="Pages\AvatarSelectionPage.xaml.cs">
       <DependentUpon>AvatarSelectionPage.xaml</DependentUpon>
     </Compile>

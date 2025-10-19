@@ -61,7 +61,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UNO LIS!.
+        ///   Looks up a localized string similar to UNO-LIS!.
         /// </summary>
         public static string AppNameLabel {
             get {
@@ -187,6 +187,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guest.
+        /// </summary>
+        public static string GuestLabel {
+            get {
+                return ResourceManager.GetString("GuestLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to play?.
         /// </summary>
         public static string HowToPlayLabel {
@@ -304,11 +313,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Success!.
+        /// </summary>
+        public static string SuccessLabel {
+            get {
+                return ResourceManager.GetString("SuccessLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string TitlePlaceholderLabel {
             get {
                 return ResourceManager.GetString("TitlePlaceholderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsuccessful.
+        /// </summary>
+        public static string UnsuccessfulLabel {
+            get {
+                return ResourceManager.GetString("UnsuccessfulLabel", resourceCulture);
             }
         }
         
