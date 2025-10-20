@@ -196,6 +196,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The profile information has not been loaded..
+        /// </summary>
+        public static string ProfileNotLoadedMessageLabel {
+            get {
+                return ResourceManager.GetString("ProfileNotLoadedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The URL must belong to the {0} domain..
         /// </summary>
         public static string SocialLinkDomainMessageLabel {

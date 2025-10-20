@@ -187,6 +187,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User successfully registered, welcome to UNO-LIS!.
+        /// </summary>
+        public static string UserRegisteredSuccessfullyLabel {
+            get {
+                return ResourceManager.GetString("UserRegisteredSuccessfullyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome to UNO-LIS!.
         /// </summary>
         public static string WelcomeLabel {

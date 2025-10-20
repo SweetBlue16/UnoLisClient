@@ -20,12 +20,12 @@
                    FontSize="40"/>
             <TextBlock x:Name="MessageTextBlock"
                        HorizontalAlignment="Center"
-                       TextWrapping="Wrap"
+                       TextWrapping="WrapWithOverflow"
                        Text="{x:Static language:Global.MessagePlaceholderLabel}"
                        VerticalAlignment="Center"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
-                       FontSize="18"
+                       FontSize="15"
                        Margin="0,0,0,24"
                        Height="51"/>
             <Button Content="{x:Static language:Global.OkButton}"

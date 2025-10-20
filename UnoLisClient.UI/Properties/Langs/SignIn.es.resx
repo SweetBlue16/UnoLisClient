@@ -162,4 +162,7 @@
   <data name="PasswordValidationSpecialCharLabel" xml:space="preserve">
     <value>• Al menos un carácter especial (ej: _, -).</value>
   </data>
+  <data name="UserRegisteredSuccessfullyLabel" xml:space="preserve">
+    <value>Usuario registrado con éxito, ¡bienvenido a UNO-LIS!</value>
+  </data>
 </root>

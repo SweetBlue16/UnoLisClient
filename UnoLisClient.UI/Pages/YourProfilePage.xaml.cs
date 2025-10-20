@@ -13,41 +13,47 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceModel;
-using UnoLisClient.UI.UnoLisServerReference.Profile;
-using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.UnoLisServerReference.ProfileView;
 using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Utilities;
 
 namespace UnoLisClient.UI.Pages
 {
     /// <summary>
     /// Interaction logic for YourProfilePage.xaml
     /// </summary>
-    public partial class YourProfilePage : Page, IProfileManagerCallback
+    public partial class YourProfilePage : Page, IProfileViewManagerCallback
     {
-        private ProfileManagerClient _profileClient;
+        private ProfileViewManagerClient _profileViewClient;
 
         public YourProfilePage()
         {
             InitializeComponent();
-            try
-            {
-                _profileClient = new ProfileManagerClient(new InstanceContext(this));
-                string nickname = SessionManager.CurrentProfile?.Nickname ?? Global.GuestLabel;
-                _profileClient.GetProfileData(nickname);
-            }
-            catch
-            {
-                LoadDefaultData();
-            }
+            RequestProfileData();
         }
 
-        public void ProfileDataReceived(ProfileData data)
+        public void ProfileDataReceived(bool success, ProfileData data)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                if (!success || data == null)
+                {
+                    new SimplePopUpWindow(Global.WarningLabel, "").ShowDialog();
+                    LoadDefaultData();
+                    return;
+                }
+
+                var clientProfile = data.ToClientModel();
+
                 UserNicknameLabel.Text = data.Nickname;
                 UserFullNameLabel.Text = data.FullName;
                 UserEmailLabel.Text = data.Email;
+
+                UserFacebookLinkLabel.Content = data.FacebookUrl;
+                UserInstagramLinkLabel.Content = data.InstagramUrl;
+                UserTikTokLinkLabel.Content = data.TikTokUrl;
 
                 PlayerStatisticsDataGrid.ItemsSource = new List<dynamic>
                 {
@@ -57,14 +63,13 @@ namespace UnoLisClient.UI.Pages
                         Wins = data.Wins,
                         Loses = data.Losses,
                         GlobalPoints = data.ExperiencePoints,
-                        WinRate = data.MatchesPlayed == 0 ? "0%" : 
-                            $"{(int)((float)data.Wins / data.MatchesPlayed * 100)}%"
+                        WinRate = data.MatchesPlayed == 0 ? "0%" :
+                        $"{(int)(float) data.Wins / data.MatchesPlayed * 100}%"
                     }
                 };
+                CurrentSession.CurrentUserProfileData = clientProfile;
             });
         }
-
-        public void ProfileUpdateResponse(bool success, string message) {}
 
         private void ClickChangeAvatarButton(object sender, RoutedEventArgs e)
         {
@@ -73,7 +78,12 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickChangeDataButton(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new EditProfilePage());
+            if (CurrentSession.CurrentUserProfileData == null)
+            {
+                new SimplePopUpWindow(Global.WarningLabel, ErrorMessages.ProfileNotLoadedMessageLabel).ShowDialog();
+                return;
+            }
+            NavigationService?.Navigate(new EditProfilePage(CurrentSession.CurrentUserProfileData));
         }
 
         private void ClickBackButton(object sender, RoutedEventArgs e)
@@ -81,11 +91,27 @@ namespace UnoLisClient.UI.Pages
             NavigationService?.Navigate(new MainMenuPage());
         }
 
+        private void RequestProfileData()
+        {
+            try
+            {
+                var context = new InstanceContext(this);
+                _profileViewClient = new ProfileViewManagerClient(context);
+                string nickname = CurrentSession.CurrentUserNickname ?? "Guest";
+                _profileViewClient.GetProfileData(nickname);
+            }
+            catch (Exception)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
+                LoadDefaultData();
+            }
+        }
+
         private void LoadDefaultData()
         {
             var defaultData = new ProfileData
             {
-                Nickname = Global.GuestLabel,
+                Nickname = "Guest",
                 FullName = "-",
                 Email = "-",
                 MatchesPlayed = 0,
@@ -93,7 +119,15 @@ namespace UnoLisClient.UI.Pages
                 Losses = 0,
                 ExperiencePoints = 0
             };
-            ProfileDataReceived(defaultData);
+
+            UserNicknameLabel.Text = defaultData.Nickname;
+            UserFullNameLabel.Text = defaultData.FullName;
+            UserEmailLabel.Text = defaultData.Email;
+
+            PlayerStatisticsDataGrid.ItemsSource = new List<dynamic>
+            {
+                new { MatchesPlayed = 0, Wins = 0, Loses = 0, GlobalPoints = 0, WinRate = "0%" }
+            };
         }
     }
 }

@@ -13,75 +13,95 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceModel;
-using UnoLisClient.UI.UnoLisServerReference.Profile;
-using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.UnoLisServerReference.ProfileEdit;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.Validators;
 
 namespace UnoLisClient.UI.Pages
 {
     /// <summary>
     /// Interaction logic for EditProfilePage.xaml
     /// </summary>
-    public partial class EditProfilePage : Page, IProfileManagerCallback
+    public partial class EditProfilePage : Page, IProfileEditManagerCallback
     {
-        private ProfileManagerClient _profileClient;
+        private ProfileEditManagerClient _profileEditClient;
+        private readonly ClientProfileData _currentProfile;
 
-        public EditProfilePage()
+        public EditProfilePage(ClientProfileData currentProfile)
         {
             InitializeComponent();
-            _profileClient = new ProfileManagerClient(new InstanceContext(this));
-
-            if (SessionManager.CurrentProfile != null)
-            {
-                _profileClient.GetProfileData(SessionManager.CurrentProfile.Nickname);
-            }
-        }
-
-        public void ProfileDataReceived(ProfileData data)
-        {
-            SessionManager.CurrentProfile = data;
-            Dispatcher.Invoke(() =>
-            {
-                FullNameTextBox.Text = data.FullName;
-                NicknameTextBox.Text = data.Nickname;
-                EmailTextBox.Text = data.Email;
-                PasswordField.Password = string.Empty;
-                FacebookLinkTextBox.Text = string.Empty;
-                InstagramLinkTextBox.Text = string.Empty;
-                TikTokLinkTextBox.Text = string.Empty;
-
-                NicknameTextBox.IsEnabled = false;
-            });
+            _currentProfile = currentProfile ?? new ClientProfileData();
+            LoadProfileData();
         }
 
         public void ProfileUpdateResponse(bool success, string message)
         {
-            Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                new SimplePopUpWindow(success ? Global.SuccessLabel : Global.UnsuccessfulLabel, message);
-
                 if (success)
                 {
+                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
                     NavigationService?.Navigate(new YourProfilePage());
+                }
+                else
+                {
+                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
                 }
             });
         }
 
         private void ClickSaveButton(object sender, RoutedEventArgs e)
         {
-            var updated = new ProfileData
+            try
             {
-                Nickname = NicknameTextBox.Text.Trim(),
-                FullName = FullNameTextBox.Text.Trim(),
-                Email = EmailTextBox.Text.Trim()
-            };
-            _profileClient.UpdateProfileData(updated);
+                var updatedProfile = new ClientProfileData
+                {
+                    Nickname = _currentProfile.Nickname,
+                    FullName = FullNameTextBox.Text.Trim(),
+                    Email = EmailTextBox.Text.Trim(),
+                    Password = PasswordField.Password,
+                    FacebookUrl = FacebookLinkTextBox.Text.Trim(),
+                    InstagramUrl = InstagramLinkTextBox.Text.Trim(),
+                    TikTokUrl = TikTokLinkTextBox.Text.Trim()
+                };
+
+                var errors = UserValidator.ValidateProfileUpdate(updatedProfile.ToProfileEditContract(),
+                    updatedProfile.Password);
+
+                if (errors.Count > 0)
+                {
+                    string message = "◆ " + string.Join("\n◆ ", errors);
+                    new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
+                    return;
+                }
+
+                var context = new InstanceContext(this);
+                _profileEditClient = new ProfileEditManagerClient(context);
+                var contractProfile = updatedProfile.ToProfileEditContract();
+                _profileEditClient.UpdateProfileData(contractProfile);
+            }
+            catch (Exception)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
+            }
         }
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new YourProfilePage());
+        }
+
+        private void LoadProfileData()
+        {
+            NicknameTextBox.Text = _currentProfile.Nickname;
+            FullNameTextBox.Text = _currentProfile.FullName;
+            EmailTextBox.Text = _currentProfile.Email;
+            FacebookLinkTextBox.Text = _currentProfile.FacebookUrl;
+            InstagramLinkTextBox.Text = _currentProfile.InstagramUrl;
+            TikTokLinkTextBox.Text = _currentProfile.TikTokUrl;
         }
     }
 }

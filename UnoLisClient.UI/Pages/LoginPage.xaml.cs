@@ -15,8 +15,7 @@ using System.Windows.Shapes;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.UnoLisServerReference;
-using UnoLisClient.UI.UnoLisServerReference.Auth;
-using UnoLisClient.UI.UnoLisServerReference.Profile;
+using UnoLisClient.UI.UnoLisServerReference.Login;
 using UnoLisClient.UI.Validators;
 using System.ServiceModel;
 using UnoLisClient.UI.Managers;
@@ -26,9 +25,9 @@ namespace UnoLisClient.UI.Pages
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : Page, IAuthManagerCallback
+    public partial class LoginPage : Page, ILoginManagerCallback
     {
-        private AuthManagerClient _authClient;
+        private LoginManagerClient _loginClient;
 
         public LoginPage()
         {
@@ -37,45 +36,49 @@ namespace UnoLisClient.UI.Pages
 
         public void LoginResponse(bool success, string message)
         {
-            if (success)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                SessionManager.CurrentProfile = new ProfileData
+                if (success)
                 {
-                    Nickname = NicknameTextBox.Text.Trim()
-                };
-                new SimplePopUpWindow(Global.SuccessLabel, SignIn.WelcomeLabel).ShowDialog();
-                NavigationService?.Navigate(new MainMenuPage());
-            }
-            else
-            {
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
-            }
+                    CurrentSession.CurrentUserNickname = NicknameTextBox.Text.Trim();
+                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
+                    NavigationService?.Navigate(new MainMenuPage());
+                }
+                else
+                {
+                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                }
+            });
         }
-
-        public void RegisterResponse(bool success, string message) {}
-
-        public void ConfirmationResponse(bool success) {}
 
         private void ClickLoginButton(object sender, RoutedEventArgs e)
         {
             string nickname = NicknameTextBox.Text.Trim();
-            string password = PasswordField.Password.Trim();
-
-            var errors = UserValidator.ValidateLoginEmptyFields(nickname, password);
-            if (errors.Any())
-            {
-                string errorMessage = string.Join("\n", errors);
-                new SimplePopUpWindow(errorMessage, Global.WarningLabel).ShowDialog();
-                return;
-            }
-
-            _authClient = new AuthManagerClient(new InstanceContext(this));
+            string password = PasswordField.Password;
             var credentials = new AuthCredentials
             {
                 Nickname = nickname,
                 Password = password
             };
-            _authClient.Login(credentials);
+
+            List<string> errors = UserValidator.ValidateLogin(credentials);
+            if (errors.Count > 0)
+            {
+                string message = string.Join("\n◆ ", errors);
+                new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
+                return;
+            }
+
+            try
+            {
+                var context = new InstanceContext(this);
+                _loginClient = new LoginManagerClient(context);
+                _loginClient.Login(credentials);
+            }
+            catch (Exception ex)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
+            }
         }
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)

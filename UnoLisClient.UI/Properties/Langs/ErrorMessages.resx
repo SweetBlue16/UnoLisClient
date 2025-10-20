@@ -162,6 +162,9 @@
   <data name="PasswordSameAsOldMessageLabel" xml:space="preserve">
     <value>The new password is the same as the old one.</value>
   </data>
+  <data name="ProfileNotLoadedMessageLabel" xml:space="preserve">
+    <value>The profile information has not been loaded.</value>
+  </data>
   <data name="SocialLinkDomainMessageLabel" xml:space="preserve">
     <value>The URL must belong to the {0} domain.</value>
   </data>
