@@ -33,6 +33,7 @@ namespace UnoLisClient.UI.Pages
         private void CreateGameButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Partida creada exitosamente!");
+            NavigationService?.Navigate(new MatchLobbyPage());
         }
         private void MusicToggle_Checked(object sender, RoutedEventArgs e)
         {
