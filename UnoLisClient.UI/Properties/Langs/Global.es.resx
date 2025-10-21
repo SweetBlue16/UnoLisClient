@@ -165,6 +165,9 @@
   <data name="HowToPlayLabel" xml:space="preserve">
     <value>¿Cómo jugar?</value>
   </data>
+  <data name="LoadingLabel" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
   <data name="MatchesPlayedColumn" xml:space="preserve">
     <value>Partidas jugadas</value>
   </data>

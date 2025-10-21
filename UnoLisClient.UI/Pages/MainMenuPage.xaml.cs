@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnoLisClient.UI.Managers;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -48,6 +49,16 @@ namespace UnoLisClient.UI.Pages
         private void ExitLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             NavigationService?.Navigate(new GamePage());
+            LogoutCurrentUser();
+        }
+
+        private void LogoutCurrentUser()
+        {
+            if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+            {
+                CurrentSession.CurrentUserNickname = null;
+                CurrentSession.CurrentUserProfileData = null;
+            }
         }
     }
 }

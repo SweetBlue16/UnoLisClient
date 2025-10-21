@@ -132,6 +132,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ProgressBarWidthConverter.cs" />
+    <Compile Include="CustomUserControls\LoadingProgressBar.xaml.cs">
+      <DependentUpon>LoadingProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Managers\ClientProfileData.cs" />
     <Compile Include="Managers\CurrentSession.cs" />
     <Compile Include="Pages\AvatarSelectionPage.xaml.cs">
@@ -190,6 +194,9 @@
     </Compile>
     <Compile Include="PopUpWindows\GottenAvatarWindow.xaml.cs">
       <DependentUpon>GottenAvatarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpWindows\LoadingPopUpWindow.xaml.cs">
+      <DependentUpon>LoadingPopUpWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Langs\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -568,6 +575,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomUserControls\LoadingProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AvatarSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -645,6 +656,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PopUpWindows\InputPopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopUpWindows\LoadingPopUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
