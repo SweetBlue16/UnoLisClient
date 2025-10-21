@@ -153,6 +153,9 @@
   <data name="TikTokLinkLabel" xml:space="preserve">
     <value>TikTok label</value>
   </data>
+  <data name="UserDataChangedLabel" xml:space="preserve">
+    <value>Profile information successfully changed!</value>
+  </data>
   <data name="WinsColumn" xml:space="preserve">
     <value>Wins</value>
   </data>

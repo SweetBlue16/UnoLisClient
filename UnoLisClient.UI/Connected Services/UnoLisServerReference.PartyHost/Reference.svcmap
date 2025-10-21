@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="fbbefa85-d077-472b-8d29-9991ed77ea22" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="ec5a9fe5-f523-46f2-be4f-1ce3d295d3aa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,12 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:8107/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:8110" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ce87ca2b-8757-4e22-8cdc-8b73b26134dd" SourceId="1" SourceUrl="net.tcp://localhost:8107/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d519724f-39d6-44f9-8c91-ef02ca0bf6c2" SourceId="1" SourceUrl="net.tcp://localhost:8107/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ccbef703-98da-47de-acb9-cad5f3182f77" SourceId="1" SourceUrl="net.tcp://localhost:8107/mex" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="c81ecee9-f347-4c54-ae63-b9ed18e5cae6" SourceId="1" SourceUrl="http://localhost:8110/?xsd=xsd0" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="1eb4adf2-a0a3-48fe-92bc-c68cc73341d7" SourceId="1" SourceUrl="http://localhost:8110/?disco" />
+    <MetadataFile FileName="PartyHostManager.wsdl" MetadataType="Wsdl" ID="8f78dabc-ec17-456f-93a7-947e3e963820" SourceId="1" SourceUrl="http://localhost:8110/?wsdl" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="d3c0fed6-9de9-416e-9912-40fe94639f06" SourceId="1" SourceUrl="http://localhost:8110/?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

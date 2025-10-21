@@ -153,6 +153,9 @@
   <data name="TikTokLinkLabel" xml:space="preserve">
     <value>Link de TikTok</value>
   </data>
+  <data name="UserDataChangedLabel" xml:space="preserve">
+    <value>¡Datos del perfil cambiados con éxito!</value>
+  </data>
   <data name="WinsColumn" xml:space="preserve">
     <value>Victorias</value>
   </data>
