@@ -322,133 +322,133 @@
     <Resource Include="Fonts\Lato.ttf" />
     <Resource Include="Fonts\Luckiest-Guy.ttf" />
     <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
-    <None Include="Connected Services\UnoLisServerReference.Chat\ChatManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Chat\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Chat\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Chat\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Chat\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Chat\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Chat\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Chat\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Confirmation\ConfirmationManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Confirmation\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Confirmation\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Confirmation\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Confirmation\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Confirmation\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Friends\FriendsManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Friends\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Friends\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Friends\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Friends\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Friends\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Friends\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Friends\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Gameplay\GameplayManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Gameplay\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Gameplay\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Gameplay\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Gameplay\item3.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\UnoLisServer.Contracts.Enums.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Leaderboards\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Leaderboards\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Leaderboards\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Leaderboards\LeaderboardsManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Login\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Login\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\LoginManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Notifications\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Notifications\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Notifications\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Notifications\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Notifications\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Notifications\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Notifications\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Notifications\NotificationsManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.PartyClient\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\PartyClientManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.PartyHost\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\PartyHostManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\ProfileEditManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.ProfileView\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.ProfileView\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.ProfileView\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.ProfileView\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.ProfileView\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.ProfileView\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.ProfileView\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.ProfileView\ProfileViewManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Register\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Register\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Register\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Register\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Register\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Register\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Register\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Register\RegisterManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Shop\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Shop\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Shop\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Shop\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Shop\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Shop\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Shop\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Shop\ShopManager.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -464,91 +464,78 @@
     </None>
     <None Include="Connected Services\UnoLisServerReference.Friends\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Friends\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Friends\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Shop\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Shop\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Shop\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Shop\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Leaderboards\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Chat\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Chat\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Chat\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Chat\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Notifications\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Notifications\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Gameplay\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Gameplay\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Gameplay\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Gameplay\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.PartyClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.PartyClient\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.PartyClient\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.PartyHost\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.PartyHost\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.PartyHost\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.ProfileView\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.ProfileView\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.ProfileView\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.ProfileView\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Confirmation\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Confirmation\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Confirmation\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Confirmation\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Register\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Register\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Register\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Register\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Login\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Login\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Login\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Login\item.disco" />
     <Resource Include="Assets\pixelNoise.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -557,6 +544,12 @@
     </Resource>
     <Resource Include="Assets\exitIcon.png" />
     <Resource Include="Assets\friendsIcon.png" />
+    <Content Include="Assets\lobbyVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\lobbyMusic.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\marioDesktop.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
