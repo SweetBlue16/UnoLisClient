@@ -482,6 +482,12 @@
     <None Include="Connected Services\UnoLisServerReference.Auth\configuration91.svcinfo" />
     <Resource Include="Assets\exitIcon.png" />
     <Resource Include="Assets\friendsIcon.png" />
+    <Content Include="Assets\lobbyVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\lobbyMusic.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\marioDesktop.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

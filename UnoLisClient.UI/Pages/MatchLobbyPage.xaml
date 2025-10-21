@@ -7,205 +7,281 @@
       Title="MatchLobbyPage">
 
     <Grid Background="#88000000">
-        <!-- Fondo translúcido oscuro -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <!-- 📋 Lista de jugadores a la izquierda -->
-        <Border Background="#55000000"
-                CornerRadius="12"
-                Padding="20"
-                Width="260"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Left"
-                Margin="40,60,0,60">
+        <!-- 📧 Panel de invitaciones de amigos -->
+        <Border Grid.Column="0"
+        Background="#55000000"
+        CornerRadius="12"
+        Padding="20"
+        Width="300"
+        VerticalAlignment="Stretch"
+        Margin="40,60,20,60">
             <StackPanel>
-                <TextBlock Text="Players"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,10"/>
-
-                <ListBox x:Name="PlayersListBox"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Foreground="White"
-                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0,6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Avatar -->
-                                <Ellipse Width="36" Height="36" Fill="#888" Grid.Column="0"/>
-                                <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                    <TextBlock Text="{Binding PlayerName}"
-                                               FontWeight="Bold"
-                                               FontSize="14"
-                                               Foreground="White"/>
-                                    <TextBlock Text="{Binding Status}"
-                                               FontSize="12"
-                                               Foreground="LightGreen"/>
-                                </StackPanel>
-                                <!-- Icono de estado -->
-                                <TextBlock Text="{Binding RoleIcon}"
-                                           Grid.Column="2"
-                                           FontSize="16"
-                                           Foreground="Gold"
-                                           VerticalAlignment="Center"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-        </Border>
-
-        <!-- 🎮 Zona central con jugadores y logo -->
-        <Grid>
-            <!-- Jugador superior -->
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,60,0,0">
-                <Ellipse Width="70" Height="70" Fill="DarkGray"/>
-                <TextBlock Text="Player 3"
-                           FontSize="16"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           Margin="0,6,0,0"/>
-            </StackPanel>
-
-            <!-- Jugador izquierdo -->
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Margin="120,0,0,0">
-                <Ellipse Width="70" Height="70" Fill="DarkGray"/>
-                <TextBlock Text="Player 1"
-                           FontSize="16"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           Margin="0,6,0,0"/>
-            </StackPanel>
-
-            <!-- Jugador derecho -->
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,120,0">
-                <Ellipse Width="70" Height="70" Fill="DarkGray"/>
-                <TextBlock Text="Player 2"
-                           FontSize="16"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           Margin="0,6,0,0"/>
-            </StackPanel>
-
-            <!-- Jugador inferior -->
-            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100">
-                <Ellipse Width="70" Height="70" Fill="DarkGray"/>
-                <TextBlock Text="Player 4"
-                           FontSize="16"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           Margin="0,6,0,0"/>
-            </StackPanel>
-
-            <!-- Logo UNO central -->
-            <Image Source="/Assets/unoLogoPixelArt.png"
-                   Width="230"
-                   Height="190"
+                <!-- Título -->
+                <TextBlock Text="Invite Friends"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="White"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center">
-                <Image.Effect>
-                    <DropShadowEffect BlurRadius="20"
-                                      ShadowDepth="4"
-                                      Color="Black"
-                                      Opacity="0.6"/>
-                </Image.Effect>
-            </Image>
-        </Grid>
+                   Margin="0,0,0,10"/>
 
-        <!-- 📟 Código + botón Ready (parte inferior central) -->
-        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,40">
-            <Border Background="#33000000"
-                    CornerRadius="8"
-                    Padding="8,4"
-                    BorderBrush="White"
-                    BorderThickness="1"
-                    Margin="0,0,0,10">
-                <TextBlock Text="CODE: ABX92"
-                           Foreground="Lime"
-                           FontFamily="Consolas"
-                           FontSize="20"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-            </Border>
+                <!-- Lista de amigos -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="FriendsList"
+                          Margin="0,10,0,10">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#33000000"
+                                CornerRadius="8"
+                                Padding="8"
+                                Margin="0,4">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-            <TextBlock Text="3 / 4 Players ready"
-                       FontSize="15"
-                       Foreground="White"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,8"/>
+                                        <!-- Avatar -->
+                                        <Ellipse Width="40" Height="40"
+                                         Fill="DarkGray"
+                                         Grid.Column="0"/>
 
-            <Button x:Name="StartButton"
-                    Content="READY"
-                    Width="180"
-                    Height="55"
-                    FontSize="17"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Margin="0,5,0,0"/>
-        </StackPanel>
+                                        <!-- Nombre + estado -->
+                                        <StackPanel Grid.Column="1"
+                                            Margin="10,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding FriendName}"
+                                               FontWeight="Bold"
+                                               Foreground="White"
+                                               FontSize="14"/>
+                                            <TextBlock Text="{Binding Status}"
+                                               FontSize="12"
+                                               Foreground="{Binding StatusColor}"/>
+                                        </StackPanel>
 
-        <!-- ⚙️ Botones de chat y ajustes (arriba a la derecha) -->
-        <StackPanel Orientation="Vertical"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Right"
-                    Margin="0,20,20,0">
-            <Button Width="42" Height="42"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="SettingsButton_Click">
-                <Image Source="/Assets/settingsIcon.png" Width="26" Height="26"/>
-            </Button>
-
-            <Button Width="42" Height="42"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="ChatButton_Click"
-                    Margin="0,12,0,0">
-                <Image Source="/Assets/friendsIcon.png" Width="26" Height="26"/>
-            </Button>
-        </StackPanel>
-
-        <!-- 💬 Chat emergente lateral -->
-        <Border x:Name="ChatPopup"
-                Background="#DD111111"
-                CornerRadius="10"
-                BorderBrush="White"
-                BorderThickness="1"
-                Padding="10"
-                Width="280"
-                Height="300"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Margin="0,80,20,0"
-                Visibility="Collapsed">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="SweetBlue16: Ready!" Foreground="White"/>
-                        <TextBlock Text="MapleVR: Let's go!" Foreground="White"/>
-                    </StackPanel>
+                                        <!-- Botón Invitar -->
+                                        <Button Content="Invite"
+                                        Width="60"
+                                        Height="28"
+                                        Grid.Column="2"
+                                        Margin="5,0,0,0"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Click="InviteButton_Click"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
 
-                <DockPanel Grid.Row="1" Margin="0,10,0,0">
-                    <TextBox Width="200" Height="30" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <Button Content="Send"
-                            Width="50" Height="30"
-                            Style="{StaticResource SecondaryButtonStyle}"/>
-                </DockPanel>
-            </Grid>
+                <!-- Botón global -->
+                <Button x:Name="SendInvitesButton"
+                Content="Send Invites"
+                Width="200"
+                Height="45"
+                FontSize="16"
+                Margin="0,15,0,0"
+                HorizontalAlignment="Center"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Click="SendInvitesButton_Click"/>
+            </StackPanel>
         </Border>
+
+        <!-- 🎮 Zona central: avatares + logo + controles -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 🧩 Rejilla cuadrada 3x3 responsiva -->
+            <Viewbox Grid.Row="0"
+                     Stretch="Uniform"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="0,10,0,0">
+                <Grid Width="520" Height="520">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 🎮 Jugador 3 (Arriba) -->
+                    <StackPanel Grid.Row="0" Grid.Column="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
+                        <TextBlock Text="Player 3"
+                                   Foreground="White"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- 🎮 Jugador 1 (Izquierda) -->
+                    <StackPanel Grid.Row="1" Grid.Column="0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
+                        <TextBlock Text="Player 1"
+                                   Foreground="White"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- 🎮 Jugador 2 (Derecha) -->
+                    <StackPanel Grid.Row="1" Grid.Column="2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
+                        <TextBlock Text="Player 2"
+                                   Foreground="White"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- 🎮 Jugador 4 (Abajo) -->
+                    <StackPanel Grid.Row="2" Grid.Column="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0,20,0,10">
+                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
+                        <TextBlock Text="Player 4"
+                                   Foreground="White"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- 🟥 Logo UNO (Centro exacto) -->
+                    <Viewbox Grid.Row="1" Grid.Column="1"
+                             Stretch="Uniform"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Width="200" Height="170">
+                        <Image Source="/Assets/unoLogoPixelArt.png">
+                            <Image.Effect>
+                                <DropShadowEffect BlurRadius="20"
+                                                  ShadowDepth="4"
+                                                  Color="Black"
+                                                  Opacity="0.6"/>
+                            </Image.Effect>
+                        </Image>
+                    </Viewbox>
+                </Grid>
+            </Viewbox>
+
+            <!-- 📟 Controles de lobby -->
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Margin="0,10,0,20"
+                        Orientation="Vertical">
+
+                <!-- Botón READY -->
+                <Button x:Name="StartButton"
+                        Content="READY"
+                        Width="180"
+                        Height="55"
+                        FontSize="17"
+                        Margin="0,5,0,15"
+                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                <!-- Código + Jugadores Ready -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,8">
+
+                    <Border Background="#33000000"
+                            CornerRadius="8"
+                            Padding="10,5"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            Margin="0,0,10,0">
+                        <TextBlock Text="CODE: ABX92"
+                                   Foreground="Lime"
+                                   FontFamily="Consolas"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                    </Border>
+
+                    <TextBlock Text="3 / 4 Players ready"
+                               FontSize="15"
+                               Foreground="White"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- ⚙️ Chat y Ajustes -->
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0,20,20,0">
+                <Button Width="42" Height="42"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="SettingsButton_Click">
+                    <Image Source="/Assets/settingsIcon.png" Width="26" Height="26"/>
+                </Button>
+
+                <Button Width="42" Height="42"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="ChatButton_Click"
+                        Margin="0,12,0,0">
+                    <Image Source="/Assets/friendsIcon.png" Width="26" Height="26"/>
+                </Button>
+            </StackPanel>
+
+            <!-- 💬 Chat emergente -->
+            <Border x:Name="ChatPopup"
+                    Background="#DD111111"
+                    CornerRadius="10"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    Padding="10"
+                    Width="280"
+                    Height="300"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,80,20,0"
+                    Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock Text="SweetBlue16: Ready!" Foreground="White"/>
+                            <TextBlock Text="MapleVR: Let's go!" Foreground="White"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <DockPanel Grid.Row="1" Margin="0,10,0,0">
+                        <TextBox Width="200" Height="30" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Button Content="Send"
+                                Width="50" Height="30"
+                                Style="{StaticResource SecondaryButtonStyle}"/>
+                    </DockPanel>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

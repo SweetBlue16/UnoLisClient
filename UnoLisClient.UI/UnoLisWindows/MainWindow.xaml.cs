@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,9 +10,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace UnoLisClient.UI
 {
@@ -28,6 +29,7 @@ namespace UnoLisClient.UI
 
         private void VideoBackground_MediaEnded(object sender, RoutedEventArgs e)
         {
+            // 🔁 Repite el video en bucle
             VideoBackground.Position = TimeSpan.Zero;
             VideoBackground.Play();
         }
@@ -37,33 +39,27 @@ namespace UnoLisClient.UI
             // 🎵 Inicia música y navega a la primera página (GamePage)
             MainFrame.Navigate(new Pages.GamePage());
 
-            // Aseguramos que ambos estén visibles al inicio
+            // 🟣 Prepara pantalla negra y logo
             IntroMask.Visibility = Visibility.Visible;
             IntroMask.Opacity = 1;
             SplashLogo.Visibility = Visibility.Visible;
             SplashLogo.Opacity = 0;
 
             // 🟡 Etapa 1: Fade-in + scale del logo UNO
-            var fadeInLogo = new System.Windows.Media.Animation.DoubleAnimation
+            var fadeInLogo = new DoubleAnimation
             {
                 From = 0,
                 To = 1,
                 Duration = TimeSpan.FromSeconds(3.0),
-                EasingFunction = new System.Windows.Media.Animation.CubicEase
-                {
-                    EasingMode = System.Windows.Media.Animation.EasingMode.EaseInOut
-                }
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            var scaleLogo = new System.Windows.Media.Animation.DoubleAnimation
+            var scaleLogo = new DoubleAnimation
             {
                 From = 0.8,
                 To = 1.0,
                 Duration = TimeSpan.FromSeconds(3.0),
-                EasingFunction = new System.Windows.Media.Animation.CubicEase
-                {
-                    EasingMode = System.Windows.Media.Animation.EasingMode.EaseOut
-                }
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
             SplashLogo.BeginAnimation(UIElement.OpacityProperty, fadeInLogo);
@@ -73,15 +69,12 @@ namespace UnoLisClient.UI
             await Task.Delay(3000); // Logo visible unos segundos
 
             // 🟠 Etapa 2: Fade-out del logo UNO
-            var fadeOutLogo = new System.Windows.Media.Animation.DoubleAnimation
+            var fadeOutLogo = new DoubleAnimation
             {
                 From = 1,
                 To = 0,
                 Duration = TimeSpan.FromSeconds(1.8),
-                EasingFunction = new System.Windows.Media.Animation.CubicEase
-                {
-                    EasingMode = System.Windows.Media.Animation.EasingMode.EaseInOut
-                }
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
             SplashLogo.BeginAnimation(UIElement.OpacityProperty, fadeOutLogo);
 
@@ -89,18 +82,14 @@ namespace UnoLisClient.UI
             MusicPlayer.Play();
 
             // 🔵 Etapa 3: Fade-out del fondo negro (IntroMask)
-            var fadeOutMask = new System.Windows.Media.Animation.DoubleAnimation
+            var fadeOutMask = new DoubleAnimation
             {
                 From = 1,
                 To = 0,
                 Duration = TimeSpan.FromSeconds(2.5),
-                EasingFunction = new System.Windows.Media.Animation.CubicEase
-                {
-                    EasingMode = System.Windows.Media.Animation.EasingMode.EaseOut
-                }
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
-            // Cuando termina, ocultamos todo el overlay
             fadeOutMask.Completed += (s, _) =>
             {
                 IntroMask.Visibility = Visibility.Collapsed;
@@ -112,8 +101,73 @@ namespace UnoLisClient.UI
 
         private void MusicPlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
+            // 🔁 Repite música de fondo
             MusicPlayer.Position = TimeSpan.Zero;
             MusicPlayer.Play();
+        }
+
+        // 🎬 Transición cinematográfica al cambiar video/música
+        public async void SetBackgroundMedia(string videoPath, string musicPath)
+        {
+            try
+            {
+                // 🔸 Paso 1: Fade out suave (video + audio)
+                var fadeOut = new DoubleAnimation
+                {
+                    From = 1,
+                    To = 0,
+                    Duration = TimeSpan.FromSeconds(1.0),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+                };
+
+                VideoBackground.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+                double oldVolume = MusicPlayer.Volume;
+
+                var fadeOutMusic = new DoubleAnimation
+                {
+                    From = oldVolume,
+                    To = 0,
+                    Duration = TimeSpan.FromSeconds(1.0),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+                };
+                MusicPlayer.BeginAnimation(MediaElement.VolumeProperty, fadeOutMusic);
+
+                await Task.Delay(1000);
+
+                // 🔸 Paso 2: Cambiar las fuentes
+                VideoBackground.Stop();
+                MusicPlayer.Stop();
+
+                VideoBackground.Source = new Uri(System.IO.Path.GetFullPath(videoPath));
+                MusicPlayer.Source = new Uri(System.IO.Path.GetFullPath(musicPath));
+
+                // 🔸 Paso 3: Reproducir nuevos medios
+                VideoBackground.Play();
+                MusicPlayer.Play();
+
+                // 🔸 Paso 4: Fade in suave (video + audio)
+                var fadeIn = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = TimeSpan.FromSeconds(1.0),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+                };
+                VideoBackground.BeginAnimation(UIElement.OpacityProperty, fadeIn);
+
+                var fadeInMusic = new DoubleAnimation
+                {
+                    From = 0,
+                    To = oldVolume,
+                    Duration = TimeSpan.FromSeconds(1.0),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+                };
+                MusicPlayer.BeginAnimation(MediaElement.VolumeProperty, fadeInMusic);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error changing background media: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
     }
