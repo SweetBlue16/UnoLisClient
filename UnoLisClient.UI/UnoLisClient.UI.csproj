@@ -97,6 +97,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Logout\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\UnoLisServerReference.Notifications\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,7 +137,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ProgressBarWidthConverter.cs" />
+    <Compile Include="Utilities\ProgressBarWidthConverter.cs" />
     <Compile Include="CustomUserControls\LoadingProgressBar.xaml.cs">
       <DependentUpon>LoadingProgressBar.xaml</DependentUpon>
     </Compile>
@@ -389,6 +394,13 @@
     <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\LogoutManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\service.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\service.xsd">
       <SubType>Designer</SubType>
@@ -465,6 +477,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Logout\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Logout\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Logout\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Friends\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -690,6 +709,7 @@
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Gameplay\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Leaderboards\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Login\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Logout\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Notifications\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyClient\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyHost\" />

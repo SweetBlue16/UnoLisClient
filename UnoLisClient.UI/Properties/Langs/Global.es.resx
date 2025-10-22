@@ -168,6 +168,9 @@
   <data name="LoadingLabel" xml:space="preserve">
     <value>Cargando...</value>
   </data>
+  <data name="LogoutMessageLabel" xml:space="preserve">
+    <value>¿Estás seguro de que quieres cerrar sesión?</value>
+  </data>
   <data name="MatchesPlayedColumn" xml:space="preserve">
     <value>Partidas jugadas</value>
   </data>

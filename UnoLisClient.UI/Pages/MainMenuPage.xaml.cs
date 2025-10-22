@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,17 +14,37 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.UnoLisServerReference.Logout;
 
 namespace UnoLisClient.UI.Pages
 {
     /// <summary>
     /// Interaction logic for MainMenuPage.xaml
     /// </summary>
-    public partial class MainMenuPage : Page
+    public partial class MainMenuPage : Page, ILogoutManagerCallback
     {
+        private LogoutManagerClient _logoutClient;
+
         public MainMenuPage()
         {
             InitializeComponent();
+        }
+
+        public void LogoutResponse(bool success, string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (success)
+                {
+                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
+                }
+                else
+                {
+                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                }
+            });
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -48,16 +69,31 @@ namespace UnoLisClient.UI.Pages
 
         private void ExitLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NavigationService?.Navigate(new GamePage());
-            LogoutCurrentUser();
+            var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel).ShowDialog();
+            if (result == true)
+            {
+                NavigationService?.Navigate(new GamePage());
+                LogoutCurrentUser();
+            }
         }
 
         private void LogoutCurrentUser()
         {
-            if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+            try
             {
-                CurrentSession.CurrentUserNickname = null;
-                CurrentSession.CurrentUserProfileData = null;
+                if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+                {
+                    var context = new InstanceContext(this);
+                    _logoutClient = new LogoutManagerClient(context);
+                    _logoutClient.LogoutAsync(CurrentSession.CurrentUserNickname);
+
+                    CurrentSession.CurrentUserNickname = null;
+                    CurrentSession.CurrentUserProfileData = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
         }
     }

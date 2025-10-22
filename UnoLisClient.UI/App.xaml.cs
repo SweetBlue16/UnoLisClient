@@ -2,23 +2,44 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Globalization;
-using System.Threading;
-using System.Windows.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.UnoLisServerReference.Logout;
 
 namespace UnoLisClient.UI
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : Application, ILogoutManagerCallback
     {
+        private LogoutManagerClient _logoutClient;
+
+        public void LogoutResponse(bool success, string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (success)
+                {
+                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
+                }
+                else
+                {
+                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                }
+            });
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -41,10 +62,21 @@ namespace UnoLisClient.UI
 
         private void LogoutCurrentUser()
         {
-            if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+            try
             {
-                CurrentSession.CurrentUserNickname = null;
-                CurrentSession.CurrentUserProfileData = null;
+                if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+                {
+                    var context = new InstanceContext(this);
+                    _logoutClient = new LogoutManagerClient(context);
+                    _logoutClient.LogoutAsync(CurrentSession.CurrentUserNickname);
+
+                    CurrentSession.CurrentUserNickname = null;
+                    CurrentSession.CurrentUserProfileData = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
         }
     }

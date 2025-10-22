@@ -9,7 +9,8 @@
         Title="{x:Static language:Global.AppNameLabel}"
         Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
-        Loaded="MainWindow_Loaded">
+        Loaded="MainWindow_Loaded"
+        Closing="MainWindowClosing">
 
     <Grid>
         <MediaElement x:Name="VideoBackground"

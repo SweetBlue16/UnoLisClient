@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace UnoLisClient.UI.Converters
+namespace UnoLisClient.UI.Utilities
 {
     public class ProgressBarWidthConverter : IMultiValueConverter
     {
