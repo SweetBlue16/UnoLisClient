@@ -29,6 +29,7 @@ namespace UnoLisClient.UI.Pages
     {
         private ProfileEditManagerClient _profileEditClient;
         private readonly ClientProfileData _currentProfile;
+        private LoadingPopUpWindow _loadingPopUpWindow;
 
         public EditProfilePage(ClientProfileData currentProfile)
         {
@@ -41,6 +42,7 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                _loadingPopUpWindow?.StopLoadingAndClose();
                 if (success)
                 {
                     new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
@@ -78,6 +80,11 @@ namespace UnoLisClient.UI.Pages
                     return;
                 }
 
+                _loadingPopUpWindow = new LoadingPopUpWindow()
+                {
+                    Owner = Window.GetWindow(this)
+                };
+                _loadingPopUpWindow.Show();
                 var context = new InstanceContext(this);
                 _profileEditClient = new ProfileEditManagerClient(context);
                 var contractProfile = updatedProfile.ToProfileEditContract();
@@ -85,6 +92,7 @@ namespace UnoLisClient.UI.Pages
             }
             catch (Exception)
             {
+                _loadingPopUpWindow?.StopLoadingAndClose();
                 new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
             }
         }

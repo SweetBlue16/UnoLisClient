@@ -130,10 +130,10 @@
     <value>¿Todavía no tienes una cuenta? Regístrate aquí.</value>
   </data>
   <data name="PasswordValidationCapitalLabel" xml:space="preserve">
-    <value>• Al menos una letra mayúscula (A-Z).</value>
+    <value>◆ Al menos una letra mayúscula (A-Z).</value>
   </data>
   <data name="PasswordValidationLengthLabel" xml:space="preserve">
-    <value>• Entre 8 y 16 caracteres.</value>
+    <value>◆ Entre 8 y 16 caracteres.</value>
   </data>
   <data name="PasswordValidationHeaderLabel" xml:space="preserve">
     <value>La contraseña debe contener:</value>
@@ -154,15 +154,18 @@
     <value>¡Bienvenido a UNO-LIS!</value>
   </data>
   <data name="PasswordValidationLowerLabel" xml:space="preserve">
-    <value>• Al menos una letra minúscula (a-z).</value>
+    <value>◆ Al menos una letra minúscula (a-z).</value>
   </data>
   <data name="PasswordValidationNumberLabel" xml:space="preserve">
-    <value>• Al menos un número (0-9).</value>
+    <value>◆ Al menos un número (0-9).</value>
   </data>
   <data name="PasswordValidationSpecialCharLabel" xml:space="preserve">
-    <value>• Al menos un carácter especial (ej: _, -).</value>
+    <value>◆ Al menos un carácter especial (@, $, !, %, *, ?, &amp;, -, _).</value>
   </data>
   <data name="UserRegisteredSuccessfullyLabel" xml:space="preserve">
     <value>Usuario registrado con éxito, ¡bienvenido a UNO-LIS!</value>
+  </data>
+  <data name="PasswordRequirementsHeaderLabel" xml:space="preserve">
+    <value>Requisitos de la contraseña</value>
   </data>
 </root>

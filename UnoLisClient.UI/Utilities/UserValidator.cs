@@ -22,7 +22,7 @@ namespace UnoLisClient.UI.Validators
         private const int MaxPasswordLength = 16;
 
         private static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]+$");
-        private static readonly Regex _strongPasswordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$");
+        private static readonly Regex _strongPasswordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_])[A-Za-z\d@$!%*?&\-_]{8,16}$");
 
         public static List<string> ValidateRegistration(RegistrationData registrationData, string rewritedPassword)
         {

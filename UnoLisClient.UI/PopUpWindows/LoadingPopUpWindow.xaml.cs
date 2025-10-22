@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UnoLisClient.UI.Properties.Langs;
 
 namespace UnoLisClient.UI.PopUpWindows
 {
@@ -22,6 +23,7 @@ namespace UnoLisClient.UI.PopUpWindows
         public LoadingPopUpWindow()
         {
             InitializeComponent();
+            Title = Global.LoadingLabel.ToUpper();
             Loaded += LoadingPopUpWindowLoaded;
         }
 

@@ -66,7 +66,7 @@ namespace UnoLisClient.UI.Pages
             List<string> errors = UserValidator.ValidateLogin(credentials);
             if (errors.Count > 0)
             {
-                string message = string.Join("\n◆ ", errors);
+                string message = "◆ " + string.Join("\n◆ ", errors);
                 new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
                 return;
             }

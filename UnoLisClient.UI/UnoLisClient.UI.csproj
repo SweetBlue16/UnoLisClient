@@ -137,6 +137,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\ProgressBarWidthConverter.cs" />
     <Compile Include="CustomUserControls\LoadingProgressBar.xaml.cs">
       <DependentUpon>LoadingProgressBar.xaml</DependentUpon>

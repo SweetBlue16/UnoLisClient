@@ -27,6 +27,7 @@ namespace UnoLisClient.UI.Pages
     public partial class RegisterPage : Page, IRegisterManagerCallback
     {
         private RegisterManagerClient _registerClient;
+        private LoadingPopUpWindow _loadingPopUpWindow;
 
         public RegisterPage()
         {
@@ -37,6 +38,7 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                _loadingPopUpWindow?.StopLoadingAndClose();
                 if (success)
                 {
                     new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
@@ -73,19 +75,25 @@ namespace UnoLisClient.UI.Pages
             List<string> errors = UserValidator.ValidateRegistration(registrationData, rewritedPassword);
             if (errors.Count > 0)
             {
-                string message = string.Join("\n◆ ", errors);
+                string message = "◆ " + string.Join("\n◆ ", errors);
                 new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
                 return;
             }
 
             try
             {
+                _loadingPopUpWindow = new LoadingPopUpWindow()
+                {
+                    Owner = Window.GetWindow(this)
+                };
+                _loadingPopUpWindow.Show();
                 var context = new InstanceContext(this);
                 _registerClient = new RegisterManagerClient(context);
                 _registerClient.Register(registrationData);
             }
             catch (Exception)
             {
+                _loadingPopUpWindow?.StopLoadingAndClose();
                 new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
             }
         }

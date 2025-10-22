@@ -52,6 +52,7 @@
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
                        VerticalAlignment="Top"
+                       IsEnabled="False"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
                        FontSize="15"/>

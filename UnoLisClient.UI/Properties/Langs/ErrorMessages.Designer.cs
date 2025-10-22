@@ -223,6 +223,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The user hasn&apos;t configured this social network. Please try another one..
+        /// </summary>
+        public static string SocialNetworkNotConfiguredMessageLabel {
+            get {
+                return ResourceManager.GetString("SocialNetworkNotConfiguredMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The link couldn&apos;t be opened. Please try again..
+        /// </summary>
+        public static string UnableToOpenLinkMessageLabel {
+            get {
+                return ResourceManager.GetString("UnableToOpenLinkMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user with the nickname given already exists..
         /// </summary>
         public static string UserDuplicatedLabel {
