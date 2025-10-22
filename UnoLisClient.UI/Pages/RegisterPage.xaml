@@ -11,11 +11,13 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0"
+        <Border Grid.Column="1"
                 Background="#AA000000"
 	            CornerRadius="15"
 	            Padding="24"
@@ -102,7 +104,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1"
+        <Border Grid.Column="2"
                 Background="#AA000000"
                 CornerRadius="15"
                 Padding="24"
@@ -125,43 +127,43 @@
                        VerticalAlignment="Top"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
-                       FontSize="25"/>
+                       FontSize="20"/>
                 <Label Content="{x:Static language:SignIn.PasswordValidationCapitalLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,0,8"
                        VerticalAlignment="Top"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
-                       FontSize="25"/>
+                       FontSize="20"/>
                 <Label Content="{x:Static language:SignIn.PasswordValidationLowerLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,0,8"
                        VerticalAlignment="Top"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
-                       FontSize="25"/>
+                       FontSize="20"/>
                 <Label Content="{x:Static language:SignIn.PasswordValidationNumberLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,0,8"
                        VerticalAlignment="Top"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
-                       FontSize="25"/>
+                       FontSize="20"/>
                 <Label Content="{x:Static language:SignIn.PasswordValidationLengthLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,0,8"
                        VerticalAlignment="Top"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
-                       FontSize="25"/>
+                       FontSize="20"/>
                 <TextBlock Text="{x:Static language:SignIn.PasswordValidationSpecialCharLabel}"
                            HorizontalAlignment="Left"
                            Margin="8,0,0,8"
-                           Width="450"
+                           Width="400"
                            FontFamily="pack://application:,,,/Fonts/#Lato"
                            Foreground="White"
                            TextWrapping="WrapWithOverflow"
-                           FontSize="25"/>
+                           FontSize="20"/>
             </StackPanel>
         </Border>
     </Grid>
