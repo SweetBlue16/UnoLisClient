@@ -72,8 +72,7 @@ namespace UnoLisClient.UI.Pages
                     TikTokUrl = TikTokLinkTextBox.Text.Trim()
                 };
 
-                var errors = UserValidator.ValidateProfileUpdate(updatedProfile.ToProfileEditContract(),
-                    updatedProfile.Password);
+                var errors = UserValidator.ValidateProfileUpdate(updatedProfile.ToProfileEditContract());
 
                 if (errors.Count > 0)
                 {
@@ -87,6 +86,7 @@ namespace UnoLisClient.UI.Pages
                     Owner = Window.GetWindow(this)
                 };
                 _loadingPopUpWindow.Show();
+
                 var context = new InstanceContext(this);
                 _profileEditClient = new ProfileEditManagerClient(context);
                 var contractProfile = updatedProfile.ToProfileEditContract();
