@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {

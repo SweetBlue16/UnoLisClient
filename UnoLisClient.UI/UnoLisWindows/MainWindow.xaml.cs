@@ -192,6 +192,31 @@ namespace UnoLisClient.UI
             }
         }
 
+        public async void RestoreDefaultBackground()
+        {
+            try
+            {
+                string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/marioDesktop.mp4");
+                string defaultMusic = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/jazzBackground.mp3");
+
+                await Task.Delay(600);
+
+                VideoBackground.Stop();
+                MusicPlayer.Stop();
+
+                VideoBackground.Source = new Uri(defaultVideo, UriKind.Absolute);
+                MusicPlayer.Source = new Uri(defaultMusic, UriKind.Absolute);
+
+                VideoBackground.Play();
+                MusicPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error restoring background:\n{ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
         private void LogoutCurrentUser()
         {
             try

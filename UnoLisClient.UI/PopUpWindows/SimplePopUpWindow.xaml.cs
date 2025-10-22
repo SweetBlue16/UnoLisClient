@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.PopUpWindows
 {
@@ -28,6 +29,7 @@ namespace UnoLisClient.UI.PopUpWindows
 
         private void ClickOkButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             this.Close();
         }
     }

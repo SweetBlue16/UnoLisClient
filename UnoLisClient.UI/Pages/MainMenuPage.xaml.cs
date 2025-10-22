@@ -17,6 +17,7 @@ using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.UnoLisServerReference.Logout;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -73,6 +74,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ExitLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            SoundManager.PlayClick();
             var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel).ShowDialog();
             if (result == true)
             {
