@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -27,12 +29,14 @@ namespace UnoLisClient.UI.Pages
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.GoBack();
         }
 
         private void CreateGameButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Partida creada exitosamente!");
+            SoundManager.PlayClick();
+            new SimplePopUpWindow("Game Created", "Your game has been successfully created!").ShowDialog();
             NavigationService?.Navigate(new MatchLobbyPage());
         }
         private void MusicToggle_Checked(object sender, RoutedEventArgs e)

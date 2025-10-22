@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -46,6 +47,7 @@ namespace UnoLisClient.UI.Pages
         // 💌 Invitar amigos individuales
         private void InviteButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             if (sender is Button button && button.DataContext is Friend friend)
             {
                 friend.Invited = !friend.Invited;
@@ -57,6 +59,7 @@ namespace UnoLisClient.UI.Pages
         // ✉️ Enviar invitaciones seleccionadas
         private void SendInvitesButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             var invited = Friends.Where(f => f.Invited).Select(f => f.FriendName).ToList();
 
             if (invited.Any())
@@ -72,6 +75,7 @@ namespace UnoLisClient.UI.Pages
         // 💬 Botón de Chat
         private void ChatButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             if (_isChatVisible)
             {
                 FadeOut(ChatPopup);
@@ -189,8 +193,12 @@ namespace UnoLisClient.UI.Pages
             };
             exitButton.Click += (s, e) =>
             {
-                MessageBox.Show("Leaving match...");
+                var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
+                mainWindow?.RestoreDefaultBackground();
+
                 CloseSettingsModal();
+
+                NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
             };
 
             var closeButton = new Button

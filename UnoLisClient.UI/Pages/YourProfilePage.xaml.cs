@@ -18,6 +18,7 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -73,11 +74,13 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickChangeAvatarButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new AvatarSelectionPage());
         }
 
         private void ClickChangeDataButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             if (CurrentSession.CurrentUserProfileData == null)
             {
                 new SimplePopUpWindow(Global.WarningLabel, ErrorMessages.ProfileNotLoadedMessageLabel).ShowDialog();
@@ -88,6 +91,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickBackButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new MainMenuPage());
         }
 

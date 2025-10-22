@@ -17,6 +17,7 @@ using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.UnoLisServerReference.Login;
 using UnoLisClient.UI.UnoLisServerReference.Register;
+using UnoLisClient.UI.Utils;
 using UnoLisClient.UI.Validators;
 
 namespace UnoLisClient.UI.Pages
@@ -51,11 +52,13 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.GoBack();
         }
 
         private void ClickSignInButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             string nickname = NicknameTextBox.Text.Trim();
             string fullname = FullNameTextBox.Text.Trim();
             string email = EmailTextBox.Text.Trim();

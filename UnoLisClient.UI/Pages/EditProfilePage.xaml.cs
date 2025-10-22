@@ -19,6 +19,7 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Validators;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -57,6 +58,7 @@ namespace UnoLisClient.UI.Pages
         {
             try
             {
+                SoundManager.PlayClick();
                 var updatedProfile = new ClientProfileData
                 {
                     Nickname = _currentProfile.Nickname,
@@ -91,6 +93,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new YourProfilePage());
         }
 

@@ -158,7 +158,8 @@
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Width="100"
                                     HorizontalAlignment="Center"
-                                    Click="BuySpecial_Click"/>
+                                    Click="BuySpecial_Click"
+                                    Cursor="Hand"/>
                         </StackPanel>
 
                         <!-- 🟦 Caja épica -->
@@ -182,7 +183,8 @@
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Width="100"
                                     HorizontalAlignment="Center"
-                                    Click="BuyEpic_Click"/>
+                                    Click="BuyEpic_Click"
+                                    Cursor="Hand"/>
                         </StackPanel>
 
                         <!-- 🟨 Caja legendaria -->
@@ -206,7 +208,8 @@
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Width="100"
                                     HorizontalAlignment="Center"
-                                    Click="BuyLegendary_Click"/>
+                                    Click="BuyLegendary_Click"
+                                    Cursor="Hand"/>
                         </StackPanel>
                     </UniformGrid>
                 </ScrollViewer>

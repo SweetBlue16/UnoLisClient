@@ -19,6 +19,7 @@ using UnoLisClient.UI.UnoLisServerReference.Login;
 using UnoLisClient.UI.Validators;
 using System.ServiceModel;
 using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -53,6 +54,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickLoginButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             string nickname = NicknameTextBox.Text.Trim();
             string password = PasswordField.Password;
             var credentials = new AuthCredentials
@@ -83,6 +85,7 @@ namespace UnoLisClient.UI.Pages
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.GoBack();
         }
 

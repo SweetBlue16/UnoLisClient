@@ -203,6 +203,7 @@
       <DependentUpon>VisiblePasswordField.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ProfileDataMapper.cs" />
+    <Compile Include="Utilities\SoundManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -544,6 +545,12 @@
     </Resource>
     <Resource Include="Assets\exitIcon.png" />
     <Resource Include="Assets\friendsIcon.png" />
+    <Resource Include="Assets\buttonClick.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Assets\buttonClick.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\lobbyVideo.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

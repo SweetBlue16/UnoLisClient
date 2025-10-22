@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -27,26 +28,31 @@ namespace UnoLisClient.UI.Pages
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new GameSettingsPage());
         }
 
         private void SettingsLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new SettingsPage());
         }
 
         private void ShopLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new AvatarShopPage());
         }
 
         private void ProfileLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new YourProfilePage());
         }
 
         private void ExitLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            SoundManager.PlayClick();
             NavigationService?.Navigate(new GamePage());
         }
     }
