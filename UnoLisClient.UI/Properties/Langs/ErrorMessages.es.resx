@@ -171,6 +171,12 @@
   <data name="SocialLinkFormatMessageLabel" xml:space="preserve">
     <value>El link de {0} no es una URL válida.</value>
   </data>
+  <data name="SocialNetworkNotConfiguredMessageLabel" xml:space="preserve">
+    <value>El usuario no ha configurado esta red social, intente con otra.</value>
+  </data>
+  <data name="UnableToOpenLinkMessageLabel" xml:space="preserve">
+    <value>No se pudo abrir el enlace, intente nuevamente.</value>
+  </data>
   <data name="UserDuplicatedLabel" xml:space="preserve">
     <value>El usuario con el nombre de jugador proporcionado ya existe.</value>
   </data>

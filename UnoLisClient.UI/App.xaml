@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:UnoLisClient.UI"
-              StartupUri="UnoLisWindows/MainWindow.xaml">
+             xmlns:converters="clr-namespace:UnoLisClient.UI.Utilities"
+             StartupUri="UnoLisWindows/MainWindow.xaml">
     <Application.Resources>
         <!-- Button Colors -->
         <SolidColorBrush x:Key="PrimaryYellowColor" Color="#FFD60A"/>
@@ -58,6 +59,16 @@
                              Opacity="0.9">
             <GradientStop Color="#1E1E2E" Offset="0.0"/>
             <GradientStop Color="#2D2F3A" Offset="1.0"/>
+        </LinearGradientBrush>
+        
+        <!-- ProgressBar Colors -->
+        <SolidColorBrush x:Key="ProgressBarBackgroundColor" Color="#1A1F29"/>
+        <SolidColorBrush x:Key="ProgressBarBorderBrushColor" Color="#0A84FF"/>
+        <LinearGradientBrush x:Key="ProgressBarForegroundColor"
+                             StartPoint="0,0"
+                             EndPoint="1,0">
+            <GradientStop Color="#18FFFF" Offset="0"/>
+            <GradientStop Color="#00E676" Offset="1"/>
         </LinearGradientBrush>
 
         <!-- Starts PrimaryButtonStyle -->
@@ -604,5 +615,58 @@
             <Setter Property="VerticalGridLinesBrush" Value="#333"/>
         </Style>
         <!-- Ends DataGridStyle -->
+        
+        <!-- Starts ProgressBarStyle-->
+        <converters:ProgressBarWidthConverter x:Key="ProgressBarWidthConverter"/>
+        <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="{StaticResource ProgressBarBackgroundColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ProgressBarBorderBrushColor}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Foreground" Value="{StaticResource ProgressBarForegroundColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
+                            <Grid x:Name="ContainerGrid" ClipToBounds="True">
+                                <Rectangle Fill="{TemplateBinding Background}">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="10"
+                                                          ShadowDepth="0"
+                                                          Color="#000000"
+                                                          Opacity="0.3"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Rectangle x:Name="PART_Track"
+                                           HorizontalAlignment="Left"
+                                           RadiusX="10"
+                                           RadiusY="10"
+                                           Fill="{TemplateBinding Foreground}">
+                                    <Rectangle.Width>
+                                        <MultiBinding Converter="{StaticResource ProgressBarWidthConverter}">
+                                            <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="ActualWidth" ElementName="ContainerGrid"/>
+                                        </MultiBinding>
+                                    </Rectangle.Width>
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="15"
+                                                          ShadowDepth="0"
+                                                          Color="#18FFFF"
+                                                          Opacity="0.4"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Ends ProgressBarStyle -->
     </Application.Resources>
 </Application>

@@ -29,6 +29,7 @@ namespace UnoLisClient.UI.Pages
     public partial class LoginPage : Page, ILoginManagerCallback
     {
         private LoginManagerClient _loginClient;
+        private LoadingPopUpWindow _loadingPopUpWindow;
 
         public LoginPage()
         {
@@ -39,6 +40,7 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                _loadingPopUpWindow?.StopLoadingAndClose();
                 if (success)
                 {
                     CurrentSession.CurrentUserNickname = NicknameTextBox.Text.Trim();
@@ -66,19 +68,25 @@ namespace UnoLisClient.UI.Pages
             List<string> errors = UserValidator.ValidateLogin(credentials);
             if (errors.Count > 0)
             {
-                string message = string.Join("\n◆ ", errors);
+                string message = "◆ " + string.Join("\n◆ ", errors);
                 new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
                 return;
             }
 
             try
             {
+                _loadingPopUpWindow = new LoadingPopUpWindow()
+                {
+                    Owner = Window.GetWindow(this)
+                };
+                _loadingPopUpWindow.Show();
                 var context = new InstanceContext(this);
                 _loginClient = new LoginManagerClient(context);
                 _loginClient.Login(credentials);
             }
             catch (Exception ex)
             {
+                _loadingPopUpWindow?.StopLoadingAndClose();
                 new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
         }

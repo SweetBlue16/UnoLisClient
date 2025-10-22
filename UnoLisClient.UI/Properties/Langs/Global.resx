@@ -165,6 +165,12 @@
   <data name="HowToPlayLabel" xml:space="preserve">
     <value>How to play?</value>
   </data>
+  <data name="LoadingLabel" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="LogoutMessageLabel" xml:space="preserve">
+    <value>Are you sure you want to log out?</value>
+  </data>
   <data name="MatchesPlayedColumn" xml:space="preserve">
     <value>Matches played</value>
   </data>

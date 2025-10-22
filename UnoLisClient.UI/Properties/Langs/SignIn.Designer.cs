@@ -97,7 +97,16 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least one capital letter (A-Z)..
+        ///   Looks up a localized string similar to Password requirements.
+        /// </summary>
+        public static string PasswordRequirementsHeaderLabel {
+            get {
+                return ResourceManager.GetString("PasswordRequirementsHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ◆ At least one capital letter (A-Z)..
         /// </summary>
         public static string PasswordValidationCapitalLabel {
             get {
@@ -115,7 +124,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • Between 8 and 16 characters..
+        ///   Looks up a localized string similar to ◆ Between 8 and 16 characters..
         /// </summary>
         public static string PasswordValidationLengthLabel {
             get {
@@ -124,7 +133,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least lowercase letter (a-z)..
+        ///   Looks up a localized string similar to ◆ At least lowercase letter (a-z)..
         /// </summary>
         public static string PasswordValidationLowerLabel {
             get {
@@ -133,7 +142,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least one number (0-9)..
+        ///   Looks up a localized string similar to ◆ At least one number (0-9)..
         /// </summary>
         public static string PasswordValidationNumberLabel {
             get {
@@ -142,7 +151,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to • At least one special character (e.g., _, -)..
+        ///   Looks up a localized string similar to ◆ At least one special character (@, $, !, %, *, ?, &amp;, -, _)..
         /// </summary>
         public static string PasswordValidationSpecialCharLabel {
             get {

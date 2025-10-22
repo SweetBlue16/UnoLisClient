@@ -78,22 +78,37 @@
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
-                        <StackPanel Orientation="Horizontal" Margin="0">
-                            <Label x:Name="UserFacebookLinkLabel"
-                                   Content="Facebook"
-                                   FontFamily="pack://application:,,,/Fonts/#Lato"
-                                   Foreground="White"
-                                   FontSize="15"/>
-                            <Label x:Name="UserInstagramLinkLabel"
-                                   Content="Instagram"
-                                   FontFamily="pack://application:,,,/Fonts/#Lato"
-                                   Foreground="White"
-                                   FontSize="15"/>
-                            <Label x:Name="UserTikTokLinkLabel"
-                                   Content="TikTok"
-                                   FontFamily="pack://application:,,,/Fonts/#Lato"
-                                   Foreground="White"
-                                   FontSize="15"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
+                                       Foreground="White"
+                                       FontSize="15"
+                                       Margin="0,0,15,0">
+                                <Hyperlink x:Name="UserFacebookLink"
+                                           Foreground="LightBlue"
+                                           Click="ClickSocialLink">
+                                    Facebook
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
+                                       Foreground="White"
+                                       FontSize="15"
+                                       Margin="0,0,15,0">
+                                <Hyperlink x:Name="UserInstagramLink"
+                                           Foreground="LightPink"
+                                           Click="ClickSocialLink">
+                                    Instagram
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
+                                       Foreground="White"
+                                       FontSize="15"
+                                       Margin="0,0,15,0">
+                                <Hyperlink x:Name="UserTikTokLink"
+                                           Foreground="HotPink"
+                                           Click="ClickSocialLink">
+                                    TikTok
+                                </Hyperlink>
+                            </TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -107,11 +122,13 @@
                         <Image Source="/Assets/unoLogo.png" Stretch="UniformToFill"/>
                     </Border>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="{x:Static language:Profile.ChangeAvatarButton}"
+                        <Button x:Name="ChangeAvatarButton"
+                                Content="{x:Static language:Profile.ChangeAvatarButton}"
                                 Style="{DynamicResource PrimaryButtonStyle}"
                                 Margin="0,0,10,0"
                                 Click="ClickChangeAvatarButton"/>
-                        <Button Content="{x:Static language:Profile.ChangeDataButton}"
+                        <Button x:Name="ChangeDataButton"
+                                Content="{x:Static language:Profile.ChangeDataButton}"
                                 Style="{DynamicResource PrimaryButtonStyle}"
                                 Click="ClickChangeDataButton"/>
                     </StackPanel>

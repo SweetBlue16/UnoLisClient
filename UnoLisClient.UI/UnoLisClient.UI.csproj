@@ -97,6 +97,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Logout\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\UnoLisServerReference.Notifications\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,6 +136,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\BrowserHelper.cs" />
+    <Compile Include="Utilities\ProgressBarWidthConverter.cs" />
+    <Compile Include="CustomUserControls\LoadingProgressBar.xaml.cs">
+      <DependentUpon>LoadingProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Managers\ClientProfileData.cs" />
     <Compile Include="Managers\CurrentSession.cs" />
@@ -190,6 +200,9 @@
     </Compile>
     <Compile Include="PopUpWindows\GottenAvatarWindow.xaml.cs">
       <DependentUpon>GottenAvatarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpWindows\LoadingPopUpWindow.xaml.cs">
+      <DependentUpon>LoadingPopUpWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Langs\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -383,6 +396,13 @@
     <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\LogoutManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\service.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\service.xsd">
       <SubType>Designer</SubType>
@@ -459,6 +479,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Logout\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Logout\configuration91.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Logout\item.disco" />
     <None Include="Connected Services\UnoLisServerReference.Friends\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -575,6 +602,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomUserControls\LoadingProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AvatarSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -655,6 +686,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PopUpWindows\LoadingPopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PopUpWindows\QuestionPopUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -682,6 +717,7 @@
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Gameplay\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Leaderboards\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Login\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Logout\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Notifications\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyClient\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyHost\" />

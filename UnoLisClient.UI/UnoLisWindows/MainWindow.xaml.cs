@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,17 +15,38 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.UnoLisServerReference.Logout;
 
 namespace UnoLisClient.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ILogoutManagerCallback
     {
+        private LogoutManagerClient _logoutClient;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void LogoutResponse(bool success, string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (success)
+                {
+                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
+                }
+                else
+                {
+                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                }
+            });
         }
 
         private void VideoBackground_MediaEnded(object sender, RoutedEventArgs e)
@@ -170,34 +192,34 @@ namespace UnoLisClient.UI
             }
         }
 
-        public async void RestoreDefaultBackground()
+        private void LogoutCurrentUser()
         {
             try
             {
-                string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/marioDesktop.mp4");
-                string defaultMusic = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/jazzBackground.mp3");
+                if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+                {
+                    var context = new InstanceContext(this);
+                    _logoutClient = new LogoutManagerClient(context);
+                    _logoutClient.LogoutAsync(CurrentSession.CurrentUserNickname);
 
-                // 🟣 Fade a negro
-
-                await Task.Delay(600);
-
-                VideoBackground.Stop();
-                MusicPlayer.Stop();
-
-                VideoBackground.Source = new Uri(defaultVideo, UriKind.Absolute);
-                MusicPlayer.Source = new Uri(defaultMusic, UriKind.Absolute);
-
-                VideoBackground.Play();
-                MusicPlayer.Play();
-
+                    CurrentSession.CurrentUserNickname = null;
+                    CurrentSession.CurrentUserProfileData = null;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error restoring background:\n{ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
         }
 
-
+        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel).ShowDialog();
+            if (result != true)
+            {
+                e.Cancel = true;
+            }
+            LogoutCurrentUser();
+        }
     }
-
 }
