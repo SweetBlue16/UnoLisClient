@@ -56,6 +56,12 @@ namespace UnoLisClient.UI
             VideoBackground.Play();
         }
 
+        public void SetMusicVolume(double volume)
+        {
+            // Convertimos de 0–100 del slider a 0–1 del MediaElement
+            MusicPlayer.Volume = volume / 100.0;
+        }
+
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // 🎵 Inicia música y navega a la primera página (GamePage)

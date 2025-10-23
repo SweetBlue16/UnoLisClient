@@ -138,7 +138,8 @@
                             Width="150" Height="24"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
-                            Grid.Column="1"/>
+                            Grid.Column="1"
+                            ValueChanged="VolumeSlider_ValueChanged"/>
                 </Grid>
             </Grid>
         </Border>

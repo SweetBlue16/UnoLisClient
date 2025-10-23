@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using UnoLisClient.UI.Utils;
+using UnoLisClient.UI.PopUpWindows;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -91,6 +92,7 @@ namespace UnoLisClient.UI.Pages
         // ⚙️ Botón de Ajustes
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundManager.PlayClick();
             if (_settingsOverlay != null)
                 return;
 
@@ -191,15 +193,39 @@ namespace UnoLisClient.UI.Pages
                 Margin = new Thickness(0, 10, 0, 0),
                 Style = (Style)FindResource("SecondaryButtonStyle")
             };
-            exitButton.Click += (s, e) =>
+            exitButton.Click += async (s, e) =>
             {
-                var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
-                mainWindow?.RestoreDefaultBackground();
+                SoundManager.PlayClick();
 
-                CloseSettingsModal();
+                // Ventana de confirmación
+                var questionPopup = new QuestionPopUpWindow("Confirm", "Are you sure you want to leave the match?");
+                bool? result = questionPopup.ShowDialog();
 
-                NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
+                if (result == true) // ✅ Usuario confirmó
+                {
+                    var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
+                    if (mainWindow != null)
+                    {
+                        // 🔊 Cambiamos el sonido y restauramos fondo predeterminado
+                        mainWindow.RestoreDefaultBackground();
+                    }
+
+                    // 🌙 Transición suave antes de salir
+                    await FadeOutTransition();
+
+                    // Cierra modal de ajustes si sigue abierto
+                    CloseSettingsModal();
+
+                    // 🔄 Regresa al menú principal
+                    NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
+                }
+                else
+                {
+                    // ❌ Usuario canceló → reproducimos otro sonido (opcional)
+                    SoundManager.PlaySound("cancel.wav", 0.5);
+                }
             };
+
 
             var closeButton = new Button
             {
@@ -232,6 +258,7 @@ namespace UnoLisClient.UI.Pages
         // 🔧 Cerrar modal
         private async void CloseSettingsModal()
         {
+            SoundManager.PlayClick();
             if (_settingsOverlay == null)
                 return;
 
@@ -243,5 +270,26 @@ namespace UnoLisClient.UI.Pages
 
             _settingsOverlay = null;
         }
+
+        private async Task FadeOutTransition()
+        {
+            var grid = this.Content as Grid;
+            if (grid == null) return;
+
+            var fadeOut = new System.Windows.Media.Animation.DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.8),
+                EasingFunction = new System.Windows.Media.Animation.CubicEase
+                {
+                    EasingMode = System.Windows.Media.Animation.EasingMode.EaseInOut
+                }
+            };
+
+            grid.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+            await Task.Delay(800);
+        }
+
     }
 }

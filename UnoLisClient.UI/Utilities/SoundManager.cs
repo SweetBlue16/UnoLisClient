@@ -1,10 +1,11 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.IO;
 using System.Windows.Media;
 
 namespace UnoLisClient.UI.Utils
@@ -19,40 +20,57 @@ namespace UnoLisClient.UI.Utils
         /// <param name="fileName">Ejemplo: "buttonClick.mp3"</param>
         public static void PlaySound(string fileName, double volume = 0.6)
         {
+            string soundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", fileName);
+
             try
             {
-                string soundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", fileName);
-
                 if (!File.Exists(soundPath))
-                {
-                    System.Diagnostics.Debug.WriteLine($"⚠️ No se encontró el sonido: {soundPath}");
-                    return;
-                }
+                    throw new FileNotFoundException("El archivo de sonido no existe.", soundPath);
 
-                _player = new MediaPlayer();
-                _player.Open(new Uri(soundPath, UriKind.Absolute));
-                _player.Volume = volume;
-                _player.Play();
+                var player = new MediaPlayer();
+                player.Open(new Uri(soundPath, UriKind.Absolute));
+                player.Volume = volume;
 
-                // Limpieza automática al terminar
-                _player.MediaEnded += (s, _) =>
+                player.MediaEnded += (s, e) =>
                 {
-                    _player.Close();
-                    _player = null;
+                    try
+                    {
+                        player.Stop();
+                        player.Close();
+                    }
+                    catch (Exception closeEx)
+                    {
+                        Debug.WriteLine($"⚠️ Error al cerrar el reproductor: {closeEx.Message}");
+                    }
                 };
+
+                player.Play();
+            }
+            catch (FileNotFoundException fnfEx)
+            {
+                Debug.WriteLine($"⚠️ Sonido no encontrado: {fnfEx.FileName}");
+            }
+            catch (UriFormatException uriEx)
+            {
+                Debug.WriteLine($"❌ Ruta de sonido inválida: {uriEx.Message}");
+            }
+            catch (InvalidOperationException opEx)
+            {
+                Debug.WriteLine($"⚠️ Error al reproducir el sonido (MediaPlayer): {opEx.Message}");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"❌ Error al reproducir sonido: {ex.Message}");
+                Debug.WriteLine($"❌ Error inesperado al reproducir sonido: {ex.Message}");
             }
         }
+
 
         /// <summary>
         /// Sonido rápido para clics de botones
         /// </summary>
         public static void PlayClick()
         {
-            PlaySound("buttonClick.mp3", 1.0);
+            PlaySound("buttonClick.mp3", 2.0);
         }
 
         /// <summary>

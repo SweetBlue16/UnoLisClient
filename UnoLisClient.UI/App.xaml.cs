@@ -44,6 +44,8 @@ namespace UnoLisClient.UI
         {
             base.OnStartup(e);
 
+            UnoLisClient.UI.Utilities.LogManager.Info("🎮 UNO LIS Client iniciado.");
+
             var langCode = global::UnoLisClient.UI.Properties.Settings.Default.languageCode;
             if (string.IsNullOrWhiteSpace(langCode))
             {

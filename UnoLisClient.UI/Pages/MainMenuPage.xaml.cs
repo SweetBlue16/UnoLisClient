@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Pages
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            NavigationService?.Navigate(new GameSettingsPage());
+            NavigationService?.Navigate(new MatchMenuPage());
         }
 
         private void SettingsLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -85,7 +85,7 @@ namespace UnoLisClient.UI.Pages
                 _loadingPopUpWindow = new LoadingPopUpWindow()
                 {
                     Owner = Window.GetWindow(this)
-                };
+                }; 
                 _loadingPopUpWindow.Show();
                 var context = new InstanceContext(this);
                 _profileEditClient = new ProfileEditManagerClient(context);

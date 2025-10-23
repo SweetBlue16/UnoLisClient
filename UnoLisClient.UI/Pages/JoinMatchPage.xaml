@@ -1,0 +1,62 @@
+﻿<Page x:Class="UnoLisClient.UI.Pages.JoinMatchPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="JoinMatchPage">
+
+    <Grid>
+        <!-- Fondo semitransparente -->
+        <Border Background="#AA000000"
+                CornerRadius="15"
+                Padding="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="500"
+                Height="350">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
+
+                <!-- 🔹 Título -->
+                <TextBlock Text="JOIN MATCH"
+                           FontSize="36"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                           Margin="0,0,0,30"/>
+
+                <!-- 🟢 Campo para el código -->
+                <TextBox x:Name="CodeTextBox"
+                         Style="{StaticResource TextBoxStyle}"
+                         Width="250"
+                         Height="40"
+                         Tag="Enter match code..."
+                         FontSize="18"
+                         HorizontalAlignment="Center"
+                         TextAlignment="Center"/>
+
+                <!-- ⚙️ Botones -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
+                    <Button x:Name="JoinButton"
+                            Content="JOIN"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Width="130"
+                            Height="55"
+                            FontSize="18"
+                            Cursor="Hand"
+                            Click="JoinButton_Click"/>
+
+                    <Button x:Name="CancelButton"
+                            Content="BACK"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Width="130"
+                            Height="55"
+                            FontSize="18"
+                            Cursor="Hand"
+                            Click="CancelButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

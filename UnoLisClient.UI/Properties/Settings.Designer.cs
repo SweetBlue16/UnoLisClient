@@ -34,5 +34,17 @@ namespace UnoLisClient.UI.Properties {
                 this["languageCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public double lastVolume {
+            get {
+                return ((double)(this["lastVolume"]));
+            }
+            set {
+                this["lastVolume"] = value;
+            }
+        }
     }
 }
