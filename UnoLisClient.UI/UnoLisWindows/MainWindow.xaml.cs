@@ -222,7 +222,6 @@ namespace UnoLisClient.UI
             }
         }
 
-
         private void LogoutCurrentUser()
         {
             try
@@ -246,11 +245,14 @@ namespace UnoLisClient.UI
         private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel).ShowDialog();
-            if (result != true)
+            if (result == true)
+            {
+                LogoutCurrentUser();
+            }
+            else
             {
                 e.Cancel = true;
             }
-            LogoutCurrentUser();
         }
     }
 }

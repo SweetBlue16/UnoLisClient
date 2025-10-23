@@ -29,11 +29,7 @@ namespace UnoLisClient.UI
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (success)
-                {
-                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
-                }
-                else
+                if (!success)
                 {
                     new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
                 }

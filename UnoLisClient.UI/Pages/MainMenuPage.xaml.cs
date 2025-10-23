@@ -83,10 +83,22 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
+        private bool IsGuest()
+        {
+            return string.Equals(CurrentSession.CurrentUserNickname, "Guest", StringComparison.OrdinalIgnoreCase);
+        }
+
         private void LogoutCurrentUser()
         {
             try
             {
+                if (IsGuest())
+                {
+                    CurrentSession.CurrentUserNickname = null;
+                    CurrentSession.CurrentUserProfileData = null;
+                    return;
+                }
+
                 if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
                 {
                     var context = new InstanceContext(this);

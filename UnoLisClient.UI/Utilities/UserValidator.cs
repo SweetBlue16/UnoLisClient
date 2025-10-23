@@ -86,7 +86,7 @@ namespace UnoLisClient.UI.Validators
             return errors;
         }
 
-        public static List<string> ValidateProfileUpdate(ProfileData profileData, string newPassword)
+        public static List<string> ValidateProfileUpdate(ProfileData profileData)
         {
             var errors = new List<string>();
 
@@ -101,9 +101,16 @@ namespace UnoLisClient.UI.Validators
 
             errors.AddRange(ValidateEmail(profileData.Email));
 
-            if (!string.IsNullOrWhiteSpace(profileData.Password) || !string.IsNullOrWhiteSpace(newPassword))
+            if (!string.IsNullOrWhiteSpace(profileData.Password))
             {
-                errors.AddRange(ValidatePasswordChange(profileData.Password, newPassword));
+                if (!_strongPasswordRegex.IsMatch(profileData.Password))
+                {
+                    errors.Add(ErrorMessages.WeakPasswordMessageLabel);
+                }
+                else if (profileData.Password.Length < MinPasswordLength || profileData.Password.Length > MaxPasswordLength)
+                {
+                    errors.Add(string.Format(ErrorMessages.PasswordLengthMessageLabel, MinPasswordLength, MaxPasswordLength));
+                }
             }
 
             errors.AddRange(ValidateSocialMediaLink(profileData.FacebookUrl, "facebook.com", "Facebook"));
@@ -130,30 +137,6 @@ namespace UnoLisClient.UI.Validators
             catch (FormatException)
             {
                 errors.Add(ErrorMessages.EmailFormatMessageLabel);
-            }
-            return errors;
-        }
-
-        private static List<string> ValidatePasswordChange(string currentPassword, string newPassword)
-        {
-            var errors = new List<string>();
-
-            if (string.IsNullOrWhiteSpace(newPassword))
-            {
-                errors.Add(ErrorMessages.NewPasswordEmptyMessageLabel);
-            }
-            else if (!_strongPasswordRegex.IsMatch(newPassword))
-            {
-                errors.Add(ErrorMessages.WeakPasswordMessageLabel);
-            }
-            else if (newPassword.Length < MinPasswordLength || newPassword.Length > MaxPasswordLength)
-            {
-                errors.Add(string.Format(ErrorMessages.PasswordLengthMessageLabel, MinPasswordLength, MaxPasswordLength));
-            }
-
-            if (!string.IsNullOrWhiteSpace(currentPassword) && newPassword == currentPassword)
-            {
-                errors.Add(ErrorMessages.PasswordSameAsOldMessageLabel);
             }
             return errors;
         }
