@@ -1,41 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Collections.ObjectModel;
-using System.Windows.Media;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
-using UnoLisClient.UI.Utils;
+using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.UnoLisServerReference.Chat;
+using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
-    public class Friend
-    {
-        public string FriendName { get; set; }
-        public string Status { get; set; }
-        public Brush StatusColor { get; set; }
-        public bool Invited { get; set; }
-    }
-
     public partial class MatchLobbyPage : Page
     {
-        public ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
+        private const string GlobalLobbyChannel = "GlobalLobby";
+
         private bool _isChatVisible = false;
-        private Grid _settingsOverlay; // referencia al overlay de ajustes
+        private ChatManagerClient _chatClient;
+        private ChatCallback _chatCallback;
+        private string _currentUserNickname;
+        
+
+        public ObservableCollection<ChatMessageData> ChatMessages { get; set; } = new ObservableCollection<ChatMessageData>();
+        public ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
 
         public MatchLobbyPage()
         {
             InitializeComponent();
+            _currentUserNickname = CurrentSession.CurrentUserNickname;
             LoadFriends();
+            ChatControl.Initialize(_currentUserNickname);
 
-            // 🎬 Cambiar fondo y música al entrar al lobby con transición
-            var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
-            mainWindow?.SetBackgroundMedia("Assets/lobbyVideo.mp4", "Assets/lobbyMusic.mp3");
+            this.DataContext = this;
         }
 
-        // 🔹 Cargar lista de amigos simulada
         private void LoadFriends()
         {
             Friends.Add(new Friend { FriendName = "SweetBlue16", Status = "Online", StatusColor = Brushes.Lime });
@@ -45,7 +48,6 @@ namespace UnoLisClient.UI.Pages
             FriendsList.ItemsSource = Friends;
         }
 
-        // 💌 Invitar amigos individuales
         private void InviteButton_Click(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
@@ -57,7 +59,6 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
-        // ✉️ Enviar invitaciones seleccionadas
         private void SendInvitesButton_Click(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
@@ -73,223 +74,47 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
-        // 💬 Botón de Chat
-        private void ChatButton_Click(object sender, RoutedEventArgs e)
-        {
-            SoundManager.PlayClick();
-            if (_isChatVisible)
-            {
-                FadeOut(ChatPopup);
-                _isChatVisible = false;
-            }
-            else
-            {
-                FadeIn(ChatPopup);
-                _isChatVisible = true;
-            }
-        }
-
-        // ⚙️ Botón de Ajustes
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            if (_settingsOverlay != null)
-                return;
-
-            ShowSettingsModal();
+            AnimationUtils.FadeIn(SettingsModal);
         }
 
-        // 🟢 Animación Fade In
-        private void FadeIn(UIElement element, double duration = 0.3)
+        private async void SettingsModal_CloseRequested(object sender, EventArgs e)
         {
-            element.Visibility = Visibility.Visible;
-            element.Opacity = 0;
-
-            var fade = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(duration),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
-
-            element.BeginAnimation(UIElement.OpacityProperty, fade);
+            await AnimationUtils.FadeOut(SettingsModal);
         }
 
-        // 🔴 Animación Fade Out
-        private async void FadeOut(UIElement element, double duration = 0.25)
-        {
-            var fade = new DoubleAnimation
-            {
-                From = 1,
-                To = 0,
-                Duration = TimeSpan.FromSeconds(duration),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-
-            element.BeginAnimation(UIElement.OpacityProperty, fade);
-            await Task.Delay((int)(duration * 1000));
-            element.Visibility = Visibility.Collapsed;
-        }
-
-        // ⚙️ Modal de Ajustes
-        private void ShowSettingsModal()
-        {
-            _settingsOverlay = new Grid
-            {
-                Background = new SolidColorBrush(Color.FromArgb(150, 0, 0, 0)),
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Stretch
-            };
-
-            var border = new Border
-            {
-                Background = new SolidColorBrush(Color.FromArgb(230, 30, 30, 30)),
-                CornerRadius = new CornerRadius(10),
-                Width = 350,
-                Height = 280,
-                Padding = new Thickness(20),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-
-            var stack = new StackPanel
-            {
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
-
-            var title = new TextBlock
-            {
-                Text = "Settings",
-                FontSize = 22,
-                FontWeight = FontWeights.Bold,
-                Foreground = Brushes.White,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(0, 0, 0, 20)
-            };
-
-            var volumeLabel = new TextBlock
-            {
-                Text = "Volume",
-                FontSize = 16,
-                Foreground = Brushes.White
-            };
-
-            var volumeSlider = new Slider
-            {
-                Minimum = 0,
-                Maximum = 100,
-                Value = 50,
-                Width = 200,
-                Margin = new Thickness(0, 10, 0, 20)
-            };
-
-            var exitButton = new Button
-            {
-                Content = "Leave Match",
-                Width = 150,
-                Height = 40,
-                Margin = new Thickness(0, 10, 0, 0),
-                Style = (Style)FindResource("SecondaryButtonStyle")
-            };
-            exitButton.Click += async (s, e) =>
-            {
-                SoundManager.PlayClick();
-
-                // Ventana de confirmación
-                var questionPopup = new QuestionPopUpWindow("Confirm", "Are you sure you want to leave the match?");
-                bool? result = questionPopup.ShowDialog();
-
-                if (result == true) // ✅ Usuario confirmó
-                {
-                    var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
-                    if (mainWindow != null)
-                    {
-                        // 🔊 Cambiamos el sonido y restauramos fondo predeterminado
-                        mainWindow.RestoreDefaultBackground();
-                    }
-
-                    // 🌙 Transición suave antes de salir
-                    await FadeOutTransition();
-
-                    // Cierra modal de ajustes si sigue abierto
-                    CloseSettingsModal();
-
-                    // 🔄 Regresa al menú principal
-                    NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
-                }
-                else
-                {
-                    // ❌ Usuario canceló → reproducimos otro sonido (opcional)
-                    SoundManager.PlaySound("cancel.wav", 0.5);
-                }
-            };
-
-
-            var closeButton = new Button
-            {
-                Content = "Close",
-                Width = 150,
-                Height = 40,
-                Margin = new Thickness(0, 10, 0, 0),
-                Style = (Style)FindResource("PrimaryButtonStyle")
-            };
-            closeButton.Click += (s, e) => CloseSettingsModal();
-
-            stack.Children.Add(title);
-            stack.Children.Add(volumeLabel);
-            stack.Children.Add(volumeSlider);
-            stack.Children.Add(exitButton);
-            stack.Children.Add(closeButton);
-
-            border.Child = stack;
-            _settingsOverlay.Children.Add(border);
-
-            var root = Window.GetWindow(this)?.Content as Grid;
-            if (root != null)
-                root.Children.Add(_settingsOverlay);
-            else if (this.Content is Grid grid)
-                grid.Children.Add(_settingsOverlay);
-
-            FadeIn(_settingsOverlay, 0.3);
-        }
-
-        // 🔧 Cerrar modal
-        private async void CloseSettingsModal()
+        private async void ChatButton_Click(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            if (_settingsOverlay == null)
-                return;
 
-            FadeOut(_settingsOverlay, 0.25);
-            await Task.Delay(250);
-
-            if (this.Content is Grid grid && grid.Children.Contains(_settingsOverlay))
-                grid.Children.Remove(_settingsOverlay);
-
-            _settingsOverlay = null;
-        }
-
-        private async Task FadeOutTransition()
-        {
-            var grid = this.Content as Grid;
-            if (grid == null) return;
-
-            var fadeOut = new System.Windows.Media.Animation.DoubleAnimation
+            // 👇 2. AHORA ANIMAMOS EL CONTROL
+            if (_isChatVisible)
             {
-                From = 1,
-                To = 0,
-                Duration = TimeSpan.FromSeconds(0.8),
-                EasingFunction = new System.Windows.Media.Animation.CubicEase
-                {
-                    EasingMode = System.Windows.Media.Animation.EasingMode.EaseInOut
-                }
-            };
-
-            grid.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-            await Task.Delay(800);
+                await AnimationUtils.FadeOut(ChatControl); // Animamos el UserControl
+            }
+            else
+            {
+                AnimationUtils.FadeIn(ChatControl); // Animamos el UserControl
+            }
+            _isChatVisible = !_isChatVisible;
         }
 
+        private async void SettingsModal_LeaveMatchRequested(object sender, EventArgs e)
+        {
+            ChatControl.Cleanup();
+            var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.RestoreDefaultBackground();
+            }
+
+            await AnimationUtils.FadeOut(SettingsModal);
+
+            await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.8);
+
+            NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
+        }
     }
 }

@@ -1,0 +1,1 @@
+ŒR~C:\Users\meler\OneDrive\Escritorio\TecnologÃ­as para el Desarrollo de Software\Proyecto\UnoLisClient.UI\UnoLisClient.UI.csprojò	CSharp7_3

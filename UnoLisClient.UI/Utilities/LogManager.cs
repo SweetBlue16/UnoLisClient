@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using log4net.Config;
-using System;
 using System.IO;
 using System.Reflection;
 
@@ -19,7 +18,6 @@ namespace UnoLisClient.UI.Utilities
         {
             var logRepository = log4net.LogManager.GetRepository(Assembly.GetEntryAssembly());
 
-            // 🧩 Inicializa desde App.config
             XmlConfigurator.Configure(logRepository, new FileInfo("App.config"));
 
             _logger = log4net.LogManager.GetLogger(typeof(LogManager));

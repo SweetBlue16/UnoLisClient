@@ -14,8 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnoLisClient.UI.Utilities;
-using UnoLisClient.UI.Utils; // si usas SoundManager u otras utilidades
-
+using UnoLisClient.UI.Utils; 
 namespace UnoLisClient.UI.Pages
 {
     public partial class MatchMenuPage : Page
@@ -27,14 +26,14 @@ namespace UnoLisClient.UI.Pages
 
         private void CreateMatchButton_Click(object sender, RoutedEventArgs e)
         {
-            SoundManager.PlayClick(); // si tienes el efecto
-            NavigationService?.Navigate(new GameSettingsPage()); // te lleva al lobby
+            SoundManager.PlayClick();
+            NavigationService?.Navigate(new GameSettingsPage()); 
         }
 
         private void JoinMatchButton_Click(object sender, RoutedEventArgs e)
         {
-            SoundManager.PlayClick(); // idem
-            NavigationService?.Navigate(new JoinMatchPage()); // (luego creamos esta)
+            SoundManager.PlayClick(); 
+            NavigationService?.Navigate(new JoinMatchPage()); 
         }
     }
 }

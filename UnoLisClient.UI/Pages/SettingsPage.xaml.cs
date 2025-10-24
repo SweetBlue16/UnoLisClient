@@ -22,11 +22,10 @@ namespace UnoLisClient.UI.Pages
             Thread.CurrentThread.CurrentCulture = new CultureInfo(saved);
             SelectLanguageByCode(saved);
 
-            // 🔊 Restaurar volumen guardado
             if (Properties.Settings.Default.lastVolume > 0)
                 VolumeSlider.Value = Properties.Settings.Default.lastVolume;
             else
-                VolumeSlider.Value = 50; // volumen por defecto
+                VolumeSlider.Value = 50;
 
             _initializing = false;
         }
@@ -80,7 +79,6 @@ namespace UnoLisClient.UI.Pages
             var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
             mainWindow?.SetMusicVolume(e.NewValue);
 
-            // (Opcional) Guardar volumen para futuras sesiones
             Properties.Settings.Default.lastVolume = e.NewValue;
             Properties.Settings.Default.Save();
         }

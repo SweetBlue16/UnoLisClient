@@ -26,6 +26,8 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="de6b0915-1d90-4b3b-8a06-cf7d01022808" SourceId="1" SourceUrl="net.tcp://localhost:8101/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4cf9fd10-5d81-40c6-9103-e77888252a4b" SourceId="1" SourceUrl="net.tcp://localhost:8101/mex" />
     <MetadataFile FileName="UnoLisServer.Contracts.DTOs.xsd" MetadataType="Schema" ID="8f781784-f909-4d42-aaf0-868cdfc6ff70" SourceId="1" SourceUrl="net.tcp://localhost:8101/mex" />
+    <MetadataFile FileName="UnoLisServer.Common.Models.xsd" MetadataType="Schema" ID="ad106174-7f80-4d63-af10-e8d566b6a382" SourceId="1" SourceUrl="net.tcp://localhost:8101/mex" />
+    <MetadataFile FileName="UnoLisServer.Common.Enums.xsd" MetadataType="Schema" ID="b29acbef-a499-4199-8217-86b7d8605140" SourceId="1" SourceUrl="net.tcp://localhost:8101/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

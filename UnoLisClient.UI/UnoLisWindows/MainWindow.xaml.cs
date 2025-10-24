@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnoLisClient.UI.Managers;
+using UnoLisClient.UI.Pages;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.UnoLisServerReference.Logout;
@@ -28,12 +29,18 @@ namespace UnoLisClient.UI
     public partial class MainWindow : Window, ILogoutManagerCallback
     {
         private LogoutManagerClient _logoutClient;
+      //  private MatchLobbyPage _lobbyPage;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
+       /* public void OpenLobby()
+        {
+            _lobbyPage = new MatchLobbyPage();
+            MainFrame.Navigate(_lobbyPage);
+        }*/
         public void LogoutResponse(bool success, string message)
         {
             Application.Current.Dispatcher.Invoke(() =>

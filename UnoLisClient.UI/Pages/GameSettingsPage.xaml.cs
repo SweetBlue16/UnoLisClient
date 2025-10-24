@@ -42,29 +42,28 @@ namespace UnoLisClient.UI.Pages
         private void MusicToggle_Checked(object sender, RoutedEventArgs e)
         {
             if (MusicToggle.Content is TextBlock tb)
-                tb.Text = "🎵"; // Encendido
-            // Aquí: reproducir música
+                tb.Text = "🎵"; 
         }
 
         private void MusicToggle_Unchecked(object sender, RoutedEventArgs e)
         {
             if (MusicToggle.Content is TextBlock tb)
-                tb.Text = "🔇"; // Apagado
+                tb.Text = "🔇";
             // Aquí: pausar/detener música
+            // NOTA: Mejor silenciarla que detenerla para evitar retrasos al reanudar
         }
 
         private void SoundToggle_Checked(object sender, RoutedEventArgs e)
         {
             if (SoundToggle.Content is TextBlock tb)
-                tb.Text = "🔊"; // Encendido
-            // Aquí: habilitar efectos de sonido
+                tb.Text = "🔊";
         }
 
         private void SoundToggle_Unchecked(object sender, RoutedEventArgs e)
         {
             if (SoundToggle.Content is TextBlock tb)
-                tb.Text = "🔈"; // Apagado
-            // Aquí: deshabilitar efectos de sonido
+                tb.Text = "🔈";
+
         }
     }
 }

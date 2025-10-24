@@ -46,17 +46,14 @@
   <wsdl:message name="IChatManager_GetChatHistory_InputMessage">
     <wsdl:part name="parameters" element="tns:GetChatHistory" />
   </wsdl:message>
+  <wsdl:message name="IChatManager_RegisterPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterPlayer" />
+  </wsdl:message>
   <wsdl:message name="IChatManager_MessageReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MessageReceived" />
   </wsdl:message>
-  <wsdl:message name="IChatManager_MessageReceived_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:MessageReceivedResponse" />
-  </wsdl:message>
   <wsdl:message name="IChatManager_ChatHistoryReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ChatHistoryReceived" />
-  </wsdl:message>
-  <wsdl:message name="IChatManager_ChatHistoryReceived_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ChatHistoryReceivedResponse" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IChatManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessage">
@@ -65,13 +62,14 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetChatHistory">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatManager/GetChatHistory" message="tns:IChatManager_GetChatHistory_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RegisterPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatManager/RegisterPlayer" message="tns:IChatManager_RegisterPlayer_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="MessageReceived">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatManager/MessageReceived" message="tns:IChatManager_MessageReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatManager/MessageReceivedResponse" message="tns:IChatManager_MessageReceived_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ChatHistoryReceived">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatManager/ChatHistoryReceived" message="tns:IChatManager_ChatHistoryReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatManager/ChatHistoryReceivedResponse" message="tns:IChatManager_ChatHistoryReceived_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatManager" type="tns:IChatManager">
@@ -90,20 +88,20 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="MessageReceived">
-      <soap12:operation soapAction="http://tempuri.org/IChatManager/MessageReceived" style="document" />
+    <wsdl:operation name="RegisterPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IChatManager/RegisterPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="MessageReceived">
+      <soap12:operation soapAction="http://tempuri.org/IChatManager/MessageReceived" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ChatHistoryReceived">
       <soap12:operation soapAction="http://tempuri.org/IChatManager/ChatHistoryReceived" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -23,6 +23,9 @@ namespace UnoLisClient.UI.UnoLisServerReference.Chat {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ChannelIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -38,6 +41,19 @@ namespace UnoLisClient.UI.UnoLisServerReference.Chat {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ChannelId {
+            get {
+                return this.ChannelIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChannelIdField, value) != true)) {
+                    this.ChannelIdField = value;
+                    this.RaisePropertyChanged("ChannelId");
+                }
             }
         }
         
@@ -105,15 +121,21 @@ namespace UnoLisClient.UI.UnoLisServerReference.Chat {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatManager/GetChatHistory")]
         System.Threading.Tasks.Task GetChatHistoryAsync(string channelId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatManager/RegisterPlayer")]
+        void RegisterPlayer(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatManager/RegisterPlayer")]
+        System.Threading.Tasks.Task RegisterPlayerAsync(string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IChatManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatManager/MessageReceived", ReplyAction="http://tempuri.org/IChatManager/MessageReceivedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatManager/MessageReceived")]
         void MessageReceived(UnoLisClient.UI.UnoLisServerReference.Chat.ChatMessageData message);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatManager/ChatHistoryReceived", ReplyAction="http://tempuri.org/IChatManager/ChatHistoryReceivedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatManager/ChatHistoryReceived")]
         void ChatHistoryReceived(UnoLisClient.UI.UnoLisServerReference.Chat.ChatMessageData[] messages);
     }
     
@@ -159,6 +181,14 @@ namespace UnoLisClient.UI.UnoLisServerReference.Chat {
         
         public System.Threading.Tasks.Task GetChatHistoryAsync(string channelId) {
             return base.Channel.GetChatHistoryAsync(channelId);
+        }
+        
+        public void RegisterPlayer(string nickname) {
+            base.Channel.RegisterPlayer(nickname);
+        }
+        
+        public System.Threading.Tasks.Task RegisterPlayerAsync(string nickname) {
+            return base.Channel.RegisterPlayerAsync(nickname);
         }
     }
 }

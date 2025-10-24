@@ -15,6 +15,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RegisterPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="MessageReceived">
     <xs:complexType>
       <xs:sequence>
@@ -22,21 +29,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MessageReceivedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="ChatHistoryReceived">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="messages" nillable="true" type="q3:ArrayOfChatMessageData" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ChatHistoryReceivedResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

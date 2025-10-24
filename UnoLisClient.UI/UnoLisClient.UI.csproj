@@ -142,13 +142,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChatControl.xaml.cs">
+      <DependentUpon>ChatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettingsModal.xaml.cs">
+      <DependentUpon>SettingsModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Friend.cs" />
     <Compile Include="Pages\JoinMatchPage.xaml.cs">
       <DependentUpon>JoinMatchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MatchMenuPage.xaml.cs">
       <DependentUpon>MatchMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\AnimationUtils.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
+    <Compile Include="Utilities\ChatCallback.cs" />
     <Compile Include="Utilities\LogManager.cs" />
     <Compile Include="Utilities\ProgressBarWidthConverter.cs" />
     <Compile Include="CustomUserControls\LoadingProgressBar.xaml.cs">
@@ -405,6 +414,12 @@
     <None Include="Connected Services\UnoLisServerReference.Login\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Common.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Common.Models.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -492,6 +507,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Chat\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Chat\configuration.svcinfo" />
+    <None Include="Connected Services\UnoLisServerReference.Chat\configuration91.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Logout\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -517,12 +538,6 @@
     </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\configuration.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\configuration91.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Chat\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\UnoLisServerReference.Chat\configuration.svcinfo" />
-    <None Include="Connected Services\UnoLisServerReference.Chat\configuration91.svcinfo" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -615,6 +630,14 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ChatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SettingsModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControls\LoadingProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

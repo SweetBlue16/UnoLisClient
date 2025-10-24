@@ -14,7 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Utilities;
-using UnoLisClient.UI.Utils; // si usas SoundManager o similares
+using UnoLisClient.UI.Utils;
+
 
 namespace UnoLisClient.UI.Pages
 {
@@ -37,8 +38,9 @@ namespace UnoLisClient.UI.Pages
                 return;
             }
 
-            // ⚡ Simulación: validación o conexión
-            if (code.Length == 5) // Ejemplo: "ABX92"
+            // Simulación: validación o conexión
+            //TODO: Implementar la lógica real para unirse a una partida usando el código proporcionado.
+            if (code.Length == 5) 
             {
                 new SimplePopUpWindow("Success", $"Successfully joined the {code} match!").ShowDialog();
                 NavigationService?.Navigate(new MatchLobbyPage());
