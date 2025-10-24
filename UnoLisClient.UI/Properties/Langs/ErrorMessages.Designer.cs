@@ -61,6 +61,69 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is already on your friends list..
+        /// </summary>
+        public static string AlreadyFriendsMessageLabel {
+            get {
+                return ResourceManager.GetString("AlreadyFriendsMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete or incorrectly formatted request. Please verify the information or contact support..
+        /// </summary>
+        public static string BadRequestMessageLabel {
+            get {
+                return ResourceManager.GetString("BadRequestMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t send messages to a blocked user..
+        /// </summary>
+        public static string BlockedUserMessageLabel {
+            get {
+                return ResourceManager.GetString("BlockedUserMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error executing client callback..
+        /// </summary>
+        public static string CallbackErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("CallbackErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the chat module..
+        /// </summary>
+        public static string ChatInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("ChatInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The client was disconnected from the remote service..
+        /// </summary>
+        public static string ClientDisconnectedMessageLabel {
+            get {
+                return ResourceManager.GetString("ClientDisconnectedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data conflict or concurrency..
+        /// </summary>
+        public static string ConcurrencyConflictMessageLabel {
+            get {
+                return ResourceManager.GetString("ConcurrencyConflictMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection Error.
         /// </summary>
         public static string ConnectionErrorHeaderLabel {
@@ -75,6 +138,42 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ConnectionErrorMessageLabel {
             get {
                 return ResourceManager.GetString("ConnectionErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The server refused the connection..
+        /// </summary>
+        public static string ConnectionRejectedMessageLabel {
+            get {
+                return ResourceManager.GetString("ConnectionRejectedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database error..
+        /// </summary>
+        public static string DatabaseErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("DatabaseErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user is not logged in..
+        /// </summary>
+        public static string DuplicateSessionMessageLabel {
+            get {
+                return ResourceManager.GetString("DuplicateSessionMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The email address provided is already in use. Please provide another one..
+        /// </summary>
+        public static string EmailAlreadyRegisteredMessageLabel {
+            get {
+                return ResourceManager.GetString("EmailAlreadyRegisteredMessageLabel", resourceCulture);
             }
         }
         
@@ -97,6 +196,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One or more required fields are empty..
+        /// </summary>
+        public static string EmptyFieldsMessageLabel {
+            get {
+                return ResourceManager.GetString("EmptyFieldsMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend action completed..
+        /// </summary>
+        public static string FriendActionCompletedMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendActionCompletedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the friends module..
+        /// </summary>
+        public static string FriendsInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendsInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full name is required..
         /// </summary>
         public static string FullNameEmptyMessageLabel {
@@ -115,11 +241,191 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General server error..
+        /// </summary>
+        public static string GeneralServerErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("GeneralServerErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message contains inappropriate language..
+        /// </summary>
+        public static string InappropriatedContentMessageLabel {
+            get {
+                return ResourceManager.GetString("InappropriatedContentMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect username or password, please verify the fields..
+        /// </summary>
+        public static string InvalidCredentialsMessageLabel {
+            get {
+                return ResourceManager.GetString("InvalidCredentialsMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more fields contain invalid data. Please verify the information provided..
+        /// </summary>
+        public static string InvalidDataMessageLabel {
+            get {
+                return ResourceManager.GetString("InvalidDataMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid authentication token..
+        /// </summary>
+        public static string InvalidTokenMessageLabel {
+            get {
+                return ResourceManager.GetString("InvalidTokenMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The match was closed by the host..
+        /// </summary>
+        public static string LobbyClosedMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbyClosedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The lobby already has the maximum number of players allowed (4)..
+        /// </summary>
+        public static string LobbyFullMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbyFullMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inconsistent lobby state detected..
+        /// </summary>
+        public static string LobbyInconsistentStateMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbyInconsistentStateMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the game/lobby module..
+        /// </summary>
+        public static string LobbyInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbyInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested lobby couldn&apos;t be found..
+        /// </summary>
+        public static string LobbyNotFoundMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbyNotFoundMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error during login..
+        /// </summary>
+        public static string LoginInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("LoginInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error during logout..
+        /// </summary>
+        public static string LogoutInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("LogoutInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The game is over now..
+        /// </summary>
+        public static string MatchAlreadyEndedMessageLabel {
+            get {
+                return ResourceManager.GetString("MatchAlreadyEndedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t join, the game has already started..
+        /// </summary>
+        public static string MatchAlreadyStartedMessageLabel {
+            get {
+                return ResourceManager.GetString("MatchAlreadyStartedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The match {0} has been canceled..
+        /// </summary>
+        public static string MatchCancelledMessageLabel {
+            get {
+                return ResourceManager.GetString("MatchCancelledMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The match with code {0} was not found..
+        /// </summary>
+        public static string MatchNotFoundMessageLabel {
+            get {
+                return ResourceManager.GetString("MatchNotFoundMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t send an empty message..
+        /// </summary>
+        public static string MessageCantBeEmptyMessageLabel {
+            get {
+                return ResourceManager.GetString("MessageCantBeEmptyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message exceeds the allowed character limit (200)..
+        /// </summary>
+        public static string MessageLengthMessageLabel {
+            get {
+                return ResourceManager.GetString("MessageLengthMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A session token was not provided..
+        /// </summary>
+        public static string MissingTokenMessageLabel {
+            get {
+                return ResourceManager.GetString("MissingTokenMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New password can&apos;t be empty..
         /// </summary>
         public static string NewPasswordEmptyMessageLabel {
             get {
                 return ResourceManager.GetString("NewPasswordEmptyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An account with the associated nickname already exists..
+        /// </summary>
+        public static string NicknameAlreadyTakenMessageLabel {
+            get {
+                return ResourceManager.GetString("NicknameAlreadyTakenMessageLabel", resourceCulture);
             }
         }
         
@@ -160,11 +466,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have permission to execute this action..
+        /// </summary>
+        public static string NoPermissionsMessageLabel {
+            get {
+                return ResourceManager.GetString("NoPermissionsMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation not supported..
+        /// </summary>
+        public static string OperationNotSupportedMessageLabel {
+            get {
+                return ResourceManager.GetString("OperationNotSupportedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords don&apos;t match, please verify them..
         /// </summary>
-        public static string PasswordDontMatchLabel {
+        public static string PasswordDontMatchMessageLabel {
             get {
-                return ResourceManager.GetString("PasswordDontMatchLabel", resourceCulture);
+                return ResourceManager.GetString("PasswordDontMatchMessageLabel", resourceCulture);
             }
         }
         
@@ -196,11 +520,119 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The player was already ready..
+        /// </summary>
+        public static string PlayerAlreadyReadyMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerAlreadyReadyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} disconnected during the match..
+        /// </summary>
+        public static string PlayerDisconnectedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerDisconnectedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The player already has an active lobby..
+        /// </summary>
+        public static string PlayerHasActiveLobbyMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerHasActiveLobbyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified player was not found..
+        /// </summary>
+        public static string PlayerNotFoundMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerNotFoundMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The player doesn&apos;t belong to the lobby..
+        /// </summary>
+        public static string PlayerNotInLobbyMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerNotInLobbyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The player was not ready..
+        /// </summary>
+        public static string PlayerWereNotReadyMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerWereNotReadyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error while retrieving profile..
+        /// </summary>
+        public static string ProfileFetchFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("ProfileFetchFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The profile information has not been loaded..
         /// </summary>
         public static string ProfileNotLoadedMessageLabel {
             get {
                 return ResourceManager.GetString("ProfileNotLoadedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error while updating profile..
+        /// </summary>
+        public static string ProfileUpdateFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("ProfileUpdateFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing your purchase..
+        /// </summary>
+        public static string PurchaseProcessingErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("PurchaseProcessingErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing the reward..
+        /// </summary>
+        public static string RewardProcessingErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("RewardProcessingErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error serializing or deserializing objects..
+        /// </summary>
+        public static string SerializationErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("SerializationErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The session has expired, please log in again..
+        /// </summary>
+        public static string SessionExpiredMessageLabel {
+            get {
+                return ResourceManager.GetString("SessionExpiredMessageLabel", resourceCulture);
             }
         }
         
@@ -232,6 +664,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error when executing an SQL query..
+        /// </summary>
+        public static string SqlErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("SqlErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout exceeded..
+        /// </summary>
+        public static string TimeoutMessageLabel {
+            get {
+                return ResourceManager.GetString("TimeoutMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed or unconfirmed transaction..
+        /// </summary>
+        public static string TransactionFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("TransactionFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The link couldn&apos;t be opened. Please try again..
         /// </summary>
         public static string UnableToOpenLinkMessageLabel {
@@ -241,16 +700,61 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The user with the nickname given already exists..
+        ///   Looks up a localized string similar to Unauthorized access..
         /// </summary>
-        public static string UserDuplicatedLabel {
+        public static string UnauthorizedAccessMessageLabel {
             get {
-                return ResourceManager.GetString("UserDuplicatedLabel", resourceCulture);
+                return ResourceManager.GetString("UnauthorizedAccessMessageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new password is not secure, please check the requirements..
+        ///   Looks up a localized string similar to Unhandled exception..
+        /// </summary>
+        public static string UnhandledExceptionMessageLabel {
+            get {
+                return ResourceManager.GetString("UnhandledExceptionMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error, please contact the support team..
+        /// </summary>
+        public static string UnknownErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("UnknownErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unstable connection detected..
+        /// </summary>
+        public static string UnstableConnectionMessageLabel {
+            get {
+                return ResourceManager.GetString("UnstableConnectionMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user is not logged in..
+        /// </summary>
+        public static string UserNotConnectedMessageLabel {
+            get {
+                return ResourceManager.GetString("UserNotConnectedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data validation failed..
+        /// </summary>
+        public static string ValidationFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("ValidationFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password doesn&apos;t match the minimum security requirements. Please fix it before continuing..
         /// </summary>
         public static string WeakPasswordMessageLabel {
             get {

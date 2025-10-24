@@ -59,6 +59,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UnoLisServer.Common">
+      <HintPath>..\..\..\UnoLisServer\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -159,6 +162,7 @@
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\ChatCallback.cs" />
     <Compile Include="Utilities\LogManager.cs" />
+    <Compile Include="Utilities\MessageTranslator.cs" />
     <Compile Include="Utilities\ProgressBarWidthConverter.cs" />
     <Compile Include="CustomUserControls\LoadingProgressBar.xaml.cs">
       <DependentUpon>LoadingProgressBar.xaml</DependentUpon>
@@ -429,6 +433,12 @@
     <None Include="Connected Services\UnoLisServerReference.Logout\item1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Logout\item21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Logout\LogoutManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\service.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Notifications\service.xsd">
@@ -464,6 +474,12 @@
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\UnoLisServer.Common.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.ProfileEdit\UnoLisServer.Common.Models.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -474,6 +490,12 @@
     <None Include="Connected Services\UnoLisServerReference.ProfileView\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.ProfileView\UnoLisServer.Common.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.ProfileView\UnoLisServer.Common.Models.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.ProfileView\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -482,6 +504,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Register\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Register\UnoLisServer.Common.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Register\UnoLisServer.Common.Models.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Register\UnoLisServer.Contracts.DTOs.xsd">

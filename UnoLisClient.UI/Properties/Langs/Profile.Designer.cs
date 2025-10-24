@@ -178,6 +178,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile data successfully obtained..
+        /// </summary>
+        public static string UserDataObtainedLabel {
+            get {
+                return ResourceManager.GetString("UserDataObtainedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wins.
         /// </summary>
         public static string WinsColumn {

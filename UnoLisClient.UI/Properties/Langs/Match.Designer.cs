@@ -79,11 +79,38 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The game is over..
+        /// </summary>
+        public static string MatchOverLabel {
+            get {
+                return ResourceManager.GetString("MatchOverLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match Results.
         /// </summary>
         public static string MatchResultsLabel {
             get {
                 return ResourceManager.GetString("MatchResultsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The result of the match was recorded correctly..
+        /// </summary>
+        public static string MatchResultsRecordedMessageLabel {
+            get {
+                return ResourceManager.GetString("MatchResultsRecordedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting game....
+        /// </summary>
+        public static string MatchStartedLabel {
+            get {
+                return ResourceManager.GetString("MatchStartedLabel", resourceCulture);
             }
         }
         
@@ -102,6 +129,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PlaceResultsColumn {
             get {
                 return ResourceManager.GetString("PlaceResultsColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was banned from the match..
+        /// </summary>
+        public static string PlayerBannedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerBannedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been successfully blocked..
+        /// </summary>
+        public static string PlayerBlockedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerBlockedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was kicked out of the game..
+        /// </summary>
+        public static string PlayerKickedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerKickedMessageLabel", resourceCulture);
             }
         }
         

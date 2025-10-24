@@ -121,7 +121,9 @@ namespace UnoLisClient.UI.UnoLisServerReference.Register {
     public interface IRegisterManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegisterManager/RegisterResponse", ReplyAction="http://tempuri.org/IRegisterManager/RegisterResponseResponse")]
-        void RegisterResponse(bool success, string message);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.UI.UnoLisServerReference.Register.RegistrationData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        void RegisterResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

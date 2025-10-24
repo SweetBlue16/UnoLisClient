@@ -61,6 +61,60 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match {0} successfully created..
+        /// </summary>
+        public static string LobbyCreatedSuccessfullyLabel {
+            get {
+                return ResourceManager.GetString("LobbyCreatedSuccessfullyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat message sent successfully..
+        /// </summary>
+        public static string MessageSentSuccessfullyLabel {
+            get {
+                return ResourceManager.GetString("MessageSentSuccessfullyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New message sent successfully..
+        /// </summary>
+        public static string NewMessageSentLabel {
+            get {
+                return ResourceManager.GetString("NewMessageSentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has joined the game..
+        /// </summary>
+        public static string PlayerJoinedLabel {
+            get {
+                return ResourceManager.GetString("PlayerJoinedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not ready..
+        /// </summary>
+        public static string PlayerNotReadyLabel {
+            get {
+                return ResourceManager.GetString("PlayerNotReadyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is ready..
+        /// </summary>
+        public static string PlayerReadyLabel {
+            get {
+                return ResourceManager.GetString("PlayerReadyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to READY!.
         /// </summary>
         public static string ReadyButton {

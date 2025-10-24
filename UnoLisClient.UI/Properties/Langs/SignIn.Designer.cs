@@ -196,6 +196,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login successful. Welcome to UNO-LIS {0}!.
+        /// </summary>
+        public static string UserLoggedInSuccessfullyLabel {
+            get {
+                return ResourceManager.GetString("UserLoggedInSuccessfullyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve successfully logged out..
+        /// </summary>
+        public static string UserLoggedOutSuccessfullyLabel {
+            get {
+                return ResourceManager.GetString("UserLoggedOutSuccessfullyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User successfully registered, welcome to UNO-LIS!.
         /// </summary>
         public static string UserRegisteredSuccessfullyLabel {

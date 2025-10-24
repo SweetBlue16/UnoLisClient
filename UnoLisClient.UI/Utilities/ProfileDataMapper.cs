@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnoLisClient.UI.Managers;
-using UnoLisClient.UI.UnoLisServerReference.ProfileEdit;
-using UnoLisClient.UI.UnoLisServerReference.ProfileView;
+using UnoLisClient.UI.UnoLisServerReference;
 
 namespace UnoLisClient.UI.Utilities
 {
@@ -51,6 +50,5 @@ namespace UnoLisClient.UI.Utilities
                 Password = data.Password
             };
         }
-        
     }
 }

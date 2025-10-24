@@ -268,6 +268,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oops...!.
+        /// </summary>
+        public static string OopsLabel {
+            get {
+                return ResourceManager.GetString("OopsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string PasswordLabel {
@@ -282,6 +291,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PlayButton {
             get {
                 return ResourceManager.GetString("PlayButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has reconnected to the match..
+        /// </summary>
+        public static string PlayerReconnectedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerReconnectedMessageLabel", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string StatisticsLabel {
             get {
                 return ResourceManager.GetString("StatisticsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation completed successfully..
+        /// </summary>
+        public static string SuccessfulOperationMessageLabel {
+            get {
+                return ResourceManager.GetString("SuccessfulOperationMessageLabel", resourceCulture);
             }
         }
         

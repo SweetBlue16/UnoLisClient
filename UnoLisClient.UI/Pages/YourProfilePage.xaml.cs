@@ -20,6 +20,7 @@ using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Utilities;
 using System.Diagnostics;
 using UnoLisClient.UI.Utils;
+using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -37,38 +38,39 @@ namespace UnoLisClient.UI.Pages
             RequestProfileData();
         }
 
-        public void ProfileDataReceived(bool success, ProfileData data)
+        public void ProfileDataReceived(ServiceResponse<ProfileData> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _loadingPopUpWindow?.StopLoadingAndClose();
-                if (!success || data == null)
+                string message = MessageTranslator.GetMessage(response.Code);
+                if (!response.Success || response.Data == null)
                 {
-                    new SimplePopUpWindow(Global.WarningLabel, "").ShowDialog();
+                    new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
                     LoadDefaultData();
                     return;
                 }
 
-                var clientProfile = data.ToClientModel();
+                var clientProfile = ProfileDataMapper.ToClientModel(response.Data);
 
-                UserNicknameLabel.Text = data.Nickname;
-                UserFullNameLabel.Text = data.FullName;
-                UserEmailLabel.Text = data.Email;
+                UserNicknameLabel.Text = clientProfile.Nickname;
+                UserFullNameLabel.Text = clientProfile.FullName;
+                UserEmailLabel.Text = clientProfile.Email;
 
-                UserFacebookLink.NavigateUri = !string.IsNullOrWhiteSpace(data.FacebookUrl) ? new Uri(data.FacebookUrl) : null;
-                UserInstagramLink.NavigateUri = !string.IsNullOrWhiteSpace(data.InstagramUrl) ? new Uri(data.InstagramUrl) : null;
-                UserTikTokLink.NavigateUri = !string.IsNullOrWhiteSpace(data.TikTokUrl) ? new Uri(data.TikTokUrl) : null;
+                UserFacebookLink.NavigateUri = !string.IsNullOrWhiteSpace(clientProfile.FacebookUrl) ? new Uri(clientProfile.FacebookUrl) : null;
+                UserInstagramLink.NavigateUri = !string.IsNullOrWhiteSpace(clientProfile.InstagramUrl) ? new Uri(clientProfile.InstagramUrl) : null;
+                UserTikTokLink.NavigateUri = !string.IsNullOrWhiteSpace(clientProfile.TikTokUrl) ? new Uri(clientProfile.TikTokUrl) : null;
 
                 PlayerStatisticsDataGrid.ItemsSource = new List<dynamic>
                 {
                     new
                     {
-                        MatchesPlayed = data.MatchesPlayed,
-                        Wins = data.Wins,
-                        Loses = data.Losses,
-                        GlobalPoints = data.ExperiencePoints,
-                        WinRate = data.MatchesPlayed == 0 ? "0%" :
-                        $"{(int)(float) data.Wins / data.MatchesPlayed * 100}%"
+                        MatchesPlayed = clientProfile.MatchesPlayed,
+                        Wins = clientProfile.Wins,
+                        Loses = clientProfile.Losses,
+                        GlobalPoints = clientProfile.ExperiencePoints,
+                        WinRate = clientProfile.MatchesPlayed == 0 ? "0%" :
+                        $"{(int)(float) clientProfile.Wins / clientProfile.MatchesPlayed * 100}%"
                     }
                 };
 

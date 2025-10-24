@@ -17,8 +17,10 @@ using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.UnoLisServerReference.Login;
 using UnoLisClient.UI.UnoLisServerReference.Register;
+using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Utils;
 using UnoLisClient.UI.Validators;
+using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -35,12 +37,13 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        public void RegisterResponse(bool success, string message)
+        public void RegisterResponse(ServiceResponse<object> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _loadingPopUpWindow?.StopLoadingAndClose();
-                if (success)
+                string message = MessageTranslator.GetMessage(response.Code);
+                if (response.Success)
                 {
                     new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
                     NavigationService?.Navigate(new LoginPage());

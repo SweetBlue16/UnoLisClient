@@ -186,11 +186,17 @@
   <data name="OkButton" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="OopsLabel" xml:space="preserve">
+    <value>Oops...!</value>
+  </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Password</value>
   </data>
   <data name="PlayButton" xml:space="preserve">
     <value>PLAY!</value>
+  </data>
+  <data name="PlayerReconnectedMessageLabel" xml:space="preserve">
+    <value>{0} has reconnected to the match.</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Profile</value>
@@ -206,6 +212,9 @@
   </data>
   <data name="StatisticsLabel" xml:space="preserve">
     <value>Statistics</value>
+  </data>
+  <data name="SuccessfulOperationMessageLabel" xml:space="preserve">
+    <value>Operation completed successfully.</value>
   </data>
   <data name="SuccessLabel" xml:space="preserve">
     <value>Success!</value>

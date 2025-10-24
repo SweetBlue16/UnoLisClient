@@ -115,6 +115,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Purchase completed successfully..
+        /// </summary>
+        public static string PurchaseSuccessfulLabel {
+            get {
+                return ResourceManager.GetString("PurchaseSuccessfulLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Revo Coins.
         /// </summary>
         public static string RevoCoinsLabel {
@@ -124,11 +133,20 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reward &apos;{0}&apos; obtained..
+        /// </summary>
+        public static string RewardObtainedLabel {
+            get {
+                return ResourceManager.GetString("RewardObtainedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Congrats, you&apos;ve got: {0}.
         /// </summary>
-        public static string RewardLabel {
+        public static string RewardShopLabel {
             get {
-                return ResourceManager.GetString("RewardLabel", resourceCulture);
+                return ResourceManager.GetString("RewardShopLabel", resourceCulture);
             }
         }
         

@@ -65,7 +65,7 @@ namespace UnoLisClient.UI.Validators
             }
             if (!registrationData.Password.Equals(rewritedPassword))
             {
-                errors.Add(ErrorMessages.PasswordDontMatchLabel);
+                errors.Add(ErrorMessages.PasswordDontMatchMessageLabel);
             }
 
             return errors;

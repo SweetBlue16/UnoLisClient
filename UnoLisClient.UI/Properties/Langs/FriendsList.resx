@@ -123,8 +123,23 @@
   <data name="EnterNicknameMessageLabel" xml:space="preserve">
     <value>Enter your friend's nickname to add them to the list.</value>
   </data>
+  <data name="FriendRemovedMessageLabel" xml:space="preserve">
+    <value>{0} has been removed from your friends list.</value>
+  </data>
+  <data name="FriendRequestAcceptedLabel" xml:space="preserve">
+    <value>{0} has accepted your friend request.</value>
+  </data>
+  <data name="FriendRequestSentLabel" xml:space="preserve">
+    <value>We've sent a friend request to {0}.</value>
+  </data>
   <data name="MyFriendsLabel" xml:space="preserve">
     <value>My friends</value>
+  </data>
+  <data name="PlayerBlockedMessageLabel" xml:space="preserve">
+    <value>{0} has been successfully blocked.</value>
+  </data>
+  <data name="PlayerUnblockedMessageLabel" xml:space="preserve">
+    <value>{0} has been successfully unblocked.</value>
   </data>
   <data name="RemoveFriendMessageLabel" xml:space="preserve">
     <value>Are you sure you want to remove {0} from your friends list?</value>

@@ -26,7 +26,8 @@ namespace UnoLisClient.UI.UnoLisServerReference.Logout {
     public interface ILogoutManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILogoutManager/LogoutResponse")]
-        void LogoutResponse(bool success, string message);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        void LogoutResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
