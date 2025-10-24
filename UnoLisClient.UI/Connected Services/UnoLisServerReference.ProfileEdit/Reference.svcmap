@@ -13,8 +13,10 @@
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
-    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
-    <ReferencedAssemblies />
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="UnoLisServer.Common" />
+    </ReferencedAssemblies>
     <ReferencedDataContractTypes />
     <ServiceContractMappings />
   </ClientOptions>
@@ -26,6 +28,8 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0a108c66-91a8-42d8-9b58-5ed238b19098" SourceId="1" SourceUrl="net.tcp://localhost:8109/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f89db0a9-4f76-4436-a914-838a76f76b15" SourceId="1" SourceUrl="net.tcp://localhost:8109/mex" />
     <MetadataFile FileName="UnoLisServer.Contracts.DTOs.xsd" MetadataType="Schema" ID="e1db6ece-a898-4e97-8a1a-0a5252ac6c2b" SourceId="1" SourceUrl="net.tcp://localhost:8109/mex" />
+    <MetadataFile FileName="UnoLisServer.Common.Models.xsd" MetadataType="Schema" ID="51b4fd3b-ef70-4c5a-956c-ae81529b49e6" SourceId="1" SourceUrl="net.tcp://localhost:8109/mex" />
+    <MetadataFile FileName="UnoLisServer.Common.Enums.xsd" MetadataType="Schema" ID="2f72ee93-ca62-48b3-a0fa-490c6a2f3fcc" SourceId="1" SourceUrl="net.tcp://localhost:8109/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

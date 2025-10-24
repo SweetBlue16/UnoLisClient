@@ -156,6 +156,9 @@
   <data name="UserDataChangedLabel" xml:space="preserve">
     <value>Profile information successfully changed!</value>
   </data>
+  <data name="UserDataObtainedLabel" xml:space="preserve">
+    <value>Profile data successfully obtained.</value>
+  </data>
   <data name="WinsColumn" xml:space="preserve">
     <value>Wins</value>
   </data>

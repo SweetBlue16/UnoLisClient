@@ -35,9 +35,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginManager_Login_InputMessage">
@@ -84,7 +86,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8101/LoginManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>EVICTUS\meler</Upn>
+          <Upn>SWEETBLUE16\pswee</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

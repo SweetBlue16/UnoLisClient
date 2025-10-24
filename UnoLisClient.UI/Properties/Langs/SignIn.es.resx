@@ -168,4 +168,10 @@
   <data name="PasswordRequirementsHeaderLabel" xml:space="preserve">
     <value>Requisitos de la contraseña</value>
   </data>
+  <data name="UserLoggedInSuccessfullyLabel" xml:space="preserve">
+    <value>Inicio de sesión exitoso. ¡Bienvenido a UNO-LIS {0}!</value>
+  </data>
+  <data name="UserLoggedOutSuccessfullyLabel" xml:space="preserve">
+    <value>Se ha cerrado sesión exitosamente.</value>
+  </data>
 </root>

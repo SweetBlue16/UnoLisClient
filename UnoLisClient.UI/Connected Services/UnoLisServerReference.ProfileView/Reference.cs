@@ -297,7 +297,7 @@ namespace UnoLisClient.UI.UnoLisServerReference.ProfileView {
     public interface IProfileViewManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileViewManager/ProfileDataReceived", ReplyAction="http://tempuri.org/IProfileViewManager/ProfileDataReceivedResponse")]
-        void ProfileDataReceived(bool success, UnoLisClient.UI.UnoLisServerReference.ProfileView.ProfileData data);
+        void ProfileDataReceived(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.UI.UnoLisServerReference.ProfileView.ProfileData> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -79,11 +79,56 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has been removed from your friends list..
+        /// </summary>
+        public static string FriendRemovedMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendRemovedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has accepted your friend request..
+        /// </summary>
+        public static string FriendRequestAcceptedLabel {
+            get {
+                return ResourceManager.GetString("FriendRequestAcceptedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We&apos;ve sent a friend request to {0}..
+        /// </summary>
+        public static string FriendRequestSentLabel {
+            get {
+                return ResourceManager.GetString("FriendRequestSentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My friends.
         /// </summary>
         public static string MyFriendsLabel {
             get {
                 return ResourceManager.GetString("MyFriendsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been successfully blocked..
+        /// </summary>
+        public static string PlayerBlockedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerBlockedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been successfully unblocked..
+        /// </summary>
+        public static string PlayerUnblockedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerUnblockedMessageLabel", resourceCulture);
             }
         }
         

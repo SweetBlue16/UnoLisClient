@@ -297,7 +297,7 @@ namespace UnoLisClient.UI.UnoLisServerReference.ProfileEdit {
     public interface IProfileEditManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileEditManager/ProfileUpdateResponse", ReplyAction="http://tempuri.org/IProfileEditManager/ProfileUpdateResponseResponse")]
-        void ProfileUpdateResponse(bool success, string message);
+        void ProfileUpdateResponse(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.UI.UnoLisServerReference.ProfileEdit.ProfileData> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

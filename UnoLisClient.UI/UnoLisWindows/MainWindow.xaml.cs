@@ -19,6 +19,8 @@ using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.UnoLisServerReference.Logout;
+using UnoLisClient.UI.Utilities;
+using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI
 {
@@ -34,11 +36,12 @@ namespace UnoLisClient.UI
             InitializeComponent();
         }
 
-        public void LogoutResponse(bool success, string message)
+        public void LogoutResponse(ServiceResponse<object> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (success)
+                string message = MessageTranslator.GetMessage(response.Code);
+                if (response.Success)
                 {
                     new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
                 }

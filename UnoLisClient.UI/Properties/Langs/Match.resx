@@ -123,14 +123,32 @@
   <data name="ExitMatchConfirmationLabel" xml:space="preserve">
     <value>Are you sure you want to leave the match?</value>
   </data>
+  <data name="MatchOverLabel" xml:space="preserve">
+    <value>The game is over.</value>
+  </data>
   <data name="MatchResultsLabel" xml:space="preserve">
     <value>Match Results</value>
+  </data>
+  <data name="MatchResultsRecordedMessageLabel" xml:space="preserve">
+    <value>The result of the match was recorded correctly.</value>
+  </data>
+  <data name="MatchStartedLabel" xml:space="preserve">
+    <value>Starting game...</value>
   </data>
   <data name="OptionsLabel" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="PlaceResultsColumn" xml:space="preserve">
     <value>Place</value>
+  </data>
+  <data name="PlayerBannedMessageLabel" xml:space="preserve">
+    <value>{0} was banned from the match.</value>
+  </data>
+  <data name="PlayerBlockedMessageLabel" xml:space="preserve">
+    <value>{0} has been successfully blocked.</value>
+  </data>
+  <data name="PlayerKickedMessageLabel" xml:space="preserve">
+    <value>{0} was kicked out of the game.</value>
   </data>
   <data name="PlayerNameColumn" xml:space="preserve">
     <value>Player</value>

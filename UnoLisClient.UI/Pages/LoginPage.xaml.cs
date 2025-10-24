@@ -14,12 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.UI.UnoLisServerReference;
 using UnoLisClient.UI.UnoLisServerReference.Login;
 using UnoLisClient.UI.Validators;
 using System.ServiceModel;
 using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.Utils;
+using UnoLisServer.Common.Models;
+using UnoLisClient.UI.Utilities;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -36,12 +38,13 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        public void LoginResponse(bool success, string message)
+        public void LoginResponse(ServiceResponse<object> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _loadingPopUpWindow?.StopLoadingAndClose();
-                if (success)
+                string message = MessageTranslator.GetMessage(response.Code);
+                if (response.Success)
                 {
                     CurrentSession.CurrentUserNickname = NicknameTextBox.Text.Trim();
                     new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();

@@ -20,6 +20,7 @@ using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Validators;
 using UnoLisClient.UI.Utils;
+using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI.Pages
 {
@@ -39,12 +40,13 @@ namespace UnoLisClient.UI.Pages
             LoadProfileData();
         }
 
-        public void ProfileUpdateResponse(bool success, string message)
+        public void ProfileUpdateResponse(ServiceResponse<ProfileData> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _loadingPopUpWindow?.StopLoadingAndClose();
-                if (success)
+                string message = MessageTranslator.GetMessage(response.Code);
+                if (response.Success)
                 {
                     new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
                     NavigationService?.Navigate(new YourProfilePage());

@@ -138,10 +138,16 @@
   <data name="RevoCoinsLabel" xml:space="preserve">
     <value>Revo Monedas</value>
   </data>
-  <data name="RewardLabel" xml:space="preserve">
+  <data name="RewardShopLabel" xml:space="preserve">
     <value>¡Felicidades, has obtenido: {0}!</value>
+  </data>
+  <data name="RewardObtainedLabel" xml:space="preserve">
+    <value>Recompensa '{0}' obtenida.</value>
   </data>
   <data name="SpecialBoxLabel" xml:space="preserve">
     <value>Caja especial</value>
+  </data>
+  <data name="PurchaseSuccessfulLabel" xml:space="preserve">
+    <value>Compra realizada correctamente.</value>
   </data>
 </root>
