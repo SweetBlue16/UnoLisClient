@@ -37,10 +37,15 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IConfirmationManager_ConfirmCode_InputMessage">
     <wsdl:part name="parameters" element="tns:ConfirmCode" />
+  </wsdl:message>
+  <wsdl:message name="IConfirmationManager_ResendConfirmationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResendConfirmationCode" />
   </wsdl:message>
   <wsdl:message name="IConfirmationManager_ConfirmationResponse_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ConfirmationResponse" />
@@ -48,13 +53,26 @@
   <wsdl:message name="IConfirmationManager_ConfirmationResponse_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ConfirmationResponseResponse" />
   </wsdl:message>
+  <wsdl:message name="IConfirmationManager_ResendCodeResponse_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ResendCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfirmationManager_ResendCodeResponse_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ResendCodeResponseResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfirmationManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConfirmCode">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfirmationManager/ConfirmCode" message="tns:IConfirmationManager_ConfirmCode_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ResendConfirmationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfirmationManager/ResendConfirmationCode" message="tns:IConfirmationManager_ResendConfirmationCode_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConfirmationResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IConfirmationManager/ConfirmationResponse" message="tns:IConfirmationManager_ConfirmationResponse_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IConfirmationManager/ConfirmationResponseResponse" message="tns:IConfirmationManager_ConfirmationResponse_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ResendCodeResponse">
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfirmationManager/ResendCodeResponse" message="tns:IConfirmationManager_ResendCodeResponse_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfirmationManager/ResendCodeResponseResponse" message="tns:IConfirmationManager_ResendCodeResponse_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IConfirmationManager" type="tns:IConfirmationManager">
@@ -67,8 +85,23 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="ResendConfirmationCode">
+      <soap12:operation soapAction="http://tempuri.org/IConfirmationManager/ResendConfirmationCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ConfirmationResponse">
       <soap12:operation soapAction="http://tempuri.org/IConfirmationManager/ConfirmationResponse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResendCodeResponse">
+      <soap12:operation soapAction="http://tempuri.org/IConfirmationManager/ResendCodeResponse" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -83,7 +116,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8105/ConfirmationManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>EVICTUS\meler</Upn>
+          <Upn>SWEETBLUE16\pswee</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

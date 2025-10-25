@@ -174,4 +174,7 @@
   <data name="UserLoggedOutSuccessfullyLabel" xml:space="preserve">
     <value>You've successfully logged out.</value>
   </data>
+  <data name="ResendVerificationCodeLabel" xml:space="preserve">
+    <value>Didn't receive the code? Resend.</value>
+  </data>
 </root>

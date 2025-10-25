@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UnoLisClient.UI
+namespace UnoLisClient.UI.CustomUserControls
 {
     /// <summary>
     /// Interaction logic for VisiblePasswordField.xaml

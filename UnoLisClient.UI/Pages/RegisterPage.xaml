@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:UnoLisClient.UI.Pages"
       mc:Ignorable="d" 
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
-      xmlns:controls="clr-namespace:UnoLisClient.UI"
+      xmlns:controls="clr-namespace:UnoLisClient.UI.CustomUserControls"
       Title="RegisterPage">
 
     <Grid>
@@ -164,6 +164,16 @@
                            Foreground="White"
                            TextWrapping="WrapWithOverflow"
                            FontSize="20"/>
+                <TextBlock x:Name="ResendVerificationCodeLabel"
+                           Text="{x:Static language:SignIn.ResendVerificationCodeLabel}"
+                           HorizontalAlignment="Center"
+                           Margin="0,120,0,0"
+                           VerticalAlignment="Top"
+                           FontFamily="pack://application:,,,/Fonts/#Lato"
+                           FontSize="10"
+                           Cursor="Hand"
+                           Foreground="LightSkyBlue"
+                           MouseDown="SignUpLabelMouseDown"/>
             </StackPanel>
         </Border>
     </Grid>
