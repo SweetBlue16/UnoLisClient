@@ -178,6 +178,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Didn&apos;t receive the code? Resend..
+        /// </summary>
+        public static string ResendVerificationCodeLabel {
+            get {
+                return ResourceManager.GetString("ResendVerificationCodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rewrite password.
         /// </summary>
         public static string RewritedPasswordLabel {

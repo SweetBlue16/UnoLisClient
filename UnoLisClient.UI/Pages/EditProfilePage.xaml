@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:UnoLisClient.UI.Pages"
       mc:Ignorable="d" 
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
-      xmlns:controls="clr-namespace:UnoLisClient.UI"
+      xmlns:controls="clr-namespace:UnoLisClient.UI.CustomUserControls"
       Title="EditProfilePage">
 
     <Border Background="#AA000000"

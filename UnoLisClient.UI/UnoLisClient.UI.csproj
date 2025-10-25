@@ -378,6 +378,12 @@
     <None Include="Connected Services\UnoLisServerReference.Confirmation\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Confirmation\UnoLisServer.Common.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Confirmation\UnoLisServer.Common.Models.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Friends\service.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Friends\service.xsd">
       <SubType>Designer</SubType>

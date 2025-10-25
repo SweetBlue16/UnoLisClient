@@ -20,13 +20,24 @@ namespace UnoLisClient.UI.UnoLisServerReference.Confirmation {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IConfirmationManager/ConfirmCode")]
         System.Threading.Tasks.Task ConfirmCodeAsync(string email, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IConfirmationManager/ResendConfirmationCode")]
+        void ResendConfirmationCode(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IConfirmationManager/ResendConfirmationCode")]
+        System.Threading.Tasks.Task ResendConfirmationCodeAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IConfirmationManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfirmationManager/ConfirmationResponse", ReplyAction="http://tempuri.org/IConfirmationManager/ConfirmationResponseResponse")]
-        void ConfirmationResponse(bool success);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        void ConfirmationResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfirmationManager/ResendCodeResponse", ReplyAction="http://tempuri.org/IConfirmationManager/ResendCodeResponseResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        void ResendCodeResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,6 +74,14 @@ namespace UnoLisClient.UI.UnoLisServerReference.Confirmation {
         
         public System.Threading.Tasks.Task ConfirmCodeAsync(string email, string code) {
             return base.Channel.ConfirmCodeAsync(email, code);
+        }
+        
+        public void ResendConfirmationCode(string email) {
+            base.Channel.ResendConfirmationCode(email);
+        }
+        
+        public System.Threading.Tasks.Task ResendConfirmationCodeAsync(string email) {
+            return base.Channel.ResendConfirmationCodeAsync(email);
         }
     }
 }
