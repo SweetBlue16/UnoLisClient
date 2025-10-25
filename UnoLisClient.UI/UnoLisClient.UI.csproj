@@ -60,7 +60,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="UnoLisServer.Common">
-      <HintPath>..\..\..\UnoLisServer\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\source\repos\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

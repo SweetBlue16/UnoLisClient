@@ -187,6 +187,8 @@ namespace UnoLisClient.UI.Pages
                         .ShowDialog();
                 }
             }
+
+            e.Handled = true;
         }
 
         private string GetSocialLinkUrl(string linkName)
