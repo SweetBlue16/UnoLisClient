@@ -16,6 +16,9 @@ using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
+    /// <summary>
+    /// Interaction logic MatchLobbyPage.xaml
+    /// </summary>
     public partial class MatchLobbyPage : Page
     {
         private bool _isChatVisible = false;

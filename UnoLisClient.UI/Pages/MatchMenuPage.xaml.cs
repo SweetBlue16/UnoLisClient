@@ -17,6 +17,9 @@ using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Utils; 
 namespace UnoLisClient.UI.Pages
 {
+    /// <summary>
+    /// Interaction logic for MatchMenuPage.xaml
+    /// </summary>
     public partial class MatchMenuPage : Page
     {
         public MatchMenuPage()

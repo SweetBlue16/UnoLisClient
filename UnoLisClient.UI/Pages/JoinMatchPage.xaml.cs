@@ -19,6 +19,9 @@ using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
+    /// <summary>
+    /// Interaction logic for JoinMatchPage.xaml
+    /// </summary>
     public partial class JoinMatchPage : Page
     {
         public JoinMatchPage()
