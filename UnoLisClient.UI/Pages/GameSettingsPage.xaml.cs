@@ -60,7 +60,7 @@ namespace UnoLisClient.UI.Pages
                 tb.Text = "🔊";
         }
 
-        private void CheckedSoundTogglex(object sender, RoutedEventArgs e)
+        private void UncheckedSoundToggle(object sender, RoutedEventArgs e)
         {
             if (SoundToggle.Content is TextBlock tb)
                 tb.Text = "🔈";
