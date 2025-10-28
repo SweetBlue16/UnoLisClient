@@ -30,7 +30,7 @@ namespace UnoLisClient.UI.Pages
             _initializing = false;
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void ClickCloseButton(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new MainMenuPage());
         }
@@ -50,7 +50,7 @@ namespace UnoLisClient.UI.Pages
             LanguageComboBox.SelectedIndex = 0;
         }
 
-        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SelectionChangedLanguageComboBox(object sender, SelectionChangedEventArgs e)
         {
             if (_initializing) return;
 
@@ -72,7 +72,7 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
-        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void ValueChangedVolumeSlider(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_initializing) return;
 

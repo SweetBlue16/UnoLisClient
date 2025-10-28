@@ -69,35 +69,14 @@ namespace UnoLisClient.UI
             try
             {
                 MainFrame.Navigate(new Pages.GamePage());
-                IntroMask.Visibility = Visibility.Visible;
-                IntroMask.Opacity = 1;
-                SplashLogo.Visibility = Visibility.Visible;
-                SplashLogo.Opacity = 0;
 
-                var fadeInLogo = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromSeconds(3.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-                var scaleLogo = new DoubleAnimation { From = 0.8, To = 1.0, Duration = TimeSpan.FromSeconds(3.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut } };
+                var introArgs = new AnimationUtils.IntroAnimationArgs(
+                    IntroMask,
+                    SplashLogo,
+                    MusicPlayer
+                );
 
-                SplashLogo.BeginAnimation(UIElement.OpacityProperty, fadeInLogo);
-                SplashLogo.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleLogo);
-                SplashLogo.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleLogo);
-
-                await Task.Delay(3000);
-
-                var fadeOutLogo = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(1.8), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-                SplashLogo.BeginAnimation(UIElement.OpacityProperty, fadeOutLogo);
-
-                await Task.Delay(2000);
-                MusicPlayer.Play();
-
-                var fadeOutMask = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(2.5), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut } };
-
-                fadeOutMask.Completed += (s, _) =>
-                {
-                    IntroMask.Visibility = Visibility.Collapsed;
-                    SplashLogo.Visibility = Visibility.Collapsed;
-                };
-
-                IntroMask.BeginAnimation(UIElement.OpacityProperty, fadeOutMask);
+                await AnimationUtils.PlayIntroAnimationAsync(introArgs);
             }
             catch (InvalidOperationException ex)
             {
@@ -123,33 +102,18 @@ namespace UnoLisClient.UI
             MusicPlayer.Play();
         }
 
-        public async void SetBackgroundMedia(string videoPath, string musicPath)
+        public async Task SetBackgroundMedia(string videoPath, string musicPath)
         {
             try
             {
-                var fadeOut = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-                VideoBackground.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-                double oldVolume = MusicPlayer.Volume;
+                var mediaArgs = new AnimationUtils.CrossfadeMediaArgs(
+                    VideoBackground,
+                    MusicPlayer,
+                    videoPath,
+                    musicPath
+                );
 
-                var fadeOutMusic = new DoubleAnimation { From = oldVolume, To = 0, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-                MusicPlayer.BeginAnimation(MediaElement.VolumeProperty, fadeOutMusic);
-
-                await Task.Delay(1000);
-
-                VideoBackground.Stop();
-                MusicPlayer.Stop();
-
-                VideoBackground.Source = new Uri(System.IO.Path.GetFullPath(videoPath));
-                MusicPlayer.Source = new Uri(System.IO.Path.GetFullPath(musicPath));
-
-                VideoBackground.Play();
-                MusicPlayer.Play();
-
-                var fadeIn = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-                VideoBackground.BeginAnimation(UIElement.OpacityProperty, fadeIn);
-
-                var fadeInMusic = new DoubleAnimation { From = 0, To = oldVolume, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-                MusicPlayer.BeginAnimation(MediaElement.VolumeProperty, fadeInMusic);
+                await AnimationUtils.CrossfadeMediaAsync(mediaArgs);
             }
             catch (UriFormatException ex)
             {
@@ -169,23 +133,11 @@ namespace UnoLisClient.UI
             }
         }
 
-        public async void RestoreDefaultBackground()
+        public async Task RestoreDefaultBackground()
         {
             try
             {
-                string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/marioDesktop.mp4");
-                string defaultMusic = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/jazzBackground.mp3");
-
-                await Task.Delay(600);
-
-                VideoBackground.Stop();
-                MusicPlayer.Stop();
-
-                VideoBackground.Source = new Uri(defaultVideo, UriKind.Absolute);
-                MusicPlayer.Source = new Uri(defaultMusic, UriKind.Absolute);
-
-                VideoBackground.Play();
-                MusicPlayer.Play();
+                await AnimationUtils.RestoreDefaultMediaAsync(VideoBackground, MusicPlayer);
             }
             catch (System.IO.FileNotFoundException ex)
             {

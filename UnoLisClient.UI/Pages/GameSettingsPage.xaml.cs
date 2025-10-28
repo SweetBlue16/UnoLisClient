@@ -27,39 +27,40 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void ClickCloseButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             NavigationService?.GoBack();
         }
 
-        private void CreateGameButton_Click(object sender, RoutedEventArgs e)
+        private void ClickCreateGameButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             new SimplePopUpWindow("Game Created", "Your game has been successfully created!").ShowDialog();
             NavigationService?.Navigate(new MatchLobbyPage());
         }
-        private void MusicToggle_Checked(object sender, RoutedEventArgs e)
+        private void CheckedMusicToggle(object sender, RoutedEventArgs e)
         {
             if (MusicToggle.Content is TextBlock tb)
                 tb.Text = "🎵"; 
         }
 
-        private void MusicToggle_Unchecked(object sender, RoutedEventArgs e)
+        private void UncheckedMusicToggle(object sender, RoutedEventArgs e)
         {
             if (MusicToggle.Content is TextBlock tb)
                 tb.Text = "🔇";
             // Aquí: pausar/detener música
             // NOTA: Mejor silenciarla que detenerla para evitar retrasos al reanudar
+            //TODO: Implementar la funcionalidad
         }
 
-        private void SoundToggle_Checked(object sender, RoutedEventArgs e)
+        private void CheckedSoundToggle(object sender, RoutedEventArgs e)
         {
             if (SoundToggle.Content is TextBlock tb)
                 tb.Text = "🔊";
         }
 
-        private void SoundToggle_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckedSoundTogglex(object sender, RoutedEventArgs e)
         {
             if (SoundToggle.Content is TextBlock tb)
                 tb.Text = "🔈";

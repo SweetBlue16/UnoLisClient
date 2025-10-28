@@ -61,7 +61,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Cursor="Hand"
-                            Click="CloseButton_Click">
+                            Click="ClickCloseButton">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -92,7 +92,7 @@
                     </Button>
                 </Grid>
 
-                <!-- 🌐 Idioma -->
+                <!-- Idioma -->
                 <Grid Grid.Row="2" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -111,14 +111,14 @@
                               Width="150" Height="35"
                               FontSize="14"
                               HorizontalAlignment="Right"
-                              SelectionChanged="LanguageComboBox_SelectionChanged"
+                              SelectionChanged="SelectionChangedLanguageComboBox"
                               Grid.Column="1">
                         <ComboBoxItem Content="{x:Static language:Settings.EnglishComboItem}" Tag="en-US"/>
                         <ComboBoxItem Content="{x:Static language:Settings.SpanishComboItem}" Tag="es-MX"/>
                     </ComboBox>
                 </Grid>
 
-                <!-- 🔊 Volumen -->
+                <!-- Volumen -->
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -139,7 +139,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
                             Grid.Column="1"
-                            ValueChanged="VolumeSlider_ValueChanged"/>
+                            ValueChanged="ValueChangedVolumeSlider"/>
                 </Grid>
             </Grid>
         </Border>

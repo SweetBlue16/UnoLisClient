@@ -26,7 +26,7 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        private void JoinButton_Click(object sender, RoutedEventArgs e)
+        private void ClickJoinButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
 
@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             NavigationService?.Navigate(new MatchMenuPage());

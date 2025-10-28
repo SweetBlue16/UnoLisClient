@@ -17,7 +17,7 @@
                 Height="350">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
 
-                <!-- 🔹 Título -->
+                <!--  Título -->
                 <TextBlock Text="JOIN MATCH"
                            FontSize="36"
                            FontWeight="Bold"
@@ -26,7 +26,7 @@
                            FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,0,0,30"/>
 
-                <!-- 🟢 Campo para el código -->
+                <!--  Campo para el código -->
                 <TextBox x:Name="CodeTextBox"
                          Style="{StaticResource TextBoxStyle}"
                          Width="250"
@@ -36,7 +36,7 @@
                          HorizontalAlignment="Center"
                          TextAlignment="Center"/>
 
-                <!-- ⚙️ Botones -->
+                <!-- Botones -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
                     <Button x:Name="JoinButton"
                             Content="JOIN"
@@ -45,7 +45,7 @@
                             Height="55"
                             FontSize="18"
                             Cursor="Hand"
-                            Click="JoinButton_Click"/>
+                            Click="ClickJoinButton"/>
 
                     <Button x:Name="CancelButton"
                             Content="BACK"
@@ -54,7 +54,7 @@
                             Height="55"
                             FontSize="18"
                             Cursor="Hand"
-                            Click="CancelButton_Click"/>
+                            Click="ClickCancelButton"/>
                 </StackPanel>
             </StackPanel>
         </Border>

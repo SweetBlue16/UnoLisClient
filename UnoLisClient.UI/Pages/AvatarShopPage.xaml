@@ -8,7 +8,7 @@
       Title="AvatarShopPage">
 
     <Grid>
-        <!-- 🔲 Border semitransparente centrado -->
+        <!-- Border semitransparente centrado -->
         <Border Background="#AA000000"
                 CornerRadius="15"
                 Padding="24"
@@ -32,7 +32,7 @@
                     <!-- Contenido -->
                 </Grid.RowDefinitions>
 
-                <!-- 🔝 HEADER: botón regresar + título + monedas -->
+                <!-- HEADER: botón regresar + título + monedas -->
                 <Grid Grid.Row="0" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -57,7 +57,7 @@
                             Cursor="Hand"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Click="BackButton_Click">
+                            Click="ClickBackButton">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Template">
@@ -128,7 +128,7 @@
                            Background="White"
                            Opacity="0.3"/>
 
-                <!-- 🎁 Contenido principal -->
+                <!-- Contenido principal -->
                 <ScrollViewer Grid.Row="2"
                               VerticalScrollBarVisibility="Auto">
                     <UniformGrid Columns="3"
@@ -137,7 +137,7 @@
                                  VerticalAlignment="Top"
                                  Rows="1">
 
-                        <!-- 🟩 Caja especial -->
+                        <!-- Caja especial -->
                         <StackPanel Margin="20" HorizontalAlignment="Center">
                             <Border Width="120" Height="120"
                                     Background="LimeGreen"
@@ -158,11 +158,11 @@
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Width="100"
                                     HorizontalAlignment="Center"
-                                    Click="BuySpecial_Click"
+                                    Click="ClickBuySpecial"
                                     Cursor="Hand"/>
                         </StackPanel>
 
-                        <!-- 🟦 Caja épica -->
+                        <!-- Caja épica -->
                         <StackPanel Margin="20" HorizontalAlignment="Center">
                             <Border Width="120" Height="120"
                                     Background="DodgerBlue"
@@ -183,7 +183,7 @@
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Width="100"
                                     HorizontalAlignment="Center"
-                                    Click="BuyEpic_Click"
+                                    Click="ClickBuyEpic"
                                     Cursor="Hand"/>
                         </StackPanel>
 
@@ -208,7 +208,7 @@
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Width="100"
                                     HorizontalAlignment="Center"
-                                    Click="BuyLegendary_Click"
+                                    Click="ClickBuyLegendary"
                                     Cursor="Hand"/>
                         </StackPanel>
                     </UniformGrid>

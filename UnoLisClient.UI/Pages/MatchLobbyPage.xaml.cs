@@ -18,12 +18,8 @@ namespace UnoLisClient.UI.Pages
 {
     public partial class MatchLobbyPage : Page
     {
-        private const string GlobalLobbyChannel = "GlobalLobby";
-
         private bool _isChatVisible = false;
-        private ChatManagerClient _chatClient;
-        private ChatCallback _chatCallback;
-        private string _currentUserNickname;
+        private readonly string _currentUserNickname;
         
 
         public ObservableCollection<ChatMessageData> ChatMessages { get; set; } = new ObservableCollection<ChatMessageData>();
@@ -48,7 +44,7 @@ namespace UnoLisClient.UI.Pages
             FriendsList.ItemsSource = Friends;
         }
 
-        private void InviteButton_Click(object sender, RoutedEventArgs e)
+        private void ClickInviteButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             if (sender is Button button && button.DataContext is Friend friend)
@@ -59,7 +55,7 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
-        private void SendInvitesButton_Click(object sender, RoutedEventArgs e)
+        private void ClickSendInvitesButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             var invited = Friends.Where(f => f.Invited).Select(f => f.FriendName).ToList();
@@ -74,47 +70,50 @@ namespace UnoLisClient.UI.Pages
             }
         }
 
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        private void ClickSettingsButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             AnimationUtils.FadeIn(SettingsModal);
         }
 
-        private async void SettingsModal_CloseRequested(object sender, EventArgs e)
+        private async void CloseRequestedSettingsModal(object sender, EventArgs e)
         {
             await AnimationUtils.FadeOut(SettingsModal);
         }
 
-        private async void ChatButton_Click(object sender, RoutedEventArgs e)
+        private async void ClickChatButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-
-            // 👇 2. AHORA ANIMAMOS EL CONTROL
             if (_isChatVisible)
             {
-                await AnimationUtils.FadeOut(ChatControl); // Animamos el UserControl
+                await AnimationUtils.FadeOut(ChatControl); 
             }
             else
             {
-                AnimationUtils.FadeIn(ChatControl); // Animamos el UserControl
+                AnimationUtils.FadeIn(ChatControl);
             }
             _isChatVisible = !_isChatVisible;
         }
 
-        private async void SettingsModal_LeaveMatchRequested(object sender, EventArgs e)
+        private async void LeaveMatchRequestedSettingsModal(object sender, EventArgs e)
         {
-            ChatControl.Cleanup();
-            var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
-            if (mainWindow != null)
+            try
             {
-                mainWindow.RestoreDefaultBackground();
+                ChatControl.Cleanup();
+
+                var mainWindow = Application.Current.MainWindow as UnoLisClient.UI.MainWindow;
+                if (mainWindow != null)
+                {
+                    await mainWindow.RestoreDefaultBackground();
+                }
+                await AnimationUtils.FadeOut(SettingsModal);
+                await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.8);
+                NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
             }
-
-            await AnimationUtils.FadeOut(SettingsModal);
-
-            await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.8);
-
-            NavigationService?.Navigate(new UnoLisClient.UI.Pages.MainMenuPage());
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocurrió un error al salir de la partida: {ex.Message}", "Error al Salir");
+            }
         }
     }
 }

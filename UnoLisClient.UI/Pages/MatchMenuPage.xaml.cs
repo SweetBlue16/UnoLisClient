@@ -24,13 +24,13 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        private void CreateMatchButton_Click(object sender, RoutedEventArgs e)
+        private void ClickCreateMatchButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             NavigationService?.Navigate(new GameSettingsPage()); 
         }
 
-        private void JoinMatchButton_Click(object sender, RoutedEventArgs e)
+        private void ClickJoinMatchButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick(); 
             NavigationService?.Navigate(new JoinMatchPage()); 

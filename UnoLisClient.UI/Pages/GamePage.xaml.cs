@@ -27,14 +27,14 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        private void PlayGuestButton_Click(object sender, RoutedEventArgs e)
+        private void ClickPlayGuestButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             CurrentSession.CurrentUserNickname = "Guest";
             NavigationService?.Navigate(new MainMenuPage());
         }
 
-        private void LoginButtonClick(object sender, RoutedEventArgs e)
+        private void ClickLoginButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             NavigationService?.Navigate(new LoginPage());

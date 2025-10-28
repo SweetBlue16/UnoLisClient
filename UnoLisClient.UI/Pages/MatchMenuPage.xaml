@@ -49,7 +49,7 @@
                         Width="300"
                         Height="80"
                         Cursor="Hand"
-                        Click="CreateMatchButton_Click"
+                        Click="ClickCreateMatchButton"
                         Margin="0,0,0,30"/>
 
                 <!-- 🔵 Botón Unirse -->
@@ -60,7 +60,7 @@
                         Width="300"
                         Height="80"
                         Cursor="Hand"
-                        Click="JoinMatchButton_Click"/>
+                        Click="ClickJoinMatchButton"/>
             </StackPanel>
         </Border>
     </Grid>

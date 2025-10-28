@@ -13,6 +13,8 @@ using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI.Pages
 {
+    //TODO Renombrar manejadores de eventos alineados al estándar
+
     /// <summary>
     /// Interaction logic for MainMenuPage.xaml
     /// </summary>

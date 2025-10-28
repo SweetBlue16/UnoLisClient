@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 
 namespace UnoLisClient.UI.Pages
 {
+    /// <summary>
+    /// Interaction logic for AvatarSelectionPage.xaml
+    /// </summary>
     public partial class AvatarSelectionPage : Page
     {
         public AvatarSelectionPage()
@@ -22,12 +25,12 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void ClickSave(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Avatar saved successfully!");
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void ClickCancel(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
         }

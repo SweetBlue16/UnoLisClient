@@ -28,7 +28,7 @@
                     <RowDefinition Height="Auto"/>  <!-- Botón Crear Partida -->
                 </Grid.RowDefinitions>
 
-                <!-- 🔝 Header con título + botón cerrar -->
+                <!-- Header con título + botón cerrar -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -42,7 +42,7 @@
                                HorizontalAlignment="Center"
                                Margin="0,0,0,10"/>
 
-                    <!-- Botón cerrar (✖) -->
+                    <!-- Botón cerrar -->
                     <Button x:Name="CloseButton"
                             Grid.Column="1"
                             Content="✖"
@@ -55,7 +55,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Cursor="Hand"
-                            Click="CloseButton_Click">
+                            Click="ClickCloseButton">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Template">
@@ -83,10 +83,10 @@
                     </Button>
                 </Grid>
 
-                <!-- ⚙️ Configuración -->
+                <!-- Configuración -->
                 <StackPanel Grid.Row="1">
 
-                    <!-- 👥 Players -->
+                    <!-- Players -->
                     <StackPanel Orientation="Vertical" Margin="0,0,0,15">
                         <Label Content="{x:Static language:Settings.PlayerSettingsLabel}"
                                Foreground="White" FontSize="16"/>
@@ -99,7 +99,7 @@
 
                     <Separator Margin="0,10"/>
 
-                    <!-- 📋 Special Rules -->
+                    <!-- Special Rules -->
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.SpecialRulesSettingsLabel}"
                                Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
@@ -110,7 +110,7 @@
 
                     <Separator Margin="0,10"/>
 
-                    <!-- 🔀 Re-Shuffle Deck -->
+                    <!-- Re-Shuffle Deck -->
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.ReShuffleDeckSettingsLabel}"
                                Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
@@ -121,7 +121,7 @@
 
                     <Separator Margin="0,10"/>
 
-                    <!-- 🎵 Music -->
+                    <!-- Music -->
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.MusicSettingsLabel}"
                                Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
@@ -132,8 +132,8 @@
                                       Background="Transparent"
                                       BorderThickness="0"
                                       HorizontalAlignment="Right"
-                                      Checked="MusicToggle_Checked"
-                                      Unchecked="MusicToggle_Unchecked">
+                                      Checked="CheckedMusicToggle"
+                                      Unchecked="UncheckedMusicToggle">
                             <TextBlock Text="🎵"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
@@ -142,7 +142,7 @@
 
                     <Separator Margin="0,10"/>
 
-                    <!-- 🔊 Sound Effects -->
+                    <!-- Sound Effects -->
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.SoundEffectsSettingsLabel}"
                                Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
@@ -153,8 +153,8 @@
                                       Background="Transparent"
                                       BorderThickness="0"
                                       HorizontalAlignment="Right"
-                                      Checked="SoundToggle_Checked"
-                                      Unchecked="SoundToggle_Unchecked">
+                                      Checked="CheckedSoundToggle"
+                                      Unchecked="UncheckedSoundToggle">
                             <TextBlock Text="🔊"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
@@ -162,7 +162,7 @@
                     </DockPanel>
                 </StackPanel>
 
-                <!-- 🟩 Botón Crear Partida -->
+                <!-- Botón Crear Partida -->
                 <Button Grid.Row="2"
                         Content="Crear Partida"
                         Background="#2ECC71"
@@ -175,7 +175,7 @@
                         HorizontalAlignment="Center"
                         Margin="0,20,0,0"
                         Cursor="Hand"
-                        Click="CreateGameButton_Click">
+                        Click="ClickCreateGameButton">
                     <Button.Effect>
                         <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
                     </Button.Effect>

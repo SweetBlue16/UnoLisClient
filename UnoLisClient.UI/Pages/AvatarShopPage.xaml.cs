@@ -17,6 +17,9 @@ using UnoLisClient.UI.Utils;
 
 namespace UnoLisClient.UI.Pages
 {
+    /// <summary>
+    /// Interaction logic for AvatarShopPage.xaml
+    /// </summary>
     public partial class AvatarShopPage : Page
     {
         public AvatarShopPage()
@@ -24,25 +27,25 @@ namespace UnoLisClient.UI.Pages
             InitializeComponent();
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void ClickBackButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             NavigationService?.GoBack();
         }
 
-        private void BuySpecial_Click(object sender, RoutedEventArgs e)
+        private void ClickBuySpecial(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             new SimplePopUpWindow("Purchase Successful", "You bought a Special Box!").ShowDialog();
         }
 
-        private void BuyEpic_Click(object sender, RoutedEventArgs e)
+        private void ClickBuyEpic(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             new SimplePopUpWindow("Purchase Successful", "You bought an Epic Box!").ShowDialog();
         }
 
-        private void BuyLegendary_Click(object sender, RoutedEventArgs e)
+        private void ClickBuyLegendary(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
             new SimplePopUpWindow("Purchase Successful", "You bought a Legendary Box!").ShowDialog();
