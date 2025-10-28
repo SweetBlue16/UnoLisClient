@@ -44,16 +44,16 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
+                HideLoading();
                 string message = MessageTranslator.GetMessage(response.Code);
+
                 if (response.Success)
                 {
-                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
-                    NavigationService?.Navigate(new LoginPage());
+                    HandleConfirmationSuccess(message);
                 }
                 else
                 {
-                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                    ShowAlert(Global.UnsuccessfulLabel, message);
                 }
             });
         }
@@ -62,28 +62,16 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
+                HideLoading();
                 string message = MessageTranslator.GetMessage(response.Code);
+
                 if (response.Success)
                 {
-                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
-                    var inputPopUp = new InputPopUpWindow(
-                        Global.ConfirmationLabel,
-                        Global.ConfirmationMessageLabel,
-                        Global.CodeLabel
-                    );
-                    inputPopUp.Owner = Window.GetWindow(this);
-
-                    if (inputPopUp.ShowDialog() == true)
-                    {
-                        string code = inputPopUp.UserInput;
-                        CallConfirmationService(code);
-                    }
-                    ResendVerificationCodeLabel.Visibility = Visibility.Visible;
+                    HandleRegisterSuccess(message);
                 }
                 else
                 {
-                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                    ShowAlert(Global.UnsuccessfulLabel, message);
                 }
             });
         }
@@ -92,10 +80,10 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
+                HideLoading();
                 string message = MessageTranslator.GetMessage(response.Code);
                 string title = response.Success ? Global.SuccessLabel : Global.UnsuccessfulLabel;
-                new SimplePopUpWindow(title, message).ShowDialog();
+                ShowAlert(title, message);
             });
         }
 
@@ -108,45 +96,17 @@ namespace UnoLisClient.UI.Pages
         private void ClickSignInButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            string nickname = NicknameTextBox.Text.Trim();
-            string fullname = FullNameTextBox.Text.Trim();
-            string email = EmailTextBox.Text.Trim();
-            string password = PasswordField.Password;
+
+            var registrationData = GetRegistrationDataFromUI();
             string rewritedPassword = RewritedPasswordField.Password;
 
-            var registrationData = new RegistrationData
+            if (!ValidateRegistrationInput(registrationData, rewritedPassword))
             {
-                Nickname = nickname,
-                FullName = fullname,
-                Email = email,
-                Password = password
-            };
-
-            List<string> errors = UserValidator.ValidateRegistration(registrationData, rewritedPassword);
-            if (errors.Count > 0)
-            {
-                string message = "◆ " + string.Join("\n◆ ", errors);
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
                 return;
             }
 
-            _pendingEmail = email;
-            try
-            {
-                _loadingPopUpWindow = new LoadingPopUpWindow()
-                {
-                    Owner = Window.GetWindow(this)
-                };
-                _loadingPopUpWindow.Show();
-                var context = new InstanceContext(this);
-                _registerClient = new RegisterManagerClient(context);
-                _registerClient.Register(registrationData);
-            }
-            catch (Exception)
-            {
-                _loadingPopUpWindow?.StopLoadingAndClose();
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
-            }
+            _pendingEmail = registrationData.Email;
+            ExecuteRegister(registrationData);
         }
 
         private void SignUpLabelMouseDown(object sender, MouseButtonEventArgs e)
@@ -156,51 +116,169 @@ namespace UnoLisClient.UI.Pages
             {
                 return;
             }
+            ExecuteResendCode(_pendingEmail);
+        }
 
+        private void ExecuteRegister(RegistrationData data)
+        {
             try
             {
-                _loadingPopUpWindow = new LoadingPopUpWindow()
-                {
-                    Owner = Window.GetWindow(this)
-                };
-                _loadingPopUpWindow.Show();
-
+                ShowLoading();
                 var context = new InstanceContext(this);
-                _confirmationClient = new ConfirmationManagerClient(context);
-                _confirmationClient.ResendConfirmationCode(_pendingEmail);
+                _registerClient = new RegisterManagerClient(context);
+                _registerClient.Register(data);
             }
-            catch (Exception)
+            catch (EndpointNotFoundException ex)
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
             }
         }
 
-        private void CallConfirmationService(string code)
+        private void ExecuteConfirmCode(string code)
         {
             if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(_pendingEmail))
             {
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.InvalidDataMessageLabel).ShowDialog();
+                ShowAlert(Global.UnsuccessfulLabel, ErrorMessages.InvalidDataMessageLabel);
                 return;
             }
 
             try
             {
-                _loadingPopUpWindow = new LoadingPopUpWindow()
-                {
-                    Owner = Window.GetWindow(this)
-                };
-                _loadingPopUpWindow.Show();
-
+                ShowLoading();
                 var context = new InstanceContext(this);
                 _confirmationClient = new ConfirmationManagerClient(context);
                 _confirmationClient.ConfirmCode(_pendingEmail, code);
             }
-            catch (Exception)
+            catch (EndpointNotFoundException ex)
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
             }
+            catch (TimeoutException ex)
+            {
+                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
+            }
+        }
+
+        private void ExecuteResendCode(string email)
+        {
+            try
+            {
+                ShowLoading();
+                var context = new InstanceContext(this);
+                _confirmationClient = new ConfirmationManagerClient(context);
+                _confirmationClient.ResendConfirmationCode(email);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
+            }
+        }
+
+        private RegistrationData GetRegistrationDataFromUI()
+        {
+            return new RegistrationData
+            {
+                Nickname = NicknameTextBox.Text.Trim(),
+                FullName = FullNameTextBox.Text.Trim(),
+                Email = EmailTextBox.Text.Trim(),
+                Password = PasswordField.Password
+            };
+        }
+
+        private bool ValidateRegistrationInput(RegistrationData data, string rewritedPassword)
+        {
+            List<string> errors = UserValidator.ValidateRegistration(data, rewritedPassword);
+            if (errors.Count > 0)
+            {
+                string message = "◆ " + string.Join("\n◆ ", errors);
+                ShowAlert(Global.UnsuccessfulLabel, message);
+                return false;
+            }
+            return true;
+        }
+
+        private void HandleRegisterSuccess(string message)
+        {
+            ShowAlert(Global.SuccessLabel, message);
+
+            var inputPopUp = new InputPopUpWindow(
+                Global.ConfirmationLabel,
+                Global.ConfirmationMessageLabel,
+                Global.CodeLabel
+            );
+            inputPopUp.Owner = Window.GetWindow(this);
+
+            if (inputPopUp.ShowDialog() == true)
+            {
+                string code = inputPopUp.UserInput;
+                ExecuteConfirmCode(code);
+            }
+
+            ResendVerificationCodeLabel.Visibility = Visibility.Visible;
+        }
+
+        private void HandleConfirmationSuccess(string message)
+        {
+            ShowAlert(Global.SuccessLabel, message);
+            NavigationService?.Navigate(new LoginPage());
+        }
+
+        private void HandleException(string userMessage, Exception ex)
+        {
+            HideLoading();
+            LogManager.Error($"Fallo en flujo de registro: {ex.Message}", ex);
+            ShowAlert(Global.UnsuccessfulLabel, userMessage);
+        }
+
+        private void ShowAlert(string title, string message)
+        {
+            new SimplePopUpWindow(title, message).ShowDialog();
+        }
+
+        private void ShowLoading()
+        {
+            _loadingPopUpWindow = new LoadingPopUpWindow()
+            {
+                Owner = Window.GetWindow(this)
+            };
+            _loadingPopUpWindow.Show();
+        }
+
+        private void HideLoading()
+        {
+            _loadingPopUpWindow?.StopLoadingAndClose();
         }
     }
 }

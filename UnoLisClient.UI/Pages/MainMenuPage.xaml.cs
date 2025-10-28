@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
@@ -29,6 +19,7 @@ namespace UnoLisClient.UI.Pages
     public partial class MainMenuPage : Page, ILogoutManagerCallback
     {
         private LogoutManagerClient _logoutClient;
+        private LoadingPopUpWindow _loadingPopUpWindow;
 
         public MainMenuPage()
         {
@@ -39,15 +30,18 @@ namespace UnoLisClient.UI.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                HideLoading();
                 string message = MessageTranslator.GetMessage(response.Code);
+
                 if (response.Success)
                 {
-                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
+                    ShowAlert(Global.SuccessLabel, message);
                 }
                 else
                 {
-                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                    ShowAlert(Global.UnsuccessfulLabel, message);
                 }
+                ClearLocalSessionAndNavigate();
             });
         }
 
@@ -82,7 +76,7 @@ namespace UnoLisClient.UI.Pages
             if (result == true)
             {
                 NavigationService?.Navigate(new GamePage());
-                LogoutCurrentUser();
+                ExecuteUserLogout();
             }
         }
 
@@ -91,31 +85,83 @@ namespace UnoLisClient.UI.Pages
             return string.Equals(CurrentSession.CurrentUserNickname, "Guest", StringComparison.OrdinalIgnoreCase);
         }
 
-        private void LogoutCurrentUser()
+        private void ExecuteUserLogout()
         {
+            if (IsGuest())
+            {
+                HandleGuestLogout();
+                return;
+            }
+
+            string nickname = CurrentSession.CurrentUserNickname;
+            if (string.IsNullOrWhiteSpace(nickname))
+            {
+                ClearLocalSessionAndNavigate();
+                return;
+            }
+
             try
             {
-                if (IsGuest())
-                {
-                    CurrentSession.CurrentUserNickname = null;
-                    CurrentSession.CurrentUserProfileData = null;
-                    return;
-                }
-
-                if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
-                {
-                    var context = new InstanceContext(this);
-                    _logoutClient = new LogoutManagerClient(context);
-                    _logoutClient.LogoutAsync(CurrentSession.CurrentUserNickname);
-
-                    CurrentSession.CurrentUserNickname = null;
-                    CurrentSession.CurrentUserProfileData = null;
-                }
+                ShowLoading();
+                var context = new InstanceContext(this);
+                _logoutClient = new LogoutManagerClient(context);
+                _logoutClient.LogoutAsync(nickname);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, ex);
             }
             catch (Exception ex)
             {
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
             }
+        }
+
+        private void HandleGuestLogout()
+        {
+            ClearLocalSessionAndNavigate();
+        }
+
+        private void HandleException(string userMessage, Exception ex)
+        {
+            HideLoading();
+            LogManager.Error($"Fallo en logout de MainMenu: {ex.Message}", ex);
+            ShowAlert(Global.UnsuccessfulLabel, userMessage);
+            ClearLocalSessionAndNavigate();
+        }
+
+        private void ClearLocalSessionAndNavigate()
+        {
+            CurrentSession.CurrentUserNickname = null;
+            CurrentSession.CurrentUserProfileData = null;
+            NavigationService?.Navigate(new GamePage());
+        }
+
+        private void ShowAlert(string title, string message)
+        {
+            new SimplePopUpWindow(title, message).ShowDialog();
+        }
+
+        private void ShowLoading()
+        {
+            _loadingPopUpWindow = new LoadingPopUpWindow()
+            {
+                Owner = Window.GetWindow(this)
+            };
+            _loadingPopUpWindow.Show();
+        }
+
+        private void HideLoading()
+        {
+            _loadingPopUpWindow?.StopLoadingAndClose();
         }
     }
 }

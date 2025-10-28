@@ -29,23 +29,24 @@ namespace UnoLisClient.UI
 
         public void LogoutResponse(ServiceResponse<object> response)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            if (response.Success)
+            {
+                LogManager.Info("Servidor confirmó el cierre de sesión de OnExit.");
+            }
+            else
             {
                 string message = MessageTranslator.GetMessage(response.Code);
-                if (!response.Success)
-                {
-                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
-                }
-            });
+                LogManager.Warn($"Servidor reportó un error al cerrar sesión de OnExit: {message}");
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            UnoLisClient.UI.Utilities.LogManager.Info("🎮 UNO LIS Client iniciado.");
+            LogManager.Info("🎮 UNO LIS Client iniciado.");
 
-            var langCode = global::UnoLisClient.UI.Properties.Settings.Default.languageCode;
+            var langCode = UI.Properties.Settings.Default.languageCode;
             if (string.IsNullOrWhiteSpace(langCode))
             {
                 langCode = "en-US";
@@ -58,27 +59,38 @@ namespace UnoLisClient.UI
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-            LogoutCurrentUser();
+            ExecuteExitLogout();
         }
 
-        private void LogoutCurrentUser()
+        private void ExecuteExitLogout()
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
+                string nickname = CurrentSession.CurrentUserNickname;
+                if (string.IsNullOrWhiteSpace(nickname))
                 {
-                    var context = new InstanceContext(this);
-                    _logoutClient = new LogoutManagerClient(context);
-                    _logoutClient.LogoutAsync(CurrentSession.CurrentUserNickname);
-
-                    CurrentSession.CurrentUserNickname = null;
-                    CurrentSession.CurrentUserProfileData = null;
+                    return;
                 }
+                ClearLocalSession();
+
+                var context = new InstanceContext(this);
+                _logoutClient = new LogoutManagerClient(context);
+                _logoutClient.LogoutAsync(nickname);
+            }
+            catch (CommunicationException ex)
+            {
+                LogManager.Error("Error de comunicación al notificar logout en OnExit.", ex);
             }
             catch (Exception ex)
             {
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
+                LogManager.Error($"Error inesperado en ExecuteExitLogout: {ex.Message}", ex);
             }
+        }
+
+        private void ClearLocalSession()
+        {
+            CurrentSession.CurrentUserNickname = null;
+            CurrentSession.CurrentUserProfileData = null;
         }
     }
 }

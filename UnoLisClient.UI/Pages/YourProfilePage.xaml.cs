@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ServiceModel;
 using UnoLisClient.UI.UnoLisServerReference.ProfileView;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Managers;
 using UnoLisClient.UI.PopUpWindows;
 using UnoLisClient.UI.Utilities;
-using System.Diagnostics;
 using UnoLisClient.UI.Utils;
 using UnoLisServer.Common.Models;
 
@@ -35,47 +25,26 @@ namespace UnoLisClient.UI.Pages
         public YourProfilePage()
         {
             InitializeComponent();
-            RequestProfileData();
+            LoadProfileData();
         }
 
         public void ProfileDataReceived(ServiceResponse<ProfileData> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
+                HideLoading();
                 string message = MessageTranslator.GetMessage(response.Code);
+
                 if (!response.Success || response.Data == null)
                 {
-                    new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
-                    LoadDefaultData();
+                    HandleResponseError(message);
                     return;
                 }
 
                 var clientProfile = ProfileDataMapper.ToClientModel(response.Data);
-
-                UserNicknameLabel.Text = clientProfile.Nickname;
-                UserFullNameLabel.Text = clientProfile.FullName;
-                UserEmailLabel.Text = clientProfile.Email;
-
-                UserFacebookLink.NavigateUri = !string.IsNullOrWhiteSpace(clientProfile.FacebookUrl) ? new Uri(clientProfile.FacebookUrl) : null;
-                UserInstagramLink.NavigateUri = !string.IsNullOrWhiteSpace(clientProfile.InstagramUrl) ? new Uri(clientProfile.InstagramUrl) : null;
-                UserTikTokLink.NavigateUri = !string.IsNullOrWhiteSpace(clientProfile.TikTokUrl) ? new Uri(clientProfile.TikTokUrl) : null;
-
-                PlayerStatisticsDataGrid.ItemsSource = new List<dynamic>
-                {
-                    new
-                    {
-                        MatchesPlayed = clientProfile.MatchesPlayed,
-                        Wins = clientProfile.Wins,
-                        Loses = clientProfile.Losses,
-                        GlobalPoints = clientProfile.ExperiencePoints,
-                        WinRate = clientProfile.MatchesPlayed == 0 ? "0%" :
-                        $"{(int)(float) clientProfile.Wins / clientProfile.MatchesPlayed * 100}%"
-                    }
-                };
-
-                ChangeAvatarButton.IsEnabled = true;
-                ChangeDataButton.IsEnabled = true;
+                PopulateUiWithProfile(clientProfile);
+                PlayerStatisticsDataGrid.ItemsSource = CreateStatisticsList(clientProfile);
+                EnableProfileButtons(true);
                 CurrentSession.CurrentUserProfileData = clientProfile;
             });
         }
@@ -89,9 +58,10 @@ namespace UnoLisClient.UI.Pages
         private void ClickChangeDataButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
+
             if (CurrentSession.CurrentUserProfileData == null)
             {
-                new SimplePopUpWindow(Global.WarningLabel, ErrorMessages.ProfileNotLoadedMessageLabel).ShowDialog();
+                ShowAlert(Global.WarningLabel, ErrorMessages.ProfileNotLoadedMessageLabel);
                 return;
             }
             NavigationService?.Navigate(new EditProfilePage(CurrentSession.CurrentUserProfileData));
@@ -103,31 +73,98 @@ namespace UnoLisClient.UI.Pages
             NavigationService?.Navigate(new MainMenuPage());
         }
 
-        private void RequestProfileData()
+        private void ClickSocialLink(object sender, RoutedEventArgs e)
+        {
+            if (sender is Hyperlink link)
+            {
+                HandleSocialLinkClick(link.Name);
+            }
+            e.Handled = true;
+        }
+
+        private void LoadProfileData()
         {
             ClearUiBeforeLoad();
+
             if (string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname) || IsGuest())
             {
                 LoadDefaultData();
                 return;
             }
 
+            ExecuteGetProfileDataCall(CurrentSession.CurrentUserNickname);
+        }
+
+        private void ExecuteGetProfileDataCall(string nickname)
+        {
             try
             {
-                _loadingPopUpWindow = new LoadingPopUpWindow()
-                {
-                    Owner = Window.GetWindow(this)
-                };
-                _loadingPopUpWindow.Show();
+                ShowLoading();
                 var context = new InstanceContext(this);
                 _profileViewClient = new ProfileViewManagerClient(context);
-                _profileViewClient.GetProfileData(CurrentSession.CurrentUserNickname);
+                _profileViewClient.GetProfileData(nickname);
             }
-            catch (Exception)
+            catch (EndpointNotFoundException ex)
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
-                LoadDefaultData();
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
+            }
+        }
+
+        private void HandleResponseError(string message)
+        {
+            ShowAlert(Global.WarningLabel, message);
+            LoadDefaultData();
+        }
+
+        private void HandleException(string userMessage, Exception ex)
+        {
+            HideLoading();
+            LogManager.Error($"Fallo al cargar perfil: {ex.Message}", ex);
+            ShowAlert(Global.UnsuccessfulLabel, userMessage);
+            LoadDefaultData();
+        }
+
+        private void HandleSocialLinkClick(string linkName)
+        {
+            if (CurrentSession.CurrentUserProfileData == null)
+            {
+                ShowAlert(Global.WarningLabel, ErrorMessages.ProfileNotLoadedMessageLabel);
+                return;
+            }
+
+            string targetUrl = null;
+            switch (linkName)
+            {
+                case "UserFacebookLink":
+                    targetUrl = CurrentSession.CurrentUserProfileData.FacebookUrl;
+                    break;
+                case "UserInstagramLink":
+                    targetUrl = CurrentSession.CurrentUserProfileData.InstagramUrl;
+                    break;
+                case "UserTikTokLink":
+                    targetUrl = CurrentSession.CurrentUserProfileData.TikTokUrl;
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(targetUrl))
+            {
+                BrowserHelper.OpenUrl(targetUrl);
+            }
+            else
+            {
+                ShowAlert(Global.WarningLabel, ErrorMessages.SocialNetworkNotConfiguredMessageLabel);
             }
         }
 
@@ -136,79 +173,100 @@ namespace UnoLisClient.UI.Pages
             return string.Equals(CurrentSession.CurrentUserNickname, "Guest", StringComparison.OrdinalIgnoreCase);
         }
 
-        private void ClearUiBeforeLoad()
+        private void PopulateUiWithProfile(ClientProfileData clientProfile)
         {
-            UserNicknameLabel.Text = "...";
-            UserFullNameLabel.Text = "...";
-            UserEmailLabel.Text = "...";
-            PlayerStatisticsDataGrid.ItemsSource = null;
+            UserNicknameLabel.Text = clientProfile.Nickname;
+            UserFullNameLabel.Text = clientProfile.FullName;
+            UserEmailLabel.Text = clientProfile.Email;
+
+            UserFacebookLink.NavigateUri = CreateUri(clientProfile.FacebookUrl);
+            UserInstagramLink.NavigateUri = CreateUri(clientProfile.InstagramUrl);
+            UserTikTokLink.NavigateUri = CreateUri(clientProfile.TikTokUrl);
+        }
+
+        private List<dynamic> CreateStatisticsList(ClientProfileData clientProfile)
+        {
+            string winRate = "0%";
+            if (clientProfile.MatchesPlayed > 0)
+            {
+                double rate = (double)clientProfile.Wins / clientProfile.MatchesPlayed * 100;
+                winRate = $"{(int)rate}%";
+            }
+
+            return new List<dynamic>
+            {
+                new
+                {
+                    MatchesPlayed = clientProfile.MatchesPlayed,
+                    Wins = clientProfile.Wins,
+                    Loses = clientProfile.Losses,
+                    GlobalPoints = clientProfile.ExperiencePoints,
+                    WinRate = winRate
+                }
+            };
         }
 
         private void LoadDefaultData()
         {
-            var defaultData = new ProfileData
-            {
-                Nickname = "Guest",
-                FullName = "-",
-                Email = "-",
-                MatchesPlayed = 0,
-                Wins = 0,
-                Losses = 0,
-                ExperiencePoints = 0
-            };
-
-            UserNicknameLabel.Text = defaultData.Nickname;
-            UserFullNameLabel.Text = defaultData.FullName;
-            UserEmailLabel.Text = defaultData.Email;
+            ClearUiBeforeLoad();
+            UserNicknameLabel.Text = "Guest";
+            UserFullNameLabel.Text = "-";
+            UserEmailLabel.Text = "-";
 
             PlayerStatisticsDataGrid.ItemsSource = new List<dynamic>
             {
                 new { MatchesPlayed = 0, Wins = 0, Loses = 0, GlobalPoints = 0, WinRate = "0%" }
             };
 
-            ChangeAvatarButton.IsEnabled = false;
-            ChangeDataButton.IsEnabled = false;
+            EnableProfileButtons(false);
         }
 
-        private void ClickSocialLink(object sender, RoutedEventArgs e)
+        private void ClearUiBeforeLoad()
         {
-            if (sender is Hyperlink link)
-            {
-                string target = GetSocialLinkUrl(link.Name);
-
-                if (!string.IsNullOrWhiteSpace(target))
-                {
-                    BrowserHelper.OpenUrl(target);
-                }
-                else
-                {
-                    new SimplePopUpWindow(Global.WarningLabel,
-                        ErrorMessages.SocialNetworkNotConfiguredMessageLabel)
-                        .ShowDialog();
-                }
-            }
-
-            e.Handled = true;
+            UserNicknameLabel.Text = "...";
+            UserFullNameLabel.Text = "...";
+            UserEmailLabel.Text = "...";
+            PlayerStatisticsDataGrid.ItemsSource = null;
+            EnableProfileButtons(false);
         }
 
-        private string GetSocialLinkUrl(string linkName)
+        private void EnableProfileButtons(bool isEnabled)
         {
-            if (CurrentSession.CurrentUserProfileData == null)
+            ChangeAvatarButton.IsEnabled = isEnabled;
+            ChangeDataButton.IsEnabled = isEnabled;
+        }
+
+        private Uri CreateUri(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
             {
                 return null;
             }
 
-            switch (linkName)
+            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
             {
-                case "UserFacebookLink":
-                    return CurrentSession.CurrentUserProfileData.FacebookUrl;
-                case "UserInstagramLink":
-                    return CurrentSession.CurrentUserProfileData.InstagramUrl;
-                case "UserTikTokLink":
-                    return CurrentSession.CurrentUserProfileData.TikTokUrl;
-                default:
-                    return null;
+                return uri;
             }
+            return null;
+        }
+
+        private void ShowAlert(string title, string message)
+        {
+            new SimplePopUpWindow(title, message).ShowDialog();
+        }
+
+        private void ShowLoading()
+        {
+            _loadingPopUpWindow = new LoadingPopUpWindow()
+            {
+                Owner = Window.GetWindow(this)
+            };
+            _loadingPopUpWindow.Show();
+        }
+
+        private void HideLoading()
+        {
+            _loadingPopUpWindow?.StopLoadingAndClose();
         }
     }
 }

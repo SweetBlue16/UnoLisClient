@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ServiceModel;
 using UnoLisClient.UI.UnoLisServerReference.ProfileEdit;
 using UnoLisClient.UI.PopUpWindows;
@@ -37,68 +26,39 @@ namespace UnoLisClient.UI.Pages
         {
             InitializeComponent();
             _currentProfile = currentProfile ?? new ClientProfileData();
-            LoadProfileData();
+            LoadProfileDataIntoUI();
         }
 
         public void ProfileUpdateResponse(ServiceResponse<ProfileData> response)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _loadingPopUpWindow?.StopLoadingAndClose();
+                HideLoading();
                 string message = MessageTranslator.GetMessage(response.Code);
+
                 if (response.Success)
                 {
-                    new SimplePopUpWindow(Global.SuccessLabel, message).ShowDialog();
-                    NavigationService?.Navigate(new YourProfilePage());
+                    HandleSuccessResponse(message);
                 }
                 else
                 {
-                    new SimplePopUpWindow(Global.UnsuccessfulLabel, message).ShowDialog();
+                    HandleErrorResponse(message);
                 }
             });
         }
 
         private void ClickSaveButton(object sender, RoutedEventArgs e)
         {
-            try
+            SoundManager.PlayClick();
+
+            var updatedProfile = GetProfileDataFromUI();
+            var contractProfile = updatedProfile.ToProfileEditContract();
+
+            if (!ValidateInput(contractProfile))
             {
-                SoundManager.PlayClick();
-                var updatedProfile = new ClientProfileData
-                {
-                    Nickname = _currentProfile.Nickname,
-                    FullName = FullNameTextBox.Text.Trim(),
-                    Email = EmailTextBox.Text.Trim(),
-                    Password = PasswordField.Password,
-                    FacebookUrl = FacebookLinkTextBox.Text.Trim(),
-                    InstagramUrl = InstagramLinkTextBox.Text.Trim(),
-                    TikTokUrl = TikTokLinkTextBox.Text.Trim()
-                };
-
-                var errors = UserValidator.ValidateProfileUpdate(updatedProfile.ToProfileEditContract());
-
-                if (errors.Count > 0)
-                {
-                    string message = "◆ " + string.Join("\n◆ ", errors);
-                    new SimplePopUpWindow(Global.WarningLabel, message).ShowDialog();
-                    return;
-                }
-
-                _loadingPopUpWindow = new LoadingPopUpWindow()
-                {
-                    Owner = Window.GetWindow(this)
-                }; 
-                _loadingPopUpWindow.Show();
-
-                var context = new InstanceContext(this);
-                _profileEditClient = new ProfileEditManagerClient(context);
-                var contractProfile = updatedProfile.ToProfileEditContract();
-                _profileEditClient.UpdateProfileData(contractProfile);
+                return;
             }
-            catch (Exception)
-            {
-                _loadingPopUpWindow?.StopLoadingAndClose();
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ErrorMessages.ConnectionErrorMessageLabel).ShowDialog();
-            }
+            ExecuteUpdateProfile(contractProfile);
         }
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
@@ -107,7 +67,52 @@ namespace UnoLisClient.UI.Pages
             NavigationService?.Navigate(new YourProfilePage());
         }
 
-        private void LoadProfileData()
+        private void ExecuteUpdateProfile(ProfileData contractProfile)
+        {
+            try
+            {
+                ShowLoading();
+                var context = new InstanceContext(this);
+                _profileEditClient = new ProfileEditManagerClient(context);
+                _profileEditClient.UpdateProfileData(contractProfile);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
+            }
+        }
+
+        private void HandleSuccessResponse(string message)
+        {
+            ShowAlert(Global.SuccessLabel, message);
+            NavigationService?.Navigate(new YourProfilePage());
+        }
+
+        private void HandleErrorResponse(string message)
+        {
+            ShowAlert(Global.UnsuccessfulLabel, message);
+        }
+
+        private void HandleException(string userMessage, Exception ex)
+        {
+            HideLoading();
+            LogManager.Error($"Fallo al actualizar perfil: {ex.Message}", ex);
+            ShowAlert(Global.UnsuccessfulLabel, userMessage);
+        }
+
+        private void LoadProfileDataIntoUI()
         {
             NicknameTextBox.Text = _currentProfile.Nickname;
             FullNameTextBox.Text = _currentProfile.FullName;
@@ -115,6 +120,51 @@ namespace UnoLisClient.UI.Pages
             FacebookLinkTextBox.Text = _currentProfile.FacebookUrl;
             InstagramLinkTextBox.Text = _currentProfile.InstagramUrl;
             TikTokLinkTextBox.Text = _currentProfile.TikTokUrl;
+        }
+
+        private ClientProfileData GetProfileDataFromUI()
+        {
+            return new ClientProfileData
+            {
+                Nickname = _currentProfile.Nickname,
+                FullName = FullNameTextBox.Text.Trim(),
+                Email = EmailTextBox.Text.Trim(),
+                Password = PasswordField.Password,
+                FacebookUrl = FacebookLinkTextBox.Text.Trim(),
+                InstagramUrl = InstagramLinkTextBox.Text.Trim(),
+                TikTokUrl = TikTokLinkTextBox.Text.Trim()
+            };
+        }
+
+        private bool ValidateInput(ProfileData contractProfile)
+        {
+            var errors = UserValidator.ValidateProfileUpdate(contractProfile);
+            if (errors.Count > 0)
+            {
+                string message = "◆ " + string.Join("\n◆ ", errors);
+                ShowAlert(Global.WarningLabel, message);
+                return false;
+            }
+            return true;
+        }
+
+        private void ShowAlert(string title, string message)
+        {
+            new SimplePopUpWindow(title, message).ShowDialog();
+        }
+
+        private void ShowLoading()
+        {
+            _loadingPopUpWindow = new LoadingPopUpWindow()
+            {
+                Owner = Window.GetWindow(this)
+            };
+            _loadingPopUpWindow.Show();
+        }
+
+        private void HideLoading()
+        {
+            _loadingPopUpWindow?.StopLoadingAndClose();
         }
     }
 }
