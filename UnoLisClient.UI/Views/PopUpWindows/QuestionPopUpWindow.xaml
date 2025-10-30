@@ -1,0 +1,52 @@
+﻿<Window x:Class="UnoLisClient.UI.Views.PopUpWindows.QuestionPopUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
+        mc:Ignorable="d"
+        xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+        Title="QuestionPopUpWindow" Height="280" Width="450"
+        WindowStartupLocation="CenterScreen" Background="#1B263B">
+    <Grid>
+        <StackPanel Margin="20">
+            <Label x:Name="TitleLabel"
+                   Content="{x:Static language:Global.TitlePlaceholderLabel}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,16"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                   Foreground="White"
+                   FontSize="40"/>
+            <TextBlock x:Name="MessageTextBlock"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"
+                       Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                       VerticalAlignment="Top"
+                       FontFamily="pack://application:,,,/Fonts/#Lato"
+                       Foreground="White"
+                       FontSize="18"
+                       Margin="0,0,0,12"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="20"
+                        HorizontalAlignment="Center">
+                <Button Content="{x:Static language:Global.YesButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Height="40"
+                        Margin="16,8,32,8"
+                        Width="100"
+                        Click="ClickYesButton"/>
+                <Button Content="{x:Static language:Global.NoButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Height="40"
+                        Margin="32,8,16,8"
+                        Width="100"
+                        Click="ClickNoButton"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

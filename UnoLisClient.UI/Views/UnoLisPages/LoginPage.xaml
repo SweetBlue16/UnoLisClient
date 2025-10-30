@@ -1,0 +1,95 @@
+﻿<Page x:Class="UnoLisClient.UI.Views.UnoLisPages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UnoLisClient.UI.Views.UnoLisPages"
+      mc:Ignorable="d" 
+      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
+      xmlns:localConverters="clr-namespace:UnoLisClient.UI.Converters"
+      xmlns:localHelpers="clr-namespace:UnoLisClient.UI.Utilities"
+      Title="LoginPage">
+    <Page.Resources>
+        <localConverters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <localConverters:BooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"
+                                                 TrueValue="Collapsed" FalseValue="Visible"/>
+    </Page.Resources>
+
+	<Border Background="#AA000000"
+			CornerRadius="15"
+			Padding="24"
+			MinWidth="350" MinHeight="300"
+			HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+		<StackPanel>
+            <Label Content="{x:Static language:SignIn.WelcomeLabel}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,16"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                   Foreground="White"
+                   FontSize="30"/>
+            <Label Content="{x:Static language:SignIn.NicknameLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,34,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <TextBox x:Name="NicknameTextBox"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="0,0,34,16"
+                     Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="{x:Static language:Global.PasswordLabel}"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,34,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="15"/>
+            <controls:VisiblePasswordField x:Name="PasswordField"
+                                           Margin="0,0,0,16"
+                                           Password="{Binding Password,
+                                                      Mode=TwoWay,
+                                                      UpdateSourceTrigger=PropertyChanged}"/>
+            <DockPanel Margin="10,5">
+                <Button Content="{x:Static language:SignIn.LoginButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Height="56"
+                        Margin="0,0,15,0"
+                        Width="140"
+                        Cursor="Hand"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsLoading,
+                                    Converter={StaticResource InvertedBoolToVisibilityConverter}, ConverterParameter='Invert'}"/>
+                <Button Content="{x:Static language:Global.CancelButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Height="56"
+                        Margin="0,0,0,0"
+                        Width="140"
+                        Cursor="Hand"
+                        Command="{Binding CancelCommand}"
+                        IsEnabled="{Binding IsLoading,
+                                    Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </DockPanel>
+            <Label Content="{x:Static language:SignIn.NotRegisteredLabel}"
+                   HorizontalAlignment="Center"
+                   Margin="16,16,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                   Foreground="White"
+                   FontSize="10"
+                   Cursor="Hand">
+                <Label.InputBindings>
+                    <MouseBinding MouseAction="LeftClick"
+                                  Command="{Binding GoToRegisterCommand}"/>
+                </Label.InputBindings>
+            </Label>
+        </StackPanel>
+	</Border>
+</Page>

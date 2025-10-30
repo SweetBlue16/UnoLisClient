@@ -6,12 +6,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Markup;
+using UnoLisClient.Logic.UnoLisServerReference.Login;
+using UnoLisClient.Logic.UnoLisServerReference.ProfileEdit;
+using UnoLisClient.Logic.UnoLisServerReference.Register;
 using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.UI.UnoLisServerReference.Login;
-using UnoLisClient.UI.UnoLisServerReference.ProfileEdit;
-using UnoLisClient.UI.UnoLisServerReference.Register;
 
-namespace UnoLisClient.UI.Validators
+namespace UnoLisClient.UI.Utilities
 {
     public static class UserValidator
     {

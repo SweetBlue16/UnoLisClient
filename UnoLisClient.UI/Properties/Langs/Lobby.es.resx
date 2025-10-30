@@ -120,6 +120,9 @@
   <data name="LobbyCreatedSuccessfullyLabel" xml:space="preserve">
     <value>Partida {0} creada exitosamente.</value>
   </data>
+  <data name="MessageRetrievedLabel" xml:space="preserve">
+    <value>Nuevo mensaje recibido.</value>
+  </data>
   <data name="MessageSentSuccessfullyLabel" xml:space="preserve">
     <value>Mensaje de chat enviado correctamente.</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="PlayerJoinedLabel" xml:space="preserve">
     <value>{0} se ha unido a la partida.</value>
+  </data>
+  <data name="PlayerLeftLabel" xml:space="preserve">
+    <value>{0} ha abandonado la partida.</value>
   </data>
   <data name="PlayerNotReadyLabel" xml:space="preserve">
     <value>{0} no está listo.</value>

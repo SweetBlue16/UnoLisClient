@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.UI.Views.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
 
 // TODO: Debug

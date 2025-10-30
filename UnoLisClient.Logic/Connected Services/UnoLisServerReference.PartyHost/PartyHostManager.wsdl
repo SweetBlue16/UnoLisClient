@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="PartyHostManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IPartyHostManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8110/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8110/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPartyHostManager_CreateParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_StartMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartMatch" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_CancelParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PartyCreated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreated" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PartyCreated_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoined" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PlayerJoined_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoinedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PlayerLeft_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PlayerReadyStatusChanged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerReadyStatusChanged" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PlayerReadyStatusChanged_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerReadyStatusChangedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_AllPlayersReady_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AllPlayersReady" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_AllPlayersReady_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AllPlayersReadyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PartyCancelled_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCancelled" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_PartyCancelled_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCancelledResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_MatchStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MatchStarted" />
+  </wsdl:message>
+  <wsdl:message name="IPartyHostManager_MatchStarted_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MatchStartedResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IPartyHostManager">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CreateParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/CreateParty" message="tns:IPartyHostManager_CreateParty_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StartMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/StartMatch" message="tns:IPartyHostManager_StartMatch_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CancelParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/CancelParty" message="tns:IPartyHostManager_CancelParty_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PartyCreated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/PartyCreated" message="tns:IPartyHostManager_PartyCreated_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/PartyCreatedResponse" message="tns:IPartyHostManager_PartyCreated_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/PlayerJoined" message="tns:IPartyHostManager_PlayerJoined_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/PlayerJoinedResponse" message="tns:IPartyHostManager_PlayerJoined_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/PlayerLeft" message="tns:IPartyHostManager_PlayerLeft_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/PlayerLeftResponse" message="tns:IPartyHostManager_PlayerLeft_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerReadyStatusChanged">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/PlayerReadyStatusChanged" message="tns:IPartyHostManager_PlayerReadyStatusChanged_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/PlayerReadyStatusChangedResponse" message="tns:IPartyHostManager_PlayerReadyStatusChanged_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AllPlayersReady">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/AllPlayersReady" message="tns:IPartyHostManager_AllPlayersReady_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/AllPlayersReadyResponse" message="tns:IPartyHostManager_AllPlayersReady_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PartyCancelled">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/PartyCancelled" message="tns:IPartyHostManager_PartyCancelled_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/PartyCancelledResponse" message="tns:IPartyHostManager_PartyCancelled_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="MatchStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyHostManager/MatchStarted" message="tns:IPartyHostManager_MatchStarted_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyHostManager/MatchStartedResponse" message="tns:IPartyHostManager_MatchStarted_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IPartyHostManager" type="tns:IPartyHostManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPartyHostManager_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreateParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/CreateParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="StartMatch">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/StartMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CancelParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/CancelParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PartyCreated">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/PartyCreated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/PlayerJoined" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/PlayerLeft" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerReadyStatusChanged">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/PlayerReadyStatusChanged" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllPlayersReady">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/AllPlayersReady" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PartyCancelled">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/PartyCancelled" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchStarted">
+      <soap12:operation soapAction="http://tempuri.org/IPartyHostManager/MatchStarted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PartyHostManager">
+    <wsdl:port name="NetTcpBinding_IPartyHostManager" binding="tns:NetTcpBinding_IPartyHostManager">
+      <soap12:address location="net.tcp://localhost:8111/PartyHostManager" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8111/PartyHostManager</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>SWEETBLUE16\pswee</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

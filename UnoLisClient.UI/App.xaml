@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:UnoLisClient.UI"
              xmlns:converters="clr-namespace:UnoLisClient.UI.Utilities"
-             StartupUri="UnoLisWindows/MainWindow.xaml">
+             StartupUri="Views/UnoLisWindows/MainWindow.xaml">
     <Application.Resources>
         <!-- Button Colors -->
         <SolidColorBrush x:Key="PrimaryYellowColor" Color="#FFD60A"/>

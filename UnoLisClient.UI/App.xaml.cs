@@ -11,12 +11,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using UnoLisClient.UI.Managers;
-using UnoLisClient.UI.PopUpWindows;
+using UnoLisClient.Logic.Models;
 using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.UI.UnoLisServerReference.Logout;
+using UnoLisClient.Logic.UnoLisServerReference.Logout;
 using UnoLisClient.UI.Utilities;
 using UnoLisServer.Common.Models;
+using UnoLisClient.Logic.Helpers;
 
 namespace UnoLisClient.UI
 {

@@ -70,6 +70,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New message received..
+        /// </summary>
+        public static string MessageRetrievedLabel {
+            get {
+                return ResourceManager.GetString("MessageRetrievedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat message sent successfully..
         /// </summary>
         public static string MessageSentSuccessfullyLabel {
@@ -88,11 +97,20 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} has joined the game..
+        ///   Looks up a localized string similar to {0} has joined the match..
         /// </summary>
         public static string PlayerJoinedLabel {
             get {
                 return ResourceManager.GetString("PlayerJoinedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has left the match..
+        /// </summary>
+        public static string PlayerLeftLabel {
+            get {
+                return ResourceManager.GetString("PlayerLeftLabel", resourceCulture);
             }
         }
         

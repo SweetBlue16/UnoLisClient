@@ -120,6 +120,9 @@
   <data name="LobbyCreatedSuccessfullyLabel" xml:space="preserve">
     <value>Match {0} successfully created.</value>
   </data>
+  <data name="MessageRetrievedLabel" xml:space="preserve">
+    <value>New message received.</value>
+  </data>
   <data name="MessageSentSuccessfullyLabel" xml:space="preserve">
     <value>Chat message sent successfully.</value>
   </data>
@@ -127,7 +130,10 @@
     <value>New message sent successfully.</value>
   </data>
   <data name="PlayerJoinedLabel" xml:space="preserve">
-    <value>{0} has joined the game.</value>
+    <value>{0} has joined the match.</value>
+  </data>
+  <data name="PlayerLeftLabel" xml:space="preserve">
+    <value>{0} has left the match.</value>
   </data>
   <data name="PlayerNotReadyLabel" xml:space="preserve">
     <value>{0} is not ready.</value>

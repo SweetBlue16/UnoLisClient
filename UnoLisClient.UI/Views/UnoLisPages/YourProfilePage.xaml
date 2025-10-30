@@ -1,0 +1,172 @@
+﻿<Page x:Class="UnoLisClient.UI.Views.UnoLisPages.YourProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UnoLisClient.UI.Views.UnoLisPages"
+      mc:Ignorable="d" 
+      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      Title="YourProfilePage">
+    
+    <Border Background="#AA000000"
+	        CornerRadius="15"
+	        Padding="24"
+	        MinWidth="350" MinHeight="300"
+	        HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{x:Static language:Global.ProfileLabel}"
+                       FontSize="30"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                       Foreground="White"
+                       Margin="0,0,0,20"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,15,10">
+                        <TextBlock Text="{x:Static language:SignIn.NicknameLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="#B0B0B0"
+                                   FontSize="16"/>
+                        <TextBlock x:Name="UserNicknameLabel"
+                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="White"
+                                   FontSize="18"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="0,10,0,10">
+                        <TextBlock Text="{x:Static language:SignIn.FullNameLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="#B0B0B0"
+                                   FontSize="16"/>
+                        <TextBlock x:Name="UserFullNameLabel"
+                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="White"
+                                   FontSize="18"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Margin="0,10,0,10">
+                        <TextBlock Text="{x:Static language:Global.EmailLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="#B0B0B0"
+                                   FontSize="16"/>
+                        <TextBlock x:Name="UserEmailLabel"
+                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="White"
+                                   FontSize="18"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Margin="0,10,0,10">
+                        <TextBlock Text="{x:Static language:Profile.SocialMediaLabel}"
+                                   FontFamily="pack://application:,,,/Fonts/#Lato"
+                                   Foreground="#B0B0B0"
+                                   FontSize="16"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
+                                       Foreground="White"
+                                       FontSize="15"
+                                       Margin="0,0,15,0">
+                                <Hyperlink x:Name="UserFacebookLink"
+                                           Foreground="LightBlue"
+                                           Click="ClickSocialLink">
+                                    Facebook
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
+                                       Foreground="White"
+                                       FontSize="15"
+                                       Margin="0,0,15,0">
+                                <Hyperlink x:Name="UserInstagramLink"
+                                           Foreground="LightPink"
+                                           Click="ClickSocialLink">
+                                    Instagram
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
+                                       Foreground="White"
+                                       FontSize="15"
+                                       Margin="0,0,15,0">
+                                <Hyperlink x:Name="UserTikTokLink"
+                                           Foreground="HotPink"
+                                           Click="ClickSocialLink">
+                                    TikTok
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="50,0,0,0">
+                    <Border Width="120"
+                            Height="120"
+                            CornerRadius="60"
+                            Background="#3B3D49"
+                            Margin="0,0,0,10">
+                        <Image Source="/Assets/unoLogo.png" Stretch="UniformToFill"/>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="ChangeAvatarButton"
+                                Content="{x:Static language:Profile.ChangeAvatarButton}"
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Margin="0,0,10,0"
+                                Click="ClickChangeAvatarButton"/>
+                        <Button x:Name="ChangeDataButton"
+                                Content="{x:Static language:Profile.ChangeDataButton}"
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Click="ClickChangeDataButton"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Margin="0,30,0,0">
+                <TextBlock Text="{x:Static language:Global.StatisticsLabel}"
+                           FontSize="30"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                           Foreground="White"
+                           Margin="0,0,0,20"/>
+                <DataGrid x:Name="PlayerStatisticsDataGrid"
+                          Style="{DynamicResource DataGridStyle}"
+                          ItemsSource="{Binding Statistics}"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*"
+                          MaxWidth="750">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{x:Static language:Global.MatchesPlayedColumn}"
+                                            Binding="{Binding MatchesPlayed}"/>
+                        <DataGridTextColumn Header="{x:Static language:Profile.WinsColumn}"
+                                            Binding="{Binding Wins}"/>
+                        <DataGridTextColumn Header="{x:Static language:Profile.LosesColumn}"
+                                            Binding="{Binding Loses}"/>
+                        <DataGridTextColumn Header="{x:Static language:Global.GlobalPointsColumn}"
+                                            Binding="{Binding GlobalPoints}"/>
+                        <DataGridTextColumn Header="{x:Static language:Global.WinRateColumn}"
+                                            Binding="{Binding WinRate}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <Button Content="{x:Static language:Global.CancelButton}"
+                    Style="{DynamicResource SecondaryButtonStyle}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Click="ClickBackButton"/>
+        </Grid>
+    </Border>
+</Page>

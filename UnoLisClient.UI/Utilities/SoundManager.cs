@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace UnoLisClient.UI.Utils
+namespace UnoLisClient.UI.Utilities
 {
     public static class SoundManager
     {
