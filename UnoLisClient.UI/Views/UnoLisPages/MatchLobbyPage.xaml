@@ -252,7 +252,7 @@
             <controls:SettingsModal x:Name="SettingsModal"
                                 Grid.ColumnSpan="2"
                                 Visibility="Collapsed"
-                                CloseRequested="SettingsModal_CloseRequested"
+                                CloseRequested="CloseRequestedSettingsModal"
                                 LeaveMatchRequested="LeaveMatchRequestedSettingsModal" />
             
             <controls:ChatControl x:Name="ChatControl"
