@@ -40,12 +40,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                // Evita mostrar múltiples popups si algo sale mal
                 if (_loadingPopUpWindow == null || !_loadingPopUpWindow.IsVisible)
                 {
                     _loadingPopUpWindow = new LoadingPopUpWindow
                     {
-                        Owner = Window.GetWindow(this) // Asigna el dueño
+                        Owner = Window.GetWindow(this)
                     };
                     _loadingPopUpWindow.Show();
                 }
@@ -57,7 +56,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _loadingPopUpWindow?.StopLoadingAndClose();
-                _loadingPopUpWindow = null; // Libera la referencia
+                _loadingPopUpWindow = null;
             });
         }
 
@@ -67,7 +66,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             {
                 new SimplePopUpWindow(title, message)
                 {
-                    Owner = Window.GetWindow(this) // Asigna el dueño si es necesario
+                    Owner = Window.GetWindow(this)
                 }
                 .ShowDialog();
             });

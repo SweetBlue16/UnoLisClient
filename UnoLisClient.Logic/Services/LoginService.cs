@@ -22,7 +22,6 @@ namespace UnoLisClient.Logic.Services
                 var callbackHandler = new LoginCallback(response =>
                 {
                     taskCompletion.TrySetResult(response);
-                    CloseClient(loginClient);
                 });
 
                 var context = new InstanceContext(callbackHandler);
