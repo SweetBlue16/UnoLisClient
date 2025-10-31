@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="a9369f1c-dbf6-4ac0-98c3-5537ca47e315" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="c9472827-ac02-454b-bf77-e814b1a1618b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -13,22 +13,20 @@
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
-    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
-    <ReferencedAssemblies>
-      <ReferencedAssembly AssemblyName="UnoLisServer.Common" />
-    </ReferencedAssemblies>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
     <ReferencedDataContractTypes />
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8124" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8124/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="763e8108-d8b8-4b33-9177-7fbd4330e186" SourceId="1" SourceUrl="http://localhost:8124/?xsd=xsd0" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="dd73fcde-22d9-4c8d-8bb7-5669cb84abb0" SourceId="1" SourceUrl="http://localhost:8124/?xsd=xsd2" />
-    <MetadataFile FileName="FriendsManager.wsdl" MetadataType="Wsdl" ID="5e4c2501-dd8e-4350-88d0-3dec767119fe" SourceId="1" SourceUrl="http://localhost:8124/?wsdl" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="8c20bdc4-bc8f-450e-bc47-3aff760fb28b" SourceId="1" SourceUrl="http://localhost:8124/?disco" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="860a97bf-acd6-4fb3-a23a-35d58f37705f" SourceId="1" SourceUrl="http://localhost:8124/?xsd=xsd1" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="aaeb6b4e-3959-465d-b44c-2e3abddaaca1" SourceId="1" SourceUrl="http://localhost:8124/?xsd=xsd0" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="0d98d5f2-b947-409b-8d8e-9a8895e576fd" SourceId="1" SourceUrl="http://localhost:8124/?xsd=xsd2" />
+    <MetadataFile FileName="FriendsManager.wsdl" MetadataType="Wsdl" ID="b6380245-b62e-4477-b5f1-e62b1b62cb8f" SourceId="1" SourceUrl="http://localhost:8124/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="e1aecffc-9e43-41d1-b947-d939279ca64a" SourceId="1" SourceUrl="http://localhost:8124/?disco" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="68cb29b8-b9bc-458a-a199-50273af5d877" SourceId="1" SourceUrl="http://localhost:8124/?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
