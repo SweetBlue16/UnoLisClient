@@ -3,6 +3,10 @@ bin/
 obj/
 [Bb]uild/
 [Ll]og/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
 *.log
 
 ## Visual Studio cache
@@ -24,6 +28,8 @@ obj/
 packages/
 *.nuget.props
 *.nuget.targets
+project.lock.json
+project.fragment.lock.json
 
 ## Local config
 *.local.json
@@ -38,3 +44,31 @@ appsettings.Development.json
 [Tt]humbs.db
 [Dd]esktop.ini
 *.DS_Store
+
+## SonarQube
+.sonarqube/
+.scannerwork/
+.sonarlint/
+.sonarlint-out/
+sonar-report.json
+sonar-project.properties
+.analysis/
+*.code-analysis.xml
+
+## PureBasic
+*.pb
+*.pbi
+*.pbf
+*.pbp
+PureBasic/
+__pb_cache__/
+build/
+output/
+out/
+temp/
+
+## Temporary files
+*.tmp
+*.bak
+*.old
+*.orig
