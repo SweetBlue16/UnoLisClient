@@ -177,4 +177,7 @@
   <data name="ResendVerificationCodeLabel" xml:space="preserve">
     <value>Didn't receive the code? Resend.</value>
   </data>
+  <data name="VerificationCodeSentLabel" xml:space="preserve">
+    <value>Verification code sent successfully.</value>
+  </data>
 </root>

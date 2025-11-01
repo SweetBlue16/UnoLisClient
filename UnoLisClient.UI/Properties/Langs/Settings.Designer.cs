@@ -140,5 +140,14 @@ namespace UnoLisClient.UI.Properties.Langs {
                 return ResourceManager.GetString("SpecialRulesSettingsLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User&apos;s settings updated successfully..
+        /// </summary>
+        public static string UserSettingsUpdatedMessageLabel {
+            get {
+                return ResourceManager.GetString("UserSettingsUpdatedMessageLabel", resourceCulture);
+            }
+        }
     }
 }

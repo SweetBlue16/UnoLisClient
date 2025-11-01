@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CardDrawnMessageLabel" xml:space="preserve">
+    <value>{0} ha robado {1}.</value>
+  </data>
   <data name="DescriptionReportLabel" xml:space="preserve">
     <value>Escribe el motivo del reporte:</value>
   </data>
   <data name="ExitMatchConfirmationLabel" xml:space="preserve">
     <value>¿Estás seguro de que deseas abandonar la partida?</value>
+  </data>
+  <data name="InvalidMoveMessageLabel" xml:space="preserve">
+    <value>El movimiento realizado no es válido.</value>
   </data>
   <data name="MatchOverLabel" xml:space="preserve">
     <value>La partida ha finalizado.</value>
@@ -147,11 +153,17 @@
   <data name="PlayerBlockedMessageLabel" xml:space="preserve">
     <value>{0} ha sido bloqueado con éxito.</value>
   </data>
+  <data name="PlayerDeclaredUnoMessageLabel" xml:space="preserve">
+    <value>¡{0} dijo UNO!</value>
+  </data>
   <data name="PlayerKickedMessageLabel" xml:space="preserve">
     <value>{0} fue expulsado de la partida.</value>
   </data>
   <data name="PlayerNameColumn" xml:space="preserve">
     <value>Jugador</value>
+  </data>
+  <data name="PlayerReportedMessageLabel" xml:space="preserve">
+    <value>{0} ha sido reportado exitosamente.</value>
   </data>
   <data name="RankColumn" xml:space="preserve">
     <value>Rango</value>

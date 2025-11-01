@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CardDrawnMessageLabel" xml:space="preserve">
+    <value>{0} has drawn {1}.</value>
+  </data>
   <data name="DescriptionReportLabel" xml:space="preserve">
     <value>Write the reason for the report:</value>
   </data>
   <data name="ExitMatchConfirmationLabel" xml:space="preserve">
     <value>Are you sure you want to leave the match?</value>
+  </data>
+  <data name="InvalidMoveMessageLabel" xml:space="preserve">
+    <value>The move you made is invalid.</value>
   </data>
   <data name="MatchOverLabel" xml:space="preserve">
     <value>The game is over.</value>
@@ -147,11 +153,17 @@
   <data name="PlayerBlockedMessageLabel" xml:space="preserve">
     <value>{0} has been successfully blocked.</value>
   </data>
+  <data name="PlayerDeclaredUnoMessageLabel" xml:space="preserve">
+    <value>{0} said UNO!</value>
+  </data>
   <data name="PlayerKickedMessageLabel" xml:space="preserve">
     <value>{0} was kicked out of the game.</value>
   </data>
   <data name="PlayerNameColumn" xml:space="preserve">
     <value>Player</value>
+  </data>
+  <data name="PlayerReportedMessageLabel" xml:space="preserve">
+    <value>{0} has been successfully reported.</value>
   </data>
   <data name="RankColumn" xml:space="preserve">
     <value>Rank</value>

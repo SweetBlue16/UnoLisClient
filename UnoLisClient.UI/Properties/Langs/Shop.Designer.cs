@@ -88,6 +88,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You already have the avatar {0}..
+        /// </summary>
+        public static string ItemAlreadyOwnedMessageLabel {
+            get {
+                return ResourceManager.GetString("ItemAlreadyOwnedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legendary box.
         /// </summary>
         public static string LegendaryBoxLabel {

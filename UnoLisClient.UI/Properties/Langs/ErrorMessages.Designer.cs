@@ -61,6 +61,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The account with the email {0} is not verified..
+        /// </summary>
+        public static string AccountNotVerifiedMessageLabel {
+            get {
+                return ResourceManager.GetString("AccountNotVerifiedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is already on your friends list..
         /// </summary>
         public static string AlreadyFriendsMessageLabel {
@@ -97,6 +106,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t add yourself as a friend..
+        /// </summary>
+        public static string CannotAddSelfMessageLabel {
+            get {
+                return ResourceManager.GetString("CannotAddSelfMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internal error in the chat module..
         /// </summary>
         public static string ChatInternalErrorMessageLabel {
@@ -120,6 +138,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ConcurrencyConflictMessageLabel {
             get {
                 return ResourceManager.GetString("ConcurrencyConflictMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the verification code module..
+        /// </summary>
+        public static string ConfirmationInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("ConfirmationInternalErrorMessageLabel", resourceCulture);
             }
         }
         
@@ -160,6 +187,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your deck of cards is empty..
+        /// </summary>
+        public static string DeckIsEmptyMessageLabel {
+            get {
+                return ResourceManager.GetString("DeckIsEmptyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user is not logged in..
         /// </summary>
         public static string DuplicateSessionMessageLabel {
@@ -196,6 +232,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error sending email, please try again or contact an administrator..
+        /// </summary>
+        public static string EmailSendingFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("EmailSendingFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more required fields are empty..
         /// </summary>
         public static string EmptyFieldsMessageLabel {
@@ -205,11 +250,38 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading file, please contact an administrator..
+        /// </summary>
+        public static string FileSystemErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("FileSystemErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} forgot to say “UNO.” Draw {1}!.
+        /// </summary>
+        public static string ForgotToCallUnoMessageLabel {
+            get {
+                return ResourceManager.GetString("ForgotToCallUnoMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Friend action completed..
         /// </summary>
         public static string FriendActionCompletedMessageLabel {
             get {
                 return ResourceManager.GetString("FriendActionCompletedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No friend request found for {0}..
+        /// </summary>
+        public static string FriendRequestNotFoundMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendRequestNotFoundMessageLabel", resourceCulture);
             }
         }
         
@@ -259,6 +331,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot select that avatar. Try another one..
+        /// </summary>
+        public static string InvalidAvatarSelectionMessageLabel {
+            get {
+                return ResourceManager.GetString("InvalidAvatarSelectionMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect username or password, please verify the fields..
         /// </summary>
         public static string InvalidCredentialsMessageLabel {
@@ -277,11 +358,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} was not found in your friends list..
+        /// </summary>
+        public static string InvalidSearchQueryMessageLabel {
+            get {
+                return ResourceManager.GetString("InvalidSearchQueryMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid authentication token..
         /// </summary>
         public static string InvalidTokenMessageLabel {
             get {
                 return ResourceManager.GetString("InvalidTokenMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This item is not in the store....
+        /// </summary>
+        public static string ItemNotInShopMessageLabel {
+            get {
+                return ResourceManager.GetString("ItemNotInShopMessageLabel", resourceCulture);
             }
         }
         
@@ -412,6 +511,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First, you must draw cards..
+        /// </summary>
+        public static string MustDrawCardsMessageLabel {
+            get {
+                return ResourceManager.GetString("MustDrawCardsMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First, you must play a card or draw one..
+        /// </summary>
+        public static string MustPlayOrDrawMessageLabel {
+            get {
+                return ResourceManager.GetString("MustPlayOrDrawMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New password can&apos;t be empty..
         /// </summary>
         public static string NewPasswordEmptyMessageLabel {
@@ -475,6 +592,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have enough Revo coins, please get more..
+        /// </summary>
+        public static string NotEnoughCurrencyMessageLabel {
+            get {
+                return ResourceManager.GetString("NotEnoughCurrencyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It&apos;s not your turn to play a card..
+        /// </summary>
+        public static string NotPlayerTurnMessageLabel {
+            get {
+                return ResourceManager.GetString("NotPlayerTurnMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation not supported..
         /// </summary>
         public static string OperationNotSupportedMessageLabel {
@@ -520,6 +655,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is already a friend request for {0}..
+        /// </summary>
+        public static string PendingFriendRequestMessageLabel {
+            get {
+                return ResourceManager.GetString("PendingFriendRequestMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The player was already ready..
         /// </summary>
         public static string PlayerAlreadyReadyMessageLabel {
@@ -547,6 +691,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No more than 4 players can be added to the match..
+        /// </summary>
+        public static string PlayerLimitReachedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerLimitReachedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified player was not found..
         /// </summary>
         public static string PlayerNotFoundMessageLabel {
@@ -561,6 +714,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PlayerNotInLobbyMessageLabel {
             get {
                 return ResourceManager.GetString("PlayerNotInLobbyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error processing the player report. Please try again or contact an administrator..
+        /// </summary>
+        public static string PlayerReportFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerReportFailedMessageLabel", resourceCulture);
             }
         }
         
@@ -610,6 +772,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Many requests in a short time, please hold on....
+        /// </summary>
+        public static string RateLimitExceededMessageLabel {
+            get {
+                return ResourceManager.GetString("RateLimitExceededMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The registration information was lost because too much time has passed. Please try again..
+        /// </summary>
+        public static string RegistrationDataLostMessageLabel {
+            get {
+                return ResourceManager.GetString("RegistrationDataLostMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the registration module..
+        /// </summary>
+        public static string RegistrationInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("RegistrationInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while processing the reward..
         /// </summary>
         public static string RewardProcessingErrorMessageLabel {
@@ -628,11 +817,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error initializing the server, please contact an administrator..
+        /// </summary>
+        public static string ServiceInitializationFailedMessageLabel {
+            get {
+                return ResourceManager.GetString("ServiceInitializationFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The session has expired, please log in again..
         /// </summary>
         public static string SessionExpiredMessageLabel {
             get {
                 return ResourceManager.GetString("SessionExpiredMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the shop module..
+        /// </summary>
+        public static string ShopInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("ShopInternalErrorMessageLabel", resourceCulture);
             }
         }
         
@@ -750,6 +957,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ValidationFailedMessageLabel {
             get {
                 return ResourceManager.GetString("ValidationFailedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The verification code is not valid..
+        /// </summary>
+        public static string VerificationCodeInvalidMessageLabel {
+            get {
+                return ResourceManager.GetString("VerificationCodeInvalidMessageLabel", resourceCulture);
             }
         }
         

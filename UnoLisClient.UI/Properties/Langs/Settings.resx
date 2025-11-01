@@ -144,4 +144,7 @@
   <data name="EnglishComboItem" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="UserSettingsUpdatedMessageLabel" xml:space="preserve">
+    <value>User's settings updated successfully.</value>
+  </data>
 </root>

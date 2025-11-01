@@ -61,6 +61,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avatar icon updated!.
+        /// </summary>
+        public static string AvatarChangedSuccessfulMessageLabel {
+            get {
+                return ResourceManager.GetString("AvatarChangedSuccessfulMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change avatar.
         /// </summary>
         public static string ChangeAvatarButton {

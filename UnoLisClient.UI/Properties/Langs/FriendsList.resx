@@ -129,6 +129,15 @@
   <data name="FriendRequestAcceptedLabel" xml:space="preserve">
     <value>{0} has accepted your friend request.</value>
   </data>
+  <data name="FriendRequestDeclinedMessageLabel" xml:space="preserve">
+    <value>{0} has declined your friend request.</value>
+  </data>
+  <data name="FriendRequestRecalledMessageLabel" xml:space="preserve">
+    <value>The friend request to {0} have been removed.</value>
+  </data>
+  <data name="FriendRequestReceivedMessageLabel" xml:space="preserve">
+    <value>{0} has sent you a friend request!</value>
+  </data>
   <data name="FriendRequestSentLabel" xml:space="preserve">
     <value>We've sent a friend request to {0}.</value>
   </data>

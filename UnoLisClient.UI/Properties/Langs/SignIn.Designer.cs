@@ -232,6 +232,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verification code sent successfully..
+        /// </summary>
+        public static string VerificationCodeSentLabel {
+            get {
+                return ResourceManager.GetString("VerificationCodeSentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome to UNO-LIS!.
         /// </summary>
         public static string WelcomeLabel {

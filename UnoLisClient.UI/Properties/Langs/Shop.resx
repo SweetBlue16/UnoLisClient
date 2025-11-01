@@ -150,4 +150,7 @@
   <data name="PurchaseSuccessfulLabel" xml:space="preserve">
     <value>Purchase completed successfully.</value>
   </data>
+  <data name="ItemAlreadyOwnedMessageLabel" xml:space="preserve">
+    <value>You already have the avatar {0}.</value>
+  </data>
 </root>
