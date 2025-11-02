@@ -61,6 +61,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has drawn {1}..
+        /// </summary>
+        public static string CardDrawnMessageLabel {
+            get {
+                return ResourceManager.GetString("CardDrawnMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Write the reason for the report:.
         /// </summary>
         public static string DescriptionReportLabel {
@@ -75,6 +84,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ExitMatchConfirmationLabel {
             get {
                 return ResourceManager.GetString("ExitMatchConfirmationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The move you made is invalid..
+        /// </summary>
+        public static string InvalidMoveMessageLabel {
+            get {
+                return ResourceManager.GetString("InvalidMoveMessageLabel", resourceCulture);
             }
         }
         
@@ -151,6 +169,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} said UNO!.
+        /// </summary>
+        public static string PlayerDeclaredUnoMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerDeclaredUnoMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} was kicked out of the game..
         /// </summary>
         public static string PlayerKickedMessageLabel {
@@ -165,6 +192,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PlayerNameColumn {
             get {
                 return ResourceManager.GetString("PlayerNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been successfully reported..
+        /// </summary>
+        public static string PlayerReportedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerReportedMessageLabel", resourceCulture);
             }
         }
         

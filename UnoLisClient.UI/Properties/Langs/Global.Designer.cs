@@ -205,6 +205,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ranking data obtained..
+        /// </summary>
+        public static string LeaderboardDataReceivedMessageLabel {
+            get {
+                return ResourceManager.GetString("LeaderboardDataReceivedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string LoadingLabel {

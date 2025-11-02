@@ -165,6 +165,9 @@
   <data name="HowToPlayLabel" xml:space="preserve">
     <value>How to play?</value>
   </data>
+  <data name="LeaderboardDataReceivedMessageLabel" xml:space="preserve">
+    <value>Ranking data obtained.</value>
+  </data>
   <data name="LoadingLabel" xml:space="preserve">
     <value>Loading...</value>
   </data>

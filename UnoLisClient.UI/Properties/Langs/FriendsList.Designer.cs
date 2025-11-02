@@ -97,6 +97,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has declined your friend request..
+        /// </summary>
+        public static string FriendRequestDeclinedMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendRequestDeclinedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The friend request to {0} have been removed..
+        /// </summary>
+        public static string FriendRequestRecalledMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendRequestRecalledMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has sent you a friend request!.
+        /// </summary>
+        public static string FriendRequestReceivedMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendRequestReceivedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We&apos;ve sent a friend request to {0}..
         /// </summary>
         public static string FriendRequestSentLabel {

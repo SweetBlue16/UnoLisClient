@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountNotVerifiedMessageLabel" xml:space="preserve">
+    <value>La cuenta con el email {0} no está verificada.</value>
+  </data>
   <data name="AlreadyFriendsMessageLabel" xml:space="preserve">
     <value>{0} ya está en tu lista de amigos.</value>
   </data>
@@ -129,6 +132,9 @@
   <data name="CallbackErrorMessageLabel" xml:space="preserve">
     <value>Error al ejecutar el callback del cliente.</value>
   </data>
+  <data name="CannotAddSelfMessageLabel" xml:space="preserve">
+    <value>No te puedes añadir a ti mismo como amigo.</value>
+  </data>
   <data name="ChatInternalErrorMessageLabel" xml:space="preserve">
     <value>Error interno del módulo de chat.</value>
   </data>
@@ -137,6 +143,9 @@
   </data>
   <data name="ConcurrencyConflictMessageLabel" xml:space="preserve">
     <value>Conflicto de datos o concurrencia.</value>
+  </data>
+  <data name="ConfirmationInternalErrorMessageLabel" xml:space="preserve">
+    <value>Error interno en el módulo de códigos de verificación.</value>
   </data>
   <data name="ConnectionErrorHeaderLabel" xml:space="preserve">
     <value>Error de conexión</value>
@@ -150,6 +159,9 @@
   <data name="DatabaseErrorMessageLabel" xml:space="preserve">
     <value>Error en la base de datos.</value>
   </data>
+  <data name="DeckIsEmptyMessageLabel" xml:space="preserve">
+    <value>Tu mazo de cartas está vacío.</value>
+  </data>
   <data name="DuplicateSessionMessageLabel" xml:space="preserve">
     <value>El usuario no está conectado.</value>
   </data>
@@ -162,11 +174,23 @@
   <data name="EmailFormatMessageLabel" xml:space="preserve">
     <value>El formato del email no es válido.</value>
   </data>
+  <data name="EmailSendingFailedMessageLabel" xml:space="preserve">
+    <value>Error al enviar el email, por favor intente de nuevo o contacte a un administrador.</value>
+  </data>
   <data name="EmptyFieldsMessageLabel" xml:space="preserve">
     <value>Uno o más campos requeridos están vacíos.</value>
   </data>
+  <data name="FileSystemErrorMessageLabel" xml:space="preserve">
+    <value>Error al cargar un archivo, por favor contacte a un administrador.</value>
+  </data>
+  <data name="ForgotToCallUnoMessageLabel" xml:space="preserve">
+    <value>{0} se olvidó de decir "UNO". ¡Roba {1}!</value>
+  </data>
   <data name="FriendActionCompletedMessageLabel" xml:space="preserve">
     <value>Acción de amigo completada.</value>
+  </data>
+  <data name="FriendRequestNotFoundMessageLabel" xml:space="preserve">
+    <value>No se encontró la solicitud de amistad para {0}.</value>
   </data>
   <data name="FriendsInternalErrorMessageLabel" xml:space="preserve">
     <value>Error interno del módulo de amigos.</value>
@@ -183,14 +207,23 @@
   <data name="InappropriatedContentMessageLabel" xml:space="preserve">
     <value>El mensaje contiene lenguaje inapropiado.</value>
   </data>
+  <data name="InvalidAvatarSelectionMessageLabel" xml:space="preserve">
+    <value>No puedes seleccionar ese avatar. Intenta con otro.</value>
+  </data>
   <data name="InvalidCredentialsMessageLabel" xml:space="preserve">
     <value>Usuario o contraseña incorrectos, por favor verifique los campos.</value>
   </data>
   <data name="InvalidDataMessageLabel" xml:space="preserve">
     <value>Uno o más campos contienen datos inválidos, por favor verifique la información proporcionada.</value>
   </data>
+  <data name="InvalidSearchQueryMessageLabel" xml:space="preserve">
+    <value>No se encontró a {0} en tu lista de amigos.</value>
+  </data>
   <data name="InvalidTokenMessageLabel" xml:space="preserve">
     <value>Token de autenticación inválido.</value>
+  </data>
+  <data name="ItemNotInShopMessageLabel" xml:space="preserve">
+    <value>Este ítem no está en la tienda...</value>
   </data>
   <data name="LobbyClosedMessageLabel" xml:space="preserve">
     <value>La partida fue cerrada por el anfitrión.</value>
@@ -234,6 +267,12 @@
   <data name="MissingTokenMessageLabel" xml:space="preserve">
     <value>No se proporcionó un token de sesión.</value>
   </data>
+  <data name="MustDrawCardsMessageLabel" xml:space="preserve">
+    <value>Primero debes robar cartas.</value>
+  </data>
+  <data name="MustPlayOrDrawMessageLabel" xml:space="preserve">
+    <value>Primero debes jugar alguna carta o robar una.</value>
+  </data>
   <data name="NewPasswordEmptyMessageLabel" xml:space="preserve">
     <value>La nueva contraseña no puede estar vacía.</value>
   </data>
@@ -255,6 +294,12 @@
   <data name="NoPermissionsMessageLabel" xml:space="preserve">
     <value>No tienes permisos para realizar esta acción.</value>
   </data>
+  <data name="NotEnoughCurrencyMessageLabel" xml:space="preserve">
+    <value>No tienes suficientes monedas Revo, por favor consigue más.</value>
+  </data>
+  <data name="NotPlayerTurnMessageLabel" xml:space="preserve">
+    <value>No es tu turno de tirar carta.</value>
+  </data>
   <data name="OperationNotSupportedMessageLabel" xml:space="preserve">
     <value>Operación no soportada.</value>
   </data>
@@ -270,6 +315,9 @@
   <data name="PasswordSameAsOldMessageLabel" xml:space="preserve">
     <value>La nueva contraseña es la misma que la anterior.</value>
   </data>
+  <data name="PendingFriendRequestMessageLabel" xml:space="preserve">
+    <value>Ya existe una solicitud de amistad para {0}.</value>
+  </data>
   <data name="PlayerAlreadyReadyMessageLabel" xml:space="preserve">
     <value>El jugador ya estaba listo.</value>
   </data>
@@ -279,11 +327,17 @@
   <data name="PlayerHasActiveLobbyMessageLabel" xml:space="preserve">
     <value>El jugador ya tiene un lobby activo.</value>
   </data>
+  <data name="PlayerLimitReachedMessageLabel" xml:space="preserve">
+    <value>No se pueden añadir más de 4 jugadores a la partida.</value>
+  </data>
   <data name="PlayerNotFoundMessageLabel" xml:space="preserve">
     <value>No se encontró al jugador especificado.</value>
   </data>
   <data name="PlayerNotInLobbyMessageLabel" xml:space="preserve">
     <value>El jugador no pertenece al lobby.</value>
+  </data>
+  <data name="PlayerReportFailedMessageLabel" xml:space="preserve">
+    <value>Error al procesar el reporte al jugador, por favor intenta nuevamente o contacta a un administrador.</value>
   </data>
   <data name="PlayerWereNotReadyMessageLabel" xml:space="preserve">
     <value>El jugador no estaba listo.</value>
@@ -300,14 +354,29 @@
   <data name="PurchaseProcessingErrorMessageLabel" xml:space="preserve">
     <value>Ocurrió un error al procesar la compra.</value>
   </data>
+  <data name="RateLimitExceededMessageLabel" xml:space="preserve">
+    <value>Muchas solicitudes en poco tiempo, espera un poco...</value>
+  </data>
+  <data name="RegistrationDataLostMessageLabel" xml:space="preserve">
+    <value>Se perdió la información de registro porque pasó mucho tiempo. Intente nuevamente.</value>
+  </data>
+  <data name="RegistrationInternalErrorMessageLabel" xml:space="preserve">
+    <value>Error interno en el módulo de registro.</value>
+  </data>
   <data name="RewardProcessingErrorMessageLabel" xml:space="preserve">
     <value>Ocurrió un error al procesar la recompensa.</value>
   </data>
   <data name="SerializationErrorMessageLabel" xml:space="preserve">
     <value>Error al serializar o deserializar objetos.</value>
   </data>
+  <data name="ServiceInitializationFailedMessageLabel" xml:space="preserve">
+    <value>Error al inicializar el servidor, por favor contacte a un administrador.</value>
+  </data>
   <data name="SessionExpiredMessageLabel" xml:space="preserve">
     <value>La sesión ha caducado, inicie sesión de nuevo.</value>
+  </data>
+  <data name="ShopInternalErrorMessageLabel" xml:space="preserve">
+    <value>Error interno en el módulo de la tienda.</value>
   </data>
   <data name="SocialLinkDomainMessageLabel" xml:space="preserve">
     <value>La URL debe pertenecer al dominio de {0}.</value>
@@ -347,6 +416,9 @@
   </data>
   <data name="ValidationFailedMessageLabel" xml:space="preserve">
     <value>Validación de datos fallida.</value>
+  </data>
+  <data name="VerificationCodeInvalidMessageLabel" xml:space="preserve">
+    <value>El código de verificación no es válido.</value>
   </data>
   <data name="WeakPasswordMessageLabel" xml:space="preserve">
     <value>La contraseña no cumple con los requisitos mínimos de seguridad, por favor corrige antes de continuar.</value>

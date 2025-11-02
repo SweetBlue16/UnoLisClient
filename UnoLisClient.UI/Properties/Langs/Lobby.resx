@@ -120,6 +120,9 @@
   <data name="LobbyCreatedSuccessfullyLabel" xml:space="preserve">
     <value>Match {0} successfully created.</value>
   </data>
+  <data name="LobbySettingsUpdatedMessageLabel" xml:space="preserve">
+    <value>{0} updated lobby's settings.</value>
+  </data>
   <data name="MessageRetrievedLabel" xml:space="preserve">
     <value>New message received.</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="PlayerReadyLabel" xml:space="preserve">
     <value>{0} is ready.</value>
+  </data>
+  <data name="PlayersListUpdated" xml:space="preserve">
+    <value>Players list updated.</value>
   </data>
   <data name="ReadyButton" xml:space="preserve">
     <value>READY!</value>

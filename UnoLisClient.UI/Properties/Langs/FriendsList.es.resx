@@ -129,6 +129,15 @@
   <data name="FriendRequestAcceptedLabel" xml:space="preserve">
     <value>{0} ha aceptado tu solicitud de amistad.</value>
   </data>
+  <data name="FriendRequestDeclinedMessageLabel" xml:space="preserve">
+    <value>{0} ha rechazado tu solicitud de amistad.</value>
+  </data>
+  <data name="FriendRequestRecalledMessageLabel" xml:space="preserve">
+    <value>La solicitud de amistad a {0} ha sido eliminada.</value>
+  </data>
+  <data name="FriendRequestReceivedMessageLabel" xml:space="preserve">
+    <value>¡{0} te ha enviado una solicitud de amistad!</value>
+  </data>
   <data name="FriendRequestSentLabel" xml:space="preserve">
     <value>Hemos enviado la solicitud de amistad a {0}.</value>
   </data>

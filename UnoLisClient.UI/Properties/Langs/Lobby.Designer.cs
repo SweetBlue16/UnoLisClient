@@ -70,6 +70,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} updated lobby&apos;s settings..
+        /// </summary>
+        public static string LobbySettingsUpdatedMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbySettingsUpdatedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New message received..
         /// </summary>
         public static string MessageRetrievedLabel {
@@ -129,6 +138,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PlayerReadyLabel {
             get {
                 return ResourceManager.GetString("PlayerReadyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players list updated..
+        /// </summary>
+        public static string PlayersListUpdated {
+            get {
+                return ResourceManager.GetString("PlayersListUpdated", resourceCulture);
             }
         }
         
