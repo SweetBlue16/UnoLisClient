@@ -90,7 +90,6 @@ namespace UnoLisClient.UI.ViewModels
                 if (response.Success)
                 {
                     CurrentSession.CurrentUserNickname = this.Nickname;
-                  //_dialogService.ShowAlert(Global.SuccessLabel, message);
                     _navigationService.NavigateTo(new MainMenuPage());
                 }
                 else
