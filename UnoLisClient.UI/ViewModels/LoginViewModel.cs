@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
@@ -20,9 +20,11 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private readonly LoginService _authService;
+        private readonly LoginService _loginService;
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
+
+        private readonly Page _view;
 
         private string _nickname = "";
         public string Nickname
@@ -56,11 +58,12 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand GoToRegisterCommand { get; }
 
-        public LoginViewModel(INavigationService navigationService, IDialogService dialogService)
+        public LoginViewModel(IDialogService dialogService, Page view)
         {
-            _navigationService = navigationService;
+            _view = view;
+            _navigationService = (INavigationService)view;
             _dialogService = dialogService;
-            _authService = new LoginService();
+            _loginService = new LoginService();
 
             LoginCommand = new RelayCommand(async () => await ExecuteLoginAsync(), () => !IsLoading);
             CancelCommand = new RelayCommand(ExecuteCancel, () => !IsLoading);
@@ -75,41 +78,44 @@ namespace UnoLisClient.UI.ViewModels
             var validationErrors = UserValidator.ValidateLogin(credentials);
             if (validationErrors.Any())
             {
-                ErrorMessage = "◆ " + string.Join("\n◆ ", validationErrors);
-                AlertManager.HandleWarning(ErrorMessage);
+                _dialogService.HandleValidationErrors(validationErrors.ToList(), Window.GetWindow(_view));
                 return;
             }
 
             SetLoading(true);
-
             try
             {
-                var response = await _authService.LoginAsync(credentials);
+                var response = await _loginService.LoginAsync(credentials);
                 string message = MessageTranslator.GetMessage(response.Code);
 
                 if (response.Success)
                 {
-                    CurrentSession.CurrentUserNickname = this.Nickname;
-                    _dialogService.ShowAlert(Global.SuccessLabel, message);
+                    CurrentSession.CurrentUserNickname = Nickname;
+                    string successMessage = string.Format(message, Nickname);
+                    SoundManager.PlayClick();
                     _navigationService.NavigateTo(new MainMenuPage());
+                    _dialogService.ShowAlert(Global.SuccessLabel, successMessage, GetOwnerWindow());
                 }
                 else
                 {
                     ErrorMessage = message;
+                    _dialogService.ShowWarning(ErrorMessage, GetOwnerWindow());
                 }
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException enfEx)
             {
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, ex);
+                string logMessage = $"Fallo en inicio de sesión: {enfEx.Message}";
+                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException timeoutEx)
             {
-                HandleException(ErrorMessages.TimeoutMessageLabel, ex);
+                string logMessage = $"Fallo en inicio de sesión: {timeoutEx.Message}";
+                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Fallo en inicio de sesión: {ex.Message}", ex);
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, ex);
+                string logMessage = $"Fallo en inicio de sesión: {ex.Message}";
+                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
             }
             finally
             {
@@ -125,6 +131,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteGoToRegister()
         {
+            SoundManager.PlayClick();
             _navigationService.NavigateTo(new RegisterPage());
         }
 
@@ -137,7 +144,7 @@ namespace UnoLisClient.UI.ViewModels
 
             if (isLoading)
             {
-                _dialogService.ShowLoading();
+                _dialogService.ShowLoading(GetOwnerWindow());
             }
             else 
             { 
@@ -145,10 +152,19 @@ namespace UnoLisClient.UI.ViewModels
             }
         }
 
-        private void HandleException(string userMessage, Exception ex)
+        private void HandleException(string userMessage, string logMessage, Exception ex)
         {
-            LogManager.Error($"Fallo en el inicio de sesión: {ex.Message}", ex);
-            ErrorMessage = userMessage;
+            SetLoading(false);
+            LogManager.Error(logMessage, ex);
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+            {
+                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage, GetOwnerWindow());
+            }));
+        }
+
+        private Window GetOwnerWindow()
+        {
+            return Window.GetWindow(_view);
         }
     }
 }

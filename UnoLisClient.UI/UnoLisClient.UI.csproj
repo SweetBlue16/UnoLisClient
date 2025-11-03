@@ -78,7 +78,8 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Services\UIServices.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

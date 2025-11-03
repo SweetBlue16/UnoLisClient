@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using UnoLisClient.Logic.UnoLisServerReference.Login;
 using UnoLisServer.Common.Models;
@@ -22,7 +18,9 @@ namespace UnoLisClient.Logic.Callbacks
 
         public void LoginResponse(ServiceResponse<object> response)
         {
-            Application.Current?.Dispatcher.Invoke(() => _onResponseCallback?.Invoke(response));
+            Application.Current?.Dispatcher.Invoke(() => 
+                _onResponseCallback?.Invoke(response)
+            );
         }
     }
 }

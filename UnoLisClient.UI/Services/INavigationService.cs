@@ -7,11 +7,4 @@ namespace UnoLisClient.UI.Services
         void NavigateTo(Page page);
         void GoBack();
     }
-
-    public interface IDialogService
-    {
-        void ShowLoading();
-        void HideLoading();
-        void ShowAlert(string title, string message);
-    }
 }
