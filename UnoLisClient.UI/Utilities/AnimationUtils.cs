@@ -134,6 +134,7 @@ namespace UnoLisClient.UI.Utilities
         /// <summary>
         /// Realiza un crossfade (fade-out, cambio de fuente, fade-in) para video y música
         /// </summary>
+
         public static async Task CrossfadeMediaAsync(CrossfadeMediaArgs args)
         {
             var fadeOut = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
@@ -148,8 +149,11 @@ namespace UnoLisClient.UI.Utilities
             args.VideoPlayer.Stop();
             args.MusicPlayer.Stop();
 
-            args.VideoPlayer.Source = new Uri(System.IO.Path.GetFullPath(args.NewVideoPath));
-            args.MusicPlayer.Source = new Uri(System.IO.Path.GetFullPath(args.NewMusicPath));
+            string newVideoPathAbsolute = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, args.NewVideoPath);
+            string newMusicPathAbsolute = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, args.NewMusicPath);
+
+            args.VideoPlayer.Source = new Uri(newVideoPathAbsolute, UriKind.Absolute);
+            args.MusicPlayer.Source = new Uri(newMusicPathAbsolute, UriKind.Absolute);
 
             args.VideoPlayer.Play();
             args.MusicPlayer.Play();

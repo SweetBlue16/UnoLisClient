@@ -27,6 +27,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             InitializeComponent();
         }
 
+        private void BackIcon_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            NavigationService?.Navigate(new MainMenuPage());
+        }
+
         private void ClickCreateMatchButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();

@@ -81,6 +81,9 @@
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Views\Controls\AddFriendModal.xaml.cs">
+      <DependentUpon>AddFriendModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,12 @@
     </Compile>
     <Compile Include="Utilities\MessageTranslator.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Views\UnoLisPages\FriendRequestsPage.xaml.cs">
+      <DependentUpon>FriendRequestsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnoLisPages\FriendsPage.xaml.cs">
+      <DependentUpon>FriendsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UnoLisPages\JoinMatchPage.xaml.cs">
       <DependentUpon>JoinMatchPage.xaml</DependentUpon>
     </Compile>
@@ -130,9 +139,6 @@
     </Compile>
     <Compile Include="Views\UnoLisPages\MatchResultsPage.xaml.cs">
       <DependentUpon>MatchResultsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UnoLisPages\MyFriendsPage.xaml.cs">
-      <DependentUpon>MyFriendsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -330,6 +336,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Controls\AddFriendModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\ChatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -357,6 +367,14 @@
     <Page Include="Views\UnoLisPages\EditProfilePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnoLisPages\FriendRequestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnoLisPages\FriendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UnoLisPages\GamePage.xaml">
       <SubType>Designer</SubType>
@@ -387,10 +405,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UnoLisPages\MatchResultsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UnoLisPages\MyFriendsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

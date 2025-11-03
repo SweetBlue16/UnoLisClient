@@ -118,5 +118,20 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 MessageBox.Show($"Ocurrió un error al salir de la partida: {ex.Message}", "Error al Salir");
             }
         }
+
+        private async void MatchLobbyPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await SetLobbyBackgroundAsync();
+        }
+
+        private static async Task SetLobbyBackgroundAsync()
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+
+            if (mainWindow != null)
+            {
+                await mainWindow.SetBackgroundMedia("Assets/lobbyVideo.mp4", "Assets/lobbyMusic.mp3");
+            }
+        }
     }
 }

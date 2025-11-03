@@ -33,7 +33,6 @@ namespace UnoLisClient.UI.Views.Controls
         public ChatControl()
         {
             InitializeComponent();
-            // ¡Importante! Enlaza este control a su propio code-behind
             this.DataContext = this;
         }
 

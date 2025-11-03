@@ -166,5 +166,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             _loadingPopUpWindow?.StopLoadingAndClose();
         }
+
+        private void MouseDoubleClickFriendsLabel(object sender, MouseButtonEventArgs e)
+        {
+            SoundManager.PlayClick();
+            NavigationService?.Navigate(new FriendsPage());
+        }
     }
 }
