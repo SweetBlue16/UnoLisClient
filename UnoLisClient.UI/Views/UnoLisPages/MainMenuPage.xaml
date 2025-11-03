@@ -40,7 +40,8 @@
             </StackPanel>
 
             <!-- 👥 Amigos -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                        Cursor="Hand" MouseDown="MouseDoubleClickFriendsLabel">
                 <Image Source="/Assets/friendsIcon.png"
                        Width="26" Height="26"
                        VerticalAlignment="Center"
