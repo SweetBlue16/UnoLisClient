@@ -11,5 +11,6 @@ namespace UnoLisClient.UI.Services
         void ShowWarning(string message);
         string HandleValidationErrors(List<string> validationErrors);
         string ShowInputDialog(string title, string message, string placeholder);
+        bool ShowQuestionDialog(string title, string question);
     }
 }

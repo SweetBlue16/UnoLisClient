@@ -59,6 +59,12 @@ namespace UnoLisClient.UI.Utilities
             }));
         }
 
+        public bool ShowQuestionDialog(string title, string question)
+        {
+            var questionPopUp = new QuestionPopUpWindow(title, question);
+            return questionPopUp.ShowDialog() == true;
+        }
+
         public void ShowWarning(string message)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>

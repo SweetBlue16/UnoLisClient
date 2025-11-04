@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Globalization;
-using System.Linq;
 using System.ServiceModel;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Threading;
 using UnoLisClient.Logic.Models;
-using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.Logic.UnoLisServerReference.Logout;
 using UnoLisClient.UI.Utilities;
 using UnoLisServer.Common.Models;
@@ -67,7 +58,7 @@ namespace UnoLisClient.UI
             try
             {
                 string nickname = CurrentSession.CurrentUserNickname;
-                if (string.IsNullOrWhiteSpace(nickname))
+                if (string.IsNullOrWhiteSpace(nickname) || nickname == "Guest")
                 {
                     return;
                 }
@@ -80,10 +71,12 @@ namespace UnoLisClient.UI
             catch (CommunicationException ex)
             {
                 LogManager.Error("Error de comunicación al notificar logout en OnExit.", ex);
+                CloseClientHelper.CloseClient(_logoutClient);
             }
             catch (Exception ex)
             {
                 LogManager.Error($"Error inesperado en ExecuteExitLogout: {ex.Message}", ex);
+                CloseClientHelper.CloseClient(_logoutClient);
             }
         }
 
