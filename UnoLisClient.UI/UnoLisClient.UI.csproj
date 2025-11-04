@@ -83,6 +83,8 @@
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\ProfileEditViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Views\Controls\AddFriendModal.xaml.cs">
       <DependentUpon>AddFriendModal.xaml</DependentUpon>
