@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.ServiceModel;
-using UnoLisClient.Logic.UnoLisServerReference.ProfileView;
-using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisClient.UI.Utilities;
-using UnoLisServer.Common.Models;
-using UnoLisClient.UI.Views.PopUpWindows;
-using UnoLisClient.Logic.Mappers;
-using UnoLisClient.Logic.Helpers;
-using UnoLisClient.Logic.Models;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.ViewModels;
 
