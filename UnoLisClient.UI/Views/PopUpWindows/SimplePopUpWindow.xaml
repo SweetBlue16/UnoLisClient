@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
         mc:Ignorable="d"
         xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
-        Title="SimplePopUpWindow" Height="280" Width="450"
+        Title="SimplePopUpWindow"
+        Width="450"
+        SizeToContent="Height"
+        MaxHeight="400"
         WindowStartupLocation="CenterScreen" Background="#1B263B">
     <Grid>
         <StackPanel Margin="20">
@@ -20,14 +23,14 @@
                    FontSize="40"/>
             <TextBlock x:Name="MessageTextBlock"
                        HorizontalAlignment="Center"
-                       TextWrapping="WrapWithOverflow"
+                       TextWrapping="Wrap"
                        Text="{x:Static language:Global.MessagePlaceholderLabel}"
                        VerticalAlignment="Center"
                        FontFamily="pack://application:,,,/Fonts/#Lato"
                        Foreground="White"
                        FontSize="20"
                        Margin="0,0,0,24"
-                       Height="51"/>
+                       MinHeight="51"/>
             <Button Content="{x:Static language:Global.OkButton}"
                     HorizontalAlignment="Center"
                     Margin="0,0,0,24"

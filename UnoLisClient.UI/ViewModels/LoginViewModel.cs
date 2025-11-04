@@ -78,7 +78,7 @@ namespace UnoLisClient.UI.ViewModels
             var validationErrors = UserValidator.ValidateLogin(credentials);
             if (validationErrors.Any())
             {
-                _dialogService.HandleValidationErrors(validationErrors.ToList(), Window.GetWindow(_view));
+                _dialogService.HandleValidationErrors(validationErrors.ToList());
                 return;
             }
 
@@ -94,12 +94,12 @@ namespace UnoLisClient.UI.ViewModels
                     string successMessage = string.Format(message, Nickname);
                     SoundManager.PlayClick();
                     _navigationService.NavigateTo(new MainMenuPage());
-                    _dialogService.ShowAlert(Global.SuccessLabel, successMessage, GetOwnerWindow());
+                    _dialogService.ShowAlert(Global.SuccessLabel, successMessage);
                 }
                 else
                 {
                     ErrorMessage = message;
-                    _dialogService.ShowWarning(ErrorMessage, GetOwnerWindow());
+                    _dialogService.ShowWarning(ErrorMessage);
                 }
             }
             catch (EndpointNotFoundException enfEx)
@@ -111,6 +111,11 @@ namespace UnoLisClient.UI.ViewModels
             {
                 string logMessage = $"Fallo en inicio de sesión: {timeoutEx.Message}";
                 HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Fallo en inicio de sesión: {commEx.Message}";
+                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
             }
             catch (Exception ex)
             {
@@ -144,7 +149,7 @@ namespace UnoLisClient.UI.ViewModels
 
             if (isLoading)
             {
-                _dialogService.ShowLoading(GetOwnerWindow());
+                _dialogService.ShowLoading(_view);
             }
             else 
             { 
@@ -158,13 +163,8 @@ namespace UnoLisClient.UI.ViewModels
             LogManager.Error(logMessage, ex);
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage, GetOwnerWindow());
+                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
             }));
-        }
-
-        private Window GetOwnerWindow()
-        {
-            return Window.GetWindow(_view);
         }
     }
 }
