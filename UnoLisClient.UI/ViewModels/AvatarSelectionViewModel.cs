@@ -14,6 +14,7 @@ using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.Views.UnoLisPages;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -36,7 +37,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             get
             {
-                return $"pack://application:,,,/Assets/Avatars/{this.Name}.png";
+                return $"pack://application:,,,/Avatars/{this.Name}.png";
             }
         }
 
@@ -193,8 +194,12 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (response.Success)
                 {
+                    if (CurrentSession.CurrentUserProfileData != null)
+                    {
+                        CurrentSession.CurrentUserProfileData.SelectedAvatarName = SelectedAvatar.Name;
+                    }
                     _dialogService.ShowAlert(Global.SuccessLabel, message);
-                    _navigationService.GoBack();
+                    _navigationService.NavigateTo(new YourProfilePage());
                 }
                 else
                 {

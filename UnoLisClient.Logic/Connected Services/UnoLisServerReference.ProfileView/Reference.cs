@@ -59,6 +59,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileView {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SelectedAvatarNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StreakField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -229,6 +232,19 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileView {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SelectedAvatarName {
+            get {
+                return this.SelectedAvatarNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SelectedAvatarNameField, value) != true)) {
+                    this.SelectedAvatarNameField = value;
+                    this.RaisePropertyChanged("SelectedAvatarName");
                 }
             }
         }

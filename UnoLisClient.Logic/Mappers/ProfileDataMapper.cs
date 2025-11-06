@@ -13,7 +13,7 @@ namespace UnoLisClient.Logic.Mappers
         {
             if (data == null)
             {
-                return null;
+                return new ClientProfileData();
             }
 
             return new ClientProfileData
@@ -21,6 +21,7 @@ namespace UnoLisClient.Logic.Mappers
                 Nickname = data.Nickname,
                 FullName = data.FullName,
                 Email = data.Email,
+                SelectedAvatarName = data.CurrentAvatar,
                 FacebookUrl = data.FacebookUrl,
                 InstagramUrl = data.InstagramUrl,
                 TikTokUrl = data.TikTokUrl,
@@ -42,6 +43,7 @@ namespace UnoLisClient.Logic.Mappers
                 Nickname = data.Nickname,
                 FullName = data.FullName,
                 Email = data.Email,
+                SelectedAvatarName = data.CurrentAvatar,
                 FacebookUrl = data.FacebookUrl,
                 InstagramUrl = data.InstagramUrl,
                 TikTokUrl = data.TikTokUrl,
@@ -61,6 +63,7 @@ namespace UnoLisClient.Logic.Mappers
                 Nickname = data.Nickname,
                 FullName = data.FullName,
                 Email = data.Email,
+                CurrentAvatar = data.SelectedAvatarName,
                 FacebookUrl = data.FacebookUrl,
                 InstagramUrl = data.InstagramUrl,
                 TikTokUrl = data.TikTokUrl,

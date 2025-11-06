@@ -82,6 +82,13 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _tikTokUrl, value);
         }
 
+        private string _selectedAvatarImagePath;
+        public string SelectedAvatarImagePath
+        {
+            get => _selectedAvatarImagePath;
+            private set => SetProperty(ref _selectedAvatarImagePath, value);
+        }
+
         private List<dynamic> _stats;
         public List<dynamic> Stats
         {
@@ -239,6 +246,8 @@ namespace UnoLisClient.UI.ViewModels
             Nickname = profileData.Nickname;
             FullName = profileData.FullName;
             Email = profileData.Email;
+            string avatarName = string.IsNullOrEmpty(profileData.SelectedAvatarName) ? "LogoUNO" : profileData.SelectedAvatarName;
+            SelectedAvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png?{Guid.NewGuid()}";
             FacebookUrl = CreateUri(profileData.FacebookUrl);
             InstagramUrl = CreateUri(profileData.InstagramUrl);
             TikTokUrl = CreateUri(profileData.TikTokUrl);
@@ -253,6 +262,7 @@ namespace UnoLisClient.UI.ViewModels
                 Nickname = "Guest",
                 FullName = "-",
                 Email = "-",
+                SelectedAvatarName = "LogoUNO",
                 MatchesPlayed = 0,
                 Wins = 0,
                 Losses = 0,
