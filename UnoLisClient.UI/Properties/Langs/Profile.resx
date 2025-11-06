@@ -132,6 +132,9 @@
   <data name="ChangeDataLabel" xml:space="preserve">
     <value>Change profile information</value>
   </data>
+  <data name="CommonSkinsLabel" xml:space="preserve">
+    <value>Common skins</value>
+  </data>
   <data name="EpicSkinsLabel" xml:space="preserve">
     <value>Epic skins</value>
   </data>

@@ -132,6 +132,9 @@
   <data name="ChangeDataLabel" xml:space="preserve">
     <value>Cambia la información del perfil</value>
   </data>
+  <data name="CommonSkinsLabel" xml:space="preserve">
+    <value>Aspectos comunes</value>
+  </data>
   <data name="EpicSkinsLabel" xml:space="preserve">
     <value>Aspectos épicos</value>
   </data>

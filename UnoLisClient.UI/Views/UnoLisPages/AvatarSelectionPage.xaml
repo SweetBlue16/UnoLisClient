@@ -5,170 +5,141 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       mc:Ignorable="d"
-      Title="AvatarSelectionPage">
+      xmlns:vms="clr-namespace:UnoLisClient.UI.ViewModels"
+      xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
+      Title="AvatarSelectionPage"
+      Loaded="AvatarSelectionPageLoaded">
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <converters:BoolToThicknessConverter x:Key="SelectionBorderConverter" TrueThickness="3" FalseThickness="1" />
 
-    <Grid Background="Transparent" Margin="40">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- Header -->
-            <RowDefinition Height="*"/>
-            <!-- Scroll content -->
-            <RowDefinition Height="Auto"/>
-            <!-- Buttons -->
-        </Grid.RowDefinitions>
+        <DataTemplate x:Key="AvatarItemTemplate" DataType="{x:Type vms:AvatarModel}">
+            <StackPanel HorizontalAlignment="Center">
+                <Border Width="100" Height="100" CornerRadius="10" 
+                        Background="#33FFFFFF"
+                        ToolTip="{Binding Description}"
+                        BorderBrush="{Binding RarityBrush}"
+                        BorderThickness="{Binding IsSelected, Converter={StaticResource SelectionBorderConverter}}">
 
-        <!-- HEADER -->
-        <TextBlock Text="{x:Static language:Profile.ChangeAvatarLabel}"
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" 
+                                            Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                                            CommandParameter="{Binding}"/>
+                    </Border.InputBindings>
+
+                    <Grid>
+                        <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
+
+                        <Border Background="#AA000000"
+                                Visibility="{Binding IsUnlocked, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                IsHitTestVisible="False"/>
+                        <Image Source="/Assets/lockIcon.png" Stretch="None" Visibility="{Binding IsUnlocked, Converter={StaticResource InvertedBoolToVisibilityConverter}}" />
+                    </Grid>
+                </Border>
+                <TextBlock Text="{Binding Name}"
+                           Foreground="White" FontSize="14"
+                           HorizontalAlignment="Center" Margin="0,6,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <ItemsPanelTemplate x:Key="AvatarItemsPanel">
+            <UniformGrid Columns="4" Margin="0,0,0,25" />
+        </ItemsPanelTemplate>
+    </Page.Resources>
+
+    <Border Background="#AA000000"
+        CornerRadius="15"
+        Padding="24"
+        MinWidth="350" MinHeight="300"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                   Text="{x:Static language:Profile.ChangeAvatarLabel}"
                    FontSize="36"
                    FontWeight="Bold"
                    Foreground="White"
+                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                    Margin="0,10,0,30"
                    HorizontalAlignment="Left"/>
 
-        <!-- AVATAR SECTIONS -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
 
-                <!-- COMMON -->
-                <TextBlock Text="{x:Static language:Profile.SpecialSkinsLabel}"
+                    <TextBlock Text="{x:Static language:Profile.SpecialSkinsLabel}"
                            FontSize="22"
                            FontWeight="SemiBold"
                            Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,0,0,10"/>
-                <UniformGrid Columns="4" Margin="0,0,0,25">
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#22FFFFFF"
-                                BorderBrush="#AAAAAA" BorderThickness="1">
-                            <Image Source="/Assets/Avatars/Common1.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="UNO Player"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#22FFFFFF"
-                                BorderBrush="#AAAAAA" BorderThickness="1">
-                            <Image Source="/Assets/Avatars/Common2.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="LIS Student"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </UniformGrid>
-
-                <!-- SPECIAL -->
-                <TextBlock Text="{x:Static language:Profile.SpecialSkinsLabel}"
+                    <ListBox ItemsSource="{Binding CommonAvatars}"
+                         SelectedItem="{Binding SelectedAvatar, Mode=TwoWay}"
+                         ItemTemplate="{StaticResource AvatarItemTemplate}"
+                         ItemsPanel="{StaticResource AvatarItemsPanel}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    <TextBlock Text="{x:Static language:Profile.CommonSkinsLabel}"
                            FontSize="22"
                            FontWeight="SemiBold"
                            Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,10,0,10"/>
-                <UniformGrid Columns="4" Margin="0,0,0,25">
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="LightGreen" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/Special1.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="CC2 Projector"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="LightGreen" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/Special2.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="Volovan"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </UniformGrid>
-
-                <!-- EPIC -->
-                <TextBlock Text="{x:Static language:Profile.EpicSkinsLabel}"
+                    <ListBox ItemsSource="{Binding SpecialAvatars}"
+                         SelectedItem="{Binding SelectedAvatar, Mode=TwoWay}"
+                         ItemTemplate="{StaticResource AvatarItemTemplate}"
+                         ItemsPanel="{StaticResource AvatarItemsPanel}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    <TextBlock Text="{x:Static language:Profile.EpicSkinsLabel}"
                            FontSize="22"
                            FontWeight="SemiBold"
                            Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,10,0,10"/>
-                <UniformGrid Columns="4" Margin="0,0,0,25">
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="DodgerBlue" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/Muffin.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="Muffin"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="DodgerBlue" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/DraLizbeth.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="Dra. Lizbeth"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </UniformGrid>
-
-                <!-- LEGENDARY -->
-                <TextBlock Text="{x:Static language:Profile.LegendarySkinsLabel}"
+                    <ListBox ItemsSource="{Binding EpicAvatars}"
+                         SelectedItem="{Binding SelectedAvatar, Mode=TwoWay}"
+                         ItemTemplate="{StaticResource AvatarItemTemplate}"
+                         ItemsPanel="{StaticResource AvatarItemsPanel}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    <TextBlock Text="{x:Static language:Profile.LegendarySkinsLabel}"
                            FontSize="22"
                            FontWeight="SemiBold"
                            Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,10,0,10"/>
-                <UniformGrid Columns="4" Margin="0,0,0,20">
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="Gold" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/ElRevo.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="El Revo"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="Gold" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/DrOcharan.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="Dr. Ocharán"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="Gold" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/DrSaul.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="Dr. Saúl"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Border Width="100" Height="100" CornerRadius="10" Background="#33FFFFFF"
-                                BorderBrush="Gold" BorderThickness="2">
-                            <Image Source="/Assets/Avatars/DraKaren.png" Stretch="Uniform"/>
-                        </Border>
-                        <TextBlock Text="Dra. Karen"
-                                   Foreground="White" FontSize="14"
-                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </UniformGrid>
+                    <ListBox ItemsSource="{Binding LegendaryAvatars}"
+                         SelectedItem="{Binding SelectedAvatar, Mode=TwoWay}"
+                         ItemTemplate="{StaticResource AvatarItemTemplate}"
+                         ItemsPanel="{StaticResource AvatarItemsPanel}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                </StackPanel>
+            </ScrollViewer>
 
-            </StackPanel>
-        </ScrollViewer>
-
-        <!-- BOTONES -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="{x:Static language:Global.SaveButton}"
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Content="{x:Static language:Global.SaveButton}"
                     Style="{StaticResource PrimaryButtonStyle}"
-                    Width="100" Height="40"
+                    Width="116"
+                    Height="40"
                     Margin="0,0,10,0"
-                    Click="ClickSave"/>
-            <Button Content="{x:Static language:Global.CancelButton}"
+                    Command="{Binding SaveCommand}"/>
+                <Button Content="{x:Static language:Global.CancelButton}"
                     Style="{StaticResource SecondaryButtonStyle}"
-                    Width="100" Height="40"
-                    Click="ClickCancel"/>
-        </StackPanel>
-    </Grid>
+                    Width="115"
+                    Height="40"
+                    Command="{Binding CancelCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>

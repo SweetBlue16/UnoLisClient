@@ -106,6 +106,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Common skins.
+        /// </summary>
+        public static string CommonSkinsLabel {
+            get {
+                return ResourceManager.GetString("CommonSkinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Epic skins.
         /// </summary>
         public static string EpicSkinsLabel {

@@ -77,10 +77,12 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToThicknessConverter.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
+    <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
@@ -300,9 +302,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Avatars\MtroWillian.png" />
+    <Resource Include="Avatars\LogoUNO.png" />
+    <Resource Include="Avatars\Gatito.png" />
+    <Resource Include="Avatars\ElRevo.png" />
+    <Resource Include="Avatars\DrSaul.png" />
+    <Resource Include="Avatars\DrOcharan.png" />
+    <Resource Include="Avatars\DraLizbeth.png" />
+    <Resource Include="Avatars\DraKaren.png" />
+    <Resource Include="Avatars\CC2Projector.png" />
     <Resource Include="Assets\pixelNoise.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -464,8 +477,6 @@
       <Name>UnoLisClient.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Avatars\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
