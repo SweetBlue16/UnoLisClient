@@ -189,6 +189,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteOpenSocialLink(string linkName)
         {
+            SoundManager.PlayClick();
             if (CurrentSession.CurrentUserProfileData == null)
             {
                 _dialogService.ShowWarning(ErrorMessages.ProfileNotLoadedMessageLabel);
@@ -247,7 +248,7 @@ namespace UnoLisClient.UI.ViewModels
             FullName = profileData.FullName;
             Email = profileData.Email;
             string avatarName = string.IsNullOrEmpty(profileData.SelectedAvatarName) ? "LogoUNO" : profileData.SelectedAvatarName;
-            SelectedAvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png?{Guid.NewGuid()}";
+            SelectedAvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png";
             FacebookUrl = CreateUri(profileData.FacebookUrl);
             InstagramUrl = CreateUri(profileData.InstagramUrl);
             TikTokUrl = CreateUri(profileData.TikTokUrl);

@@ -23,9 +23,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CurrentAvatarField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -59,6 +56,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SelectedAvatarNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StreakField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -74,19 +74,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CurrentAvatar {
-            get {
-                return this.CurrentAvatarField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CurrentAvatarField, value) != true)) {
-                    this.CurrentAvatarField = value;
-                    this.RaisePropertyChanged("CurrentAvatar");
-                }
             }
         }
         
@@ -229,6 +216,19 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SelectedAvatarName {
+            get {
+                return this.SelectedAvatarNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SelectedAvatarNameField, value) != true)) {
+                    this.SelectedAvatarNameField = value;
+                    this.RaisePropertyChanged("SelectedAvatarName");
                 }
             }
         }

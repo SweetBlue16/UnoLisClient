@@ -23,9 +23,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileView {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CurrentAvatarField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -77,19 +74,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileView {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CurrentAvatar {
-            get {
-                return this.CurrentAvatarField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CurrentAvatarField, value) != true)) {
-                    this.CurrentAvatarField = value;
-                    this.RaisePropertyChanged("CurrentAvatar");
-                }
             }
         }
         
