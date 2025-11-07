@@ -129,6 +129,12 @@
   <data name="InvalidMoveMessageLabel" xml:space="preserve">
     <value>El movimiento realizado no es válido.</value>
   </data>
+  <data name="ItemUsedLabel" xml:space="preserve">
+    <value>¡Ítem usado!</value>
+  </data>
+  <data name="ItemUsedMessageLabel" xml:space="preserve">
+    <value>{0} usó {1}.</value>
+  </data>
   <data name="MatchOverLabel" xml:space="preserve">
     <value>La partida ha finalizado.</value>
   </data>

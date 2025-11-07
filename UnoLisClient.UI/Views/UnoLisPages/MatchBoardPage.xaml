@@ -61,7 +61,8 @@
             
             <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                           HorizontalScrollBarVisibility="Auto" 
-                          VerticalScrollBarVisibility="Disabled">
+                          VerticalScrollBarVisibility="Disabled"
+                          Margin="100,0,100,0">
                 <ItemsControl ItemsSource="{Binding PlayerHand}"
                               ItemTemplate="{StaticResource PlayerCardTemplate}">
                     <ItemsControl.ItemsPanel>

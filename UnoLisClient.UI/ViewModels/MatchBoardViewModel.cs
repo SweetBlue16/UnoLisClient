@@ -6,6 +6,7 @@ using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
 
@@ -24,7 +25,7 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _discardPileTopCard, value);
         }
 
-        private string _currentTurnNickname = "SweetBlue16";
+        private string _currentTurnNickname = "...";
         public string CurrentTurnNickname
         {
             get => _currentTurnNickname;
@@ -40,7 +41,7 @@ namespace UnoLisClient.UI.ViewModels
         public ObservableCollection<ItemModel> Items { get; }
             = new ObservableCollection<ItemModel>();
 
-        private bool _isUnoButtonVisible = true;
+        private bool _isUnoButtonVisible;
         public bool IsUnoButtonVisible 
         {
             get => _isUnoButtonVisible;
@@ -131,10 +132,12 @@ namespace UnoLisClient.UI.ViewModels
             }, null);
             CurrentTurnNickname = "SweetBlue16";
             UpdatePlayableCards();
+            UpdateUnoButtonStatus();
         }
 
         private void ExecutePlayCard(CardModel card)
         {
+            SoundManager.PlayClick();
             PlayerHand.Remove(card);
             DiscardPileTopCard = card;
 
@@ -145,10 +148,12 @@ namespace UnoLisClient.UI.ViewModels
 
             OpponentLeft.CardCount += 2;
             UpdatePlayableCards();
+            UpdateUnoButtonStatus();
         }
 
         private void ExecuteDrawCard()
         {
+            SoundManager.PlayClick();
             PlayerHand.Add(new CardModel(new Card()
             {
                 Color = CardColor.Yellow,
@@ -156,36 +161,45 @@ namespace UnoLisClient.UI.ViewModels
                 ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
             }, (card) => ExecutePlayCard(card)));
             UpdatePlayableCards();
+            UpdateUnoButtonStatus();
         }
 
         private void ExecuteCallUno()
         {
-            IsUnoButtonVisible = true;
+            SoundManager.PlayClick();
+            IsUnoButtonVisible = false;
+            _dialogService.ShowAlert(Global.AppNameLabel, string.Format(Match.PlayerDeclaredUnoMessageLabel, CurrentTurnNickname));
+        }
+
+        private void UpdateUnoButtonStatus()
+        {
+            IsUnoButtonVisible = (PlayerHand.Count == 2);
         }
 
         private void ExecuteUseItem(ItemType itemType)
         {
+            SoundManager.PlayClick();
             var item = Items.FirstOrDefault(i => i.Type == itemType);
             if (item != null)
             {
                 item.Count--;
                 item.UpdateCanExecute();
             }
+            _dialogService.ShowAlert(Match.ItemUsedLabel, string.Format(Match.ItemUsedMessageLabel, CurrentTurnNickname, item.Type));
         }
 
         private void UpdatePlayableCards()
         {
             foreach (var card in PlayerHand)
             {
-                card.IsPlayable = (card.CardData.Color == DiscardPileTopCard.CardData.Color ||
-                                   card.CardData.Value == DiscardPileTopCard.CardData.Value ||
-                                   card.CardData.Color == CardColor.Black || card.CardData.Color == CardColor.Silver);
+                card.IsPlayable = true;
                 card.UpdateCanExecute();
             }
         }
 
         private void ExecuteToggleSettings()
         {
+            SoundManager.PlayClick();
             IsSettingsMenuVisible = !IsSettingsMenuVisible;
         }
 

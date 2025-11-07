@@ -97,6 +97,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Item used!.
+        /// </summary>
+        public static string ItemUsedLabel {
+            get {
+                return ResourceManager.GetString("ItemUsedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} used {1}..
+        /// </summary>
+        public static string ItemUsedMessageLabel {
+            get {
+                return ResourceManager.GetString("ItemUsedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The game is over..
         /// </summary>
         public static string MatchOverLabel {
