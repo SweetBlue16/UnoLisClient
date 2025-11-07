@@ -4,14 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
-        mc:Ignorable="d"
         xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
         Title="SimplePopUpWindow"
         Width="450"
         SizeToContent="Height"
-        MaxHeight="400"
-        WindowStartupLocation="CenterScreen" Background="#1B263B">
-    <Grid>
+        MaxHeight="400" WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" Background="Transparent">
+    <Border BorderBrush="Gold"
+            Background="#1B263B"
+            BorderThickness="3"
+            CornerRadius="15">
         <StackPanel Margin="20">
             <Label x:Name="TitleLabel"
                    Content="{x:Static language:Global.TitlePlaceholderLabel}"
@@ -40,5 +43,5 @@
                     Width="154"
                     Click="ClickOkButton"/>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>

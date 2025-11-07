@@ -105,6 +105,9 @@
     </Compile>
     <Compile Include="Utilities\MessageTranslator.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Views\PopUpWindows\MatchResultsPopUpWindow.xaml.cs">
+      <DependentUpon>MatchResultsPopUpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UnoLisPages\FriendRequestsPage.xaml.cs">
       <DependentUpon>FriendRequestsPage.xaml</DependentUpon>
     </Compile>
@@ -373,6 +376,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LoadingProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUpWindows\MatchResultsPopUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

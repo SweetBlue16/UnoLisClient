@@ -17,6 +17,7 @@ namespace UnoLisClient.UI.Views.PopUpWindows
             TitleLabel.Content = title;
             MessageTextBlock.Text = message;
             InputTextBox.Tag = watermark;
+            Title = title.ToUpper();
 
             InputTextBox.Focus();
         }

@@ -13,6 +13,7 @@ namespace UnoLisClient.UI.Views.PopUpWindows
             InitializeComponent();
             TitleLabel.Content = title;
             MessageTextBlock.Text = message;
+            Title = title.ToUpper();
         }
 
         private void ClickOkButton(object sender, RoutedEventArgs e)

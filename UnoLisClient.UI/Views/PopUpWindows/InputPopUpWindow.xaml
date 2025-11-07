@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
-        mc:Ignorable="d"
         xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
-        Title="InputPopUpWindow" Height="340" Width="450"
-        WindowStartupLocation="CenterScreen" Background="#1B263B">
-    <Grid>
+        Title="InputPopUpWindow" Height="340" Width="450" WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" Background="Transparent">
+    <Border BorderBrush="Gold"
+            Background="#1B263B"
+            BorderThickness="3"
+            CornerRadius="15">
         <StackPanel Margin="20">
             <Label x:Name="TitleLabel"
                    Content="{x:Static language:Global.TitlePlaceholderLabel}"
@@ -53,5 +56,5 @@
                         Click="ClickCancelButton"/>
             </StackPanel>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>

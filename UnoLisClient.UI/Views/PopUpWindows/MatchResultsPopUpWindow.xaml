@@ -1,0 +1,44 @@
+﻿<Window x:Class="UnoLisClient.UI.Views.PopUpWindows.MatchResultsPopUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
+        xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+        mc:Ignorable="d"
+        Background="Transparent" WindowStyle="None"
+        Title="MatchResultsPopUpWindow" Height="450" Width="800"
+        AllowsTransparency="True" ResizeMode="NoResize">
+    <Border BorderBrush="Gold"
+            Background="#1B263B"
+            BorderThickness="3"
+            CornerRadius="15">
+        <StackPanel Margin="20">
+            <TextBlock Text="{x:Static language:Match.MatchResultsLabel}"
+                       FontSize="30"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+            <DataGrid x:Name="ResultsDataGrid"
+                      ItemsSource="{Binding Results}"
+                      AutoGenerateColumns="False"
+                      Style="{DynamicResource DataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static language:Match.PlaceResultsColumn}"
+                                        Binding="{Binding Place}"/>
+                    <DataGridTextColumn Header="{x:Static language:Match.PlayerNameColumn}"
+                                        Binding="{Binding PlayerName}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static language:Match.ScoreColumn}"
+                                        Binding="{Binding PointsEarned}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="{x:Static language:Global.GoButton}"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Style="{DynamicResource PrimaryButtonStyle}"
+                    Width="150"
+                    Click="ClickOkButton"/>
+        </StackPanel>
+    </Border>
+</Window>
