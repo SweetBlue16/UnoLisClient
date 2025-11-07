@@ -214,6 +214,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Best players of all time.
+        /// </summary>
+        public static string LeaderboardLabel {
+            get {
+                return ResourceManager.GetString("LeaderboardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string LoadingLabel {
@@ -304,6 +313,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player.
+        /// </summary>
+        public static string PlayerNameColumn {
+            get {
+                return ResourceManager.GetString("PlayerNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} has reconnected to the match..
         /// </summary>
         public static string PlayerReconnectedMessageLabel {
@@ -318,6 +336,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ProfileLabel {
             get {
                 return ResourceManager.GetString("ProfileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        public static string RankColumn {
+            get {
+                return ResourceManager.GetString("RankColumn", resourceCulture);
             }
         }
         

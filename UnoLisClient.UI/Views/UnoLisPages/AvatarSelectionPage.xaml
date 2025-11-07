@@ -5,7 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       mc:Ignorable="d"
-      xmlns:vms="clr-namespace:UnoLisClient.UI.ViewModels"
+      xmlns:vms="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
       xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       Title="AvatarSelectionPage"
       Loaded="AvatarSelectionPageLoaded">

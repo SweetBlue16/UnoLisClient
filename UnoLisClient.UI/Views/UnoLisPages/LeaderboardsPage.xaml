@@ -4,11 +4,60 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UnoLisClient.UI.Views.UnoLisPages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      mc:Ignorable="d"
+      MaxWidth="900"
       Title="LeaderboardsPage">
 
-    <Grid>
-        
-    </Grid>
+    <Border Background="#AA000000"
+            CornerRadius="15"
+            Padding="24"
+            Margin="40">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,30">
+                <TextBlock Grid.Row="0"
+                           Text="{x:Static language:Global.LeaderboardLabel}"
+                           FontSize="36"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                           Margin="0,0,60,0"
+                           HorizontalAlignment="Left"/>
+                <Button Grid.Row="0"
+                        Content="{x:Static language:Global.CancelButton}"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="140"
+                        Command="{Binding BackCommand}"/>
+            </StackPanel>
+            <DataGrid Grid.Row="1"
+                      ItemsSource="{Binding LeaderboardEntries}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Style="{DynamicResource DataGridStyle}"
+                      MaxWidth="600">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static language:Global.RankColumn}"
+                                        Binding="{Binding Rank}"/>
+                    <DataGridTextColumn Header="{x:Static language:Global.PlayerNameColumn}"
+                                        Binding="{Binding PlayerName}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static language:Global.GlobalPointsColumn}"
+                                        Binding="{Binding Score}"/>
+                    <DataGridTextColumn Header="{x:Static language:Global.MatchesPlayedColumn}"
+                                        Binding="{Binding MatchesPlayed}"/>
+                    <DataGridTextColumn Header="{x:Static language:Global.WinRateColumn}"
+                                        Binding="{Binding WinRate}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
 </Page>

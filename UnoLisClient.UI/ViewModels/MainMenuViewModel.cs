@@ -34,6 +34,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand GoToSettingsCommand { get; }
         public ICommand GoToShopCommand { get; }
         public ICommand GoToProfileCommand { get; }
+        public ICommand GoToLeaderboardsCommand { get; }
         public ICommand GoToFriendsCommand { get; }
         public ICommand LogoutCommand { get; }
 
@@ -48,6 +49,7 @@ namespace UnoLisClient.UI.ViewModels
             GoToSettingsCommand = new RelayCommand(ExecuteGoToSettings, () => !IsLoading);
             GoToShopCommand = new RelayCommand(ExecuteGoToShop, () => !IsLoading);
             GoToProfileCommand = new RelayCommand(ExecuteGoToProfile, () => !IsLoading);
+            GoToLeaderboardsCommand = new RelayCommand(ExecuteGoToLeaderboards, () => !IsLoading);
             GoToFriendsCommand = new RelayCommand(ExecuteGoToFriends, () => !IsLoading);
             LogoutCommand = new RelayCommand(async () => await ExecuteLogoutAsync(), () => !IsLoading);
         }
@@ -137,6 +139,12 @@ namespace UnoLisClient.UI.ViewModels
             _navigationService.NavigateTo(new YourProfilePage());
         }
 
+        private void ExecuteGoToLeaderboards()
+        {
+            SoundManager.PlayClick();
+            _navigationService.NavigateTo(new LeaderboardsPage());
+        }
+
         private void ExecuteGoToFriends()
         {
             SoundManager.PlayClick();
@@ -157,6 +165,7 @@ namespace UnoLisClient.UI.ViewModels
             (GoToSettingsCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (GoToShopCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (GoToProfileCommand as RelayCommand)?.RaiseCanExecuteChanged();
+            (GoToLeaderboardsCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (GoToFriendsCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (LogoutCommand as RelayCommand)?.RaiseCanExecuteChanged();
 

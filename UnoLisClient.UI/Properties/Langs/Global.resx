@@ -168,6 +168,9 @@
   <data name="LeaderboardDataReceivedMessageLabel" xml:space="preserve">
     <value>Ranking data obtained.</value>
   </data>
+  <data name="LeaderboardLabel" xml:space="preserve">
+    <value>Best players of all time</value>
+  </data>
   <data name="LoadingLabel" xml:space="preserve">
     <value>Loading...</value>
   </data>
@@ -198,11 +201,17 @@
   <data name="PlayButton" xml:space="preserve">
     <value>PLAY!</value>
   </data>
+  <data name="PlayerNameColumn" xml:space="preserve">
+    <value>Player</value>
+  </data>
   <data name="PlayerReconnectedMessageLabel" xml:space="preserve">
     <value>{0} has reconnected to the match.</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="RankColumn" xml:space="preserve">
+    <value>Rank</value>
   </data>
   <data name="SaveButton" xml:space="preserve">
     <value>Save</value>

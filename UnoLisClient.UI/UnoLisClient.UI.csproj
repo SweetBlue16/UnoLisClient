@@ -83,11 +83,17 @@
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
+    <Compile Include="ViewModels\LeaderboardsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\AvatarModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\LeaderboardEntry.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\LootBoxChancesItem.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\MatchResultEntry.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\RewardPopUpModel.cs" />
     <Compile Include="Views\Controls\AddFriendModal.xaml.cs">
       <DependentUpon>AddFriendModal.xaml</DependentUpon>
     </Compile>
