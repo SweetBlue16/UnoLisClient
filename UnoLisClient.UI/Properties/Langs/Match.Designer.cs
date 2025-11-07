@@ -241,7 +241,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Now playing {0}.
+        ///   Looks up a localized string similar to Now playing:.
         /// </summary>
         public static string TurnLabel {
             get {

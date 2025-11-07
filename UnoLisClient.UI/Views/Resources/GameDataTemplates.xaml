@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
+                    xmlns:converters="clr-namespace:UnoLisClient.UI.Converters">
+    <converters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+
+    <DataTemplate x:Key="PlayerCardTemplate" DataType="{x:Type vm:CardModel}">
+        <Grid Width="90" Height="140" Margin="2,0" ToolTip="{Binding CardData.Description}">
+            <Image Source="{Binding ImagePath}" />
+
+            <Border Background="#80000000"
+                    Visibility="{Binding IsPlayable, Converter={StaticResource InvertedBoolToVisibilityConverter}}" />
+
+            <Button Command="{Binding PlayCardCommand}" 
+                    IsEnabled="{Binding IsPlayable}"
+                    Style="{DynamicResource TransparentButtonStyle}"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ItemTemplate" DataType="{x:Type vm:ItemModel}">
+        <Button Command="{Binding UseItemCommand}" 
+                ToolTip="{Binding Type}"
+                Style="{DynamicResource TransparentButtonStyle}"
+                Width="50" Height="50" Margin="0,5">
+            <Grid>
+                <Image Source="{Binding ImagePath}" />
+
+                <Border Background="#80000000"
+                        Visibility="{Binding Count, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <TextBlock Text="{Binding Count}" 
+                           Foreground="White" FontWeight="Bold" 
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                           Margin="0,0,5,5" />
+            </Grid>
+        </Button>
+    </DataTemplate>
+</ResourceDictionary>

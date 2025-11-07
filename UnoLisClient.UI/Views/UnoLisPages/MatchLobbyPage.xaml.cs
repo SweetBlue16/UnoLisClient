@@ -133,5 +133,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 await mainWindow.SetBackgroundMedia("Assets/lobbyVideo.mp4", "Assets/lobbyMusic.mp3");
             }
         }
+
+        private void ClickReadyButton(object sender, RoutedEventArgs e)
+        {
+            SoundManager.PlayClick();
+            NavigationService?.Navigate(new MatchBoardPage());
+        }
     }
 }

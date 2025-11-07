@@ -178,7 +178,7 @@
     <value>Which player do you want to report?</value>
   </data>
   <data name="TurnLabel" xml:space="preserve">
-    <value>Now playing {0}</value>
+    <value>Now playing:</value>
   </data>
   <data name="WinnerLabel" xml:space="preserve">
     <value>The player {0} has won!</value>
