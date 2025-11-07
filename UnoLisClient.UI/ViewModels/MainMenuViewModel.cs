@@ -37,6 +37,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand GoToLeaderboardsCommand { get; }
         public ICommand GoToFriendsCommand { get; }
         public ICommand LogoutCommand { get; }
+        public ICommand GoToHowToPlayCommand { get; }
 
         public MainMenuViewModel(Page view, IDialogService dialogService)
         {
@@ -52,6 +53,7 @@ namespace UnoLisClient.UI.ViewModels
             GoToLeaderboardsCommand = new RelayCommand(ExecuteGoToLeaderboards, () => !IsLoading);
             GoToFriendsCommand = new RelayCommand(ExecuteGoToFriends, () => !IsLoading);
             LogoutCommand = new RelayCommand(async () => await ExecuteLogoutAsync(), () => !IsLoading);
+            GoToHowToPlayCommand = new RelayCommand(ExecuteGoToHowToPlay, () => !IsLoading);
         }
 
         private async Task ExecuteLogoutAsync()
@@ -151,6 +153,12 @@ namespace UnoLisClient.UI.ViewModels
             _navigationService.NavigateTo(new FriendsPage());
         }
 
+        private void ExecuteGoToHowToPlay()
+        {
+            SoundManager.PlayClick();
+            _navigationService.NavigateTo(new HowToPlayPage());
+        }
+
         private void ClearLocalSessionAndNavigate()
         {
             CurrentSession.CurrentUserNickname = null;
@@ -168,6 +176,7 @@ namespace UnoLisClient.UI.ViewModels
             (GoToLeaderboardsCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (GoToFriendsCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (LogoutCommand as RelayCommand)?.RaiseCanExecuteChanged();
+            (GoToHowToPlayCommand as RelayCommand)?.RaiseCanExecuteChanged();
 
             if (isLoading)
             {

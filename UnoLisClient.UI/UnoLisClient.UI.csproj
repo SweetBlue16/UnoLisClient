@@ -83,6 +83,7 @@
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
+    <Compile Include="ViewModels\HowToPlayViewModel.cs" />
     <Compile Include="ViewModels\LeaderboardsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
@@ -113,6 +114,9 @@
     </Compile>
     <Compile Include="Views\UnoLisPages\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnoLisPages\HowToPlayPage.xaml.cs">
+      <DependentUpon>HowToPlayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\JoinMatchPage.xaml.cs">
       <DependentUpon>JoinMatchPage.xaml</DependentUpon>
@@ -339,12 +343,15 @@
     <Content Include="Assets\buttonClick.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\Cards\CardBack.png" />
+    <Resource Include="Assets\Cards\DrawFour.png" />
     <Content Include="Assets\lobbyVideo.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\lobbyMusic.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\lockIcon.png" />
     <Content Include="Assets\marioDesktop.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -412,6 +419,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UnoLisPages\GameSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnoLisPages\HowToPlayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
