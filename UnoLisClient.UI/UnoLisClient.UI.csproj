@@ -76,10 +76,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\RelayCommandGeneric.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\UIServices.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
+    <Compile Include="ViewModels\FriendsRequestsViewModel.cs" />
+    <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\Controls\AddFriendModal.xaml.cs">
       <DependentUpon>AddFriendModal.xaml</DependentUpon>
@@ -162,6 +166,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnoLisWindows\AddFriendWindow.xaml.cs">
+      <DependentUpon>AddFriendWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisWindows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -441,6 +448,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopUpWindows\SimplePopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnoLisWindows\AddFriendWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -40,12 +40,14 @@ namespace UnoLisClient.UI.Views.UnoLisPages
 
         private void LoadFriends()
         {
-            Friends.Add(new Friend { FriendName = "SweetBlue16", Status = "Online", StatusColor = Brushes.Lime });
-            Friends.Add(new Friend { FriendName = "MapleVR", Status = "Offline", StatusColor = Brushes.Gray });
-            Friends.Add(new Friend { FriendName = "Erickmel", Status = "Online", StatusColor = Brushes.Lime });
-            Friends.Add(new Friend { FriendName = "IngeAbraham", Status = "Online", StatusColor = Brushes.Lime });
+            Friends.Add(new Friend { Nickname = "SweetBlue16", IsOnline = true });
+            Friends.Add(new Friend { Nickname = "MapleVR", IsOnline = false });
+            Friends.Add(new Friend { Nickname = "Erickmel", IsOnline = true });
+            Friends.Add(new Friend { Nickname = "IngeAbraham", IsOnline = true });
+
             FriendsList.ItemsSource = Friends;
         }
+
 
         private void ClickInviteButton(object sender, RoutedEventArgs e)
         {
@@ -61,7 +63,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         private void ClickSendInvitesButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            var invited = Friends.Where(f => f.Invited).Select(f => f.FriendName).ToList();
+            var invited = Friends.Where(f => f.Invited).Select(f => f.Nickname).ToList();
 
             if (invited.Any())
             {

@@ -32,6 +32,8 @@ namespace UnoLisClient.UI.Views.Controls
         {
             var nickname = NicknameBox.Text.Trim();
 
+            MessageBox.Show($"DEBUG MODAL → {nickname}", "UNO LIS");
+
             if (string.IsNullOrWhiteSpace(nickname))
             {
                 MessageBox.Show("Please enter a nickname.", "UNO LIS",
@@ -40,7 +42,10 @@ namespace UnoLisClient.UI.Views.Controls
             }
 
             FriendAdded?.Invoke(nickname);
+            MessageBox.Show("DEBUG MODAL → Invocando FriendAdded", "UNO LIS");
+            System.Diagnostics.Debug.WriteLine("DEBUG MODAL → Invocando FriendAdded");
         }
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {

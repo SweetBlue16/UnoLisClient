@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="FriendRequestData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="RequesterNickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TargetNickname" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="FriendRequestData" nillable="true" type="tns:FriendRequestData" />
   <xs:complexType name="ArrayOfFriendData">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendData" nillable="true" type="tns:FriendData" />
@@ -21,4 +14,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FriendData" nillable="true" type="tns:FriendData" />
+  <xs:complexType name="ArrayOfFriendRequestData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequestData" nillable="true" type="tns:FriendRequestData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFriendRequestData" nillable="true" type="tns:ArrayOfFriendRequestData" />
+  <xs:complexType name="FriendRequestData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FriendListId" type="xs:int" />
+      <xs:element minOccurs="0" name="RequesterNickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetNickname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FriendRequestData" nillable="true" type="tns:FriendRequestData" />
+  <xs:simpleType name="FriendRequestResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="UserNotFound" />
+      <xs:enumeration value="AlreadyFriends" />
+      <xs:enumeration value="RequestAlreadySent" />
+      <xs:enumeration value="Failed" />
+      <xs:enumeration value="RequestAlreadyReceived" />
+      <xs:enumeration value="CannotAddSelf" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="FriendRequestResult" nillable="true" type="tns:FriendRequestResult" />
 </xs:schema>

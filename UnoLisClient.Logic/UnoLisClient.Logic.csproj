@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Callbacks\ChatCallback.cs" />
+    <Compile Include="Callbacks\FriendsCallback.cs" />
     <Compile Include="Callbacks\LoginCallback.cs" />
     <Compile Include="Connected Services\UnoLisServerReference.Chat\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -127,11 +128,15 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LogManager.cs" />
+    <Compile Include="Mappers\FriendMapper.cs" />
     <Compile Include="Models\ClientProfileData.cs" />
     <Compile Include="Models\CurrentSession.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Mappers\ProfileDataMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FriendsService.cs" />
+    <Compile Include="Services\IFriendsService.cs" />
+    <Compile Include="Services\IModalService.cs" />
     <Compile Include="Services\LoginService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +179,15 @@
     </None>
     <None Include="Connected Services\UnoLisServerReference.Friends\item2.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Friends\UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Gameplay\GameplayManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Gameplay\item.xsd">
@@ -511,21 +525,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Friends\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Friends\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Friends\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Friends\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\UnoLisServerReference.Logout\item.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -536,6 +535,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UnoLisServerReference.Logout\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Friends\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Friends\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Friends\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Friends\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

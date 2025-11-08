@@ -15,67 +15,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Friends {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestData", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
-    [System.SerializableAttribute()]
-    public partial class FriendRequestData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RequesterNicknameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TargetNicknameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RequesterNickname {
-            get {
-                return this.RequesterNicknameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RequesterNicknameField, value) != true)) {
-                    this.RequesterNicknameField = value;
-                    this.RaisePropertyChanged("RequesterNickname");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TargetNickname {
-            get {
-                return this.TargetNicknameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TargetNicknameField, value) != true)) {
-                    this.TargetNicknameField = value;
-                    this.RaisePropertyChanged("TargetNickname");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FriendData", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
     [System.SerializableAttribute()]
     public partial class FriendData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -151,49 +90,179 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Friends {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestData", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequestData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FriendListIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RequesterNicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetNicknameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FriendListId {
+            get {
+                return this.FriendListIdField;
+            }
+            set {
+                if ((this.FriendListIdField.Equals(value) != true)) {
+                    this.FriendListIdField = value;
+                    this.RaisePropertyChanged("FriendListId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RequesterNickname {
+            get {
+                return this.RequesterNicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RequesterNicknameField, value) != true)) {
+                    this.RequesterNicknameField = value;
+                    this.RaisePropertyChanged("RequesterNickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TargetNickname {
+            get {
+                return this.TargetNicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetNicknameField, value) != true)) {
+                    this.TargetNicknameField = value;
+                    this.RaisePropertyChanged("TargetNickname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestResult", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    public enum FriendRequestResult : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Success = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserNotFound = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AlreadyFriends = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RequestAlreadySent = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Failed = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RequestAlreadyReceived = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CannotAddSelf = 6,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Friends.IFriendsManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.Friends.IFriendsManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IFriendsManager {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/GetFriendsList")]
-        void GetFriendsList(string nickname);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/GetFriendsList", ReplyAction="http://tempuri.org/IFriendsManager/GetFriendsListResponse")]
+        UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData[] GetFriendsList(string nickname);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/GetFriendsList")]
-        System.Threading.Tasks.Task GetFriendsListAsync(string nickname);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/GetFriendsList", ReplyAction="http://tempuri.org/IFriendsManager/GetFriendsListResponse")]
+        System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData[]> GetFriendsListAsync(string nickname);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/SendFriendRequest")]
-        void SendFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/GetPendingRequests", ReplyAction="http://tempuri.org/IFriendsManager/GetPendingRequestsResponse")]
+        UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData[] GetPendingRequests(string nickname);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/SendFriendRequest")]
-        System.Threading.Tasks.Task SendFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/GetPendingRequests", ReplyAction="http://tempuri.org/IFriendsManager/GetPendingRequestsResponse")]
+        System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData[]> GetPendingRequestsAsync(string nickname);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/AcceptFriendRequest")]
-        void AcceptFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendsManager/SendFriendRequestResponse")]
+        UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestResult SendFriendRequest(string requesterNickname, string targetNickname);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/AcceptFriendRequest")]
-        System.Threading.Tasks.Task AcceptFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendsManager/SendFriendRequestResponse")]
+        System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestResult> SendFriendRequestAsync(string requesterNickname, string targetNickname);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/RemoveFriend")]
-        void RemoveFriend(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendsManager/AcceptFriendRequestResponse")]
+        bool AcceptFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/RemoveFriend")]
-        System.Threading.Tasks.Task RemoveFriendAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendsManager/AcceptFriendRequestResponse")]
+        System.Threading.Tasks.Task<bool> AcceptFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendsManager/RejectFriendRequestResponse")]
+        bool RejectFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendsManager/RejectFriendRequestResponse")]
+        System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/RemoveFriend", ReplyAction="http://tempuri.org/IFriendsManager/RemoveFriendResponse")]
+        bool RemoveFriend(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/RemoveFriend", ReplyAction="http://tempuri.org/IFriendsManager/RemoveFriendResponse")]
+        System.Threading.Tasks.Task<bool> RemoveFriendAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/SubscribeToFriendUpdates")]
+        void SubscribeToFriendUpdates(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/SubscribeToFriendUpdates")]
+        System.Threading.Tasks.Task SubscribeToFriendUpdatesAsync(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/UnsubscribeFromFriendUpdates")]
+        void UnsubscribeFromFriendUpdates(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/UnsubscribeFromFriendUpdates")]
+        System.Threading.Tasks.Task UnsubscribeFromFriendUpdatesAsync(string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IFriendsManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/FriendsListReceived", ReplyAction="http://tempuri.org/IFriendsManager/FriendsListReceivedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/FriendsListReceived")]
         void FriendsListReceived(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData[] friends);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/FriendRequestReceived", ReplyAction="http://tempuri.org/IFriendsManager/FriendRequestReceivedResponse")]
-        void FriendRequestReceived(string fromNickname);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/FriendRequestReceived")]
+        void FriendRequestReceived(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData newRequest);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/FriendRequestResult", ReplyAction="http://tempuri.org/IFriendsManager/FriendRequestResultResponse")]
-        void FriendRequestResult(bool success, string message);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/PendingRequestsReceived")]
+        void PendingRequestsReceived(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData[] requests);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendsManager/FriendListUpdated", ReplyAction="http://tempuri.org/IFriendsManager/FriendListUpdatedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/FriendListUpdated")]
         void FriendListUpdated(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData[] updatedList);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IFriendsManager/FriendActionNotification")]
+        void FriendActionNotification(string message, bool isSuccess);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -224,36 +293,68 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Friends {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void GetFriendsList(string nickname) {
-            base.Channel.GetFriendsList(nickname);
+        public UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData[] GetFriendsList(string nickname) {
+            return base.Channel.GetFriendsList(nickname);
         }
         
-        public System.Threading.Tasks.Task GetFriendsListAsync(string nickname) {
+        public System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Friends.FriendData[]> GetFriendsListAsync(string nickname) {
             return base.Channel.GetFriendsListAsync(nickname);
         }
         
-        public void SendFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
-            base.Channel.SendFriendRequest(request);
+        public UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData[] GetPendingRequests(string nickname) {
+            return base.Channel.GetPendingRequests(nickname);
         }
         
-        public System.Threading.Tasks.Task SendFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
-            return base.Channel.SendFriendRequestAsync(request);
+        public System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData[]> GetPendingRequestsAsync(string nickname) {
+            return base.Channel.GetPendingRequestsAsync(nickname);
         }
         
-        public void AcceptFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
-            base.Channel.AcceptFriendRequest(request);
+        public UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestResult SendFriendRequest(string requesterNickname, string targetNickname) {
+            return base.Channel.SendFriendRequest(requesterNickname, targetNickname);
         }
         
-        public System.Threading.Tasks.Task AcceptFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
+        public System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestResult> SendFriendRequestAsync(string requesterNickname, string targetNickname) {
+            return base.Channel.SendFriendRequestAsync(requesterNickname, targetNickname);
+        }
+        
+        public bool AcceptFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
+            return base.Channel.AcceptFriendRequest(request);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AcceptFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
             return base.Channel.AcceptFriendRequestAsync(request);
         }
         
-        public void RemoveFriend(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
-            base.Channel.RemoveFriend(request);
+        public bool RejectFriendRequest(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
+            return base.Channel.RejectFriendRequest(request);
         }
         
-        public System.Threading.Tasks.Task RemoveFriendAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
+        public System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
+            return base.Channel.RejectFriendRequestAsync(request);
+        }
+        
+        public bool RemoveFriend(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
+            return base.Channel.RemoveFriend(request);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveFriendAsync(UnoLisClient.Logic.UnoLisServerReference.Friends.FriendRequestData request) {
             return base.Channel.RemoveFriendAsync(request);
+        }
+        
+        public void SubscribeToFriendUpdates(string nickname) {
+            base.Channel.SubscribeToFriendUpdates(nickname);
+        }
+        
+        public System.Threading.Tasks.Task SubscribeToFriendUpdatesAsync(string nickname) {
+            return base.Channel.SubscribeToFriendUpdatesAsync(nickname);
+        }
+        
+        public void UnsubscribeFromFriendUpdates(string nickname) {
+            base.Channel.UnsubscribeFromFriendUpdates(nickname);
+        }
+        
+        public System.Threading.Tasks.Task UnsubscribeFromFriendUpdatesAsync(string nickname) {
+            return base.Channel.UnsubscribeFromFriendUpdatesAsync(nickname);
         }
     }
 }

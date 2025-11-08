@@ -48,7 +48,7 @@
                 </Grid>
 
                 <!-- Lista de solicitudes -->
-                <ItemsControl x:Name="FriendRequestsList" Grid.Row="1">
+                <ItemsControl ItemsSource="{Binding FriendRequests}" Grid.Row="1">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Background="#33222222"
@@ -58,7 +58,7 @@
                                 <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Nickname}"
+                                    <TextBlock Text="{Binding RequesterNickname}"
                                                FontSize="16"
                                                Foreground="White"
                                                VerticalAlignment="Center"
@@ -68,12 +68,14 @@
                                             Style="{StaticResource PrimaryButtonStyle}"
                                             Width="90"
                                             Margin="10,0"
-                                            Click="Accept_Click"/>
+                                            Command="{Binding DataContext.AcceptRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                            CommandParameter="{Binding .}"/>
 
                                     <Button Content="Decline"
                                             Style="{StaticResource SecondaryButtonStyle}"
                                             Width="90"
-                                            Click="Decline_Click"/>
+                                            Command="{Binding DataContext.RejectRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                            CommandParameter="{Binding .}"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
