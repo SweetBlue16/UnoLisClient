@@ -25,7 +25,6 @@ namespace UnoLisClient.UI.ViewModels
             get => _lobbyCode;
             set
             {
-                // Convertir a mayúsculas automáticamente para mejor UX
                 SetProperty(ref _lobbyCode, value?.ToUpper());
             }
         }
