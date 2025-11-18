@@ -6,7 +6,7 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
     public enum ItemType { Shield, Thief, ExtraTurn, Swap }
 
-    public class ItemModel : BaseViewModel
+    public class ItemModel : ObservableObject
     {
         public ItemType Type { get; }
         public string ImagePath => $"pack://application:,,,/Assets/Items/{Type.ToString()}.png";

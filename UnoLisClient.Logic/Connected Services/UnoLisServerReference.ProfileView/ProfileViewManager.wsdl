@@ -44,16 +44,12 @@
   <wsdl:message name="IProfileViewManager_ProfileDataReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ProfileDataReceived" />
   </wsdl:message>
-  <wsdl:message name="IProfileViewManager_ProfileDataReceived_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ProfileDataReceivedResponse" />
-  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IProfileViewManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetProfileData">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileViewManager/GetProfileData" message="tns:IProfileViewManager_GetProfileData_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ProfileDataReceived">
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileViewManager/ProfileDataReceived" message="tns:IProfileViewManager_ProfileDataReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfileViewManager/ProfileDataReceivedResponse" message="tns:IProfileViewManager_ProfileDataReceived_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IProfileViewManager" type="tns:IProfileViewManager">
@@ -67,9 +63,6 @@
     </wsdl:operation>
     <wsdl:operation name="ProfileDataReceived">
       <soap12:operation soapAction="http://tempuri.org/IProfileViewManager/ProfileDataReceived" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -81,7 +74,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8107/ProfileViewManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>SWEETBLUE16\pswee</Upn>
+          <Upn>EVICTUS\meler</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

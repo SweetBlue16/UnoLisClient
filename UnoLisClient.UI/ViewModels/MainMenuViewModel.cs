@@ -13,22 +13,15 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
     public class MainMenuViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly LogoutService _logoutService;
         private readonly Page _view;
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
 
         public ICommand PlayCommand { get; }
         public ICommand GoToSettingsCommand { get; }
@@ -39,11 +32,10 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand LogoutCommand { get; }
         public ICommand GoToHowToPlayCommand { get; }
 
-        public MainMenuViewModel(Page view, IDialogService dialogService)
+        public MainMenuViewModel(Page view, IDialogService dialogService): base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
             _logoutService = new LogoutService();
 
             PlayCommand = new RelayCommand(ExecuteGoToPlay, () => !IsLoading);
@@ -75,46 +67,52 @@ namespace UnoLisClient.UI.ViewModels
                 return;
             }
 
-            _dialogService.ShowLoading(_view);
-            string userMessage = string.Empty;
-            bool success = false;
-
+            SetLoading(true);
             try
             {
                 var response = await _logoutService.LogoutAsync(CurrentSession.CurrentUserNickname);
-                userMessage = MessageTranslator.GetMessage(response.Code);
-                success = response.Success;
+                string userMessage = MessageTranslator.GetMessage(response.Code);
+
+                if (response.Success)
+                {
+                    _dialogService.ShowAlert(Global.SuccessLabel, userMessage);
+                    ChatService.Instance.Cleanup();
+                    FriendsService.Instance.Cleanup();
+                    ClearLocalSessionAndNavigate();
+                }
+                else
+                {
+                    _dialogService.ShowWarning(userMessage);
+                }
             }
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo en cierre de sesión: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
+                return;
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo en cierre de sesión: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+                return;
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo en cierre de sesión: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
+                return;
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo en cierre de sesión: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.LogoutInternalError, logMessage, ex);
+                return;
             }
             finally
             {
                 SetLoading(false);
             }
-
-            _dialogService.ShowAlert(
-                success ? Global.SuccessLabel : Global.OopsLabel,
-                userMessage
-            );
-            ClearLocalSessionAndNavigate();
         }
 
         private void ExecuteGoToPlay()
@@ -188,17 +186,7 @@ namespace UnoLisClient.UI.ViewModels
             }
         }
 
-        private void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            _dialogService.HideLoading();
-            LogManager.Error(logMessage, ex);
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
-            }));
-        }
-
-        private bool IsGuest()
+        private static bool IsGuest()
         {
             return string.Equals(CurrentSession.CurrentUserNickname, "Guest", StringComparison.OrdinalIgnoreCase);
         }

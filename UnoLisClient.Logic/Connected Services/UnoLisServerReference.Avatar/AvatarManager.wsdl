@@ -47,14 +47,8 @@
   <wsdl:message name="IAvatarManager_AvatarsDataReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:AvatarsDataReceived" />
   </wsdl:message>
-  <wsdl:message name="IAvatarManager_AvatarsDataReceived_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:AvatarsDataReceivedResponse" />
-  </wsdl:message>
   <wsdl:message name="IAvatarManager_AvatarUpdateResponse_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:AvatarUpdateResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAvatarManager_AvatarUpdateResponse_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:AvatarUpdateResponseResponse" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IAvatarManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPlayerAvatars">
@@ -65,11 +59,9 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AvatarsDataReceived">
       <wsdl:output wsaw:Action="http://tempuri.org/IAvatarManager/AvatarsDataReceived" message="tns:IAvatarManager_AvatarsDataReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IAvatarManager/AvatarsDataReceivedResponse" message="tns:IAvatarManager_AvatarsDataReceived_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AvatarUpdateResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IAvatarManager/AvatarUpdateResponse" message="tns:IAvatarManager_AvatarUpdateResponse_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IAvatarManager/AvatarUpdateResponseResponse" message="tns:IAvatarManager_AvatarUpdateResponse_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAvatarManager" type="tns:IAvatarManager">
@@ -89,18 +81,12 @@
     </wsdl:operation>
     <wsdl:operation name="AvatarsDataReceived">
       <soap12:operation soapAction="http://tempuri.org/IAvatarManager/AvatarsDataReceived" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AvatarUpdateResponse">
       <soap12:operation soapAction="http://tempuri.org/IAvatarManager/AvatarUpdateResponse" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -112,7 +98,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8129/AvatarManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>SWEETBLUE16\pswee</Upn>
+          <Upn>EVICTUS\meler</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

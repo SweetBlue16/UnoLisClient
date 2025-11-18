@@ -1,6 +1,6 @@
 ﻿namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class OpponentModel : BaseViewModel
+    public class OpponentModel : ObservableObject
     {
         public string Nickname { get; set; }
         public string AvatarImagePath { get; set; }

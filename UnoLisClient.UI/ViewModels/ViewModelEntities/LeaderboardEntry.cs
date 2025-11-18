@@ -1,6 +1,6 @@
 ﻿namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class LeaderboardEntry : BaseViewModel
+    public class LeaderboardEntry : ObservableObject
     {
         public int Rank { get; set; }
         public string PlayerName { get; set; }

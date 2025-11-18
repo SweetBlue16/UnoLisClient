@@ -1,6 +1,6 @@
 ﻿namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class AvatarModel : BaseViewModel
+    public class AvatarModel : ObservableObject
     {
         public int AvatarId { get; set; }
         public string Name { get; set; }

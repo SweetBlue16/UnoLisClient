@@ -11,7 +11,8 @@ namespace UnoLisClient.UI.ViewModels
 
         public ICommand BackCommand { get; }
 
-        public HowToPlayViewModel(INavigationService navigationService)
+        public HowToPlayViewModel(INavigationService navigationService, IDialogService dialogService)
+            : base(dialogService)
         {
             _navigationService = navigationService;
             BackCommand = new RelayCommand(ExecuteBack);

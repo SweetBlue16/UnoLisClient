@@ -44,16 +44,12 @@
   <wsdl:message name="IProfileEditManager_ProfileUpdateResponse_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ProfileUpdateResponse" />
   </wsdl:message>
-  <wsdl:message name="IProfileEditManager_ProfileUpdateResponse_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ProfileUpdateResponseResponse" />
-  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IProfileEditManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateProfileData">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileEditManager/UpdateProfileData" message="tns:IProfileEditManager_UpdateProfileData_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ProfileUpdateResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileEditManager/ProfileUpdateResponse" message="tns:IProfileEditManager_ProfileUpdateResponse_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfileEditManager/ProfileUpdateResponseResponse" message="tns:IProfileEditManager_ProfileUpdateResponse_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IProfileEditManager" type="tns:IProfileEditManager">
@@ -67,9 +63,6 @@
     </wsdl:operation>
     <wsdl:operation name="ProfileUpdateResponse">
       <soap12:operation soapAction="http://tempuri.org/IProfileEditManager/ProfileUpdateResponse" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -81,7 +74,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8109/ProfileEditManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>SWEETBLUE16\pswee</Upn>
+          <Upn>EVICTUS\meler</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

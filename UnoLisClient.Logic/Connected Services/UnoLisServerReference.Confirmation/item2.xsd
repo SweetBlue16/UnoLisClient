@@ -23,21 +23,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ConfirmationResponseResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="ResendCodeResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" minOccurs="0" name="response" nillable="true" type="q2:ServiceResponseOfanyType" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ResendCodeResponseResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

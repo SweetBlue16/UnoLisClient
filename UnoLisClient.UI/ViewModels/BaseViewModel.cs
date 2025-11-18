@@ -1,31 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
+using UnoLisServer.Common.Enums;
+using UnoLisClient.Logic.Helpers;
 
 namespace UnoLisClient.UI.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private bool _isLoading;
+        public bool IsLoading
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _isLoading;
+
+            protected set => SetProperty(ref _isLoading, value);
         }
 
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        protected readonly IDialogService _dialogService;
+
+        public BaseViewModel(IDialogService dialogService)
         {
-            if (EqualityComparer<T>.Default.Equals(storage, value))
+            _dialogService = dialogService;
+        }
+        protected void HandleException(MessageCode code, string logMessage, Exception ex)
+        {
+            IsLoading = false;
+            LogManager.Error(logMessage, ex);
+
+            string userMessage = MessageTranslator.GetMessage(code);
+
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                return false;
-            }
-            storage = value;
-            OnPropertyChanged(propertyName);
-            return true;
+                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
+            }));
         }
     }
 }

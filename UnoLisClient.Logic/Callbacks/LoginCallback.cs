@@ -10,7 +10,6 @@ namespace UnoLisClient.Logic.Callbacks
     public class LoginCallback : ILoginManagerCallback
     {
         private readonly Action<ServiceResponse<object>> _onResponseCallback;
-
         public LoginCallback(Action<ServiceResponse<object>> onResponseCallback)
         {
             _onResponseCallback = onResponseCallback;
@@ -18,9 +17,13 @@ namespace UnoLisClient.Logic.Callbacks
 
         public void LoginResponse(ServiceResponse<object> response)
         {
-            Application.Current?.Dispatcher.Invoke(() => 
+            if (Application.Current == null)
+                return;
+            
+            Application.Current.Dispatcher.Invoke(() =>
                 _onResponseCallback?.Invoke(response)
             );
         }
+
     }
 }

@@ -16,22 +16,15 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
     public class ProfileViewViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly ProfileViewService _profileService;
         private readonly Page _view;
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
 
         private bool _isGuest;
         public bool IsGuest
@@ -102,11 +95,10 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand BackCommand { get; }
         public ICommand OpenSocialLinkCommand { get; }
 
-        public ProfileViewViewModel(Page view, IDialogService dialogService)
+        public ProfileViewViewModel(Page view, IDialogService dialogService) : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
             _profileService = new ProfileViewService();
 
             LoadProfileCommand = new RelayCommand(async () => await LoadProfileData());
@@ -141,22 +133,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo al cargar los datos del perfil: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo al cargar los datos del perfil: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo al cargar los datos del perfil: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo al cargar los datos del perfil: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.ProfileFetchFailed, logMessage, ex); // Código más específico
             }
             finally
             {
@@ -272,7 +264,7 @@ namespace UnoLisClient.UI.ViewModels
             PopulateViewModel(defaultData);
         }
 
-        private List<dynamic> CreateStatisticsList(ClientProfileData profileData)
+        private static List<dynamic> CreateStatisticsList(ClientProfileData profileData)
         {
             string winRate = "0%";
             if (profileData.MatchesPlayed > 0)
@@ -291,17 +283,7 @@ namespace UnoLisClient.UI.ViewModels
             return new List<dynamic> { row };
         }
 
-        private void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            _dialogService.HideLoading();
-            LogManager.Error(logMessage, ex);
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
-            }));
-        }
-
-        private Uri CreateUri(string url)
+        private static Uri CreateUri(string url)
         {
             if (string.IsNullOrWhiteSpace(url) || !Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
             {

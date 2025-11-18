@@ -14,6 +14,7 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -22,7 +23,6 @@ namespace UnoLisClient.UI.ViewModels
         private readonly RegisterService _registerService;
         private readonly ConfirmationCodeService _confirmationCodeService;
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly Page _view;
 
         private string _nickname;
@@ -60,13 +60,6 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _rewritedPassword, value);
         }
 
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
-
         private string _errorMessage;
         public string ErrorMessage
         {
@@ -87,11 +80,10 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand ResendCodeCommand { get; }
 
-        public RegisterViewModel(Page view, IDialogService dialogService)
+        public RegisterViewModel(Page view, IDialogService dialogService) : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
             _registerService = new RegisterService();
             _confirmationCodeService = new ConfirmationCodeService();
 
@@ -135,22 +127,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo en registro de usuario: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo en registro de usuario: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo en registro de usuario: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo en registro de usuario: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.RegistrationInternalError, logMessage, ex);
             }
         }
 
@@ -175,22 +167,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo en confirmación de código: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo en confirmación de código: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo en confirmación de código: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo en confirmación de código: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.ConfirmationInternalError, logMessage, ex);
             }
             finally
             {
@@ -219,22 +211,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo en reenvío de código: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo en reenvío de código: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo en reenvío de código: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo en reenvío de código: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.EmailSendingFailed, logMessage, ex);
             }
         }
 
@@ -271,16 +263,6 @@ namespace UnoLisClient.UI.ViewModels
             {
                 _dialogService.HideLoading();
             }
-        }
-
-        private void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            SetLoading(false);
-            LogManager.Error(logMessage, ex);
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
-            }));
         }
 
         private RegistrationData GetRegistrationDataFromUI()

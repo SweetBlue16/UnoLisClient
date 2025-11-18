@@ -18,10 +18,18 @@ namespace UnoLisClient.Logic.Callbacks
 
         public void ProfileDataReceived(ServiceResponse<ProfileData> response)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            Console.WriteLine($"[DEBUG] Callback recibido - Success: {response.Success}");
+
+            // Ejecutar directamente sin Dispatcher
+            try
             {
                 _onResponse?.Invoke(response);
-            });
+                Console.WriteLine($"[DEBUG] Callback completado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] En callback: {ex.Message}");
+            }
         }
     }
 }

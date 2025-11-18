@@ -3,7 +3,8 @@ using System.Windows.Controls;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.ViewModels;
 using UnoLisClient.Logic.Services;
-using UnoLisClient.Logic.Models; 
+using UnoLisClient.Logic.Models;
+using UnoLisClient.UI.Utilities;
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
     public partial class FriendsPage : Page
@@ -12,10 +13,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             InitializeComponent();
 
-            IFriendsService friendsService = new FriendsService();
-            IModalService modalService = new DialogService();
-
-            DataContext = new FriendsViewModel(friendsService, modalService);
+            DataContext = new FriendsViewModel(FriendsService.Instance, new AlertManager());
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

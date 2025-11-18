@@ -5,7 +5,7 @@ using UnoLisClient.UI.Commands;
 
 namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class CardModel : BaseViewModel
+    public class CardModel : ObservableObject
     {
         public Card CardData { get; }
 

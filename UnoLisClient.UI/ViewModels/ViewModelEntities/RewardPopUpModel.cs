@@ -1,6 +1,6 @@
 ﻿namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class RewardPopUpModel : BaseViewModel
+    public class RewardPopUpModel : ObservableObject
     {
         public string AvatarName { get; set; }
         public string AvatarImagePath { get; set; }

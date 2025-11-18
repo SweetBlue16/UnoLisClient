@@ -158,10 +158,10 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Avatar {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IAvatarManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAvatarManager/AvatarsDataReceived", ReplyAction="http://tempuri.org/IAvatarManager/AvatarsDataReceivedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IAvatarManager/AvatarsDataReceived")]
         void AvatarsDataReceived(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Avatar.PlayerAvatar[]> response);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAvatarManager/AvatarUpdateResponse", ReplyAction="http://tempuri.org/IAvatarManager/AvatarUpdateResponseResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IAvatarManager/AvatarUpdateResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Avatar.PlayerAvatar[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Avatar.PlayerAvatar))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]

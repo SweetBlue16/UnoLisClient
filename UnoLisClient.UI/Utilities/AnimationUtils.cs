@@ -13,7 +13,7 @@ namespace UnoLisClient.UI.Utilities
     public static class AnimationUtils
     {
         /// <summary>
-        /// Parámetros para la animación de introducción.
+        /// Parameters for Intro Animation.
         /// </summary>
         public readonly struct IntroAnimationArgs
         {
@@ -30,7 +30,7 @@ namespace UnoLisClient.UI.Utilities
         }
 
         /// <summary>
-        /// Parámetros para el crossfade de medios.
+        /// Crossfade Media Arguments.
         /// </summary>
         public readonly struct CrossfadeMediaArgs
         {
@@ -96,7 +96,7 @@ namespace UnoLisClient.UI.Utilities
         }
 
         /// <summary>
-        /// Ejecuta la secuencia completa de animación de introducción
+        /// Executes the intro animation sequence.
         /// </summary>
         public static async Task PlayIntroAnimationAsync(IntroAnimationArgs args)
         {
@@ -132,7 +132,7 @@ namespace UnoLisClient.UI.Utilities
         }
 
         /// <summary>
-        /// Realiza un crossfade (fade-out, cambio de fuente, fade-in) para video y música
+        ///Makes a crossfade transition between two media sources.
         /// </summary>
 
         public static async Task CrossfadeMediaAsync(CrossfadeMediaArgs args)

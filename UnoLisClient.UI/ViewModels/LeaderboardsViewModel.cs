@@ -13,10 +13,9 @@ using UnoLisClient.UI.ViewModels.ViewModelEntities;
 
 namespace UnoLisClient.UI.ViewModels
 {
-    public class LeaderboardsViewModel
+    public class LeaderboardsViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly Page _view;
 
         public ObservableCollection<LeaderboardEntry> LeaderboardEntries { get; }
@@ -25,14 +24,15 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand LoadLeaderboardsCommand { get; }
         public ICommand BackCommand { get; }
 
-        public LeaderboardsViewModel(Page view, IDialogService dialogService)
+        public LeaderboardsViewModel(Page view, IDialogService dialogService) : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
 
             LoadLeaderboardsCommand = new RelayCommand(LoadLeaderboardData);
             BackCommand = new RelayCommand(ExecuteBack);
+
+            LoadLeaderboardData();
         }
 
         // Simmulated loading of leaderboard data

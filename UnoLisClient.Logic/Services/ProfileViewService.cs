@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using UnoLisClient.Logic.Callbacks;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.UnoLisServerReference.ProfileView;
+using UnoLisServer.Common.Enums;
 using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.Logic.Services
@@ -12,6 +13,7 @@ namespace UnoLisClient.Logic.Services
     {
         public Task<ServiceResponse<ProfileData>> GetProfileDataAsync(string nickname)
         {
+            Console.WriteLine($"[DEBUG] Iniciando GetProfileDataAsync para: {nickname}");
             var taskCompletion = new TaskCompletionSource<ServiceResponse<ProfileData>>();
             ProfileViewManagerClient profileViewClient = null;
 
@@ -28,6 +30,7 @@ namespace UnoLisClient.Logic.Services
                         CloseClientHelper.CloseClient(profileViewClient);
                     }
                 };
+
                 var callbackHandler = new ProfileViewCallback(callbackAction);
                 var context = new InstanceContext(callbackHandler);
                 profileViewClient = new ProfileViewManagerClient(context);

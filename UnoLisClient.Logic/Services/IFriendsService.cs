@@ -11,6 +11,8 @@ namespace UnoLisClient.Logic.Services
 {
     public interface IFriendsService
     {
+        void Initialize(string nickname);
+        void Cleanup();
         Task<FriendRequestResult> SendFriendRequestAsync(string requesterNickname, string targetNickname);
         Task<List<Friend>> GetFriendsListAsync(string nickname);
         Task<List<FriendRequestData>> GetPendingRequestsAsync(string nickname);
@@ -18,8 +20,6 @@ namespace UnoLisClient.Logic.Services
         Task<bool> RejectFriendRequestAsync(FriendRequestData request);
         Task<bool> RemoveFriendAsync(FriendRequestData request);
 
-        void Subscribe(string nickname);
-        void Unsubscribe(string nickname);
         FriendsCallback Callback { get; }
     }
 }

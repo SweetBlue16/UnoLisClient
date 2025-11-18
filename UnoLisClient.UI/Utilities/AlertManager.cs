@@ -73,7 +73,7 @@ namespace UnoLisClient.UI.Utilities
             }));
         }
 
-        private Window GetOwnerWindow(Page page)
+        private static Window GetOwnerWindow(Page page)
         {
             return Window.GetWindow(page);
         }

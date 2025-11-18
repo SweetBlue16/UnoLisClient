@@ -7,7 +7,6 @@
       Title="JoinMatchPage">
 
     <Grid>
-        <!-- Fondo semitransparente -->
         <Border Background="#AA000000"
                 CornerRadius="15"
                 Padding="40"
@@ -17,7 +16,6 @@
                 Height="350">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
 
-                <!--  Título -->
                 <TextBlock Text="JOIN MATCH"
                            FontSize="36"
                            FontWeight="Bold"
@@ -26,7 +24,6 @@
                            FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,0,0,30"/>
 
-                <!--  Campo para el código -->
                 <TextBox x:Name="CodeTextBox"
                          Style="{StaticResource TextBoxStyle}"
                          Width="250"
@@ -34,27 +31,27 @@
                          Tag="Enter match code..."
                          FontSize="18"
                          HorizontalAlignment="Center"
-                         TextAlignment="Center"/>
+                         TextAlignment="Center"
+                         MaxLength="5"
+                         CharacterCasing="Upper"
+                         Text="{Binding LobbyCode, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <!-- Botones -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
-                    <Button x:Name="JoinButton"
-                            Content="JOIN"
+                    <Button Content="JOIN"
                             Style="{StaticResource PrimaryButtonStyle}"
                             Width="130"
                             Height="55"
                             FontSize="18"
                             Cursor="Hand"
-                            Click="ClickJoinButton"/>
+                            Command="{Binding JoinMatchCommand}"/>
 
-                    <Button x:Name="CancelButton"
-                            Content="BACK"
+                    <Button Content="BACK"
                             Style="{StaticResource SecondaryButtonStyle}"
                             Width="130"
                             Height="55"
                             FontSize="18"
                             Cursor="Hand"
-                            Click="ClickCancelButton"/>
+                            Command="{Binding CancelCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Border>

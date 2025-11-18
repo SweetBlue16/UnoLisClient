@@ -10,7 +10,7 @@ namespace UnoLisClient.UI.Commands
     /// <summary>
     /// Versión genérica de RelayCommand que acepta un parámetro de tipo T.
     /// </summary>
-    public class RelayCommand<T> : ICommand
+    public class RelayCommandGeneric<T> : ICommand
     {
         private readonly Action<T> _execute;
         private readonly Predicate<T> _canExecute;
@@ -21,7 +21,7 @@ namespace UnoLisClient.UI.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+        public RelayCommandGeneric(Action<T> execute, Predicate<T> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;

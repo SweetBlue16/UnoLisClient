@@ -15,7 +15,6 @@ namespace UnoLisClient.UI.ViewModels
     public class MatchBoardViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly Page _view;
 
         private CardModel _discardPileTopCard;
@@ -61,11 +60,10 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand ExitGameCommand { get; }
         public ICommand ReportPlayerCommand { get; }
 
-        public MatchBoardViewModel(Page view, IDialogService dialogService)
+        public MatchBoardViewModel(Page view, IDialogService dialogService) : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
 
             DrawCardCommand = new RelayCommand(ExecuteDrawCard);
             CallUnoCommand = new RelayCommand(ExecuteCallUno);

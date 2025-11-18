@@ -31,11 +31,11 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Confirmation {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IConfirmationManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfirmationManager/ConfirmationResponse", ReplyAction="http://tempuri.org/IConfirmationManager/ConfirmationResponseResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IConfirmationManager/ConfirmationResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
         void ConfirmationResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfirmationManager/ResendCodeResponse", ReplyAction="http://tempuri.org/IConfirmationManager/ResendCodeResponseResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IConfirmationManager/ResendCodeResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
         void ResendCodeResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }

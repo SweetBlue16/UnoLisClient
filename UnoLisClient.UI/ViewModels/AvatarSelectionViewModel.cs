@@ -16,6 +16,7 @@ using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -23,7 +24,6 @@ namespace UnoLisClient.UI.ViewModels
     {
         private readonly AvatarService _avatarService;
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly Page _view;
 
         public ObservableCollection<AvatarModel> CommonAvatars { get; } = new ObservableCollection<AvatarModel>();
@@ -44,23 +44,15 @@ namespace UnoLisClient.UI.ViewModels
             }
         }
 
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value, nameof(IsLoading));
-        }
-
         public ICommand LoadAvatarsCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
         public ICommand SelectAvatarCommand { get; }
 
-        public AvatarSelectionViewModel(Page view, IDialogService dialogService)
+        public AvatarSelectionViewModel(Page view, IDialogService dialogService) : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
             _avatarService = new AvatarService();
 
             LoadAvatarsCommand = new RelayCommand(async () => await LoadAvatarsAsync());
@@ -71,6 +63,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private async Task LoadAvatarsAsync()
         {
+            SetLoading(true);
             try
             {
                 var response = await _avatarService.GetAvatarsAsync(CurrentSession.CurrentUserNickname);
@@ -116,22 +109,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo al cargar avatares: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo al cargar avatares: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo al cargar avatares: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo al cargar avatares: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.ProfileFetchFailed, logMessage, ex);
             }
             finally
             {
@@ -172,22 +165,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo al actualizar el avatar: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo al actualizar el avatar: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo al actualizar el avatar: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo al actualizar el avatar: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.ProfileUpdateFailed, logMessage, ex);
             }
             finally
             {
@@ -240,16 +233,6 @@ namespace UnoLisClient.UI.ViewModels
             {
                 _dialogService.HideLoading();
             }
-        }
-
-        private void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            SetLoading(false);
-            LogManager.Error(logMessage, ex);
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
-            }));
         }
     }
 }

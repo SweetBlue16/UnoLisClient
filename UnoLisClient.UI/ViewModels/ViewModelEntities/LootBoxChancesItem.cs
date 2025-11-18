@@ -2,7 +2,7 @@
 
 namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class LootBoxChancesItem : BaseViewModel
+    public class LootBoxChancesItem : ObservableObject
     {
         public string BoxName { get; set; }
         public string Rarity { get; set; }

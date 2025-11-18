@@ -48,9 +48,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnoLisServer.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\UnoLisServer\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
+    <Reference Include="UnoLisServer.Common">
+      <HintPath>..\..\..\..\..\source\repos\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -104,6 +103,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.Matchmaking\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\UnoLisServerReference.Notifications\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,12 +152,16 @@
     <Compile Include="Mappers\ProfileDataMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AvatarService.cs" />
+    <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\ConfirmationCodeService.cs" />
     <Compile Include="Services\FriendsService.cs" />
+    <Compile Include="Services\IChatService.cs" />
     <Compile Include="Services\IFriendsService.cs" />
+    <Compile Include="Services\IMatchmakingService.cs" />
     <Compile Include="Services\IModalService.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\LogoutService.cs" />
+    <Compile Include="Services\MatchmakingService.cs" />
     <Compile Include="Services\ProfileEditService.cs" />
     <Compile Include="Services\ProfileViewService.cs" />
     <Compile Include="Services\RegisterService.cs" />
@@ -247,22 +255,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\LeaderboardsManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.Login\item.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\service.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Login\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\item1.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\item2.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Common.Enums.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\item3.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Common.Models.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\item4.xsd">
+    <None Include="Connected Services\UnoLisServerReference.Login\UnoLisServer.Contracts.DTOs.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UnoLisServerReference.Login\LoginManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Logout\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -276,6 +284,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Logout\LogoutManager.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\MatchmakingManager.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\UnoLisClient.Logic.UnoLisServerReference.Matchmaking.CreateMatchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\UnoLisClient.Logic.UnoLisServerReference.Matchmaking.JoinMatchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Notifications\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -372,6 +396,7 @@
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Leaderboards\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Login\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Logout\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Matchmaking\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Notifications\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyClient\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyHost\" />
@@ -379,21 +404,6 @@
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.ProfileView\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Register\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Shop\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Login\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Login\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Login\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.Login\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UnoLisServerReference.Register\item.disco" />
@@ -601,6 +611,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UnoLisServerReference.Avatar\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Login\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Login\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Login\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

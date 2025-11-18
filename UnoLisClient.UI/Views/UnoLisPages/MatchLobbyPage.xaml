@@ -4,9 +4,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:viewModels="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
       mc:Ignorable="d"
       Title="MatchLobbyPage"
-      Loaded="MatchLobbyPage_Loaded">
+      Loaded="MatchLobbyPage_Loaded"
+      Unloaded="MatchLobbyPage_Unloaded">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
 
     <Grid Background="#88000000">
         <Grid.ColumnDefinitions>
@@ -14,33 +19,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Panel de invitaciones de amigos -->
-        <Border Grid.Column="0"
-        Background="#55000000"
-        CornerRadius="12"
-        Padding="20"
-        Width="300"
-        VerticalAlignment="Stretch"
-        Margin="40,60,20,60">
+        <Border Grid.Column="0" Background="#55000000" CornerRadius="12" Padding="20"
+                Width="300" VerticalAlignment="Stretch" Margin="40,60,20,60">
             <StackPanel>
-                <!-- Título -->
-                <TextBlock Text="Invite Friends"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,10"/>
+                <TextBlock Text="Invite Friends" FontSize="28" FontWeight="Bold" Foreground="White"
+                           HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
-                <!-- Lista de amigos -->
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ItemsControl x:Name="FriendsList"
-                          Margin="0,10,0,10">
+                    <ItemsControl ItemsSource="{Binding Friends}" Margin="0,10,0,10">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="#33000000"
-                                CornerRadius="8"
-                                Padding="8"
-                                Margin="0,4">
+                            <DataTemplate DataType="{x:Type viewModels:LobbyFriendViewModel}">
+                                <Border Background="#33000000" CornerRadius="8" Padding="8" Margin="0,4">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -48,32 +37,47 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- Avatar -->
-                                        <Ellipse Width="40" Height="40"
-                                         Fill="DarkGray"
-                                         Grid.Column="0"/>
+                                        <Ellipse Width="40" Height="40" Fill="DarkGray" Grid.Column="0"/>
 
-                                        <!-- Nombre + estado -->
-                                        <StackPanel Grid.Column="1"
-                                            Margin="10,0,0,0"
-                                            VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding FriendName}"
-                                               FontWeight="Bold"
-                                               Foreground="White"
-                                               FontSize="14"/>
-                                            <TextBlock Text="{Binding Status}"
-                                               FontSize="12"
-                                               Foreground="{Binding StatusColor}"/>
+                                        <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Nickname}" FontWeight="Bold" Foreground="White" FontSize="14"/>
+                                            <TextBlock FontSize="12">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text" Value="Offline"/>
+                                                        <Setter Property="Foreground" Value="Gray"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                                                <Setter Property="Text" Value="Online"/>
+                                                                <Setter Property="Foreground" Value="LimeGreen"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
                                         </StackPanel>
 
-                                        <!-- Botón Invitar -->
-                                        <Button Content="Invite"
-                                        Width="60"
-                                        Height="28"
-                                        Grid.Column="2"
-                                        Margin="5,0,0,0"
-                                        Style="{StaticResource SecondaryButtonStyle}"
-                                        Click="ClickInviteButton"/>
+                                        <Button Grid.Column="2" Width="60" Height="28" Margin="5,0,0,0"
+                                                Command="{Binding DataContext.InviteFriendCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
+                                                    <Setter Property="Content" Value="Invite"/>
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Invited}" Value="True">
+                                                            <Setter Property="Content" Value="Invited"/>
+                                                            <Setter Property="Background" Value="Green"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsOnline}" Value="False">
+                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                            <Setter Property="Content" Value="Offline"/>
+                                                            <Setter Property="Background" Value="#333"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -81,187 +85,52 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <!-- Botón global -->
-                <Button x:Name="SendInvitesButton"
-                Content="Send Invites"
-                Width="200"
-                Height="45"
-                FontSize="16"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Center"
-                Style="{StaticResource PrimaryButtonStyle}"
-                Click="ClickSendInvitesButton"/>
+                <Button Content="Send Invites" Width="200" Height="45" FontSize="16" Margin="0,15,0,0"
+                        HorizontalAlignment="Center" Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding SendInvitesCommand}"/>
             </StackPanel>
         </Border>
 
-        <!-- Zona central: avatares + logo + controles -->
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Rejilla cuadrada 3x3 responsiva -->
-            <Viewbox Grid.Row="0"
-                     Stretch="Uniform"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     Margin="0,10,0,0">
-                <Grid Width="520" Height="520">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Jugador 3 (Arriba) -->
-                    <StackPanel Grid.Row="0" Grid.Column="1"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
-                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
-                        <TextBlock Text="Player 3"
-                                   Foreground="White"
-                                   FontSize="15"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,5,0,0"/>
-                    </StackPanel>
-
-                    <!-- Jugador 1 (Izquierda) -->
-                    <StackPanel Grid.Row="1" Grid.Column="0"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
-                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
-                        <TextBlock Text="Player 1"
-                                   Foreground="White"
-                                   FontSize="15"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,5,0,0"/>
-                    </StackPanel>
-
-                    <!-- Jugador 2 (Derecha) -->
-                    <StackPanel Grid.Row="1" Grid.Column="2"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
-                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
-                        <TextBlock Text="Player 2"
-                                   Foreground="White"
-                                   FontSize="15"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,5,0,0"/>
-                    </StackPanel>
-
-                    <!-- Jugador 4 (Abajo) -->
-                    <StackPanel Grid.Row="2" Grid.Column="1"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Margin="0,20,0,10">
-                        <Ellipse Width="100" Height="100" Fill="DarkGray"/>
-                        <TextBlock Text="Player 4"
-                                   Foreground="White"
-                                   FontSize="15"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,5,0,0"/>
-                    </StackPanel>
-
-                    <!-- Logo UNO (Centro exacto) -->
-                    <Viewbox Grid.Row="1" Grid.Column="1"
-                             Stretch="Uniform"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center"
-                             Width="200" Height="170">
-                        <Image Source="/Assets/unoLogoPixelArt.png">
-                            <Image.Effect>
-                                <DropShadowEffect BlurRadius="20"
-                                                  ShadowDepth="4"
-                                                  Color="Black"
-                                                  Opacity="0.6"/>
-                            </Image.Effect>
-                        </Image>
-                    </Viewbox>
-                </Grid>
-            </Viewbox>
-
-            <!-- Controles de lobby -->
-            <StackPanel Grid.Row="1"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center"
-                        Margin="0,10,0,20"
-                        Orientation="Vertical">
-
-                <!-- Botón READY -->
-                <Button x:Name="StartButton"
-                        Content="READY"
-                        Width="180"
-                        Height="55"
-                        FontSize="17"
-                        Margin="0,5,0,15"
+            <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,20" Orientation="Vertical">
+                <Button Content="READY" Width="180" Height="55" FontSize="17" Margin="0,5,0,15"
                         Style="{StaticResource PrimaryButtonStyle}"
-                        Click="ClickReadyButton"/>
-
-                <!-- Código + Jugadores Ready -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="0,0,0,8">
-
-                    <Border Background="#33000000"
-                            CornerRadius="8"
-                            Padding="10,5"
-                            BorderBrush="White"
-                            BorderThickness="1"
-                            Margin="0,0,10,0">
-                        <TextBlock Text="CODE: ABX92"
-                                   Foreground="Lime"
-                                   FontFamily="Consolas"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"/>
-                    </Border>
-
-                    <TextBlock Text="3 / 4 Players ready"
-                               FontSize="15"
-                               Foreground="White"
-                               VerticalAlignment="Center"/>
-                </StackPanel>
+                        Command="{Binding ReadyCommand}"/>
             </StackPanel>
 
-            <!-- ⚙️ Chat y Ajustes -->
-            <StackPanel Orientation="Vertical"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right"
-                        Margin="0,20,20,0">
-                <Button Width="42" Height="42"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="ClickSettingsButton">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,20,0">
+                <Button Width="42" Height="42" Background="Transparent" BorderThickness="0"
+                        Command="{Binding ToggleSettingsCommand}">
                     <Image Source="/Assets/settingsIcon.png" Width="26" Height="26"/>
                 </Button>
-
-                <Button Width="42" Height="42"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="ClickChatButton"
-                        Margin="0,12,0,0">
+                <Button Width="42" Height="42" Background="Transparent" BorderThickness="0"
+                        Command="{Binding ToggleChatCommand}" Margin="0,12,0,0">
                     <Image Source="/Assets/friendsIcon.png" Width="26" Height="26"/>
                 </Button>
             </StackPanel>
 
+            <Border Grid.RowSpan="2" Grid.Column="1"
+                    Background="Transparent"
+                    Visibility="{Binding IsChatVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    MouseLeftButtonDown="ChatOverlay_MouseLeftButtonDown" />
+
             <controls:SettingsModal x:Name="SettingsModal"
-                                Grid.ColumnSpan="2"
-                                Visibility="Collapsed"
-                                CloseRequested="CloseRequestedSettingsModal"
-                                LeaveMatchRequested="LeaveMatchRequestedSettingsModal" />
-            
+                                    Grid.Column="1" Grid.RowSpan="2"
+                                    Visibility="{Binding IsSettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    CloseRequested="CloseRequestedSettingsModal"
+                                    LeaveMatchRequested="LeaveMatchRequestedSettingsModal" />
+
             <controls:ChatControl x:Name="ChatControl"
+                                  Grid.Column="1" Grid.RowSpan="2"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Top"
                                   Margin="0,80,20,0"
-                                  Visibility="Collapsed" />
+                                  Visibility="{Binding IsChatVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
     </Grid>
 </Page>

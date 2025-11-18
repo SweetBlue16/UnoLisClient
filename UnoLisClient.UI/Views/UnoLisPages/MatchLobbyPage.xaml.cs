@@ -1,145 +1,140 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.ServiceModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using UnoLisClient.UI.Views.UnoLisPages;
-using UnoLisClient.Logic.UnoLisServerReference.Chat;
-using UnoLisClient.UI.Utilities;
-using UnoLisClient.UI.Views.UnoLisWindows;
+using System.Windows.Input;
 using UnoLisClient.Logic.Models;
+using UnoLisClient.Logic.Services;
+using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.ViewModels;
+using UnoLisClient.UI.Views.UnoLisWindows;
 
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
-    /// <summary>
-    /// Interaction logic MatchLobbyPage.xaml
-    /// </summary>
-    public partial class MatchLobbyPage : Page
+    public partial class MatchLobbyPage : Page, INavigationService
     {
-        private bool _isChatVisible = false;
-        private readonly string _currentUserNickname;
-        
+        private readonly MatchLobbyViewModel _viewModel;
 
-        public ObservableCollection<ChatMessageData> ChatMessages { get; set; } = new ObservableCollection<ChatMessageData>();
-        public ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
-
-        public MatchLobbyPage()
+        public MatchLobbyPage(string lobbyCode)
         {
             InitializeComponent();
-            _currentUserNickname = CurrentSession.CurrentUserNickname;
-            LoadFriends();
-            ChatControl.Initialize(_currentUserNickname);
 
-            this.DataContext = this;
+            _viewModel = new MatchLobbyViewModel(
+                this,
+                new AlertManager(),
+                FriendsService.Instance,
+                ChatService.Instance,
+                lobbyCode
+            );
+
+            this.DataContext = _viewModel;
+            this.ChatControl.SetViewModel(_viewModel.ChatVM);
+
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
-        private void LoadFriends()
+        private async void MatchLobbyPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Friends.Add(new Friend { Nickname = "SweetBlue16", IsOnline = true });
-            Friends.Add(new Friend { Nickname = "MapleVR", IsOnline = false });
-            Friends.Add(new Friend { Nickname = "Erickmel", IsOnline = true });
-            Friends.Add(new Friend { Nickname = "IngeAbraham", IsOnline = true });
-
-            FriendsList.ItemsSource = Friends;
+            await _viewModel.OnPageLoaded();
+            await SetLobbyBackgroundAsync();
+            AnimationUtils.FadeIn(this.Content as Grid, 0.8);
         }
 
-
-        private void ClickInviteButton(object sender, RoutedEventArgs e)
+        private async void MatchLobbyPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            SoundManager.PlayClick();
-            if (sender is Button button && button.DataContext is Friend friend)
-            {
-                friend.Invited = !friend.Invited;
-                button.Content = friend.Invited ? "Invited" : "Invite";
-                button.Background = friend.Invited ? Brushes.Green : Brushes.Transparent;
-            }
-        }
-
-        private void ClickSendInvitesButton(object sender, RoutedEventArgs e)
-        {
-            SoundManager.PlayClick();
-            var invited = Friends.Where(f => f.Invited).Select(f => f.Nickname).ToList();
-
-            if (invited.Any())
-            {
-                MessageBox.Show($"Invitations sent to: {string.Join(", ", invited)}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("No friends selected for invitation.", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        private void ClickSettingsButton(object sender, RoutedEventArgs e)
-        {
-            SoundManager.PlayClick();
-            AnimationUtils.FadeIn(SettingsModal);
-        }
-
-        private async void CloseRequestedSettingsModal(object sender, EventArgs e)
-        {
-            await AnimationUtils.FadeOut(SettingsModal);
-        }
-
-        private async void ClickChatButton(object sender, RoutedEventArgs e)
-        {
-            SoundManager.PlayClick();
-            if (_isChatVisible)
-            {
-                await AnimationUtils.FadeOut(ChatControl); 
-            }
-            else
-            {
-                AnimationUtils.FadeIn(ChatControl);
-            }
-            _isChatVisible = !_isChatVisible;
-        }
-
-        private async void LeaveMatchRequestedSettingsModal(object sender, EventArgs e)
-        {
+            await _viewModel.OnPageUnloaded();
+            _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
             try
             {
-                ChatControl.Cleanup();
-
                 var mainWindow = Application.Current.MainWindow as MainWindow;
                 if (mainWindow != null)
                 {
                     await mainWindow.RestoreDefaultBackground();
                 }
-                await AnimationUtils.FadeOut(SettingsModal);
-                await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.8);
-                NavigationService?.Navigate(new MainMenuPage());
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ocurrió un error al salir de la partida: {ex.Message}", "Error al Salir");
+                System.Diagnostics.Debug.WriteLine($"Error during lobby cleanup: {ex.Message}");
             }
-        }
-
-        private async void MatchLobbyPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            await SetLobbyBackgroundAsync();
         }
 
         private static async Task SetLobbyBackgroundAsync()
         {
             var mainWindow = Application.Current.MainWindow as MainWindow;
-
             if (mainWindow != null)
             {
                 await mainWindow.SetBackgroundMedia("Assets/lobbyVideo.mp4", "Assets/lobbyMusic.mp3");
             }
         }
-
-        private void ClickReadyButton(object sender, RoutedEventArgs e)
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            SoundManager.PlayClick();
-            NavigationService?.Navigate(new MatchBoardPage());
+            if (e.PropertyName == nameof(MatchLobbyViewModel.IsChatVisible))
+            {
+                if (_viewModel.IsChatVisible)
+                {
+                    AnimationUtils.FadeIn(ChatControl);
+                }
+                else
+                {
+                    AnimationUtils.FadeOut(ChatControl);
+                }
+            }
+            else if (e.PropertyName == nameof(MatchLobbyViewModel.IsSettingsVisible))
+            {
+                if (_viewModel.IsSettingsVisible)
+                {
+                    AnimationUtils.FadeIn(SettingsModal);
+                }
+                else
+                {
+                    AnimationUtils.FadeOut(SettingsModal);
+                }
+            }
+        }
+
+        private void ChatOverlay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_viewModel.IsChatVisible)
+            {
+                _viewModel.ToggleChatCommand.Execute(null);
+            }
+        }
+
+        private void CloseRequestedSettingsModal(object sender, EventArgs e)
+        {
+            if (_viewModel.IsSettingsVisible)
+            {
+                _viewModel.ToggleSettingsCommand.Execute(null);
+            }
+        }
+
+        private async void LeaveMatchRequestedSettingsModal(object sender, EventArgs e)
+        {
+
+            if (_viewModel.IsSettingsVisible)
+            {
+                _viewModel.ToggleSettingsCommand.Execute(null);
+            }
+            await AnimationUtils.FadeOut(SettingsModal); // Espera a que se vaya
+
+            // 2. Animar la salida de la página
+            await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.8);
+
+            // 3. Dejar que el VM navegue (esto estaba perfecto)
+            _viewModel.LeaveMatchCommand.Execute(null);
+        }
+
+
+        // --- Implementación de INavigationService (Estaba perfecta) ---
+        public void NavigateTo(Page page)
+        {
+            NavigationService?.Navigate(page);
+        }
+        public void GoBack()
+        {
+            NavigationService?.GoBack();
         }
     }
 }

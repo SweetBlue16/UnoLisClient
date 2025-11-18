@@ -8,7 +8,7 @@ namespace UnoLisClient.UI.Services
     /// Implementa ambas interfaces (IDialogService y IModalService) para 
     /// mantener la compatibilidad con código existente y añadir nueva funcionalidad.
     /// </summary>
-    public class DialogService : IDialogService, IModalService
+    public class DialogService : IModalService
     {
         private Window _loadingWindow;
         public void ShowLoading()

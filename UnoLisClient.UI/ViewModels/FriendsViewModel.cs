@@ -12,22 +12,16 @@ using UnoLisClient.Logic.UnoLisServerReference.Friends;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
+using System.ServiceModel;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
     public class FriendsViewModel : BaseViewModel
     {
         private readonly IFriendsService _friendsService;
-        private readonly IModalService _modalService; 
 
         public ObservableCollection<Friend> Friends { get; } = new ObservableCollection<Friend>();
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
 
         private string _statusMessage;
         public string StatusMessage
@@ -40,20 +34,17 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand RemoveFriendCommand { get; }
         public ICommand OpenAddFriendModalCommand { get; }
 
-        public FriendsViewModel(IFriendsService friendsService, IModalService modalService)
+        public FriendsViewModel(IFriendsService friendsService, IDialogService dialogService) 
+            : base(dialogService)
         {
             _friendsService = friendsService;
-            _modalService = modalService;
 
-            _friendsService.Callback.FriendActionNotificationEvent += OnFriendActionNotification;
             _friendsService.Callback.FriendListUpdatedEvent += OnFriendListUpdated;
-            _friendsService.Callback.FriendRequestReceivedEvent += OnFriendRequestReceived;
 
             RefreshFriendsCommand = new RelayCommand(async () => await ExecuteRefreshFriendsAsync());
-            RemoveFriendCommand = new RelayCommand<Friend>(async (f) => await ExecuteRemoveFriendAsync(f));
+            RemoveFriendCommand = new RelayCommandGeneric<Friend>(async (f) => await ExecuteRemoveFriendAsync(f));
             OpenAddFriendModalCommand = new RelayCommand(ExecuteOpenAddFriendModal);
 
-            _friendsService.Subscribe(CurrentSession.CurrentUserNickname);
             _ = ExecuteRefreshFriendsAsync(); 
         }
 
@@ -71,10 +62,20 @@ namespace UnoLisClient.UI.ViewModels
                         Friends.Add(f);
                 });
             }
+            catch (TimeoutException timeoutEx)
+            {
+                string logMessage = $"Timeout refreshing friends: {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Communication error refreshing friends: {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
+            }
             catch (Exception ex)
             {
-                LogManager.Error($"Error refreshing friends: {ex.Message}", ex);
-                _modalService.ShowAlert("Error", "Could not load friends list due to a server error.");
+                string logMessage = $"Error refreshing friends: {ex.Message}";
+                HandleException(MessageCode.FriendsInternalError, logMessage, ex);
             }
             finally
             {
@@ -86,11 +87,11 @@ namespace UnoLisClient.UI.ViewModels
         {
             if (friend == null) return;
 
-            var confirm = _modalService.ShowConfirmation(
+            bool confirmed = _dialogService.ShowQuestionDialog(
                 "Confirm Removal",
                 $"Are you sure you want to remove {friend.Nickname}?");
 
-            if (confirm != MessageBoxResult.Yes) return;
+            if (!confirmed) return;
 
             IsLoading = true;
             try
@@ -110,17 +111,27 @@ namespace UnoLisClient.UI.ViewModels
                         Friends.Remove(friend);
                     });
 
-                    _modalService.ShowAlert("Success", $"{friend.Nickname} was successfully removed.");
+                    _dialogService.ShowAlert("Success", $"{friend.Nickname} was successfully removed.");
                 }
                 else
                 {
-                    _modalService.ShowAlert("Error", $"Could not remove {friend.Nickname}. Please try again.");
+                    _dialogService.ShowAlert("Error", $"Could not remove {friend.Nickname}. Please try again.");
                 }
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                string logMessage = $"Timeout removing friend: {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Communication error removing friend: {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error removing friend: {ex.Message}", ex);
-                _modalService.ShowAlert("Error", "A fatal error occurred while processing the request.");
+                string logMessage = $"Error removing friend: {ex.Message}";
+                HandleException(MessageCode.FriendsInternalError, logMessage, ex);
             }
             finally
             {
@@ -130,9 +141,9 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteOpenAddFriendModal()
         {
-            string targetNickname = _modalService.ShowTextInputDialog(
+            string targetNickname = _dialogService.ShowInputDialog(
                 "Add a Friend",
-                "Enter the nickname of the player you wish to add:");
+                "Enter the nickname of the player you wish to add:", "Nickname...");
 
             if (!string.IsNullOrWhiteSpace(targetNickname))
             {
@@ -147,7 +158,8 @@ namespace UnoLisClient.UI.ViewModels
             {
                 if (string.Equals(targetNickname, CurrentSession.CurrentUserNickname, StringComparison.OrdinalIgnoreCase))
                 {
-                    _modalService.ShowAlert("Warning", "You cannot add yourself.");
+                    _dialogService.ShowWarning(MessageTranslator.GetMessage(MessageCode.CannotAddSelfAsFriend));
+                    return;
                 }
 
                 var requestResult = await _friendsService.SendFriendRequestAsync(
@@ -156,64 +168,89 @@ namespace UnoLisClient.UI.ViewModels
 
                 HandleFriendRequestResult(requestResult, targetNickname);
             }
+            catch (TimeoutException timeoutEx)
+            {
+                string logMessage = $"Timeout sending friend request: {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Communication error sending friend request: {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
+            }
             catch (Exception ex)
             {
-                LogManager.Error($"Fatal error sending friend request: {ex.Message}", ex);
-                _modalService.ShowAlert("Error", "An unexpected error occurred. Please check server status.");
+                string logMessage = $"Fatal error sending friend request: {ex.Message}";
+                HandleException(MessageCode.FriendsInternalError, logMessage, ex);
             }
             finally
             {
                 IsLoading = false;
             }
         }
-        
+
         private void HandleFriendRequestResult(FriendRequestResult result, string targetNickname)
         {
-            string title = "Friend Request";
-            string message;
+            MessageCode code;
 
             switch (result)
             {
                 case FriendRequestResult.Success:
-                    message = $"Friend request sent to {targetNickname}.";
+                    code = MessageCode.FriendRequestSent;
                     break;
                 case FriendRequestResult.UserNotFound:
-                    message = $"Player '{targetNickname}' was not found.";
+                    code = MessageCode.PlayerNotFound;
                     break;
                 case FriendRequestResult.AlreadyFriends:
-                    message = $"You are already friends with {targetNickname}.";
+                    code = MessageCode.AlreadyFriends;
                     break;
                 case FriendRequestResult.RequestAlreadySent:
-                    message = $"A request has already been sent to {targetNickname}.";
+                    code = MessageCode.PendingFriendRequest;
                     break;
                 case FriendRequestResult.RequestAlreadyReceived:
-                    message = $"You have a pending request from {targetNickname}. Check your inbox!";
+                    code = MessageCode.FriendRequestReceived;
                     break;
                 case FriendRequestResult.CannotAddSelf:
-                    message = "You cannot send a friend request to yourself.";
+                    code = MessageCode.CannotAddSelfAsFriend;
                     break;
-                case FriendRequestResult.Failed:
                 default:
-                    message = "The request could not be processed due to a server error or timeout.";
+                    code = MessageCode.GeneralServerError;
                     break;
             }
-            
-            _modalService.ShowAlert(title, message); 
+
+            string message = MessageTranslator.GetMessage(code);
+
+            try
+            {
+                message = string.Format(message, targetNickname);
+            }
+            catch (FormatException) //¿Esta excepción puede quedarse sin nada dentro, sugerencia de la IA?
+            {
+                LogManager.Error("String format error in HandleFriendRequestResult message formatting.");
+            }
+
+            if (result == FriendRequestResult.Success)
+            {
+                _dialogService.ShowAlert("Friend Request", message);
+            }
+            else
+            {
+                _dialogService.ShowWarning(message);
+            }
         }
 
         private void OnFriendListUpdated(List<FriendData> updatedList)
         {
-            _ = ExecuteRefreshFriendsAsync(); 
-        }
+            App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                Friends.Clear();
+                var localFriends = updatedList.Select(dto => new Friend(dto));
 
-        private void OnFriendActionNotification(string message, bool isSuccess)
-        {
-            _modalService.ShowAlert(isSuccess ? "Notification" : "Alert", message);
-        }
-
-        private void OnFriendRequestReceived(FriendRequestData newRequest)
-        {
-            _modalService.ShowAlert("New Request", $"You received a friend request from {newRequest.RequesterNickname}.");
+                foreach (var f in localFriends.OrderBy(x => x.Nickname))
+                {
+                    Friends.Add(f);
+                }
+            });
         }
 
     }

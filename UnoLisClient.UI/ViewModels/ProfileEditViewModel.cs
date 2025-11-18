@@ -16,13 +16,13 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
     public class ProfileEditViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
         private readonly ProfileEditService _profileEditService;
         private readonly Page _view;
         private readonly ClientProfileData _originalProfileData;
@@ -71,21 +71,14 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _tikTokUrl, value);
         }
 
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
-
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
         public ProfileEditViewModel(Page view, IDialogService dialogService, ClientProfileData currentProfile)
+            : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)_view;
-            _dialogService = dialogService;
             _profileEditService = new ProfileEditService();
             _originalProfileData = currentProfile;
 
@@ -126,22 +119,22 @@ namespace UnoLisClient.UI.ViewModels
             catch (EndpointNotFoundException enfEx)
             {
                 string logMessage = $"Fallo al actualizar los datos del perfil: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
                 string logMessage = $"Fallo al actualizar los datos del perfil: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
                 string logMessage = $"Fallo al actualizar los datos del perfil: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
                 string logMessage = $"Fallo al actualizar los datos del perfil: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                HandleException(MessageCode.ProfileUpdateFailed, logMessage, ex); // Código más específico
             }
             finally
             {
@@ -194,16 +187,6 @@ namespace UnoLisClient.UI.ViewModels
             {
                 _dialogService.HideLoading();
             }
-        }
-
-        private void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            _dialogService.HideLoading();
-            LogManager.Error(logMessage, ex);
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
-            }));
         }
     }
 }

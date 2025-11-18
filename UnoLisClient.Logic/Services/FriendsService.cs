@@ -10,25 +10,67 @@ using UnoLisClient.Logic.Mappers;
 
 namespace UnoLisClient.Logic.Services
 {
-    public class FriendsService : IDisposable, IFriendsService
+    public class FriendsService :  IFriendsService
     {
-
-        private readonly IFriendsManager _proxy;
-        private readonly DuplexChannelFactory<IFriendsManager> _factory;
-        public FriendsCallback Callback { get; } = new FriendsCallback();
-        private bool _disposed = false;
-        public FriendsService()
+        private static readonly Lazy<FriendsService> _instance =
+            new Lazy<FriendsService>(() => new FriendsService());
+        public static IFriendsService Instance => _instance.Value;
+        private IFriendsManager _proxy;
+        private DuplexChannelFactory<IFriendsManager> _factory;
+        private string _currentUserNickname;
+        public FriendsCallback Callback { get; }
+        private FriendsService()
         {
-            var context = new InstanceContext(Callback);
-            _factory = new DuplexChannelFactory<IFriendsManager>(context, "FriendsManagerEndpoint");
-            _proxy = _factory.CreateChannel();
+            Callback = new FriendsCallback();
+        }
+
+        public void Initialize(string nickname)
+        {
+            if (_factory != null) return;
+
+            try
+            {
+                _currentUserNickname = nickname;
+                var context = new InstanceContext(Callback);
+
+                _factory = new DuplexChannelFactory<IFriendsManager>(context, "FriendsManagerEndpoint");
+                _proxy = _factory.CreateChannel();
+
+                _proxy.SubscribeToFriendUpdates(_currentUserNickname);
+            }
+            catch (TimeoutException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[FriendsService.Initialize] Timeout: {ex.Message}");
+                Cleanup();
+                throw;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[FriendsService.Initialize] Endpoint not found: {ex.Message}");
+                Cleanup();
+                throw;
+            }
+            catch (CommunicationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[FriendsService.Initialize] Communication error: {ex.Message}");
+                Cleanup();
+                throw;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[FriendsService.Initialize] Unexpected error: {ex.Message}");
+                Cleanup();
+                throw;
+            }
         }
 
         /// <summary>
-        /// Envía una solicitud de amistad y espera el resultado de negocio (Success/Error Code) del servidor.
+        /// Send a Friend Request to another player and returns the result from the server.
         /// </summary>
         public async Task<FriendRequestResult> SendFriendRequestAsync(string requesterNickname, string targetNickname)
         {
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+
             try
             {
                 return await _proxy.SendFriendRequestAsync(requesterNickname, targetNickname);
@@ -51,10 +93,11 @@ namespace UnoLisClient.Logic.Services
         }
 
         /// <summary>
-        /// Acepta una solicitud de amistad.
+        /// Accepts a friend request.
         /// </summary>
         public async Task<bool> AcceptFriendRequestAsync(FriendRequestData request)
         {
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
             try
             {
                 return await _proxy.AcceptFriendRequestAsync(request);
@@ -67,10 +110,11 @@ namespace UnoLisClient.Logic.Services
         }
 
         /// <summary>
-        /// Rechaza una solicitud de amistad.
+        /// Declines a friend request.
         /// </summary>
         public async Task<bool> RejectFriendRequestAsync(FriendRequestData request)
         {
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
             try
             {
                 return await _proxy.RejectFriendRequestAsync(request);
@@ -83,10 +127,11 @@ namespace UnoLisClient.Logic.Services
         }
 
         /// <summary>
-        /// Elimina una amistad confirmada.
+        /// Remove a friend from the player's friends list.
         /// </summary>
         public async Task<bool> RemoveFriendAsync(FriendRequestData request)
         {
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
             try
             {
                 return await _proxy.RemoveFriendAsync(request);
@@ -98,14 +143,14 @@ namespace UnoLisClient.Logic.Services
             }
         }
         /// <summary>
-        /// Obtiene la lista de amigos confirmados del jugador.
+        /// Get confirmed friends list for the player.
         /// </summary>
         public async Task<List<Friend>> GetFriendsListAsync(string nickname)
         {
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
             try
             {
                 var resultDtos = await _proxy.GetFriendsListAsync(nickname);
-                // Mapeo: Convertir DTOs WCF a modelos de dominio Friend (Local)
                 return resultDtos.Select(f => new Friend(f)).ToList();
             }
             catch (Exception ex)
@@ -116,10 +161,11 @@ namespace UnoLisClient.Logic.Services
         }
 
         /// <summary>
-        /// Obtiene la lista de solicitudes de amistad pendientes.
+        /// Get pending friend requests for the player.
         /// </summary>
         public async Task<List<FriendRequestData>> GetPendingRequestsAsync(string nickname)
         {
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
             try
             {
                 var resultDtos = await _proxy.GetPendingRequestsAsync(nickname);
@@ -133,38 +179,46 @@ namespace UnoLisClient.Logic.Services
         }
 
         /// <summary>
-        /// Inicia la suscripción Duplex a notificaciones del servidor.
+        /// Implementation for cleaning up WCF resources.
         /// </summary>
-        public void Subscribe(string nickname) => _proxy.SubscribeToFriendUpdates(nickname);
-
-        /// <summary>
-        /// Finaliza la suscripción Duplex.
-        /// </summary>
-        public void Unsubscribe(string nickname) => _proxy.UnsubscribeFromFriendUpdates(nickname);
-
-        /// <summary>
-        /// Implementación de IDisposable para cerrar el canal WCF.
-        /// </summary>
-        public void Dispose()
+        public void Cleanup()
         {
-            if (_disposed) return;
-
-            try
+            if (_factory == null) return;
+            if (!string.IsNullOrEmpty(_currentUserNickname) && _proxy != null)
             {
-                if (_factory != null)
+                try
                 {
                     if (_factory.State == CommunicationState.Opened)
-                        _factory.Close();
-                    else
-                        _factory.Abort();
+                    {
+                        _proxy.UnsubscribeFromFriendUpdates(_currentUserNickname);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[FriendsService.Cleanup] Error unsubscribing: {ex.Message}");
                 }
             }
-            catch
+            try
             {
-                _factory?.Abort();
+                if (_factory.State == CommunicationState.Opened)
+                {
+                    _factory.Close();
+                }
+                else
+                {
+                    _factory.Abort();
+                }
             }
-
-            _disposed = true;
+            catch (Exception)
+            {
+                _factory.Abort();
+            }
+            finally
+            {
+                _proxy = null;
+                _factory = null;
+                _currentUserNickname = null;
+            }
         }
     }
 }

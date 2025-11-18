@@ -15,6 +15,7 @@ using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -22,7 +23,6 @@ namespace UnoLisClient.UI.ViewModels
     {
         private readonly LoginService _loginService;
         private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
 
         private readonly Page _view;
 
@@ -40,13 +40,6 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value, nameof(IsLoading));
-        }
-
         private string _errorMessage;
         public string ErrorMessage
         {
@@ -59,11 +52,11 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand GoToRegisterCommand { get; }
 
         public LoginViewModel(IDialogService dialogService, Page view)
+      : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
-            _dialogService = dialogService;
-            _loginService = new LoginService();
+            _loginService = new LoginService();
 
             LoginCommand = new RelayCommand(async () => await ExecuteLoginAsync(), () => !IsLoading);
             CancelCommand = new RelayCommand(ExecuteCancel, () => !IsLoading);
@@ -91,6 +84,16 @@ namespace UnoLisClient.UI.ViewModels
                 if (response.Success)
                 {
                     CurrentSession.CurrentUserNickname = Nickname;
+                    try
+                    {
+                        ChatService.Instance.Initialize(Nickname);
+                        FriendsService.Instance.Initialize(Nickname);
+                    }
+                    catch (Exception chatEx)
+                    {
+                        string logMessage = $"Fallo al inicializar el servicio de chat: {chatEx.Message}";
+                        HandleException(MessageCode.UnhandledException, logMessage, chatEx);
+                    }
                     string successMessage = string.Format(message, Nickname);
                     SoundManager.PlayClick();
                     _navigationService.NavigateTo(new MainMenuPage());
@@ -104,23 +107,23 @@ namespace UnoLisClient.UI.ViewModels
             }
             catch (EndpointNotFoundException enfEx)
             {
-                string logMessage = $"Fallo en inicio de sesión: {enfEx.Message}";
-                HandleException(ErrorMessages.ConnectionRejectedMessageLabel, logMessage, enfEx);
+                string logMessage = $"Fallo en inicio de sesión (Endpoint): {enfEx.Message}";
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
             }
             catch (TimeoutException timeoutEx)
             {
-                string logMessage = $"Fallo en inicio de sesión: {timeoutEx.Message}";
-                HandleException(ErrorMessages.TimeoutMessageLabel, logMessage, timeoutEx);
+                string logMessage = $"Fallo en inicio de sesión (Timeout): {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
             }
             catch (CommunicationException commEx)
             {
-                string logMessage = $"Fallo en inicio de sesión: {commEx.Message}";
-                HandleException(ErrorMessages.ConnectionErrorMessageLabel, logMessage, commEx);
+                string logMessage = $"Fallo en inicio de sesión (Communication): {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
-                string logMessage = $"Fallo en inicio de sesión: {ex.Message}";
-                HandleException(ErrorMessages.UnknownErrorMessageLabel, logMessage, ex);
+                string logMessage = $"Fallo en inicio de sesión (Inesperado): {ex.Message}";
+                HandleException(MessageCode.UnhandledException, logMessage, ex);
             }
             finally
             {
@@ -155,16 +158,6 @@ namespace UnoLisClient.UI.ViewModels
             { 
                 _dialogService.HideLoading(); 
             }
-        }
-
-        private void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            SetLoading(false);
-            LogManager.Error(logMessage, ex);
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
-            }));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels;
 
 namespace UnoLisClient.UI.Views.UnoLisPages
@@ -13,7 +14,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         public HowToPlayPage()
         {
             InitializeComponent();
-            DataContext = new HowToPlayViewModel(this);
+            DataContext = new HowToPlayViewModel(this, new AlertManager());
         }
 
         public void NavigateTo(Page page)

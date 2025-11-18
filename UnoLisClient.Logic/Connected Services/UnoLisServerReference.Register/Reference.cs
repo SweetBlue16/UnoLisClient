@@ -120,7 +120,7 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Register {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IRegisterManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegisterManager/RegisterResponse", ReplyAction="http://tempuri.org/IRegisterManager/RegisterResponseResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegisterManager/RegisterResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Register.RegistrationData))]
         void RegisterResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);

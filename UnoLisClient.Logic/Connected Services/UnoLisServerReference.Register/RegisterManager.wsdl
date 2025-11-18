@@ -44,16 +44,12 @@
   <wsdl:message name="IRegisterManager_RegisterResponse_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RegisterResponse" />
   </wsdl:message>
-  <wsdl:message name="IRegisterManager_RegisterResponse_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:RegisterResponseResponse" />
-  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IRegisterManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegisterManager/Register" message="tns:IRegisterManager_Register_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RegisterResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IRegisterManager/RegisterResponse" message="tns:IRegisterManager_RegisterResponse_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IRegisterManager/RegisterResponseResponse" message="tns:IRegisterManager_RegisterResponse_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IRegisterManager" type="tns:IRegisterManager">
@@ -67,9 +63,6 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterResponse">
       <soap12:operation soapAction="http://tempuri.org/IRegisterManager/RegisterResponse" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

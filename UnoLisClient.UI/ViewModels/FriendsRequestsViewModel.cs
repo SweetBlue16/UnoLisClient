@@ -8,28 +8,23 @@ using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Friends;
+using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Services;
+using System.ServiceModel;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
     /// <summary>
-    /// ViewModel para la página de solicitudes de amistad, usando servicios inyectados.
-    /// Permite ver, aceptar y rechazar solicitudes pendientes de forma asíncrona.
+    /// ViewModel for FriendsRequestPage using services.
+    /// Allows to see, accept or decline pending requests.
     /// </summary>
     public class FriendRequestsViewModel : BaseViewModel
     {
         private readonly IFriendsService _friendsService;
-        private readonly IModalService _modalService;
 
         public ObservableCollection<FriendRequestData> FriendRequests { get; } = new ObservableCollection<FriendRequestData>();
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
 
         private FriendRequestData _selectedRequest;
         public FriendRequestData SelectedRequest
@@ -38,8 +33,8 @@ namespace UnoLisClient.UI.ViewModels
             set
             {
                 SetProperty(ref _selectedRequest, value);
-                (AcceptRequestCommand as RelayCommand<FriendRequestData>)?.RaiseCanExecuteChanged();
-                (RejectRequestCommand as RelayCommand<FriendRequestData>)?.RaiseCanExecuteChanged();
+                (AcceptRequestCommand as RelayCommandGeneric<FriendRequestData>)?.RaiseCanExecuteChanged();
+                (RejectRequestCommand as RelayCommandGeneric<FriendRequestData>)?.RaiseCanExecuteChanged();
             }
         }
 
@@ -47,22 +42,21 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand AcceptRequestCommand { get; }
         public ICommand RejectRequestCommand { get; }
 
-        public FriendRequestsViewModel(IFriendsService friendsService, IModalService modalService)
+        public FriendRequestsViewModel(IFriendsService friendsService, IDialogService dialogService)
+      : base(dialogService)
         {
             _friendsService = friendsService;
-            _modalService = modalService;
 
-            _friendsService.Callback.FriendActionNotificationEvent += OnFriendActionNotification;
-            _friendsService.Callback.FriendRequestReceivedEvent += OnFriendRequestReceived;
+            _friendsService.Callback.FriendRequestReceivedEvent += OnFriendRequestReceived;
 
             RefreshRequestsCommand = new RelayCommand(async () => await ExecuteRefreshRequestsAsync(),
-                () => !IsLoading);
+              () => !IsLoading);
 
-            AcceptRequestCommand = new RelayCommand<FriendRequestData>(async (r) => await RespondToRequestAsync(r, true),
-                (r) => r != null && !IsLoading);
+            AcceptRequestCommand = new RelayCommandGeneric<FriendRequestData>(async (r) => await RespondToRequestAsync(r, true),
+              (r) => r != null && !IsLoading);
 
-            RejectRequestCommand = new RelayCommand<FriendRequestData>(async (r) => await RespondToRequestAsync(r, false),
-                (r) => r != null && !IsLoading);
+            RejectRequestCommand = new RelayCommandGeneric<FriendRequestData>(async (r) => await RespondToRequestAsync(r, false),
+              (r) => r != null && !IsLoading);
 
             _ = ExecuteRefreshRequestsAsync();
         }
@@ -80,10 +74,20 @@ namespace UnoLisClient.UI.ViewModels
                         FriendRequests.Add(req);
                 });
             }
+            catch (TimeoutException timeoutEx)
+            {
+                string logMessage = $"Timeout loading pending requests: {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Communication error loading pending requests: {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
+            }
             catch (Exception ex)
             {
-                LogManager.Error($"Error loading pending requests: {ex.Message}", ex);
-                _modalService.ShowAlert("Error", "Could not retrieve pending requests due to a server error.");
+                string logMessage = $"Error loading pending requests: {ex.Message}";
+                HandleException(MessageCode.FriendsInternalError, logMessage, ex);
             }
             finally
             {
@@ -96,11 +100,11 @@ namespace UnoLisClient.UI.ViewModels
             if (request == null) return;
 
             var actionText = accepted ? "Accept" : "Decline";
-            var confirmResult = _modalService.ShowConfirmation(
+            bool confirmed = _dialogService.ShowQuestionDialog(
                 $"{actionText} Request",
                 $"Are you sure you want to {actionText.ToLower()} the request from {request.RequesterNickname}?");
 
-            if (confirmResult != MessageBoxResult.Yes) return;
+            if (!confirmed) return;
 
             IsLoading = true;
             try
@@ -122,18 +126,28 @@ namespace UnoLisClient.UI.ViewModels
                         FriendRequests.Remove(request);
                         SelectedRequest = null;
 
-                        _modalService.ShowAlert("Success", $"Request from {request.RequesterNickname} was {actionText.ToLower()}ed.");
+                        _dialogService.ShowAlert("Success", $"Request from {request.RequesterNickname} was {actionText.ToLower()}ed.");
                     });
                 }
                 else
                 {
-                    _modalService.ShowAlert("Error", $"Could not {actionText.ToLower()} the request. Please try again.");
+                    _dialogService.ShowAlert("Error", $"Could not {actionText.ToLower()} the request. Please try again.");
                 }
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                string logMessage = $"Error processing friend response: {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Communication error processing friend response: {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error processing friend response: {ex.Message}", ex);
-                _modalService.ShowAlert("Error", "A fatal error occurred while processing the response.");
+                string logMessage = $"Error processing friend response: {ex.Message}";
+                HandleException(MessageCode.FriendsInternalError, logMessage, ex);
             }
             finally
             {
@@ -141,24 +155,11 @@ namespace UnoLisClient.UI.ViewModels
             }
         }
 
-        private static void OnFriendActionNotification(string message, bool isSuccess)
-        {
-            LogManager.Info($"Action Notification Received: {message}");
-        }
-
         private void OnFriendRequestReceived(FriendRequestData newRequest)
         {
-            // El servidor nos envió el DTO completo.
-            // NO necesitamos recargar toda la lista (ExecuteRefreshRequestsAsync).
-
-            // Añadimos el nuevo objeto directamente a la ObservableCollection.
-            // Usamos el Dispatcher para asegurar que ocurra en el Hilo de la UI.
             App.Current.Dispatcher.Invoke(() =>
             {
                 FriendRequests.Add(newRequest);
-
-                // Opcional: Mostrar la alerta aquí
-                _modalService.ShowAlert("New Request", $"You received a friend request from {newRequest.RequesterNickname}.");
             });
         }
     }
