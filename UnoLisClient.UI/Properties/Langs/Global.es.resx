@@ -120,6 +120,12 @@
   <data name="AppNameLabel" xml:space="preserve">
     <value>¡UNO-LIS!</value>
   </data>
+  <data name="BasicRulesLabel" xml:space="preserve">
+    <value>Inicias con 7 cartas. En tu turno, juega una carta que coincida en color, número o símbolo con la del pozo. Si no tienes una carta jugable, debes robar del mazo hasta que puedas jugar una.</value>
+  </data>
+  <data name="BasicRulesTitleLabel" xml:space="preserve">
+    <value>Reglas básicas</value>
+  </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancelar</value>
   </data>
@@ -165,8 +171,17 @@
   <data name="HowToPlayLabel" xml:space="preserve">
     <value>¿Cómo jugar?</value>
   </data>
+  <data name="ItemsLabel" xml:space="preserve">
+    <value>Puedes usar ítems especiales en tu turno, antes de jugar tu carta. El Escudo refleja un robo. El Ladrón roba una carta de un oponente. El Turno Extra te permite jugar de nuevo. El intercambio cambia una de tus cartas con la de un oponente.</value>
+  </data>
+  <data name="ItemsTitleLabel" xml:space="preserve">
+    <value>Ítems Especiales</value>
+  </data>
   <data name="LeaderboardDataReceivedMessageLabel" xml:space="preserve">
     <value>Datos del ranking obtenidos.</value>
+  </data>
+  <data name="LeaderboardLabel" xml:space="preserve">
+    <value>Mejores jugadores del mundo</value>
   </data>
   <data name="LoadingLabel" xml:space="preserve">
     <value>Cargando...</value>
@@ -198,20 +213,38 @@
   <data name="PlayButton" xml:space="preserve">
     <value>¡JUGAR!</value>
   </data>
+  <data name="PlayerNameColumn" xml:space="preserve">
+    <value>Jugador</value>
+  </data>
   <data name="PlayerReconnectedMessageLabel" xml:space="preserve">
     <value>{0} se ha reconectado a la partida.</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Perfil</value>
   </data>
+  <data name="RankColumn" xml:space="preserve">
+    <value>Puesto</value>
+  </data>
   <data name="SaveButton" xml:space="preserve">
     <value>Guardar</value>
+  </data>
+  <data name="ScoringLabel" xml:space="preserve">
+    <value>El primer jugador en quedarse sin cartas gana la partida. La puntuación se asigna al final (Ej. 4 Jugadores: 1ro = 500, 2do = 300, 3ro = 200, 4to = 50). Recibirás monedas Revo equivalentes al 10% de tu puntuación para gastar en la tienda.</value>
+  </data>
+  <data name="ScoringTitleLabel" xml:space="preserve">
+    <value>Puntuación y Monedas</value>
   </data>
   <data name="SettingsLabel" xml:space="preserve">
     <value>Ajustes</value>
   </data>
   <data name="ShopLabel" xml:space="preserve">
     <value>Tienda</value>
+  </data>
+  <data name="StackingLabel" xml:space="preserve">
+    <value>¡Puedes encadenar cartas de robo! Si alguien te juega un +2 o +4, puedes jugar otra carta de robo (igual o de mayor valor) para pasar el castigo al siguiente jugador. El último jugador que no pueda responder, roba la suma total.</value>
+  </data>
+  <data name="StackingTitleLabel" xml:space="preserve">
+    <value>Encadenamiento de Robo</value>
   </data>
   <data name="StatisticsLabel" xml:space="preserve">
     <value>Estadísticas</value>

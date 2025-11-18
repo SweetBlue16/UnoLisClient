@@ -6,10 +6,14 @@
         xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
         xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
         xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
-        Title="LoadingPopUpWindow" Height="200" Width="450"
-        Background="#1B263B" WindowStartupLocation="CenterScreen"
+        Title="LoadingPopUpWindow" Height="200" Width="450" WindowStyle="None"
+        Background="Transparent" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
         Loaded="LoadingPopUpWindowLoaded">
-    <Grid>
+    <Border BorderBrush="Gold"
+            Background="#1B263B"
+            BorderThickness="3"
+            CornerRadius="15">
         <StackPanel Margin="20">
             <Label Content="{x:Static language:Global.LoadingLabel}"
                    HorizontalAlignment="Center"
@@ -24,5 +28,5 @@
                                          Height="30"
                                          Visibility="Visible"/>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>

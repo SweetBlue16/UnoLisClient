@@ -1,38 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.ViewModels;
 
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
     /// <summary>
     /// Interaction logic for AvatarSelectionPage.xaml
     /// </summary>
-    public partial class AvatarSelectionPage : Page
+    public partial class AvatarSelectionPage : Page, INavigationService
     {
         public AvatarSelectionPage()
         {
             InitializeComponent();
+            DataContext = new AvatarSelectionViewModel(this, new AlertManager());
+            Loaded += AvatarSelectionPageLoaded;
         }
 
-        private void ClickSave(object sender, RoutedEventArgs e)
+        public void NavigateTo(Page page)
         {
-            MessageBox.Show("Avatar saved successfully!");
+            Application.Current.Dispatcher.Invoke(() =>
+                NavigationService?.Navigate(page)
+            );
         }
 
-        private void ClickCancel(object sender, RoutedEventArgs e)
+        public void GoBack()
         {
-            NavigationService?.GoBack();
+            Application.Current.Dispatcher.Invoke(() =>
+                NavigationService?.GoBack()
+            );
+        }
+
+        private void AvatarSelectionPageLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is AvatarSelectionViewModel viewModel)
+            {
+                viewModel.LoadAvatarsCommand.Execute(null);
+            }
         }
     }
 }

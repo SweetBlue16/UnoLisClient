@@ -9,6 +9,7 @@
         Title="{x:Static language:Global.AppNameLabel}"
         Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Loaded="MainWindow_Loaded"
         Closing="MainWindowClosing">
 

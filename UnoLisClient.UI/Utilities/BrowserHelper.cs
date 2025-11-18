@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using UnoLisClient.UI.Views.PopUpWindows;
 using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.Logic.Helpers;
+using System.Windows;
 
 // TODO: Debug
 namespace UnoLisClient.UI.Utilities
@@ -32,6 +29,13 @@ namespace UnoLisClient.UI.Utilities
                     url = HttpsPrefix + url;
                 }
 
+                if (!Uri.TryCreate(url, UriKind.Absolute, out _))
+                {
+                    LogManager.Warn($"Intento de abrir URL mal formada: {url}");
+                    ShowBrowserError();
+                    return;
+                }
+
                 var processStartInfo = new ProcessStartInfo
                 {
                     FileName = url,
@@ -40,12 +44,27 @@ namespace UnoLisClient.UI.Utilities
 
                 Process.Start(processStartInfo);
             }
-            catch (Exception)
+            catch (Win32Exception winEx)
             {
-                new SimplePopUpWindow(Global.WarningLabel,
-                    ErrorMessages.UnableToOpenLinkMessageLabel)
-                    .ShowDialog();
+                LogManager.Error($"Error de Win32 al abrir URL '{url}'.", winEx);
+                ShowBrowserError();
             }
+            catch (Exception ex)
+            {
+                LogManager.Error($"Error inesperado al abrir URL '{url}'.", ex);
+                ShowBrowserError();
+            }
+        }
+
+        private static void ShowBrowserError()
+        {
+            Application.Current?.Dispatcher.Invoke(() =>
+            {
+                new SimplePopUpWindow(
+                    Global.WarningLabel,
+                    ErrorMessages.UnableToOpenLinkMessageLabel
+                ).ShowDialog();
+            });
         }
     }
 }

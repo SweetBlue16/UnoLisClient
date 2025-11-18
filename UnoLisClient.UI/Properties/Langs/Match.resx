@@ -129,6 +129,12 @@
   <data name="InvalidMoveMessageLabel" xml:space="preserve">
     <value>The move you made is invalid.</value>
   </data>
+  <data name="ItemUsedLabel" xml:space="preserve">
+    <value>Item used!</value>
+  </data>
+  <data name="ItemUsedMessageLabel" xml:space="preserve">
+    <value>{0} used {1}.</value>
+  </data>
   <data name="MatchOverLabel" xml:space="preserve">
     <value>The game is over.</value>
   </data>
@@ -178,7 +184,7 @@
     <value>Which player do you want to report?</value>
   </data>
   <data name="TurnLabel" xml:space="preserve">
-    <value>Now playing {0}</value>
+    <value>Now playing:</value>
   </data>
   <data name="WinnerLabel" xml:space="preserve">
     <value>The player {0} has won!</value>

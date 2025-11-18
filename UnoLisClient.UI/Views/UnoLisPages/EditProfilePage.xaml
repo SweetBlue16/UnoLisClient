@@ -7,7 +7,13 @@
       mc:Ignorable="d" 
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
+      xmlns:localConverters="clr-namespace:UnoLisClient.UI.Converters"
       Title="EditProfilePage">
+    <Page.Resources>
+        <localConverters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <localConverters:BooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"
+                                         TrueValue="Collapsed" FalseValue="Visible"/>
+    </Page.Resources>
 
     <Border Background="#AA000000"
 	        CornerRadius="15"
@@ -47,7 +53,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="FullNameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,32,16"/>
+                         Margin="0,0,32,16"
+                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{x:Static language:SignIn.NicknameLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -58,7 +65,9 @@
                        FontSize="15"/>
                 <TextBox x:Name="NicknameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,32,16"/>
+                         Margin="0,0,32,16"
+                         IsReadOnly="True"
+                         Text="{Binding Nickname, Mode=OneWay}"/>
                 <Label Content="{x:Static language:Global.EmailLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -68,7 +77,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="EmailTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,32,16"/>
+                         Margin="0,0,32,16"
+                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -78,7 +88,9 @@
                        FontSize="15"/>
                 <controls:VisiblePasswordField x:Name="PasswordField"
                                                Grid.ColumnSpan="2"
-                                               Margin="0,0,0,16"/>
+                                               Margin="0,0,0,16"
+                                               Password="{Binding Password, Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1"
@@ -92,7 +104,8 @@
                        FontSize="15"/>      
                 <TextBox x:Name="FacebookLinkTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,0,16"/>
+                         Margin="0,0,0,16"
+                         Text="{Binding FacebookUrl, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{x:Static language:Profile.InstagramLinkLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -102,7 +115,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="InstagramLinkTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,0,16"/>
+                         Margin="0,0,0,16"
+                         Text="{Binding InstagramUrl, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{x:Static language:Profile.TikTokLinkLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -112,7 +126,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="TikTokLinkTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,0,16"/>
+                         Margin="0,0,0,16"
+                         Text="{Binding TikTokUrl, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <Button Content="{x:Static language:Global.SaveButton}"
                     Grid.Column="0"
@@ -124,7 +139,9 @@
                     Margin="0,15,0,0"
                     Width="140"
                     Cursor="Hand"
-                    Click="ClickSaveButton"/>
+                    IsEnabled="{Binding IsLoading,
+                                Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                    Command="{Binding SaveCommand}"/>
             <Button Content="{x:Static language:Global.CancelButton}"
                     Grid.Column="1"
                     Grid.Row="2"
@@ -135,7 +152,9 @@
                     Margin="0,15,0,0"
                     Width="140"
                     Cursor="Hand"
-                    Click="ClickCancelButton"/>
+                    IsEnabled="{Binding IsLoading,
+                                Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                    Command="{Binding CancelCommand}"/>
         </Grid>
     </Border>
 </Page>

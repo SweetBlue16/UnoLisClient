@@ -120,6 +120,12 @@
   <data name="AppNameLabel" xml:space="preserve">
     <value>UNO-LIS!</value>
   </data>
+  <data name="BasicRulesLabel" xml:space="preserve">
+    <value>Start with 7 cards. On your turn, play a card that matches the color, number or symbol of the top card. If you can't play, you must draw from the deck until you get a playable card, which you must play immediately.</value>
+  </data>
+  <data name="BasicRulesTitleLabel" xml:space="preserve">
+    <value>Basic Rules</value>
+  </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -165,8 +171,17 @@
   <data name="HowToPlayLabel" xml:space="preserve">
     <value>How to play?</value>
   </data>
+  <data name="ItemsLabel" xml:space="preserve">
+    <value>You can use special items on your turn, before playing your card. The Shield reflects a Draw card back to the previous player. The Thief steals a random card from an opponent. The Extra Turn lets you play again. The Swap exchanges one of your cards with an opponent's.</value>
+  </data>
+  <data name="ItemsTitleLabel" xml:space="preserve">
+    <value>Special Items</value>
+  </data>
   <data name="LeaderboardDataReceivedMessageLabel" xml:space="preserve">
     <value>Ranking data obtained.</value>
+  </data>
+  <data name="LeaderboardLabel" xml:space="preserve">
+    <value>Best players of all time</value>
   </data>
   <data name="LoadingLabel" xml:space="preserve">
     <value>Loading...</value>
@@ -198,20 +213,38 @@
   <data name="PlayButton" xml:space="preserve">
     <value>PLAY!</value>
   </data>
+  <data name="PlayerNameColumn" xml:space="preserve">
+    <value>Player</value>
+  </data>
   <data name="PlayerReconnectedMessageLabel" xml:space="preserve">
     <value>{0} has reconnected to the match.</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="RankColumn" xml:space="preserve">
+    <value>Rank</value>
+  </data>
   <data name="SaveButton" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="ScoringLabel" xml:space="preserve">
+    <value>The first player to run out of cards wins the match. Scoring assigned at the end (e.g., 4 Players: 1st = 500, 2nd = 300, 3rd = 200, 4th = 50). You will receive Revo-Coins equal to 10% of your score to spend in the shop.</value>
+  </data>
+  <data name="ScoringTitleLabel" xml:space="preserve">
+    <value>Scoring &amp; Coins</value>
   </data>
   <data name="SettingsLabel" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="ShopLabel" xml:space="preserve">
     <value>Shop</value>
+  </data>
+  <data name="StackingLabel" xml:space="preserve">
+    <value>You can stack Draw cards! If someone plays a +2 or a +4 on you, you can play another Draw card (equal or greater) to pass the penalty to the next player. The last player who can't respond draws the total accumulated sum.</value>
+  </data>
+  <data name="StackingTitleLabel" xml:space="preserve">
+    <value>Draw Stacking</value>
   </data>
   <data name="StatisticsLabel" xml:space="preserve">
     <value>Statistics</value>

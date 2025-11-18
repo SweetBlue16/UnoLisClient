@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Markup;
 using UnoLisClient.Logic.UnoLisServerReference.Login;
 using UnoLisClient.Logic.UnoLisServerReference.ProfileEdit;
 using UnoLisClient.Logic.UnoLisServerReference.Register;

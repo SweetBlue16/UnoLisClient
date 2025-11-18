@@ -7,7 +7,13 @@
       mc:Ignorable="d" 
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
+      xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       Title="RegisterPage">
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"
+                                                 TrueValue="Collapsed" FalseValue="Visible"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,7 +48,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="FullNameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,34,16"/>
+                         Margin="0,0,34,16"
+                         Text="{Binding FullName}"/>
                 <Label Content="{x:Static language:SignIn.NicknameLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -52,7 +59,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="NicknameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,34,16"/>
+                         Margin="0,0,34,16"
+                         Text="{Binding Nickname}"/>
                 <Label Content="{x:Static language:Global.EmailLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -62,7 +70,8 @@
                        FontSize="15"/>
                 <TextBox x:Name="EmailTextBox"
                          Style="{DynamicResource TextBoxStyle}"
-                         Margin="0,0,34,16"/>
+                         Margin="0,0,34,16"
+                         Text="{Binding Email}"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -71,7 +80,10 @@
                        Foreground="White"
                        FontSize="15"/>
                 <controls:VisiblePasswordField x:Name="PasswordField"
-                                               Margin="0,0,0,16"/>
+                                               Margin="0,0,0,16"
+                                               Password="{Binding Password,
+                                               Mode=TwoWay,
+                                               UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{x:Static language:SignIn.RewritedPasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -80,7 +92,10 @@
                        Foreground="White"
                        FontSize="15"/>
                 <controls:VisiblePasswordField x:Name="RewritedPasswordField"
-                                               Margin="0,0,0,16"/>
+                                               Margin="0,0,0,16"
+                                               Password="{Binding RewritedPassword,
+                                               Mode=TwoWay,
+                                               UpdateSourceTrigger=PropertyChanged}"/>
                 <DockPanel Margin="20,5">
                     <Button Content="{x:Static language:SignIn.SignInButton}"
                             HorizontalAlignment="Center"
@@ -90,7 +105,9 @@
                             Margin="0,0,15,0"
                             Width="140"
                             Cursor="Hand"
-                            Click="ClickSignInButton"/>
+                            Command="{Binding RegisterCommand}"
+                            IsEnabled="{Binding IsLoading,
+                                        Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
                     <Button Content="{x:Static language:Global.CancelButton}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
@@ -99,7 +116,9 @@
                             Margin="0,0,0,0"
                             Width="140"
                             Cursor="Hand"
-                            Click="ClickCancelButton"/>
+                            Command="{Binding CancelCommand}"
+                            IsEnabled="{Binding IsLoading,
+                                        Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
                 </DockPanel>
             </StackPanel>
         </Border>
@@ -164,8 +183,8 @@
                            Foreground="White"
                            TextWrapping="WrapWithOverflow"
                            FontSize="20"/>
-                <TextBlock x:Name="ResendVerificationCodeLabel"
-                           Text="{x:Static language:SignIn.ResendVerificationCodeLabel}"
+                <Label x:Name="ResendVerificationCodeLabel"
+                           Content="{x:Static language:SignIn.ResendVerificationCodeLabel}"
                            HorizontalAlignment="Center"
                            Margin="0,120,0,0"
                            VerticalAlignment="Top"
@@ -173,7 +192,13 @@
                            FontSize="10"
                            Cursor="Hand"
                            Foreground="LightSkyBlue"
-                           MouseDown="SignUpLabelMouseDown"/>
+                           Visibility="{Binding IsResendVisible,
+                                        Converter={StaticResource BoolToVisibilityConverter}}">
+                    <Label.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding ResendCodeCommand}"/>
+                    </Label.InputBindings>
+                </Label>
             </StackPanel>
         </Border>
     </Grid>

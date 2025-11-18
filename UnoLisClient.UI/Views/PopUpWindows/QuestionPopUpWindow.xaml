@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:UnoLisClient.UI.Views.PopUpWindows"
         mc:Ignorable="d"
         xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
-        Title="QuestionPopUpWindow" Height="280" Width="450"
-        WindowStartupLocation="CenterScreen" Background="#1B263B">
-    <Grid>
+        Title="QuestionPopUpWindow" Height="280" Width="450" WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" Background="Transparent">
+    <Border BorderBrush="Gold"
+            Background="#1B263B"
+            BorderThickness="3"
+            CornerRadius="15">
         <StackPanel Margin="20">
             <Label x:Name="TitleLabel"
                    Content="{x:Static language:Global.TitlePlaceholderLabel}"
@@ -48,5 +52,5 @@
                         Click="ClickNoButton"/>
             </StackPanel>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>

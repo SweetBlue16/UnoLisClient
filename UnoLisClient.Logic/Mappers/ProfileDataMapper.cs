@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnoLisClient.Logic.Models;
+﻿using UnoLisClient.Logic.Models;
 
 namespace UnoLisClient.Logic.Mappers
 {
@@ -13,7 +8,7 @@ namespace UnoLisClient.Logic.Mappers
         {
             if (data == null)
             {
-                return null;
+                return new ClientProfileData();
             }
 
             return new ClientProfileData
@@ -21,6 +16,7 @@ namespace UnoLisClient.Logic.Mappers
                 Nickname = data.Nickname,
                 FullName = data.FullName,
                 Email = data.Email,
+                SelectedAvatarName = data.SelectedAvatarName,
                 FacebookUrl = data.FacebookUrl,
                 InstagramUrl = data.InstagramUrl,
                 TikTokUrl = data.TikTokUrl,
@@ -31,11 +27,31 @@ namespace UnoLisClient.Logic.Mappers
             };
         }
 
+        public static ClientProfileData ToClientModel(this UnoLisServerReference.ProfileEdit.ProfileData data)
+        {
+            if (data == null)
+            {
+                return new ClientProfileData();
+            }
+
+            return new ClientProfileData
+            {
+                Nickname = data.Nickname,
+                FullName = data.FullName,
+                Email = data.Email,
+                SelectedAvatarName = data.SelectedAvatarName,
+                FacebookUrl = data.FacebookUrl,
+                InstagramUrl = data.InstagramUrl,
+                TikTokUrl = data.TikTokUrl,
+                Password = data.Password
+            };
+        }
+
         public static UnoLisServerReference.ProfileEdit.ProfileData ToProfileEditContract(this ClientProfileData data)
         {
             if (data == null)
             {
-                return null;
+                return new UnoLisServerReference.ProfileEdit.ProfileData();
             }
 
             return new UnoLisServerReference.ProfileEdit.ProfileData
@@ -43,6 +59,7 @@ namespace UnoLisClient.Logic.Mappers
                 Nickname = data.Nickname,
                 FullName = data.FullName,
                 Email = data.Email,
+                SelectedAvatarName = data.SelectedAvatarName,
                 FacebookUrl = data.FacebookUrl,
                 InstagramUrl = data.InstagramUrl,
                 TikTokUrl = data.TikTokUrl,

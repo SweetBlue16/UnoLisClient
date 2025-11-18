@@ -78,32 +78,64 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\RelayCommandGeneric.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToThicknessConverter.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\UIServices.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
+    <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
+    <Compile Include="ViewModels\HowToPlayViewModel.cs" />
+    <Compile Include="ViewModels\LeaderboardsViewModel.cs" />
     <Compile Include="ViewModels\FriendsRequestsViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\MatchBoardViewModel.cs" />
+    <Compile Include="ViewModels\ProfileEditViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\AvatarModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\CardModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\ItemModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\LeaderboardEntry.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\LootBoxChancesItem.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\MatchResultEntry.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\OpponentModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\RewardPopUpModel.cs" />
     <Compile Include="Views\Controls\AddFriendModal.xaml.cs">
       <DependentUpon>AddFriendModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\OpponentHandControl.xaml.cs">
+      <DependentUpon>OpponentHandControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\SettingsModal.xaml.cs">
       <DependentUpon>SettingsModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\MessageTranslator.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Views\PopUpWindows\MatchResultsPopUpWindow.xaml.cs">
+      <DependentUpon>MatchResultsPopUpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UnoLisPages\FriendRequestsPage.xaml.cs">
       <DependentUpon>FriendRequestsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UnoLisPages\HowToPlayPage.xaml.cs">
+      <DependentUpon>HowToPlayPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UnoLisPages\JoinMatchPage.xaml.cs">
       <DependentUpon>JoinMatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnoLisPages\MatchBoardPage.xaml.cs">
+      <DependentUpon>MatchBoardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\MatchMenuPage.xaml.cs">
       <DependentUpon>MatchMenuPage.xaml</DependentUpon>
@@ -140,9 +172,6 @@
     </Compile>
     <Compile Include="Views\UnoLisPages\MatchLobbyPage.xaml.cs">
       <DependentUpon>MatchLobbyPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UnoLisPages\MatchResultsPage.xaml.cs">
-      <DependentUpon>MatchResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -302,9 +331,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Avatars\MtroWillian.png" />
+    <Resource Include="Avatars\LogoUNO.png" />
+    <Resource Include="Avatars\Gatito.png" />
+    <Resource Include="Avatars\ElRevo.png" />
+    <Resource Include="Avatars\DrSaul.png" />
+    <Resource Include="Avatars\DrOcharan.png" />
+    <Resource Include="Avatars\DraLizbeth.png" />
+    <Resource Include="Avatars\DraKaren.png" />
+    <Resource Include="Avatars\CC2Projector.png" />
     <Resource Include="Assets\pixelNoise.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -319,12 +359,15 @@
     <Content Include="Assets\buttonClick.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\Cards\CardBack.png" />
+    <Resource Include="Assets\Cards\DrawFour.png" />
     <Content Include="Assets\lobbyVideo.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\lobbyMusic.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\lockIcon.png" />
     <Content Include="Assets\marioDesktop.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -351,11 +394,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Controls\OpponentHandControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\SettingsModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LoadingProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUpWindows\MatchResultsPopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\GameDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -391,6 +446,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UnoLisPages\HowToPlayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UnoLisPages\JoinMatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -403,6 +462,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\UnoLisPages\MatchBoardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UnoLisPages\MatchLobbyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -410,10 +473,6 @@
     <Page Include="Views\UnoLisPages\MatchMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UnoLisPages\MatchResultsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UnoLisPages\RegisterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -470,8 +529,6 @@
       <Name>UnoLisClient.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Avatars\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

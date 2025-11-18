@@ -1,55 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using UnoLisClient.Logic.Helpers;
 using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Views.PopUpWindows;
 
 namespace UnoLisClient.UI.Utilities
 {
-    public static class AlertManager
+    public class AlertManager : IDialogService
     {
-        private static LoadingPopUpWindow _loadingPopUpWindow;
+        private LoadingPopUpWindow _loadingPopUpWindow;
 
-        public static void ShowAlert(string title, string message)
-        {
-            new SimplePopUpWindow(title, message).ShowDialog();
-        }
-
-        public static void HandleWarning(string message)
-        {
-            ShowAlert(Global.UnsuccessfulLabel, message);
-        }
-
-        public static void ShowLoading(Page page)
-        {
-            _loadingPopUpWindow = new LoadingPopUpWindow()
-            {
-                Owner = Window.GetWindow(page)
-            };
-            _loadingPopUpWindow.Show();
-        }
-
-        public static void HideLoading()
-        {
-            _loadingPopUpWindow?.StopLoadingAndClose();
-        }
-
-        public static void HandleException(string userMessage, string logMessage, Exception ex)
-        {
-            HideLoading();
-            LogManager.Error(logMessage, ex);
-            ShowAlert(Global.UnsuccessfulLabel, userMessage);
-        }
-
-        public static void HandleValidationErrors(List<string> validationErrors)
+        public string HandleValidationErrors(List<string> validationErrors)
         {
             string message = "◆ " + string.Join("\n◆ ", validationErrors);
             ShowAlert(Global.WarningLabel, message);
+            return message;
+        }
+
+        public void HideLoading()
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _loadingPopUpWindow?.StopLoadingAndClose();
+                _loadingPopUpWindow = null;
+            }));
+        }
+
+        public void ShowAlert(string title, string message)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                new SimplePopUpWindow(title, message).ShowDialog();
+            }));
+        }
+
+        public string ShowInputDialog(string title, string message, string placeholder)
+        {
+            var inputPopUp = new InputPopUpWindow(title, message, placeholder);
+
+            if (inputPopUp.ShowDialog() == true)
+            {
+                return inputPopUp.UserInput;
+            }
+            return string.Empty;
+        }
+
+        public void ShowLoading(Page page)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (_loadingPopUpWindow == null || !_loadingPopUpWindow.IsVisible)
+                {
+                    _loadingPopUpWindow = new LoadingPopUpWindow { Owner = GetOwnerWindow(page) };
+                    _loadingPopUpWindow.Show();
+                }
+            }));
+        }
+
+        public bool ShowQuestionDialog(string title, string question)
+        {
+            var questionPopUp = new QuestionPopUpWindow(title, question);
+            return questionPopUp.ShowDialog() == true;
+        }
+
+        public void ShowWarning(string message)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ShowAlert(Global.WarningLabel, message);
+            }));
+        }
+
+        private Window GetOwnerWindow(Page page)
+        {
+            return Window.GetWindow(page);
         }
     }
 }

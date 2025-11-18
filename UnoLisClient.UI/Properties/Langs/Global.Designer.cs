@@ -70,6 +70,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start with 7 cards. On your turn, play a card that matches the color, number or symbol of the top card. If you can&apos;t play, you must draw from the deck until you get a playable card, which you must play immediately..
+        /// </summary>
+        public static string BasicRulesLabel {
+            get {
+                return ResourceManager.GetString("BasicRulesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Rules.
+        /// </summary>
+        public static string BasicRulesTitleLabel {
+            get {
+                return ResourceManager.GetString("BasicRulesTitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CancelButton {
@@ -205,11 +223,38 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can use special items on your turn, before playing your card. The Shield reflects a Draw card back to the previous player. The Thief steals a random card from an opponent. The Extra Turn lets you play again. The Swap exchanges one of your cards with an opponent&apos;s..
+        /// </summary>
+        public static string ItemsLabel {
+            get {
+                return ResourceManager.GetString("ItemsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special Items.
+        /// </summary>
+        public static string ItemsTitleLabel {
+            get {
+                return ResourceManager.GetString("ItemsTitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ranking data obtained..
         /// </summary>
         public static string LeaderboardDataReceivedMessageLabel {
             get {
                 return ResourceManager.GetString("LeaderboardDataReceivedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Best players of all time.
+        /// </summary>
+        public static string LeaderboardLabel {
+            get {
+                return ResourceManager.GetString("LeaderboardLabel", resourceCulture);
             }
         }
         
@@ -304,6 +349,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player.
+        /// </summary>
+        public static string PlayerNameColumn {
+            get {
+                return ResourceManager.GetString("PlayerNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} has reconnected to the match..
         /// </summary>
         public static string PlayerReconnectedMessageLabel {
@@ -322,11 +376,38 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        public static string RankColumn {
+            get {
+                return ResourceManager.GetString("RankColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveButton {
             get {
                 return ResourceManager.GetString("SaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The first player to run out of cards wins the match. Scoring assigned at the end (e.g., 4 Players: 1st = 500, 2nd = 300, 3rd = 200, 4th = 50). You will receive Revo-Coins equal to 10% of your score to spend in the shop..
+        /// </summary>
+        public static string ScoringLabel {
+            get {
+                return ResourceManager.GetString("ScoringLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scoring &amp; Coins.
+        /// </summary>
+        public static string ScoringTitleLabel {
+            get {
+                return ResourceManager.GetString("ScoringTitleLabel", resourceCulture);
             }
         }
         
@@ -345,6 +426,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ShopLabel {
             get {
                 return ResourceManager.GetString("ShopLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can stack Draw cards! If someone plays a +2 or a +4 on you, you can play another Draw card (equal or greater) to pass the penalty to the next player. The last player who can&apos;t respond draws the total accumulated sum..
+        /// </summary>
+        public static string StackingLabel {
+            get {
+                return ResourceManager.GetString("StackingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw Stacking.
+        /// </summary>
+        public static string StackingTitleLabel {
+            get {
+                return ResourceManager.GetString("StackingTitleLabel", resourceCulture);
             }
         }
         

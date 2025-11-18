@@ -184,7 +184,10 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         Blue = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Wild = 4,
+        Black = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Silver = 5,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -235,6 +238,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         WildDrawFour = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DrawTen = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WildDrawFourReverse = 16,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

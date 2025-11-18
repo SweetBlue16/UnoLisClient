@@ -6,8 +6,14 @@
       xmlns:local="clr-namespace:UnoLisClient.UI.Views.UnoLisPages"
       mc:Ignorable="d" 
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
-      Title="YourProfilePage">
-    
+      xmlns:localConverters="clr-namespace:UnoLisClient.UI.Converters"
+      Title="YourProfilePage"
+      Loaded="YourProfilePageLoaded">
+    <Page.Resources>
+        <localConverters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <localConverters:BooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"
+                                             TrueValue="Collapsed" FalseValue="Visible"/>
+    </Page.Resources>
     <Border Background="#AA000000"
 	        CornerRadius="15"
 	        Padding="24"
@@ -46,7 +52,7 @@
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
                         <TextBlock x:Name="UserNicknameLabel"
-                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                                   Text="{Binding Nickname}"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="18"/>
@@ -57,7 +63,7 @@
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
                         <TextBlock x:Name="UserFullNameLabel"
-                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                                   Text="{Binding FullName}"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="18"/>
@@ -68,7 +74,7 @@
                                    Foreground="#B0B0B0"
                                    FontSize="16"/>
                         <TextBlock x:Name="UserEmailLabel"
-                                   Text="{x:Static language:Global.MessagePlaceholderLabel}"
+                                   Text="{Binding Email}"
                                    FontFamily="pack://application:,,,/Fonts/#Lato"
                                    Foreground="White"
                                    FontSize="18"/>
@@ -85,8 +91,10 @@
                                        Margin="0,0,15,0">
                                 <Hyperlink x:Name="UserFacebookLink"
                                            Foreground="LightBlue"
-                                           Click="ClickSocialLink">
-                                    Facebook
+                                           NavigateUri="{Binding FacebookUrl}"
+                                           Command="{Binding OpenSocialLinkCommand}"
+                                           CommandParameter="Facebook">
+                                    <Run Text="Facebook"/>
                                 </Hyperlink>
                             </TextBlock>
                             <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
@@ -95,8 +103,10 @@
                                        Margin="0,0,15,0">
                                 <Hyperlink x:Name="UserInstagramLink"
                                            Foreground="LightPink"
-                                           Click="ClickSocialLink">
-                                    Instagram
+                                           NavigateUri="{Binding InstagramUrl}"
+                                           Command="{Binding OpenSocialLinkCommand}"
+                                           CommandParameter="Instagram">
+                                    <Run Text="Instagram"/>
                                 </Hyperlink>
                             </TextBlock>
                             <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
@@ -105,8 +115,10 @@
                                        Margin="0,0,15,0">
                                 <Hyperlink x:Name="UserTikTokLink"
                                            Foreground="HotPink"
-                                           Click="ClickSocialLink">
-                                    TikTok
+                                           NavigateUri="{Binding TikTokUrl}"
+                                           Command="{Binding OpenSocialLinkCommand}"
+                                           CommandParameter="TikTok">
+                                    <Run Text="TikTok"/>
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
@@ -119,18 +131,25 @@
                             CornerRadius="60"
                             Background="#3B3D49"
                             Margin="0,0,0,10">
-                        <Image Source="/Assets/unoLogo.png" Stretch="UniformToFill"/>
+                        <Image Source="{Binding SelectedAvatarImagePath}"
+                               Stretch="UniformToFill"
+                               Height="120"
+                               Width="120"/>
                     </Border>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="ChangeAvatarButton"
                                 Content="{x:Static language:Profile.ChangeAvatarButton}"
                                 Style="{DynamicResource PrimaryButtonStyle}"
                                 Margin="0,0,10,0"
-                                Click="ClickChangeAvatarButton"/>
+                                IsEnabled="{Binding IsGuest,
+                                            Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                Command="{Binding ChangeAvatarCommand}"/>
                         <Button x:Name="ChangeDataButton"
                                 Content="{x:Static language:Profile.ChangeDataButton}"
                                 Style="{DynamicResource PrimaryButtonStyle}"
-                                Click="ClickChangeDataButton"/>
+                                IsEnabled="{Binding IsGuest,
+                                            Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                Command="{Binding ChangeDataCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -143,7 +162,7 @@
                            Margin="0,0,0,20"/>
                 <DataGrid x:Name="PlayerStatisticsDataGrid"
                           Style="{DynamicResource DataGridStyle}"
-                          ItemsSource="{Binding Statistics}"
+                          ItemsSource="{Binding Stats}"
                           AutoGenerateColumns="False"
                           ColumnWidth="*"
                           MaxWidth="750">
@@ -166,7 +185,7 @@
                     Style="{DynamicResource SecondaryButtonStyle}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Click="ClickBackButton"/>
+                    Command="{Binding BackCommand}"/>
         </Grid>
     </Border>
 </Page>

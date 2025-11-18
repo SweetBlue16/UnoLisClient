@@ -25,8 +25,10 @@
             </Grid.ColumnDefinitions>
 
             <!-- 👤 Perfil -->
-            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Cursor="Hand"
-                        MouseDown="ProfileLabel_MouseDoubleClick">
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Cursor="Hand">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding GoToProfileCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/profileIcon.png"
                        Width="26" Height="26"
                        VerticalAlignment="Center"
@@ -36,12 +38,16 @@
                        FontSize="16"
                        FontWeight="Bold"
                        Foreground="White"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center">
+                </Label>
             </StackPanel>
 
             <!-- 👥 Amigos -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" 
-                        Cursor="Hand" MouseDown="MouseDoubleClickFriendsLabel">
+                        Cursor="Hand">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding GoToFriendsCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/friendsIcon.png"
                        Width="26" Height="26"
                        VerticalAlignment="Center"
@@ -51,7 +57,8 @@
                        FontSize="16"
                        FontWeight="Bold"
                        Foreground="White"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center">
+                </Label>
             </StackPanel>
         </Grid>
 
@@ -123,7 +130,7 @@
                     Height="65"
                     FontSize="16"
                     Margin="0,30,0,0"
-                    Click="PlayButton_Click"/>
+                    Command="{Binding PlayCommand}"/>
         </StackPanel>
 
         <!-- 🔻 Footer con íconos -->
@@ -134,7 +141,10 @@
                     Margin="0,20,0,20">
 
             <!-- 🛍️ Tienda -->
-            <StackPanel Cursor="Hand" MouseDown="ShopLabel_MouseDoubleClick" HorizontalAlignment="Center" Margin="20,0">
+            <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding GoToShopCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/shopIcon.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
@@ -146,7 +156,10 @@
             </StackPanel>
 
             <!-- ⚙️ Ajustes -->
-            <StackPanel Cursor="Hand" MouseDown="SettingsLabel_MouseDoubleClick" HorizontalAlignment="Center" Margin="20,0">
+            <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding GoToSettingsCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/settingsIcon.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
@@ -159,6 +172,9 @@
 
             <!-- 📊 Estadísticas -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding GoToLeaderboardsCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/statsIcon.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
@@ -171,6 +187,9 @@
 
             <!-- ❓ Cómo jugar -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding GoToHowToPlayCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/rulesIcon.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
@@ -182,7 +201,10 @@
             </StackPanel>
 
             <!-- 🚪 Salir -->
-            <StackPanel Cursor="Hand" MouseDown="ExitLabel_MouseDoubleClick" HorizontalAlignment="Center" Margin="20,0">
+            <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding LogoutCommand}"/>
+                </StackPanel.InputBindings>
                 <Image Source="/Assets/exitIcon.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
