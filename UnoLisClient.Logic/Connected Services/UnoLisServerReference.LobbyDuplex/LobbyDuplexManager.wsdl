@@ -66,6 +66,9 @@
   <wsdl:message name="ILobbyDuplexManager_PlayerReadyStatusChanged_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerReadyStatusChanged" />
   </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_GameStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStarted" />
+  </wsdl:message>
   <wsdl:portType name="ILobbyDuplexManager">
     <wsdl:operation name="ConnectToLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyDuplexManager/ConnectToLobby" message="tns:ILobbyDuplexManager_ConnectToLobby_InputMessage" />
@@ -90,6 +93,9 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerReadyStatusChanged">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/PlayerReadyStatusChanged" message="tns:ILobbyDuplexManager_PlayerReadyStatusChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/GameStarted" message="tns:ILobbyDuplexManager_GameStarted_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILobbyDuplexManager" type="tns:ILobbyDuplexManager">
@@ -142,6 +148,12 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerReadyStatusChanged">
       <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/PlayerReadyStatusChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/GameStarted" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -9,6 +9,7 @@
   <xs:complexType name="LobbyPlayerData">
     <xs:sequence>
       <xs:element minOccurs="0" name="AvatarName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsReady" type="xs:boolean" />
       <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

@@ -13,6 +13,7 @@ namespace UnoLisClient.Logic.Services
         event Action<string> OnPlayerLeft;
         event Action<LobbyPlayerData[]> OnPlayerListUpdated;
         event Action<string, bool> OnPlayerReadyStatusChanged;
+        event Action OnGameStarted;
 
         Task ConnectToLobbyAsync(string lobbyCode, string nickname);
         Task DisconnectFromLobbyAsync(string lobbyCode, string nickname);

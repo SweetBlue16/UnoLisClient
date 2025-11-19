@@ -27,6 +27,7 @@ namespace UnoLisClient.Logic.Services
         public event Action<string> OnPlayerLeft;
         public event Action<LobbyPlayerData[]> OnPlayerListUpdated;
         public event Action<string, bool> OnPlayerReadyStatusChanged;
+        public event Action OnGameStarted;
 
         private LobbyService()
         {
@@ -36,6 +37,7 @@ namespace UnoLisClient.Logic.Services
             _callback.PlayerLeftReceived += (nick) => OnPlayerLeft?.Invoke(nick);
             _callback.PlayerListUpdatedReceived += (list) => OnPlayerListUpdated?.Invoke(list);
             _callback.PlayerReadyStatusReceived += (nick, status) => OnPlayerReadyStatusChanged?.Invoke(nick, status);
+            _callback.GameStartedReceived += () => OnGameStarted?.Invoke();
         }
 
         public async Task ConnectToLobbyAsync(string lobbyCode, string nickname)
@@ -91,6 +93,9 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
+        /// <summary>
+        /// Closes and cleans up the WCF proxy safely if a communication error occurs.
+        /// </summary>
         private void AbortProxy()
         {
             if (_proxy != null)

@@ -26,6 +26,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex {
         private string AvatarNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsReadyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NicknameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -47,6 +50,19 @@ namespace UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex {
                 if ((object.ReferenceEquals(this.AvatarNameField, value) != true)) {
                     this.AvatarNameField = value;
                     this.RaisePropertyChanged("AvatarName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsReady {
+            get {
+                return this.IsReadyField;
+            }
+            set {
+                if ((this.IsReadyField.Equals(value) != true)) {
+                    this.IsReadyField = value;
+                    this.RaisePropertyChanged("IsReady");
                 }
             }
         }
@@ -111,6 +127,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyDuplexManager/PlayerReadyStatusChanged")]
         void PlayerReadyStatusChanged(string nickname, bool isReady);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyDuplexManager/GameStarted")]
+        void GameStarted();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

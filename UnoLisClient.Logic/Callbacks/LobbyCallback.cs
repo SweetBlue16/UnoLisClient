@@ -8,7 +8,7 @@ using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
 namespace UnoLisClient.Logic.Callbacks
 {
     /// <summary>
-    /// Recibe notificaciones en tiempo real del Lobby desde el servidor.
+    /// Receives callbacks from the lobby duplex WCF service and raises corresponding events.
     /// </summary>
     public class LobbyCallback : ILobbyDuplexManagerCallback
     {
@@ -16,6 +16,7 @@ namespace UnoLisClient.Logic.Callbacks
         public event Action<string> PlayerLeftReceived;
         public event Action<LobbyPlayerData[]> PlayerListUpdatedReceived;
         public event Action<string, bool> PlayerReadyStatusReceived;
+        public event Action GameStartedReceived;
 
         public void PlayerJoined(string nickname, string avatarName)
         {
@@ -35,6 +36,11 @@ namespace UnoLisClient.Logic.Callbacks
         public void PlayerReadyStatusChanged(string nickname, bool isReady)
         {
             PlayerReadyStatusReceived?.Invoke(nickname, isReady);
+        }
+
+        public void GameStarted()
+        {
+            GameStartedReceived?.Invoke();
         }
     }
 }
