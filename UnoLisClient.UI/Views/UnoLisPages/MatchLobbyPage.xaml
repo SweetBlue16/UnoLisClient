@@ -90,11 +90,6 @@
                                                             <Setter Property="Content" Value="Invited"/>
                                                             <Setter Property="Background" Value="Green"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding IsOnline}" Value="False">
-                                                            <Setter Property="IsEnabled" Value="False"/>
-                                                            <Setter Property="Content" Value="Offline"/>
-                                                            <Setter Property="Background" Value="#333"/>
-                                                        </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </Button.Style>
