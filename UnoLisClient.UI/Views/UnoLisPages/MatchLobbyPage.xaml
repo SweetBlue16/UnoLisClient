@@ -6,11 +6,32 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewModels="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
       mc:Ignorable="d"
+      x:Name="LobbyPage"
       Title="MatchLobbyPage"
       Loaded="MatchLobbyPage_Loaded"
       Unloaded="MatchLobbyPage_Unloaded">
+
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="SlotVisibilityConverter"/>
+
+        <Style x:Key="AvatarEllipseStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Stroke" Value="White"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsReady}" Value="True">
+                    <Setter Property="Stroke" Value="#32CD32"/>
+                    <Setter Property="StrokeThickness" Value="4"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="#32CD32" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
 
     <Grid Background="#88000000">
@@ -97,10 +118,140 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,20" Orientation="Vertical">
-                <Button Content="READY" Width="180" Height="55" FontSize="17" Margin="0,5,0,15"
+            <Viewbox Grid.Row="0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Grid Width="520" Height="520">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Viewbox Grid.Row="1" Grid.Column="1" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="170">
+                        <Image Source="/Assets/unoLogoPixelArt.png">
+                            <Image.Effect>
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="4" Color="Black" Opacity="0.6"/>
+                            </Image.Effect>
+                        </Image>
+                    </Viewbox>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                DataContext="{Binding PlayersInLobby[2]}"
+                                Visibility="{Binding IsSlotFilled, Converter={StaticResource SlotVisibilityConverter}}">
+
+                        <Ellipse Style="{StaticResource AvatarEllipseStyle}">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <TextBlock Text="{Binding Nickname}" 
+                                   Foreground="White" FontSize="16" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" Margin="0,8,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="3" ShadowDepth="1" Opacity="0.8"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!-- Jugador 1 (Izquierda) -> Slot [0] -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                DataContext="{Binding PlayersInLobby[0]}"
+                                Visibility="{Binding IsSlotFilled, Converter={StaticResource SlotVisibilityConverter}}">
+                        <Ellipse Style="{StaticResource AvatarEllipseStyle}">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Nickname}" 
+                                   Foreground="White" FontSize="16" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" Margin="0,8,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="3" ShadowDepth="1" Opacity="0.8"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                DataContext="{Binding PlayersInLobby[1]}"
+                                Visibility="{Binding IsSlotFilled, Converter={StaticResource SlotVisibilityConverter}}">
+                        <Ellipse Style="{StaticResource AvatarEllipseStyle}">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Nickname}" 
+                                   Foreground="White" FontSize="16" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" Margin="0,8,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="3" ShadowDepth="1" Opacity="0.8"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,10"
+                                DataContext="{Binding PlayersInLobby[3]}"
+                                Visibility="{Binding IsSlotFilled, Converter={StaticResource SlotVisibilityConverter}}">
+                        <Ellipse Style="{StaticResource AvatarEllipseStyle}">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Nickname}" 
+                                   Foreground="White" FontSize="16" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" Margin="0,8,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="3" ShadowDepth="1" Opacity="0.8"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+
+                </Grid>
+            </Viewbox>
+
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Margin="0,10,0,20"
+                        Orientation="Vertical">
+
+                <Button x:Name="StartButton"
+                        Content="READY"
+                        Width="180"
+                        Height="55"
+                        FontSize="17"
+                        Margin="0,5,0,15"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding ReadyCommand}"/>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,8">
+
+                    <Border Background="#33000000"
+                            CornerRadius="8"
+                            Padding="10,5"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            Margin="0,0,10,0">
+                        <TextBlock Text="{Binding LobbyCodeDisplay}"
+                                   Foreground="Lime"
+                                   FontFamily="Consolas"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ReadyStatusText}"
+                               FontSize="15"
+                               Foreground="White"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,20,0">
@@ -114,23 +265,18 @@
                 </Button>
             </StackPanel>
 
-            <Border Grid.RowSpan="2" Grid.Column="1"
-                    Background="Transparent"
-                    Visibility="{Binding IsChatVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+            <Border Grid.RowSpan="2" Grid.Column="1" Background="Transparent"
+                    Visibility="{Binding DataContext.IsChatVisible, ElementName=LobbyPage, Converter={StaticResource BooleanToVisibilityConverter}}"
                     MouseLeftButtonDown="ChatOverlay_MouseLeftButtonDown" />
 
-            <controls:SettingsModal x:Name="SettingsModal"
-                                    Grid.Column="1" Grid.RowSpan="2"
-                                    Visibility="{Binding IsSettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+            <controls:SettingsModal x:Name="SettingsModal" Grid.ColumnSpan="2"
+                                    Visibility="{Binding DataContext.IsSettingsVisible, ElementName=LobbyPage, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     CloseRequested="CloseRequestedSettingsModal"
                                     LeaveMatchRequested="LeaveMatchRequestedSettingsModal" />
 
-            <controls:ChatControl x:Name="ChatControl"
-                                  Grid.Column="1" Grid.RowSpan="2"
-                                  HorizontalAlignment="Right"
-                                  VerticalAlignment="Top"
-                                  Margin="0,80,20,0"
-                                  Visibility="{Binding IsChatVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <controls:ChatControl x:Name="ChatControl" Grid.Column="1" Grid.RowSpan="2"
+                                  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"
+                                  Visibility="{Binding DataContext.IsChatVisible, ElementName=LobbyPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
     </Grid>
 </Page>

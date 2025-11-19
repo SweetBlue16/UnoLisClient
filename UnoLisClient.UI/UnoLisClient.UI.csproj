@@ -326,6 +326,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Avatars\CC2Projector.png" />
+    <Resource Include="Avatars\DraKaren.png" />
+    <Resource Include="Avatars\DraLizbeth.png" />
+    <Resource Include="Avatars\DrOcharan.png" />
+    <Resource Include="Avatars\DrSaul.png" />
+    <Resource Include="Avatars\ElRevo.png" />
+    <Resource Include="Avatars\Gatito.png" />
+    <Resource Include="Avatars\LogoUNO.png" />
+    <Resource Include="Avatars\MtroWillian.png" />
     <Resource Include="Fonts\Bangers.ttf" />
     <Resource Include="Fonts\Bubblegum-Sans.ttf" />
     <Resource Include="Fonts\Lato.ttf" />
@@ -343,15 +352,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Avatars\MtroWillian.png" />
-    <Resource Include="Avatars\LogoUNO.png" />
-    <Resource Include="Avatars\Gatito.png" />
-    <Resource Include="Avatars\ElRevo.png" />
-    <Resource Include="Avatars\DrSaul.png" />
-    <Resource Include="Avatars\DrOcharan.png" />
-    <Resource Include="Avatars\DraLizbeth.png" />
-    <Resource Include="Avatars\DraKaren.png" />
-    <Resource Include="Avatars\CC2Projector.png" />
+    <Resource Include="Avatars\+10Card.png" />
+    <Resource Include="Avatars\Jamon.png" />
+    <Resource Include="Avatars\Mau.png" />
+    <Resource Include="Avatars\Muffin.png" />
+    <Resource Include="Avatars\NormalCard.png" />
+    <Resource Include="Avatars\NormalUser.png" />
+    <Resource Include="Avatars\Palito.png" />
+    <Resource Include="Avatars\Raymon.png" />
+    <Resource Include="Avatars\Volovan.png" />
     <Resource Include="Assets\pixelNoise.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -366,8 +375,63 @@
     <Content Include="Assets\buttonClick.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Assets\Cards\CardBack.png" />
-    <Resource Include="Assets\Cards\DrawFour.png" />
+    <Resource Include="Assets\Cards\BackUNOCard.png" />
+    <Resource Include="Assets\Cards\DrawTwoBlueCard.png" />
+    <Resource Include="Assets\Cards\DrawTwoGreenCard.png" />
+    <Resource Include="Assets\Cards\DrawTwoRedCard.png" />
+    <Resource Include="Assets\Cards\DrawTwoYellowCard.png" />
+    <Resource Include="Assets\Cards\EightBlueCard.png" />
+    <Resource Include="Assets\Cards\EightGreenCard.png" />
+    <Resource Include="Assets\Cards\EightRedCard.png" />
+    <Resource Include="Assets\Cards\EightYellowCard.png" />
+    <Resource Include="Assets\Cards\FiveBlueCard.png" />
+    <Resource Include="Assets\Cards\FiveGreenCard.png" />
+    <Resource Include="Assets\Cards\FiveRedCard.png" />
+    <Resource Include="Assets\Cards\FiveYellowCard.png" />
+    <Resource Include="Assets\Cards\FourBlueCard.png" />
+    <Resource Include="Assets\Cards\FourGreenCard.png" />
+    <Resource Include="Assets\Cards\FourRedCard.png" />
+    <Resource Include="Assets\Cards\FourYellowCard.png" />
+    <Resource Include="Assets\Cards\NineBlueCard.png" />
+    <Resource Include="Assets\Cards\NineGreenCard.png" />
+    <Resource Include="Assets\Cards\NineRedCard.png" />
+    <Resource Include="Assets\Cards\NineYellowCard.png" />
+    <Resource Include="Assets\Cards\OneBlueCard.png" />
+    <Resource Include="Assets\Cards\OneGreenCard.png" />
+    <Resource Include="Assets\Cards\OneRedCard.png" />
+    <Resource Include="Assets\Cards\OneYellowCard.png" />
+    <Resource Include="Assets\Cards\ReverseBlueCard.png" />
+    <Resource Include="Assets\Cards\ReverseGreenCard.png" />
+    <Resource Include="Assets\Cards\ReverseRedCard.png" />
+    <Resource Include="Assets\Cards\ReverseYellowCard.png" />
+    <Resource Include="Assets\Cards\SevenBlueCard.png" />
+    <Resource Include="Assets\Cards\SevenGreenCard.png" />
+    <Resource Include="Assets\Cards\SevenRedCard.png" />
+    <Resource Include="Assets\Cards\SevenYellowCard.png" />
+    <Resource Include="Assets\Cards\SixBlueCard.png" />
+    <Resource Include="Assets\Cards\SixGreenCard.png" />
+    <Resource Include="Assets\Cards\SixRedCard.png" />
+    <Resource Include="Assets\Cards\SixYellowCard.png" />
+    <Resource Include="Assets\Cards\SkipBlueCard.png" />
+    <Resource Include="Assets\Cards\SkipGreenCard.png" />
+    <Resource Include="Assets\Cards\SkipRedCard.png" />
+    <Resource Include="Assets\Cards\SkipYellowCard.png" />
+    <Resource Include="Assets\Cards\ThreeBlueCard.png" />
+    <Resource Include="Assets\Cards\ThreeGreenCard.png" />
+    <Resource Include="Assets\Cards\ThreeRedCard.png" />
+    <Resource Include="Assets\Cards\ThreeYellowCard.png" />
+    <Resource Include="Assets\Cards\TwoBlueCard.png" />
+    <Resource Include="Assets\Cards\TwoGreenCard.png" />
+    <Resource Include="Assets\Cards\TwoRedCard.png" />
+    <Resource Include="Assets\Cards\TwoYellowCard.png" />
+    <Resource Include="Assets\Cards\WildCard.png" />
+    <Resource Include="Assets\Cards\WildDrawFourCard.png" />
+    <Resource Include="Assets\Cards\WildDrawSkipReverseCard.png" />
+    <Resource Include="Assets\Cards\WildDrawTenCard.png" />
+    <Resource Include="Assets\Cards\ZeroBlueCard.png" />
+    <Resource Include="Assets\Cards\ZeroGreenCard.png" />
+    <Resource Include="Assets\Cards\ZeroRedCard.png" />
+    <Resource Include="Assets\Cards\ZeroYellowCard.png" />
     <Content Include="Assets\lobbyVideo.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

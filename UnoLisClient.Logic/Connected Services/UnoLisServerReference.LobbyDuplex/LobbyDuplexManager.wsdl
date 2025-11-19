@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="LobbyDuplexManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ILobbyDuplexManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8132/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8132/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8132/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILobbyDuplexManager_ConnectToLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectToLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_ConnectToLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectToLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_DisconnectFromLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectFromLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_DisconnectFromLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectFromLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_SetReadyStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetReadyStatus" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_SetReadyStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetReadyStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_PlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoined" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_UpdatePlayerList_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerList" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyDuplexManager_PlayerReadyStatusChanged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerReadyStatusChanged" />
+  </wsdl:message>
+  <wsdl:portType name="ILobbyDuplexManager">
+    <wsdl:operation name="ConnectToLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyDuplexManager/ConnectToLobby" message="tns:ILobbyDuplexManager_ConnectToLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/ConnectToLobbyResponse" message="tns:ILobbyDuplexManager_ConnectToLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisconnectFromLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyDuplexManager/DisconnectFromLobby" message="tns:ILobbyDuplexManager_DisconnectFromLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/DisconnectFromLobbyResponse" message="tns:ILobbyDuplexManager_DisconnectFromLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetReadyStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyDuplexManager/SetReadyStatus" message="tns:ILobbyDuplexManager_SetReadyStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/SetReadyStatusResponse" message="tns:ILobbyDuplexManager_SetReadyStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/PlayerJoined" message="tns:ILobbyDuplexManager_PlayerJoined_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/PlayerLeft" message="tns:ILobbyDuplexManager_PlayerLeft_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayerList">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/UpdatePlayerList" message="tns:ILobbyDuplexManager_UpdatePlayerList_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerReadyStatusChanged">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyDuplexManager/PlayerReadyStatusChanged" message="tns:ILobbyDuplexManager_PlayerReadyStatusChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_ILobbyDuplexManager" type="tns:ILobbyDuplexManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_ILobbyDuplexManager_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ConnectToLobby">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/ConnectToLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisconnectFromLobby">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/DisconnectFromLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReadyStatus">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/SetReadyStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/PlayerJoined" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/PlayerLeft" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayerList">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/UpdatePlayerList" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerReadyStatusChanged">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyDuplexManager/PlayerReadyStatusChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LobbyDuplexManager">
+    <wsdl:port name="NetTcpBinding_ILobbyDuplexManager" binding="tns:NetTcpBinding_ILobbyDuplexManager">
+      <soap12:address location="net.tcp://localhost:8133/LobbyDuplexManager" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8133/LobbyDuplexManager</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>EVICTUS\meler</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

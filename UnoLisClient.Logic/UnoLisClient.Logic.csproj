@@ -58,6 +58,7 @@
     <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Callbacks\ConfirmationCodeCallback.cs" />
     <Compile Include="Callbacks\FriendsCallback.cs" />
+    <Compile Include="Callbacks\LobbyCallback.cs" />
     <Compile Include="Callbacks\LoginCallback.cs" />
     <Compile Include="Callbacks\LogoutCallback.cs" />
     <Compile Include="Callbacks\ProfileEditCallback.cs" />
@@ -89,6 +90,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\UnoLisServerReference.Leaderboards\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UnoLisServerReference.LobbyDuplex\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -157,8 +163,10 @@
     <Compile Include="Services\FriendsService.cs" />
     <Compile Include="Services\IChatService.cs" />
     <Compile Include="Services\IFriendsService.cs" />
+    <Compile Include="Services\ILobbyService.cs" />
     <Compile Include="Services\IMatchmakingService.cs" />
     <Compile Include="Services\IModalService.cs" />
+    <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\LogoutService.cs" />
     <Compile Include="Services\MatchmakingService.cs" />
@@ -255,6 +263,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\LeaderboardsManager.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\LobbyDuplexManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Login\service.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Login\service.xsd">
       <SubType>Designer</SubType>
@@ -394,6 +412,7 @@
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Friends\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Gameplay\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Leaderboards\" />
+    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.LobbyDuplex\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Login\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Logout\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Matchmaking\" />
@@ -638,6 +657,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UnoLisServerReference.Matchmaking\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

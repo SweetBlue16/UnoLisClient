@@ -14,6 +14,7 @@ using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisServer.Common.Enums;
+using UnoLisClient.Logic.Helpers;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -21,6 +22,7 @@ namespace UnoLisClient.UI.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IFriendsService _friendsService;
+        private readonly ILobbyService _lobbyService;
         private readonly string _currentUserNickname;
         private readonly string _currentLobbyCode;
 
@@ -47,7 +49,7 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _lobbyCodeDisplay, value);
         }
 
-        private string _readyStatusText = "1 / 4 Players Ready";
+        private string _readyStatusText = "Esperando jugadores...";
         public string ReadyStatusText
         {
             get => _readyStatusText;
@@ -70,8 +72,13 @@ namespace UnoLisClient.UI.ViewModels
         {
             _navigationService = navigationService;
             _friendsService = friendsService;
+            _lobbyService = LobbyService.Instance;
+
             _currentUserNickname = CurrentSession.CurrentUserNickname;
             _currentLobbyCode = lobbyCode;
+
+            IsChatVisible = false;
+            IsSettingsVisible = false;
 
             LobbyCodeDisplay = $"Lobby Code: {_currentLobbyCode}";
 
@@ -91,20 +98,80 @@ namespace UnoLisClient.UI.ViewModels
         {
             PlayersInLobby.Clear();
             for (int i = 0; i < 4; i++) PlayersInLobby.Add(new LobbyPlayerViewModel());
-
-            PlayersInLobby[0].FillSlot(_currentUserNickname, "/Avatars/Gatito.png");
         }
 
 
         public async Task OnPageLoaded()
         {
+            _lobbyService.OnPlayerListUpdated += HandlePlayerListUpdated;
+            _lobbyService.OnPlayerJoined += HandlePlayerJoined;
+            _lobbyService.OnPlayerLeft += HandlePlayerLeft;
+
             await ChatVM.InitializeAsync();
             await LoadFriendsAsync();
+
+            try
+            {
+                await _lobbyService.ConnectToLobbyAsync(_currentLobbyCode, _currentUserNickname);
+            }
+            catch (Exception ex)
+            {
+                HandleException(MessageCode.ConnectionFailed, "No se pudo conectar al lobby.", ex);
+                _navigationService.GoBack();
+            }
         }
 
         public async Task OnPageUnloaded()
         {
+            try
+            {
+                await _lobbyService.DisconnectFromLobbyAsync(_currentLobbyCode, _currentUserNickname);
+            }
+            catch 
+            {
+                LogManager.Error("Error while trying to disconnect.");
+            }
+
+            _lobbyService.OnPlayerListUpdated -= HandlePlayerListUpdated;
+            _lobbyService.OnPlayerJoined -= HandlePlayerJoined;
+            _lobbyService.OnPlayerLeft -= HandlePlayerLeft;
+
             await ChatVM.CleanupAsync();
+        }
+
+        private void HandlePlayerListUpdated(string[] playerNicknames)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                ReadyStatusText = $"{playerNicknames.Length} / 4 Players";
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i < playerNicknames.Length)
+                    {
+                        string nick = playerNicknames[i];
+                        // TODO: Cuando el servidor mande avatares, usaremos el real.
+                        // Por ahora usamos uno random o fijo para probar.
+                        string avatar = "/Avatars/Gatito.png";
+
+                        PlayersInLobby[i].FillSlot(nick, avatar);
+                    }
+                    else
+                    {
+                        PlayersInLobby[i].ClearSlot();
+                    }
+                }
+            });
+        }
+
+        private void HandlePlayerJoined(string nickname)
+        {
+            SoundManager.PlaySuccess();
+        }
+
+        private void HandlePlayerLeft(string nickname)
+        {
+            LogManager.Info($"Player left: {nickname}");
         }
 
         private async Task LoadFriendsAsync()
