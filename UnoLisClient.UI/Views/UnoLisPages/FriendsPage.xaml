@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:UnoLisClient.UI.Views.Controls"
       xmlns:viewModels="clr-namespace:UnoLisClient.UI.ViewModels"
+      xmlns:Langs="clr-namespace:UnoLisClient.UI.Properties.Langs"
       mc:Ignorable="d"
       Background="Transparent">
 
@@ -47,16 +48,14 @@
                             VerticalAlignment="Top"
                             Click="BackButton_Click"/>
 
-                    <!-- Título -->
                     <TextBlock Grid.Column="1"
-                               Text="My Friends"
+                               Text="{x:Static Langs:FriendsList.MyFriendsLabel}"
                                FontSize="36"
                                FontWeight="Bold"
                                Foreground="White"
                                HorizontalAlignment="Left"
                                Margin="20,0,0,0"/>
-
-                    <!-- Botón de agregar amigo -->
+                    
                     <Button Grid.Column="2"
                             Style="{StaticResource PrimaryButtonStyle}"
                             Width="40"
@@ -68,7 +67,6 @@
                             Command="{Binding OpenAddFriendModalCommand}"/>
                 </Grid>
 
-                <!-- 🔹 Lista de amigos -->
                 <DataGrid x:Name="FriendsTable"
                           Grid.Row="1"
                           ItemsSource="{Binding Friends}"
@@ -77,13 +75,11 @@
                           Margin="0,10,0,10">
 
                     <DataGrid.Columns>
-                        <!-- Nickname -->
-                        <DataGridTextColumn Header="Nickname"
+                        <DataGridTextColumn Header="{x:Static Langs:FriendsList.NicknameColumnLabel}"
                                             Binding="{Binding Nickname}"
                                             Width="*" />
 
-                        <!-- Estado con color -->
-                        <DataGridTemplateColumn Header="Status" Width="150">
+                        <DataGridTemplateColumn Header="{x:Static Langs:FriendsList.StatusColumnLabel}" Width="150">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -98,10 +94,10 @@
                         </DataGridTemplateColumn>
 
                         <!-- Acción -->
-                        <DataGridTemplateColumn Header="Action" Width="130">
+                        <DataGridTemplateColumn Header=" " Width="130">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Remove"
+                                    <Button Content="{x:Static Langs:FriendsList.FriendRemovedButton}"
                                             Style="{StaticResource SecondaryButtonStyle}"
                                             Padding="6,2"
                                             Command="{Binding DataContext.RemoveFriendCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
@@ -114,7 +110,7 @@
 
                 <!-- 🔹 Buzón de solicitudes -->
                 <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,20,0,0">
-                    <Button Content="View Friend Requests"
+                    <Button Content="{x:Static Langs:FriendsList.FriendRequestsButton}"
                             Style="{StaticResource PrimaryButtonStyle}"
                             FontSize="16"
                             Padding="10,5"

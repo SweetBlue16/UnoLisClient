@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewModels="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
+      xmlns:Langs="clr-namespace:UnoLisClient.UI.Properties.Langs"
       mc:Ignorable="d"
       x:Name="LobbyPage"
       Title="MatchLobbyPage"
@@ -43,7 +44,7 @@
         <Border Grid.Column="0" Background="#55000000" CornerRadius="12" Padding="20"
                 Width="300" VerticalAlignment="Stretch" Margin="40,60,20,60">
             <StackPanel>
-                <TextBlock Text="Invite Friends" FontSize="28" FontWeight="Bold" Foreground="White"
+                <TextBlock Text="{x:Static Langs:Lobby.InviteFriendsLabel}" FontSize="28" FontWeight="Bold" Foreground="White"
                            HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -101,7 +102,7 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <Button Content="Send Invites" Width="200" Height="45" FontSize="16" Margin="0,15,0,0"
+                <Button Content="{x:Static Langs:Lobby.SendInvitesButton}" Width="200" Height="45" FontSize="16" Margin="0,15,0,0"
                         HorizontalAlignment="Center" Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding SendInvitesCommand}"/>
             </StackPanel>
@@ -153,7 +154,6 @@
                         </TextBlock>
                     </StackPanel>
 
-                    <!-- Jugador 1 (Izquierda) -> Slot [0] -->
                     <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 DataContext="{Binding PlayersInLobby[0]}"
                                 Visibility="{Binding IsSlotFilled, Converter={StaticResource SlotVisibilityConverter}}">
@@ -215,7 +215,7 @@
                         Orientation="Vertical">
 
                 <Button x:Name="StartButton"
-                        Content="READY"
+                        Content="{x:Static Langs:Lobby.ReadyButton}"
                         Width="180"
                         Height="55"
                         FontSize="17"

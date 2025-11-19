@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:Langs="clr-namespace:UnoLisClient.UI.Properties.Langs"
       mc:Ignorable="d"
       Title="JoinMatchPage">
 
@@ -16,7 +17,7 @@
                 Height="350">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
 
-                <TextBlock Text="JOIN MATCH"
+                <TextBlock Text="{x:Static Langs:Global.JoinMatchLabel}"
                            FontSize="36"
                            FontWeight="Bold"
                            Foreground="White"
@@ -28,7 +29,7 @@
                          Style="{StaticResource TextBoxStyle}"
                          Width="250"
                          Height="40"
-                         Tag="Enter match code..."
+                         Tag="{x:Static Langs:Global.EnterMatchCodeLabel}"
                          FontSize="18"
                          HorizontalAlignment="Center"
                          TextAlignment="Center"
@@ -37,20 +38,21 @@
                          Text="{Binding LobbyCode, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
-                    <Button Content="JOIN"
+                    <Button Content="{x:Static Langs:Global.JoinButton}"
                             Style="{StaticResource PrimaryButtonStyle}"
                             Width="130"
                             Height="55"
                             FontSize="18"
                             Cursor="Hand"
+                            Margin="0,0,20,0"
                             Command="{Binding JoinMatchCommand}"/>
-
-                    <Button Content="BACK"
+                    <Button Content="{x:Static Langs:Global.BackJoinButton}"
                             Style="{StaticResource SecondaryButtonStyle}"
-                            Width="130"
-                            Height="55"
+                            Width="140"
+                            Height="59"
                             FontSize="18"
                             Cursor="Hand"
+                            Margin="20,0,0,0"
                             Command="{Binding CancelCommand}"/>
                 </StackPanel>
             </StackPanel>

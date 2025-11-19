@@ -61,6 +61,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string ActionColumnLabel {
+            get {
+                return ResourceManager.GetString("ActionColumnLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddButton {
+            get {
+                return ResourceManager.GetString("AddButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add friend.
         /// </summary>
         public static string AddFriendButton {
@@ -70,11 +88,20 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your friend&apos;s nickname to add them to the list..
+        ///   Looks up a localized string similar to Enter a nickname....
         /// </summary>
         public static string EnterNicknameMessageLabel {
             get {
                 return ResourceManager.GetString("EnterNicknameMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string FriendRemovedButton {
+            get {
+                return ResourceManager.GetString("FriendRemovedButton", resourceCulture);
             }
         }
         
@@ -88,11 +115,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        public static string FriendRequestAcceptButton {
+            get {
+                return ResourceManager.GetString("FriendRequestAcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} has accepted your friend request..
         /// </summary>
         public static string FriendRequestAcceptedLabel {
             get {
                 return ResourceManager.GetString("FriendRequestAcceptedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decline.
+        /// </summary>
+        public static string FriendRequestDeclineButton {
+            get {
+                return ResourceManager.GetString("FriendRequestDeclineButton", resourceCulture);
             }
         }
         
@@ -124,6 +169,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decline.
+        /// </summary>
+        public static string FriendRequestRemoveButton {
+            get {
+                return ResourceManager.GetString("FriendRequestRemoveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend Requests.
+        /// </summary>
+        public static string FriendRequestsButton {
+            get {
+                return ResourceManager.GetString("FriendRequestsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We&apos;ve sent a friend request to {0}..
         /// </summary>
         public static string FriendRequestSentLabel {
@@ -133,11 +196,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friends Requests.
+        /// </summary>
+        public static string FriendsRequestsLabel {
+            get {
+                return ResourceManager.GetString("FriendsRequestsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My friends.
         /// </summary>
         public static string MyFriendsLabel {
             get {
                 return ResourceManager.GetString("MyFriendsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nickname.
+        /// </summary>
+        public static string NicknameColumnLabel {
+            get {
+                return ResourceManager.GetString("NicknameColumnLabel", resourceCulture);
             }
         }
         
@@ -165,6 +246,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string RemoveFriendMessageLabel {
             get {
                 return ResourceManager.GetString("RemoveFriendMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string StatusColumnLabel {
+            get {
+                return ResourceManager.GetString("StatusColumnLabel", resourceCulture);
             }
         }
     }

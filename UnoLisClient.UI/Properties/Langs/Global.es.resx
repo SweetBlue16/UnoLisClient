@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppNameLabel" xml:space="preserve">
-    <value>¡UNO-LIS!</value>
+  <data name="BackgroundSelectLabel" xml:space="preserve">
+    <value>SELECCIONA UN FONDO</value>
+  </data>
+  <data name="BackJoinButton" xml:space="preserve">
+    <value>REGRESAR</value>
   </data>
   <data name="BasicRulesLabel" xml:space="preserve">
     <value>Inicias con 7 cartas. En tu turno, juega una carta que coincida en color, número o símbolo con la del pozo. Si no tienes una carta jugable, debes robar del mazo hasta que puedas jugar una.</value>
@@ -150,6 +153,9 @@
   <data name="EmailLabel" xml:space="preserve">
     <value>Correo electrónico</value>
   </data>
+  <data name="EnterMatchCodeLabel" xml:space="preserve">
+    <value>Ingresa código de partida...</value>
+  </data>
   <data name="ExitLabel" xml:space="preserve">
     <value>Salir</value>
   </data>
@@ -177,6 +183,12 @@
   <data name="ItemsTitleLabel" xml:space="preserve">
     <value>Ítems Especiales</value>
   </data>
+  <data name="JoinButton" xml:space="preserve">
+    <value>UNIRSE</value>
+  </data>
+  <data name="JoinMatchLabel" xml:space="preserve">
+    <value>Unirse a Partida</value>
+  </data>
   <data name="LeaderboardDataReceivedMessageLabel" xml:space="preserve">
     <value>Datos del ranking obtenidos.</value>
   </data>
@@ -191,6 +203,9 @@
   </data>
   <data name="MatchesPlayedColumn" xml:space="preserve">
     <value>Partidas jugadas</value>
+  </data>
+  <data name="MatchMenuLabel" xml:space="preserve">
+    <value>Menú de Partida</value>
   </data>
   <data name="MessagePlaceholderLabel" xml:space="preserve">
     <value>Mensaje</value>
@@ -272,5 +287,17 @@
   </data>
   <data name="YesButton" xml:space="preserve">
     <value>Sí</value>
+  </data>
+  <data name="AppNameLabel" xml:space="preserve">
+    <value>¡UNO-LIS!</value>
+  </data>
+  <data name="CreateMatchButton" xml:space="preserve">
+    <value>CREAR PARTIDA</value>
+  </data>
+  <data name="JoinMenuButton" xml:space="preserve">
+    <value>UNIRSE A PARTIDA</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>CERRAR</value>
   </data>
 </root>

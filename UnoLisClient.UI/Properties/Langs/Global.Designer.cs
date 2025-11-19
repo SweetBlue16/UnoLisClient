@@ -70,6 +70,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT BACKGROUND.
+        /// </summary>
+        public static string BackgroundSelectLabel {
+            get {
+                return ResourceManager.GetString("BackgroundSelectLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BACK.
+        /// </summary>
+        public static string BackJoinButton {
+            get {
+                return ResourceManager.GetString("BackJoinButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start with 7 cards. On your turn, play a card that matches the color, number or symbol of the top card. If you can&apos;t play, you must draw from the deck until you get a playable card, which you must play immediately..
         /// </summary>
         public static string BasicRulesLabel {
@@ -102,6 +120,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ChatLabel {
             get {
                 return ResourceManager.GetString("ChatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CLOSE.
+        /// </summary>
+        public static string CloseButton {
+            get {
+                return ResourceManager.GetString("CloseButton", resourceCulture);
             }
         }
         
@@ -151,11 +178,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE MATCH.
+        /// </summary>
+        public static string CreateMatchButton {
+            get {
+                return ResourceManager.GetString("CreateMatchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string EmailLabel {
             get {
                 return ResourceManager.GetString("EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter match code....
+        /// </summary>
+        public static string EnterMatchCodeLabel {
+            get {
+                return ResourceManager.GetString("EnterMatchCodeLabel", resourceCulture);
             }
         }
         
@@ -241,6 +286,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to JOIN.
+        /// </summary>
+        public static string JoinButton {
+            get {
+                return ResourceManager.GetString("JoinButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join Match.
+        /// </summary>
+        public static string JoinMatchLabel {
+            get {
+                return ResourceManager.GetString("JoinMatchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JOIN MATCH.
+        /// </summary>
+        public static string JoinMenuButton {
+            get {
+                return ResourceManager.GetString("JoinMenuButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ranking data obtained..
         /// </summary>
         public static string LeaderboardDataReceivedMessageLabel {
@@ -282,6 +354,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string MatchesPlayedColumn {
             get {
                 return ResourceManager.GetString("MatchesPlayedColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match Menu.
+        /// </summary>
+        public static string MatchMenuLabel {
+            get {
+                return ResourceManager.GetString("MatchMenuLabel", resourceCulture);
             }
         }
         

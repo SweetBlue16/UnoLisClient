@@ -121,13 +121,22 @@
     <value>Add friend</value>
   </data>
   <data name="EnterNicknameMessageLabel" xml:space="preserve">
-    <value>Enter your friend's nickname to add them to the list.</value>
+    <value>Enter a nickname...</value>
+  </data>
+  <data name="FriendRemovedButton" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="FriendRemovedMessageLabel" xml:space="preserve">
     <value>{0} has been removed from your friends list.</value>
   </data>
+  <data name="FriendRequestAcceptButton" xml:space="preserve">
+    <value>Accept</value>
+  </data>
   <data name="FriendRequestAcceptedLabel" xml:space="preserve">
     <value>{0} has accepted your friend request.</value>
+  </data>
+  <data name="FriendRequestDeclineButton" xml:space="preserve">
+    <value>Decline</value>
   </data>
   <data name="FriendRequestDeclinedMessageLabel" xml:space="preserve">
     <value>{0} has declined your friend request.</value>
@@ -138,11 +147,20 @@
   <data name="FriendRequestReceivedMessageLabel" xml:space="preserve">
     <value>{0} has sent you a friend request!</value>
   </data>
+  <data name="FriendRequestRemoveButton" xml:space="preserve">
+    <value>Decline</value>
+  </data>
   <data name="FriendRequestSentLabel" xml:space="preserve">
     <value>We've sent a friend request to {0}.</value>
   </data>
+  <data name="FriendsRequestsLabel" xml:space="preserve">
+    <value>Friends Requests</value>
+  </data>
   <data name="MyFriendsLabel" xml:space="preserve">
     <value>My friends</value>
+  </data>
+  <data name="NicknameColumnLabel" xml:space="preserve">
+    <value>Nickname</value>
   </data>
   <data name="PlayerBlockedMessageLabel" xml:space="preserve">
     <value>{0} has been successfully blocked.</value>
@@ -152,5 +170,17 @@
   </data>
   <data name="RemoveFriendMessageLabel" xml:space="preserve">
     <value>Are you sure you want to remove {0} from your friends list?</value>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="FriendRequestsButton" xml:space="preserve">
+    <value>Friend Requests</value>
+  </data>
+  <data name="StatusColumnLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ActionColumnLabel" xml:space="preserve">
+    <value>Action</value>
   </data>
 </root>

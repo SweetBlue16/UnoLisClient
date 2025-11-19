@@ -61,6 +61,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to INVITE FRIENDS.
+        /// </summary>
+        public static string InviteFriendsLabel {
+            get {
+                return ResourceManager.GetString("InviteFriendsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LEAVE MATCH.
+        /// </summary>
+        public static string LeaveMatchButton {
+            get {
+                return ResourceManager.GetString("LeaveMatchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match {0} successfully created..
         /// </summary>
         public static string LobbyCreatedSuccessfullyLabel {
@@ -156,6 +174,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ReadyButton {
             get {
                 return ResourceManager.GetString("ReadyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SEND INVITATIONS.
+        /// </summary>
+        public static string SendInvitesButton {
+            get {
+                return ResourceManager.GetString("SendInvitesButton", resourceCulture);
             }
         }
         

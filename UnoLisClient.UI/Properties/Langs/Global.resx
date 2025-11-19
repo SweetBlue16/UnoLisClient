@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppNameLabel" xml:space="preserve">
-    <value>UNO-LIS!</value>
+  <data name="BackgroundSelectLabel" xml:space="preserve">
+    <value>SELECT BACKGROUND</value>
+  </data>
+  <data name="BackJoinButton" xml:space="preserve">
+    <value>BACK</value>
   </data>
   <data name="BasicRulesLabel" xml:space="preserve">
     <value>Start with 7 cards. On your turn, play a card that matches the color, number or symbol of the top card. If you can't play, you must draw from the deck until you get a playable card, which you must play immediately.</value>
@@ -150,6 +153,9 @@
   <data name="EmailLabel" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EnterMatchCodeLabel" xml:space="preserve">
+    <value>Enter match code...</value>
+  </data>
   <data name="ExitLabel" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -177,6 +183,12 @@
   <data name="ItemsTitleLabel" xml:space="preserve">
     <value>Special Items</value>
   </data>
+  <data name="JoinButton" xml:space="preserve">
+    <value>JOIN</value>
+  </data>
+  <data name="JoinMatchLabel" xml:space="preserve">
+    <value>Join Match</value>
+  </data>
   <data name="LeaderboardDataReceivedMessageLabel" xml:space="preserve">
     <value>Ranking data obtained.</value>
   </data>
@@ -191,6 +203,9 @@
   </data>
   <data name="MatchesPlayedColumn" xml:space="preserve">
     <value>Matches played</value>
+  </data>
+  <data name="MatchMenuLabel" xml:space="preserve">
+    <value>Match Menu</value>
   </data>
   <data name="MessagePlaceholderLabel" xml:space="preserve">
     <value>Message</value>
@@ -272,5 +287,17 @@
   </data>
   <data name="YesButton" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="AppNameLabel" xml:space="preserve">
+    <value>UNO-LIS!</value>
+  </data>
+  <data name="CreateMatchButton" xml:space="preserve">
+    <value>CREATE MATCH</value>
+  </data>
+  <data name="JoinMenuButton" xml:space="preserve">
+    <value>JOIN MATCH</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>CLOSE</value>
   </data>
 </root>

@@ -121,13 +121,22 @@
     <value>Añadir amigo</value>
   </data>
   <data name="EnterNicknameMessageLabel" xml:space="preserve">
-    <value>Ingresa el nombre de jugador para añadirlo a la lista de amigos.</value>
+    <value>Ingresa un apodo...</value>
+  </data>
+  <data name="FriendRemovedButton" xml:space="preserve">
+    <value>Eliminar</value>
   </data>
   <data name="FriendRemovedMessageLabel" xml:space="preserve">
     <value>{0} ha sido eliminado de tu lista de amigos.</value>
   </data>
+  <data name="FriendRequestAcceptButton" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
   <data name="FriendRequestAcceptedLabel" xml:space="preserve">
     <value>{0} ha aceptado tu solicitud de amistad.</value>
+  </data>
+  <data name="FriendRequestDeclineButton" xml:space="preserve">
+    <value>Rechazar</value>
   </data>
   <data name="FriendRequestDeclinedMessageLabel" xml:space="preserve">
     <value>{0} ha rechazado tu solicitud de amistad.</value>
@@ -138,11 +147,20 @@
   <data name="FriendRequestReceivedMessageLabel" xml:space="preserve">
     <value>¡{0} te ha enviado una solicitud de amistad!</value>
   </data>
+  <data name="FriendRequestRemoveButton" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
   <data name="FriendRequestSentLabel" xml:space="preserve">
     <value>Hemos enviado la solicitud de amistad a {0}.</value>
   </data>
+  <data name="FriendsRequestsLabel" xml:space="preserve">
+    <value>Solicitudes de amistad</value>
+  </data>
   <data name="MyFriendsLabel" xml:space="preserve">
     <value>Mis amigos</value>
+  </data>
+  <data name="NicknameColumnLabel" xml:space="preserve">
+    <value>Apodo</value>
   </data>
   <data name="PlayerBlockedMessageLabel" xml:space="preserve">
     <value>{0} ha sido bloqueado con éxito.</value>
@@ -152,5 +170,17 @@
   </data>
   <data name="RemoveFriendMessageLabel" xml:space="preserve">
     <value>¿Estás seguro(a) de que quieres eliminar a {0} de tu lista de amigos?</value>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="FriendRequestsButton" xml:space="preserve">
+    <value>Solicitudes de Amistad</value>
+  </data>
+  <data name="StatusColumnLabel" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="ActionColumnLabel" xml:space="preserve">
+    <value>Acción</value>
   </data>
 </root>
