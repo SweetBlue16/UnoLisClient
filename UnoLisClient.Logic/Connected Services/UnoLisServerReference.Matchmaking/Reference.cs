@@ -259,6 +259,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Matchmaking {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/JoinMatch", ReplyAction="http://tempuri.org/IMatchmakingManager/JoinMatchResponse")]
         System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Matchmaking.JoinMatchResponse> JoinMatchAsync(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/SendInvitations", ReplyAction="http://tempuri.org/IMatchmakingManager/SendInvitationsResponse")]
+        bool SendInvitations(string lobbyCode, string senderNickname, string[] invitedNicknames);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/SendInvitations", ReplyAction="http://tempuri.org/IMatchmakingManager/SendInvitationsResponse")]
+        System.Threading.Tasks.Task<bool> SendInvitationsAsync(string lobbyCode, string senderNickname, string[] invitedNicknames);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -302,6 +308,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Matchmaking {
         
         public System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Matchmaking.JoinMatchResponse> JoinMatchAsync(string lobbyCode, string nickname) {
             return base.Channel.JoinMatchAsync(lobbyCode, nickname);
+        }
+        
+        public bool SendInvitations(string lobbyCode, string senderNickname, string[] invitedNicknames) {
+            return base.Channel.SendInvitations(lobbyCode, senderNickname, invitedNicknames);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SendInvitationsAsync(string lobbyCode, string senderNickname, string[] invitedNicknames) {
+            return base.Channel.SendInvitationsAsync(lobbyCode, senderNickname, invitedNicknames);
         }
     }
 }

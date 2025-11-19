@@ -24,6 +24,7 @@ namespace UnoLisClient.UI.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IFriendsService _friendsService;
         private readonly ILobbyService _lobbyService;
+        private readonly IMatchmakingService _matchmakingService;
 
         private readonly string _currentUserNickname;
         private readonly string _currentLobbyCode;
@@ -76,14 +77,15 @@ namespace UnoLisClient.UI.ViewModels
         {
             _navigationService = navigationService;
             _friendsService = friendsService;
+
             _lobbyService = LobbyService.Instance;
+            _matchmakingService = MatchmakingService.Instance;
 
             _currentUserNickname = CurrentSession.CurrentUserNickname;
             _currentLobbyCode = lobbyCode;
 
             IsChatVisible = false;
             IsSettingsVisible = false;
-
             LobbyCodeDisplay = $"Lobby Code: {_currentLobbyCode}";
 
             ChatVM = new ChatViewModel(chatService, dialogService, _currentLobbyCode, _currentUserNickname);
@@ -123,7 +125,7 @@ namespace UnoLisClient.UI.ViewModels
             }
             catch (Exception ex)
             {
-                HandleException(MessageCode.ConnectionFailed, "No se pudo conectar al lobby.", ex);
+                HandleException(MessageCode.ConnectionFailed, "Could not connect to Lobby.", ex);
                 _navigationService.GoBack();
             }
         }
@@ -261,19 +263,47 @@ namespace UnoLisClient.UI.ViewModels
             friend.Invited = !friend.Invited;
         }
 
-        private void ExecuteSendInvites()
+        private async void ExecuteSendInvites()
         {
             SoundManager.PlayClick();
-            var invited = Friends.Where(f => f.Invited).Select(f => f.Nickname).ToList();
 
-            if (invited.Any())
-            {
-                _dialogService.ShowAlert("UNO LIS", $"Invitations sent to: {string.Join(", ", invited)}");
-                // TODO: Aquí irá tu lógica para enviar los emails con el _lobbyChannelId
-            }
-            else
+            // 1. Obtener lista de seleccionados
+            var invitedNicknames = Friends.Where(f => f.Invited).Select(f => f.Nickname).ToList();
+
+            if (!invitedNicknames.Any())
             {
                 _dialogService.ShowWarning("No friends selected for invitation.");
+                return;
+            }
+
+            IsLoading = true;
+            try
+            {
+                // 2. Llamar al servicio REAL para enviar correos
+                bool success = await _matchmakingService.SendInvitationsAsync(
+                    _currentLobbyCode,
+                    _currentUserNickname,
+                    invitedNicknames);
+
+                if (success)
+                {
+                    _dialogService.ShowAlert("Invitations Sent", "Email invitations have been sent successfully!");
+
+                    // Limpiar selección
+                    foreach (var f in Friends) f.Invited = false;
+                }
+                else
+                {
+                    _dialogService.ShowWarning("Could not send some invitations. Please check connection.");
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(MessageCode.ConfirmationInternalError, "Error sending invites", ex);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

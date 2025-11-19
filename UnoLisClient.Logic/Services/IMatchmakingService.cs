@@ -14,5 +14,6 @@ namespace UnoLisClient.Logic.Services
     {
         Task<CreateMatchResponse> CreateMatchAsync(MatchSettings settings);
         Task<JoinMatchResponse> JoinMatchAsync(string lobbyCode, string nickname);
+        Task<bool> SendInvitationsAsync(string lobbyCode, string senderNickname, List<string> invitedNicknames);
     }
 }

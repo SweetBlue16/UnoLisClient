@@ -104,6 +104,39 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
+        public async Task<bool> SendInvitationsAsync(string lobbyCode, string senderNickname, List<string> invitedNicknames)
+        {
+            MatchmakingManagerClient proxy = null;
+            try
+            {
+                proxy = new MatchmakingManagerClient("NetTcpBinding_IMatchmakingManager");
+
+                // WCF requiere Arrays, así que convertimos la lista antes de enviar
+                var result = await proxy.SendInvitationsAsync(lobbyCode, senderNickname, invitedNicknames.ToArray());
+
+                proxy.Close();
+                return result;
+            }
+            catch (TimeoutException ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Timeout sending invites: {ex.Message}", ex);
+                return false;
+            }
+            catch (CommunicationException ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Communication error sending invites: {ex.Message}", ex);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Unexpected error sending invites: {ex.Message}", ex);
+                return false;
+            }
+        }
+
         private void AbortProxy(ICommunicationObject proxy)
         {
             if (proxy != null)

@@ -311,6 +311,9 @@
     <None Include="Connected Services\UnoLisServerReference.Matchmaking\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Matchmaking\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Matchmaking\MatchmakingManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.Matchmaking\UnoLisClient.Logic.UnoLisServerReference.Matchmaking.CreateMatchResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

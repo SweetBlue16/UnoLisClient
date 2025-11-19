@@ -34,6 +34,7 @@
       <xsd:import schemaLocation="http://localhost:8130/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8130/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8130/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+      <xsd:import schemaLocation="http://localhost:8130/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IMatchmakingManager_CreateMatch_InputMessage">
@@ -48,6 +49,12 @@
   <wsdl:message name="IMatchmakingManager_JoinMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinMatchResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchmakingManager_SendInvitations_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvitations" />
+  </wsdl:message>
+  <wsdl:message name="IMatchmakingManager_SendInvitations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvitationsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMatchmakingManager">
     <wsdl:operation name="CreateMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/CreateMatch" message="tns:IMatchmakingManager_CreateMatch_InputMessage" />
@@ -56,6 +63,10 @@
     <wsdl:operation name="JoinMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/JoinMatch" message="tns:IMatchmakingManager_JoinMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchmakingManager/JoinMatchResponse" message="tns:IMatchmakingManager_JoinMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/SendInvitations" message="tns:IMatchmakingManager_SendInvitations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchmakingManager/SendInvitationsResponse" message="tns:IMatchmakingManager_SendInvitations_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMatchmakingManager" type="tns:IMatchmakingManager">
@@ -72,6 +83,15 @@
     </wsdl:operation>
     <wsdl:operation name="JoinMatch">
       <soap12:operation soapAction="http://tempuri.org/IMatchmakingManager/JoinMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitations">
+      <soap12:operation soapAction="http://tempuri.org/IMatchmakingManager/SendInvitations" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
