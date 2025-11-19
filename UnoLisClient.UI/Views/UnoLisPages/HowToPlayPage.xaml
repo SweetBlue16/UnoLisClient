@@ -57,7 +57,7 @@
 
                 <Border Style="{StaticResource HowToPlaySectionStyle}">
                     <StackPanel>
-                        <Image Source="/Assets/Cards/CardBack.png" Height="80" />
+                        <Image Source="/Assets/Other/UNOButton.png" Height="80" />
                         <TextBlock Text="{x:Static language:Global.BasicRulesTitleLabel}" Style="{StaticResource HowToPlayTitleStyle}"/>
                         <TextBlock Text="{x:Static language:Global.BasicRulesLabel}" Style="{StaticResource HowToPlayBodyStyle}"/>
                     </StackPanel>
@@ -65,7 +65,7 @@
 
                 <Border Style="{StaticResource HowToPlaySectionStyle}">
                     <StackPanel>
-                        <Image Source="/Assets/Cards/DrawFour.png" Height="80" />
+                        <Image Source="/Assets/Other/Streak.png" Height="80" />
                         <TextBlock Text="{x:Static language:Global.StackingTitleLabel}" Style="{StaticResource HowToPlayTitleStyle}"/>
                         <TextBlock Text="{x:Static language:Global.StackingLabel}" Style="{StaticResource HowToPlayBodyStyle}"/>
                     </StackPanel>
@@ -73,7 +73,7 @@
 
                 <Border Style="{StaticResource HowToPlaySectionStyle}">
                     <StackPanel>
-                        <Image Source="/Assets/statsIcon.png" Height="80" />
+                        <Image Source="/Assets/Items/ThiefItem.png" Height="80" />
                         <TextBlock Text="{x:Static language:Global.ItemsTitleLabel}" Style="{StaticResource HowToPlayTitleStyle}"/>
                         <TextBlock Text="{x:Static language:Global.ItemsLabel}" Style="{StaticResource HowToPlayBodyStyle}"/>
                     </StackPanel>
@@ -81,7 +81,7 @@
 
                 <Border Style="{StaticResource HowToPlaySectionStyle}">
                     <StackPanel>
-                        <Image Source="/Assets/shopIcon.png" Height="80" />
+                        <Image Source="/Assets/Other/RevoCoins.png" Height="80" />
                         <TextBlock Text="{x:Static language:Global.ScoringTitleLabel}" Style="{StaticResource HowToPlayTitleStyle}"/>
                         <TextBlock Text="{x:Static language:Global.ScoringLabel}" Style="{StaticResource HowToPlayBodyStyle}"/>
                     </StackPanel>

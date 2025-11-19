@@ -352,6 +352,37 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\Other\1stPlace.png" />
+    <Resource Include="Assets\Other\2ndPlace.png" />
+    <Resource Include="Assets\Other\3rdPlace.png" />
+    <Resource Include="Assets\Other\4thPlace.png" />
+    <Resource Include="Assets\Other\Achievement.png" />
+    <Resource Include="Assets\Other\ChangePassword.png" />
+    <Resource Include="Assets\Other\CreateAccount.png" />
+    <Resource Include="Assets\Other\EmailVerification.png" />
+    <Resource Include="Assets\Other\EpicBox.png" />
+    <Resource Include="Assets\Other\ErrorAlert.png" />
+    <Resource Include="Assets\Other\HowToPlay.png" />
+    <Resource Include="Assets\Other\Info.png" />
+    <Resource Include="Assets\Other\LegendaryBox.png" />
+    <Resource Include="Assets\Other\LobbyHost.png" />
+    <Resource Include="Assets\Other\Locked.png" />
+    <Resource Include="Assets\Other\Login.png" />
+    <Resource Include="Assets\Other\Logout.png" />
+    <Resource Include="Assets\Other\LootBoxesChances.png" />
+    <Resource Include="Assets\Other\MatchHistory.png" />
+    <Resource Include="Assets\Other\NowPlaying.png" />
+    <Resource Include="Assets\Other\OkAlert.png" />
+    <Resource Include="Assets\Other\QuestionAlert.png" />
+    <Resource Include="Assets\Other\RecoverPassword.png" />
+    <Resource Include="Assets\Other\ReportPlayer.png" />
+    <Resource Include="Assets\Other\RevoCoins.png" />
+    <Resource Include="Assets\Other\SpecialBox.png" />
+    <Resource Include="Assets\Other\Statistics.png" />
+    <Resource Include="Assets\Other\Streak.png" />
+    <Resource Include="Assets\Other\Timer.png" />
+    <Resource Include="Assets\Other\UNOButton.png" />
+    <Resource Include="Assets\Other\WarningAlert.png" />
     <Resource Include="Avatars\+10Card.png" />
     <Resource Include="Avatars\Jamon.png" />
     <Resource Include="Avatars\Mau.png" />
@@ -432,6 +463,10 @@
     <Resource Include="Assets\Cards\ZeroGreenCard.png" />
     <Resource Include="Assets\Cards\ZeroRedCard.png" />
     <Resource Include="Assets\Cards\ZeroYellowCard.png" />
+    <Resource Include="Assets\Items\ExtraTurnItem.png" />
+    <Resource Include="Assets\Items\ShieldItem.png" />
+    <Resource Include="Assets\Items\SwapItem.png" />
+    <Resource Include="Assets\Items\ThiefItem.png" />
     <Content Include="Assets\lobbyVideo.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
