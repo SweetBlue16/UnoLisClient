@@ -14,10 +14,10 @@ namespace UnoLisClient.Logic.Callbacks
     {
         public event Action<string> PlayerJoinedReceived;
         public event Action<string> PlayerLeftReceived;
-        public event Action<string[]> PlayerListUpdatedReceived;
+        public event Action<LobbyPlayerData[]> PlayerListUpdatedReceived;
         public event Action<string, bool> PlayerReadyStatusReceived;
 
-        public void PlayerJoined(string nickname)
+        public void PlayerJoined(string nickname, string avatarName)
         {
             PlayerJoinedReceived?.Invoke(nickname);
         }
@@ -27,7 +27,7 @@ namespace UnoLisClient.Logic.Callbacks
             PlayerLeftReceived?.Invoke(nickname);
         }
 
-        public void UpdatePlayerList(string[] nicknames)
+        public void UpdatePlayerList(LobbyPlayerData[] nicknames)
         {
             PlayerListUpdatedReceived?.Invoke(nicknames);
         }

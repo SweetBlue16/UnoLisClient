@@ -15,6 +15,7 @@ using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisServer.Common.Enums;
 using UnoLisClient.Logic.Helpers;
+using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -23,8 +24,11 @@ namespace UnoLisClient.UI.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IFriendsService _friendsService;
         private readonly ILobbyService _lobbyService;
+
         private readonly string _currentUserNickname;
         private readonly string _currentLobbyCode;
+
+        private bool _isMeReady = false;
 
         public ChatViewModel ChatVM { get; }
 
@@ -107,6 +111,8 @@ namespace UnoLisClient.UI.ViewModels
             _lobbyService.OnPlayerJoined += HandlePlayerJoined;
             _lobbyService.OnPlayerLeft += HandlePlayerLeft;
 
+            _lobbyService.OnPlayerReadyStatusChanged += HandlePlayerReadyStatus;
+
             await ChatVM.InitializeAsync();
             await LoadFriendsAsync();
 
@@ -136,31 +142,61 @@ namespace UnoLisClient.UI.ViewModels
             _lobbyService.OnPlayerJoined -= HandlePlayerJoined;
             _lobbyService.OnPlayerLeft -= HandlePlayerLeft;
 
+            _lobbyService.OnPlayerReadyStatusChanged -= HandlePlayerReadyStatus;
+
             await ChatVM.CleanupAsync();
         }
 
-        private void HandlePlayerListUpdated(string[] playerNicknames)
+        private void HandlePlayerListUpdated(LobbyPlayerData[] players)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                ReadyStatusText = $"{playerNicknames.Length} / 4 Players";
+                int readyCount = PlayersInLobby.Count(p => p.IsSlotFilled && p.IsReady);
+                ReadyStatusText = $"{readyCount} / {players.Length} Players Ready";
 
                 for (int i = 0; i < 4; i++)
                 {
-                    if (i < playerNicknames.Length)
+                    if (i < players.Length)
                     {
-                        string nick = playerNicknames[i];
-                        // TODO: Cuando el servidor mande avatares, usaremos el real.
-                        // Por ahora usamos uno random o fijo para probar.
-                        string avatar = "/Avatars/Gatito.png";
+                        var player = players[i];
+                        string nick = player.Nickname;
+                        string avatarName = string.IsNullOrEmpty(player.AvatarName) ? "LogoUNO" : player.AvatarName;
+                        string avatarPath = $"pack://application:,,,/Avatars/{avatarName}.png";
 
-                        PlayersInLobby[i].FillSlot(nick, avatar);
+                        if (PlayersInLobby[i].IsSlotFilled && PlayersInLobby[i].Nickname == nick)
+                        {
+                            // Solo actualizamos si cambió algo, pero mantenemos IsReady
+                            // (No hacemos nada extra aquí por ahora)
+                        }
+                        else
+                        {
+                            PlayersInLobby[i].FillSlot(nick, avatarPath);
+                        }
                     }
                     else
                     {
                         PlayersInLobby[i].ClearSlot();
                     }
                 }
+            });
+        }
+
+        private void HandlePlayerReadyStatus(string nickname, bool isReady)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                var playerSlot = PlayersInLobby.FirstOrDefault(p => p.Nickname == nickname);
+                if (playerSlot != null)
+                {
+                    playerSlot.IsReady = isReady; 
+                    SoundManager.PlayClick();
+                }
+
+                int totalPlayers = PlayersInLobby.Count(p => p.IsSlotFilled);
+                int readyCount = PlayersInLobby.Count(p => p.IsSlotFilled && p.IsReady);
+                ReadyStatusText = $"{readyCount} / {totalPlayers} Players Ready";
+
+                // Lógica futura: Si todos están listos y soy el Host, iniciar partida
             });
         }
 
@@ -172,6 +208,24 @@ namespace UnoLisClient.UI.ViewModels
         private void HandlePlayerLeft(string nickname)
         {
             LogManager.Info($"Player left: {nickname}");
+        }
+
+        private async void ExecuteReady()
+        {
+            _isMeReady = !_isMeReady;
+            try
+            {
+                await _lobbyService.SetReadyStatusAsync(_currentLobbyCode, _currentUserNickname, _isMeReady);
+            }
+            catch (Exception ex)
+            {
+                _isMeReady = !_isMeReady;
+                HandleException(MessageCode.ConfirmationInternalError, "Error setting ready status", ex);
+            }
+
+            // Opcional: Si quisieras navegar directo (como tenías antes), sería aquí.
+            // Pero lo correcto es esperar a que TODOS estén listos.
+            // _navigationService.NavigateTo(new MatchBoardPage()); 
         }
 
         private async Task LoadFriendsAsync()
@@ -237,14 +291,6 @@ namespace UnoLisClient.UI.ViewModels
         {
             //TODO: Llamar al servicio para salir del lobby en el servidor
             _navigationService.NavigateTo(new MainMenuPage());
-        }
-
-        private void ExecuteReady()
-        {
-            SoundManager.PlayClick();
-            // TODO: Aquí irá la lógica para avisar al servidor que estás listo
-
-            _navigationService.NavigateTo(new MatchBoardPage());
         }
     }
 }

@@ -25,7 +25,7 @@ namespace UnoLisClient.Logic.Services
 
         public event Action<string> OnPlayerJoined;
         public event Action<string> OnPlayerLeft;
-        public event Action<string[]> OnPlayerListUpdated;
+        public event Action<LobbyPlayerData[]> OnPlayerListUpdated;
         public event Action<string, bool> OnPlayerReadyStatusChanged;
 
         private LobbyService()
@@ -69,7 +69,6 @@ namespace UnoLisClient.Logic.Services
             try
             {
                 await _proxy.DisconnectFromLobbyAsync(lobbyCode, nickname);
-
                 _proxy.Close(); 
             }
             catch (Exception ex)

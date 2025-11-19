@@ -9,7 +9,70 @@
 //------------------------------------------------------------------------------
 
 namespace UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LobbyPlayerData", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class LobbyPlayerData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AvatarNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AvatarName {
+            get {
+                return this.AvatarNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AvatarNameField, value) != true)) {
+                    this.AvatarNameField = value;
+                    this.RaisePropertyChanged("AvatarName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.LobbyDuplex.ILobbyDuplexManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex.ILobbyDuplexManagerCallback))]
@@ -38,13 +101,13 @@ namespace UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex {
     public interface ILobbyDuplexManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyDuplexManager/PlayerJoined")]
-        void PlayerJoined(string nickname);
+        void PlayerJoined(string nickname, string avatarName);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyDuplexManager/PlayerLeft")]
         void PlayerLeft(string nickname);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyDuplexManager/UpdatePlayerList")]
-        void UpdatePlayerList(string[] nicknames);
+        void UpdatePlayerList(UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex.LobbyPlayerData[] nicknames);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyDuplexManager/PlayerReadyStatusChanged")]
         void PlayerReadyStatusChanged(string nickname, bool isReady);

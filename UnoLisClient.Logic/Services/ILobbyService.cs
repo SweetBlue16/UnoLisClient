@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
 
 namespace UnoLisClient.Logic.Services
 {
@@ -10,7 +11,7 @@ namespace UnoLisClient.Logic.Services
     {
         event Action<string> OnPlayerJoined;
         event Action<string> OnPlayerLeft;
-        event Action<string[]> OnPlayerListUpdated;
+        event Action<LobbyPlayerData[]> OnPlayerListUpdated;
         event Action<string, bool> OnPlayerReadyStatusChanged;
 
         Task ConnectToLobbyAsync(string lobbyCode, string nickname);
