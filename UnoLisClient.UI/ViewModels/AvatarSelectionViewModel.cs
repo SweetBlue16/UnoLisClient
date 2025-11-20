@@ -3,11 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
-using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Commands;
@@ -134,12 +131,25 @@ namespace UnoLisClient.UI.ViewModels
 
         private async Task SaveAvatarAsync()
         {
+            SoundManager.PlayClick();
             if (SelectedAvatar == null)
             {
                 return;
             }
-            SetLoading(true);
 
+            if (!SelectedAvatar.IsUnlocked)
+            {
+                _dialogService.ShowWarning(ErrorMessages.AvatarLockedMessageLabel);
+                return;
+            }
+
+            if (IsSameAvatar())
+            {
+                _dialogService.ShowWarning(ErrorMessages.NoChangesMessageLabel);
+                return;
+            }
+
+            SetLoading(true);
             try
             {
                 var response = await _avatarService.SetAvatarAsync(
@@ -188,13 +198,25 @@ namespace UnoLisClient.UI.ViewModels
             }
         }
 
+        private bool IsSameAvatar()
+        {
+            if (CurrentSession.CurrentUserProfileData == null)
+            {
+                return false;
+            }
+            string currentAvatarName = CurrentSession.CurrentUserProfileData.SelectedAvatarName;
+            return string.Equals(SelectedAvatar?.Name, currentAvatarName, StringComparison.OrdinalIgnoreCase);
+        }
+
         private void ExecuteCancel()
         {
+            SoundManager.PlayClick();
             _navigationService.GoBack();
         }
 
         private void ExecuteSelectAvatar(AvatarModel avatar)
         {
+            SoundManager.PlayClick();
             if (avatar == null)
             {
                 return;
@@ -204,7 +226,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private bool CanSave()
         {
-            return SelectedAvatar != null && SelectedAvatar.IsUnlocked;
+            return SelectedAvatar != null;
         }
 
         private void UpdateSelectionStates(AvatarModel newlySelected)
@@ -221,8 +243,8 @@ namespace UnoLisClient.UI.ViewModels
         {
             IsLoading = isLoading;
             (LoadAvatarsCommand as RelayCommand)?.RaiseCanExecuteChanged();
-            (SaveCommand as  RelayCommand)?.RaiseCanExecuteChanged();
-            (CancelCommand as  RelayCommand)?.RaiseCanExecuteChanged();
+            (SaveCommand as RelayCommand)?.RaiseCanExecuteChanged();
+            (CancelCommand as RelayCommand)?.RaiseCanExecuteChanged();
             (SelectAvatarCommand as RelayCommand)?.RaiseCanExecuteChanged();
 
             if (isLoading)

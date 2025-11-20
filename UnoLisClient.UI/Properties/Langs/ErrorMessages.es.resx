@@ -123,6 +123,9 @@
   <data name="AlreadyFriendsMessageLabel" xml:space="preserve">
     <value>{0} ya está en tu lista de amigos.</value>
   </data>
+  <data name="AvatarLockedMessageLabel" xml:space="preserve">
+    <value>Debes desbloquear este avatar antes de usarlo.</value>
+  </data>
   <data name="BadRequestMessageLabel" xml:space="preserve">
     <value>Petición malformada o con datos incompletos, por favor verifique la información o contacte a soporte.</value>
   </data>

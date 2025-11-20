@@ -79,6 +79,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must unlock this avatar before using it..
+        /// </summary>
+        public static string AvatarLockedMessageLabel {
+            get {
+                return ResourceManager.GetString("AvatarLockedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incomplete or incorrectly formatted request. Please verify the information or contact support..
         /// </summary>
         public static string BadRequestMessageLabel {

@@ -123,6 +123,9 @@
   <data name="AlreadyFriendsMessageLabel" xml:space="preserve">
     <value>{0} is already on your friends list.</value>
   </data>
+  <data name="AvatarLockedMessageLabel" xml:space="preserve">
+    <value>You must unlock this avatar before using it.</value>
+  </data>
   <data name="BadRequestMessageLabel" xml:space="preserve">
     <value>Incomplete or incorrectly formatted request. Please verify the information or contact support.</value>
   </data>
