@@ -89,8 +89,8 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Login {
     public interface ILoginManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILoginManager/LoginResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Login.AuthCredentials))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Login.AuthCredentials))]
         void LoginResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }
     

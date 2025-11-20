@@ -8,30 +8,51 @@
     <DataTemplate x:Key="PlayerCardTemplate" DataType="{x:Type vm:CardModel}">
         <Grid Width="90" Height="140" Margin="2,0" ToolTip="{Binding CardData.Description}">
             <Image Source="{Binding ImagePath}" />
-
-            <Border Background="#80000000"
+            <Border Background="#00000000"
                     Visibility="{Binding IsPlayable, Converter={StaticResource InvertedBoolToVisibilityConverter}}" />
-
             <Button Command="{Binding PlayCardCommand}" 
                     IsEnabled="{Binding IsPlayable}"
-                    Style="{DynamicResource TransparentButtonStyle}"/>
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Focusable="False"
+                    Cursor="Hand"/>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="ItemTemplate" DataType="{x:Type vm:ItemModel}">
         <Button Command="{Binding UseItemCommand}" 
                 ToolTip="{Binding Type}"
-                Style="{DynamicResource TransparentButtonStyle}"
-                Width="50" Height="50" Margin="0,5">
-            <Grid>
-                <Image Source="{Binding ImagePath}" />
+                Background="Transparent"
+                Width="60" Height="60" Margin="0,5"
+                Cursor="Hand">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Image Source="{Binding ImagePath}" />
 
-                <Border Background="#80000000"
-                        Visibility="{Binding Count, Converter={StaticResource BoolToVisibilityConverter}}" />
-                <TextBlock Text="{Binding Count}" 
-                           Foreground="White" FontWeight="Bold" 
-                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                           Margin="0,0,5,5" />
-            </Grid>
+                        <Border x:Name="CounterBorder"
+                            Background="#66000000"
+                            BorderBrush="#AAFFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="2,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,4,4">
+                            <TextBlock Text="{Binding Count}"
+                                   Foreground="White"
+                                   FontWeight="Bold"
+                                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                                   FontSize="14"/>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Count}" Value="0">
+                            <Setter TargetName="CounterBorder" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
     </DataTemplate>
 </ResourceDictionary>

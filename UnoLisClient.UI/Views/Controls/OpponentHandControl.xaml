@@ -19,23 +19,23 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
             <Grid Width="120" Height="80" IsHitTestVisible="False">
-                <Image Source="pack://application:,,,/Assets/Cards/CardBack.png" Width="60" RenderTransformOrigin="0.5, 1">
+                <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" Width="60" RenderTransformOrigin="0.5, 1">
                     <Image.RenderTransform>
                         <RotateTransform Angle="-20"/>
                     </Image.RenderTransform>
                 </Image>
-                <Image Source="pack://application:,,,/Assets/Cards/CardBack.png" Width="60" RenderTransformOrigin="0.5, 1">
+                <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" Width="60" RenderTransformOrigin="0.5, 1">
                     <Image.RenderTransform>
                         <RotateTransform Angle="-10"/>
                     </Image.RenderTransform>
                 </Image>
-                <Image Source="pack://application:,,,/Assets/Cards/CardBack.png" Width="60" />
-                <Image Source="pack://application:,,,/Assets/Cards/CardBack.png" Width="60" RenderTransformOrigin="0.5, 1">
+                <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" Width="60" />
+                <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" Width="60" RenderTransformOrigin="0.5, 1">
                     <Image.RenderTransform>
                         <RotateTransform Angle="10"/>
                     </Image.RenderTransform>
                 </Image>
-                <Image Source="pack://application:,,,/Assets/Cards/CardBack.png" Width="60" RenderTransformOrigin="0.5, 1">
+                <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" Width="60" RenderTransformOrigin="0.5, 1">
                     <Image.RenderTransform>
                         <RotateTransform Angle="20"/>
                     </Image.RenderTransform>
@@ -48,14 +48,14 @@
                 </Ellipse.Fill>
             </Ellipse>
 
-            <Border Background="#80000000" CornerRadius="5" Padding="5,2" Margin="0,5,0,0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                    <Image Source="/Assets/profileIcon.png" Width="16" Height="16" Margin="0,0,5,0"
+            <Border Background="#80000000" CornerRadius="5" Padding="5" Margin="0,5,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <Image Source="/Assets/Other/LobbyHost.png" Width="16" Height="16" Margin="0,0,5,0"
                        Visibility="{Binding IsHost, Converter={StaticResource BoolToVisibilityConverter}}" />
                     <TextBlock Text="{Binding Nickname}" Foreground="White" />
-                    <TextBlock Text=" [" Foreground="Gold" />
+                    <TextBlock Text=" (" Foreground="Gold" />
                     <TextBlock Text="{Binding CardCount}" Foreground="Gold" FontWeight="Bold"/>
-                    <TextBlock Text="]" Foreground="Gold"/>
+                    <TextBlock Text=")" Foreground="Gold"/>
                 </StackPanel>
             </Border>
         </StackPanel>

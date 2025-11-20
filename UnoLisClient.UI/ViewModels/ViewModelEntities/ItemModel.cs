@@ -9,7 +9,7 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
     public class ItemModel : ObservableObject
     {
         public ItemType Type { get; }
-        public string ImagePath => $"pack://application:,,,/Assets/Items/{Type.ToString()}.png";
+        public string ImagePath => $"pack://application:,,,/Assets/Items/{Type}Item.png";
         public ICommand UseItemCommand { get; }
 
         private int _count;

@@ -28,9 +28,9 @@
                 <RowDefinition Height="160" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="210" />
+                <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="210" />
+                <ColumnDefinition Width="230" />
             </Grid.ColumnDefinitions>
 
             <controls:OpponentHandControl Grid.Row="0"
@@ -51,7 +51,7 @@
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" 
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border Width="90" Height="140" Margin="10">
-                    <Image Source="pack://application:,,,/Assets/Cards/CardBack.png" ToolTip="Robar Carta"/>
+                    <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" ToolTip="Robar Carta"/>
                     <Border.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding DrawCardCommand}" />
                     </Border.InputBindings>
@@ -62,7 +62,7 @@
             <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                           HorizontalScrollBarVisibility="Auto" 
                           VerticalScrollBarVisibility="Disabled"
-                          Margin="100,0,100,0">
+                          Margin="150,0,150,0">
                 <ItemsControl ItemsSource="{Binding PlayerHand}"
                               ItemTemplate="{StaticResource PlayerCardTemplate}">
                     <ItemsControl.ItemsPanel>
@@ -75,32 +75,51 @@
 
             <Border Grid.Column="2" Grid.Row="0"
                     BorderBrush="#80000000"
-                    CornerRadius="15">
-                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20">
-                    <TextBlock Text="{x:Static language:Match.TurnLabel}" 
-                               FontSize="14" Foreground="Gray" FontFamily="pack://application:,,,/Fonts/#lato"/>
-                    <TextBlock Text="{Binding CurrentTurnNickname}" 
-                               FontSize="18" FontWeight="Bold" Foreground="White" />
+                    CornerRadius="15"
+                    Width="Auto"
+                    Margin="10">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="10">
+                    <StackPanel Margin="0,0,10,0">
+                        <TextBlock Text="{x:Static language:Match.TurnLabel}" 
+                                   FontSize="14" Foreground="Gray" FontFamily="pack://application:,,,/Fonts/#lato"
+                                   HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding CurrentTurnNickname}" 
+                                   FontSize="18" FontWeight="Bold" Foreground="White"
+                                   HorizontalAlignment="Right"
+                                   MaxWidth="110"/>
+                    </StackPanel>
+                    <Image Source="pack://application:,,,/Assets/Other/NowPlaying.png"
+                           Height="60" Width="60"
+                           Margin="0,0,0,0"/>
                 </StackPanel>
             </Border>
         </Grid>
 
         <Grid>
             <ItemsControl ItemsSource="{Binding Items}" 
-                          ItemTemplate="{StaticResource ItemTemplate}"
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20">
+              ItemTemplate="{StaticResource ItemTemplate}"
+              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
+                        <UniformGrid Columns="2" Rows="2"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
-            <Button Content="{x:Static language:Global.AppNameLabel}" 
-                    Style="{DynamicResource PrimaryButtonStyle}"
-                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,50"
+            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,50"
                     Command="{Binding CallUnoCommand}"
-                    Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Background="Transparent">
+                <Button.Content>
+                    <Image Source="/Assets/Other/UNOButton.png"
+                           Stretch="Uniform"
+                           Width="70"
+                           Height="70"/>
+                </Button.Content>
+            </Button>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
                 <Button Content="{x:Static language:Global.SettingsLabel}"

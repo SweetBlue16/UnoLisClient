@@ -25,6 +25,13 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _discardPileTopCard, value);
         }
 
+        private CardModel _deckPileCard;
+        public CardModel DeckPileCard
+        {
+            get => _deckPileCard;
+            set => SetProperty(ref _deckPileCard, value);
+        }
+
         private string _currentTurnNickname = "...";
         public string CurrentTurnNickname
         {
@@ -77,9 +84,9 @@ namespace UnoLisClient.UI.ViewModels
 
         private void LoadMockData()
         {
-            OpponentTop = new OpponentModel { Nickname = "MapleVR", AvatarImagePath = "...", CardCount = 7 };
-            OpponentLeft = new OpponentModel { Nickname = "Erickmel", AvatarImagePath = "...", CardCount = 7, IsHost = true };
-            OpponentRight = new OpponentModel { Nickname = "IngeAbraham", AvatarImagePath = "...", CardCount = 7 };
+            OpponentTop = new OpponentModel { Nickname = "MapleVR", AvatarImagePath = "pack://application:,,,/Avatars/Gatito.png", CardCount = 7 };
+            OpponentLeft = new OpponentModel { Nickname = "Erickmel", AvatarImagePath = "pack://application:,,,/Avatars/CC2Projector.png", CardCount = 7, IsHost = true };
+            OpponentRight = new OpponentModel { Nickname = "IngeAbraham", AvatarImagePath = "pack://application:,,,/Avatars/Palito.png", CardCount = 7 };
 
             Items.Add(new ItemModel(ItemType.Shield, 1, (item) => ExecuteUseItem(item)));
             Items.Add(new ItemModel(ItemType.Thief, 3, (item) => ExecuteUseItem(item)));
@@ -90,33 +97,34 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Color = CardColor.Red,
                 Value = CardValue.Two,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/TwoRedCard.png"
             };
             var card2 = new Card()
             {
                 Color = CardColor.Blue,
                 Value = CardValue.DrawTwo,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/DrawTwoBlueCard.png"
             };
             var card3 = new Card()
             {
                 Color = CardColor.Black,
                 Value = CardValue.WildDrawFour,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/WildDrawFourCard.png"
             };
             var card4 = new Card()
             {
                 Color = CardColor.Silver,
                 Value = CardValue.DrawTen,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/WildDrawTenCard.png"
             };
             var card5 = new Card()
             {
                 Color = CardColor.Silver,
                 Value = CardValue.WildDrawFourReverse,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/WildDrawSkipReverseCard.png"
             };
 
+            PlayerHand.Clear();
             PlayerHand.Add(new CardModel(card1, (card) => ExecutePlayCard(card)));
             PlayerHand.Add(new CardModel(card2, (card) => ExecutePlayCard(card)));
             PlayerHand.Add(new CardModel(card3, (card) => ExecutePlayCard(card)));
@@ -127,7 +135,13 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Color = CardColor.Green,
                 Value = CardValue.Five,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/FiveGreenCard.png"
+            }, null);
+            DeckPileCard = new CardModel(new Card()
+            {
+                Color = CardColor.Black,
+                Value = CardValue.Zero,
+                ImagePath = "pack://application:,,,/Assets/Cards/BackUNOCard.png"
             }, null);
             CurrentTurnNickname = "SweetBlue16";
             UpdatePlayableCards();
@@ -157,7 +171,7 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Color = CardColor.Yellow,
                 Value = CardValue.Seven,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawFour.png"
+                ImagePath = "pack://application:,,,/Assets/Cards/SevenYellowCard.png"
             }, (card) => ExecutePlayCard(card)));
             UpdatePlayableCards();
             UpdateUnoButtonStatus();
