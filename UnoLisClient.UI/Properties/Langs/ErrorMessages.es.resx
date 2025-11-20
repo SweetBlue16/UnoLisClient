@@ -288,6 +288,9 @@
   <data name="NicknameLengthMessageLabel" xml:space="preserve">
     <value>La longitud del nombre de jugador debe ser entre {0} y {1} caracteres.</value>
   </data>
+  <data name="NoChangesMessageLabel" xml:space="preserve">
+    <value>Debes cambiar los datos del perfil antes de guardar.</value>
+  </data>
   <data name="NoConnectionMessageLabel" xml:space="preserve">
     <value>El juego no está disponible por el momento, por favor intenta más tarde.</value>
   </data>

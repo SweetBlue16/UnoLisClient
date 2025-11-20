@@ -2,11 +2,8 @@
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
-using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Mappers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
@@ -91,8 +88,14 @@ namespace UnoLisClient.UI.ViewModels
         private async Task ExecuteSaveAsync()
         {
             SoundManager.PlayClick();
-            var updatedProfileData = GetProfileDataFromViewModel();
 
+            if (!HasChanges())
+            {
+                _dialogService.ShowWarning(ErrorMessages.NoChangesMessageLabel);
+                return;
+            }
+
+            var updatedProfileData = GetProfileDataFromViewModel();
             var validationErrors = UserValidator.ValidateProfileUpdate(updatedProfileData);
             if (validationErrors.Any())
             {
@@ -146,6 +149,44 @@ namespace UnoLisClient.UI.ViewModels
         {
             SoundManager.PlayClick();
             _navigationService.GoBack();
+        }
+
+        private bool HasChanges()
+        {
+            bool AreDifferent(string currentValue, string originalValue)
+            {
+                string normalizedCurrent = string.IsNullOrWhiteSpace(currentValue) ? null : currentValue.Trim();
+                string normalizedOriginal = string.IsNullOrWhiteSpace(originalValue) ? null : originalValue.Trim();
+                return normalizedCurrent != normalizedOriginal;
+            }
+
+            if (AreDifferent(FullName, _originalProfileData.FullName))
+            {
+                return true;
+            }
+            if (AreDifferent(Email, _originalProfileData.Email))
+            {
+                return true;
+            }
+            if (AreDifferent(FacebookUrl, _originalProfileData.FacebookUrl))
+            {
+                return true;
+            }
+            if (AreDifferent(InstagramUrl, _originalProfileData.InstagramUrl))
+            {
+                return true;
+            }
+            if (AreDifferent(TikTokUrl, _originalProfileData.TikTokUrl))
+            {
+                return true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(Password))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void LoadProfileDataIntoViewModel()

@@ -288,6 +288,9 @@
   <data name="NicknameLengthMessageLabel" xml:space="preserve">
     <value>The nickname length must be between {0} and {1} characters.</value>
   </data>
+  <data name="NoChangesMessageLabel" xml:space="preserve">
+    <value>You must change your profile information before saving.</value>
+  </data>
   <data name="NoConnectionMessageLabel" xml:space="preserve">
     <value>The game is currently unavailable, please try again later.</value>
   </data>

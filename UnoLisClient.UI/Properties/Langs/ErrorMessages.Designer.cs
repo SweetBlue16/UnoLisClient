@@ -574,6 +574,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must change your profile information before saving..
+        /// </summary>
+        public static string NoChangesMessageLabel {
+            get {
+                return ResourceManager.GetString("NoChangesMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The game is currently unavailable, please try again later..
         /// </summary>
         public static string NoConnectionMessageLabel {
