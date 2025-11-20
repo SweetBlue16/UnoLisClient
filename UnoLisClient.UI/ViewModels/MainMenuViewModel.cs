@@ -113,6 +113,7 @@ namespace UnoLisClient.UI.ViewModels
             {
                 SetLoading(false);
             }
+            ClearLocalSessionAndNavigate();
         }
 
         private void ExecuteGoToPlay()
