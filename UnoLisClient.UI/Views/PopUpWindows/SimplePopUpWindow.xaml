@@ -16,14 +16,22 @@
             BorderThickness="3"
             CornerRadius="15">
         <StackPanel Margin="20">
-            <Label x:Name="TitleLabel"
-                   Content="{x:Static language:Global.TitlePlaceholderLabel}"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,16"
-                   VerticalAlignment="Top"
-                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                   Foreground="White"
-                   FontSize="40"/>
+            <DockPanel>
+                <Image x:Name="IconImage"
+                       Height="80" Width="80"
+                       Margin="0,0,10,20"
+                       HorizontalAlignment="Center"
+                       Stretch="Uniform"
+                       Visibility="Collapsed"/>
+                <TextBlock x:Name="TitleLabel"
+                           Text="{x:Static language:Global.TitlePlaceholderLabel}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,0,0,25"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                           Foreground="White"
+                           FontSize="40"/>
+            </DockPanel>
             <TextBlock x:Name="MessageTextBlock"
                        HorizontalAlignment="Center"
                        TextWrapping="Wrap"

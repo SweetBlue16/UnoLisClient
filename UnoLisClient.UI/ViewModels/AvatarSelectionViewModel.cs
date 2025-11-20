@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Commands;
@@ -164,7 +165,7 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         CurrentSession.CurrentUserProfileData.SelectedAvatarName = SelectedAvatar.Name;
                     }
-                    _dialogService.ShowAlert(Global.SuccessLabel, message);
+                    _dialogService.ShowAlert(Global.SuccessLabel, message, PopUpIconType.Success);
                     _navigationService.NavigateTo(new YourProfilePage());
                 }
                 else

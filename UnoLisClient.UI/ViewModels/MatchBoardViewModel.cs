@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Properties.Langs;
@@ -166,7 +167,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             SoundManager.PlayClick();
             IsUnoButtonVisible = false;
-            _dialogService.ShowAlert(Global.AppNameLabel, string.Format(Match.PlayerDeclaredUnoMessageLabel, CurrentTurnNickname));
+            _dialogService.ShowAlert(Global.AppNameLabel, string.Format(Match.PlayerDeclaredUnoMessageLabel, CurrentTurnNickname), PopUpIconType.Info);
         }
 
         private void UpdateUnoButtonStatus()
@@ -183,7 +184,7 @@ namespace UnoLisClient.UI.ViewModels
                 item.Count--;
                 item.UpdateCanExecute();
             }
-            _dialogService.ShowAlert(Match.ItemUsedLabel, string.Format(Match.ItemUsedMessageLabel, CurrentTurnNickname, item.Type));
+            _dialogService.ShowAlert(Match.ItemUsedLabel, string.Format(Match.ItemUsedMessageLabel, CurrentTurnNickname, item.Type), PopUpIconType.Info);
         }
 
         private void UpdatePlayableCards()
@@ -203,7 +204,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteExitGame()
         {
-            if (_dialogService.ShowQuestionDialog(Global.ConfirmationLabel, Global.LogoutMessageLabel))
+            if (_dialogService.ShowQuestionDialog(Global.ConfirmationLabel, Global.LogoutMessageLabel, PopUpIconType.Question))
             {
                 _navigationService.NavigateTo(new MainMenuPage());
             }

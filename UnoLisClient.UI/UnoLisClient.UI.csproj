@@ -85,6 +85,7 @@
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
+    <Compile Include="Utilities\PopUpIconHelper.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />

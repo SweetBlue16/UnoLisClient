@@ -4,6 +4,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Mappers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
@@ -111,7 +112,7 @@ namespace UnoLisClient.UI.ViewModels
                 if (response.Success)
                 {
                     CurrentSession.CurrentUserProfileData = ProfileDataMapper.ToClientModel(updatedProfileData);
-                    _dialogService.ShowAlert(Global.SuccessLabel, message);
+                    _dialogService.ShowAlert(Global.SuccessLabel, message, PopUpIconType.Success);
                     _navigationService.NavigateTo(new YourProfilePage());
                 }
                 else

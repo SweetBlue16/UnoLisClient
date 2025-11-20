@@ -149,6 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Enums\PopUpIconType.cs" />
     <Compile Include="Helpers\CloseClientHelper.cs" />
     <Compile Include="Helpers\LogManager.cs" />
     <Compile Include="Mappers\FriendMapper.cs" />

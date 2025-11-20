@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
@@ -52,7 +53,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand GoToRegisterCommand { get; }
 
         public LoginViewModel(IDialogService dialogService, Page view)
-      : base(dialogService)
+        : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
@@ -97,7 +98,7 @@ namespace UnoLisClient.UI.ViewModels
                     string successMessage = string.Format(message, Nickname);
                     SoundManager.PlayClick();
                     _navigationService.NavigateTo(new MainMenuPage());
-                    _dialogService.ShowAlert(Global.SuccessLabel, successMessage);
+                    _dialogService.ShowAlert(Global.SuccessLabel, successMessage, PopUpIconType.Success);
                 }
                 else
                 {

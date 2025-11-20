@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
@@ -53,7 +54,8 @@ namespace UnoLisClient.UI.ViewModels
             SoundManager.PlayClick();
             bool confirm = _dialogService.ShowQuestionDialog(
                 Global.ConfirmationLabel,
-                Global.LogoutMessageLabel
+                Global.LogoutMessageLabel,
+                PopUpIconType.Logout
             );
 
             if (!confirm)
@@ -75,7 +77,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (response.Success)
                 {
-                    _dialogService.ShowAlert(Global.SuccessLabel, userMessage);
+                    _dialogService.ShowAlert(Global.SuccessLabel, userMessage, PopUpIconType.Success);
                     ChatService.Instance.Cleanup();
                     FriendsService.Instance.Cleanup();
                     ClearLocalSessionAndNavigate();

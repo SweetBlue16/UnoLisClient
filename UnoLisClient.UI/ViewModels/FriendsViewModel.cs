@@ -14,6 +14,7 @@ using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using System.ServiceModel;
 using UnoLisServer.Common.Enums;
+using UnoLisClient.Logic.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -89,7 +90,8 @@ namespace UnoLisClient.UI.ViewModels
 
             bool confirmed = _dialogService.ShowQuestionDialog(
                 "Confirm Removal",
-                $"Are you sure you want to remove {friend.Nickname}?");
+                $"Are you sure you want to remove {friend.Nickname}?",
+                PopUpIconType.Question);
 
             if (!confirmed) return;
 
@@ -111,11 +113,11 @@ namespace UnoLisClient.UI.ViewModels
                         Friends.Remove(friend);
                     });
 
-                    _dialogService.ShowAlert("Success", $"{friend.Nickname} was successfully removed.");
+                    _dialogService.ShowAlert("Success", $"{friend.Nickname} was successfully removed.", PopUpIconType.Success);
                 }
                 else
                 {
-                    _dialogService.ShowAlert("Error", $"Could not remove {friend.Nickname}. Please try again.");
+                    _dialogService.ShowAlert("Error", $"Could not remove {friend.Nickname}. Please try again.", PopUpIconType.Warning);
                 }
             }
             catch (TimeoutException timeoutEx)
@@ -143,7 +145,8 @@ namespace UnoLisClient.UI.ViewModels
         {
             string targetNickname = _dialogService.ShowInputDialog(
                 "Add a Friend",
-                "Enter the nickname of the player you wish to add:", "Nickname...");
+                "Enter the nickname of the player you wish to add:", "Nickname...",
+                PopUpIconType.CreateAccount);
 
             if (!string.IsNullOrWhiteSpace(targetNickname))
             {
@@ -231,7 +234,7 @@ namespace UnoLisClient.UI.ViewModels
 
             if (result == FriendRequestResult.Success)
             {
-                _dialogService.ShowAlert("Friend Request", message);
+                _dialogService.ShowAlert("Friend Request", message, PopUpIconType.Success);
             }
             else
             {

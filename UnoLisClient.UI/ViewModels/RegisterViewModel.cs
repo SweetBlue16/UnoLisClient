@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Register;
@@ -121,7 +122,7 @@ namespace UnoLisClient.UI.ViewModels
                 else
                 {
                     SetLoading(false);
-                    _dialogService.ShowAlert(Global.UnsuccessfulLabel, message);
+                    _dialogService.ShowAlert(Global.UnsuccessfulLabel, message, PopUpIconType.Warning);
                 }
             }
             catch (EndpointNotFoundException enfEx)
@@ -156,7 +157,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (response.Success)
                 {
-                    _dialogService.ShowAlert(Global.SuccessLabel, message);
+                    _dialogService.ShowAlert(Global.SuccessLabel, message, PopUpIconType.Success);
                     _navigationService.NavigateTo(new LoginPage());
                 }
                 else
@@ -205,7 +206,7 @@ namespace UnoLisClient.UI.ViewModels
                 else
                 {
                     SetLoading(false);
-                    _dialogService.ShowAlert(Global.UnsuccessfulLabel, message);
+                    _dialogService.ShowAlert(Global.UnsuccessfulLabel, message, PopUpIconType.Warning);
                 }
             }
             catch (EndpointNotFoundException enfEx)
@@ -241,7 +242,8 @@ namespace UnoLisClient.UI.ViewModels
             SetLoading(false);
             string code = _dialogService.ShowInputDialog(Global.ConfirmationLabel,
                         Global.ConfirmationMessageLabel,
-                        Global.CodeLabel);
+                        Global.CodeLabel,
+                        PopUpIconType.EmailVerification);
             if (!string.IsNullOrEmpty(code))
             {
                 await ExecuteConfirmCodeAsync(code);

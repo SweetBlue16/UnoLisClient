@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Matchmaking;
@@ -99,7 +100,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (response.Success)
                 {
-                    _dialogService.ShowAlert("Partida Creada", $"¡Éxito! Código de sala: {response.LobbyCode}");
+                    _dialogService.ShowAlert("Partida Creada", $"¡Éxito! Código de sala: {response.LobbyCode}", PopUpIconType.Success);
 
                     // TODO (Fase 4): Pasar el 'response.LobbyCode' al constructor de MatchLobbyPage
                     // TODO (Futuro): Cambiar esto para navegar primero a 'SelectBackgroundPage'

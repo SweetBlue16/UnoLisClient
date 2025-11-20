@@ -9,6 +9,7 @@ using UnoLisServer.Common.Models;
 using UnoLisClient.UI.Views.PopUpWindows;
 using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisClient.Logic.Models;
+using UnoLisClient.Logic.Enums;
 
 namespace UnoLisClient.UI.Views.UnoLisWindows
 {
@@ -162,7 +163,7 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
 
         private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel).ShowDialog();
+            var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel, PopUpIconType.Logout).ShowDialog();
             if (result == true)
             {
                 LogoutCurrentUser();

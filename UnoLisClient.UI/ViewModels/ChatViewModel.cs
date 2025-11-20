@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Input;
-using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Chat;
 using UnoLisClient.UI.Commands;

@@ -9,6 +9,7 @@ using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisServer.Common.Enums;
 using UnoLisClient.Logic.Helpers;
+using UnoLisClient.Logic.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -37,7 +38,7 @@ namespace UnoLisClient.UI.ViewModels
 
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage);
+                _dialogService.ShowAlert(Global.UnsuccessfulLabel, userMessage, PopUpIconType.Error);
             }));
         }
     }

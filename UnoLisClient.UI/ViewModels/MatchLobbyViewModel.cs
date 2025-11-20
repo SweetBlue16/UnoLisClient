@@ -16,6 +16,7 @@ using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisServer.Common.Enums;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
+using UnoLisClient.Logic.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -287,7 +288,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (success)
                 {
-                    _dialogService.ShowAlert("Invitations Sent", "Email invitations have been sent successfully!");
+                    _dialogService.ShowAlert("Invitations Sent", "Email invitations have been sent successfully!", PopUpIconType.Success);
 
                     // Limpiar selección
                     foreach (var f in Friends) f.Invited = false;

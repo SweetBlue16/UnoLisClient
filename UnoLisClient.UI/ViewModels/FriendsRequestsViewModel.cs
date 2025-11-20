@@ -3,16 +3,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows;
-using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Friends;
-using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Services;
 using System.ServiceModel;
 using UnoLisServer.Common.Enums;
+using UnoLisClient.Logic.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -43,7 +41,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand RejectRequestCommand { get; }
 
         public FriendRequestsViewModel(IFriendsService friendsService, IDialogService dialogService)
-      : base(dialogService)
+        : base(dialogService)
         {
             _friendsService = friendsService;
 
@@ -102,7 +100,8 @@ namespace UnoLisClient.UI.ViewModels
             var actionText = accepted ? "Accept" : "Decline";
             bool confirmed = _dialogService.ShowQuestionDialog(
                 $"{actionText} Request",
-                $"Are you sure you want to {actionText.ToLower()} the request from {request.RequesterNickname}?");
+                $"Are you sure you want to {actionText.ToLower()} the request from {request.RequesterNickname}?",
+                PopUpIconType.Question);
 
             if (!confirmed) return;
 
@@ -126,12 +125,12 @@ namespace UnoLisClient.UI.ViewModels
                         FriendRequests.Remove(request);
                         SelectedRequest = null;
 
-                        _dialogService.ShowAlert("Success", $"Request from {request.RequesterNickname} was {actionText.ToLower()}ed.");
+                        _dialogService.ShowAlert("Success", $"Request from {request.RequesterNickname} was {actionText.ToLower()}ed.", PopUpIconType.Success);
                     });
                 }
                 else
                 {
-                    _dialogService.ShowAlert("Error", $"Could not {actionText.ToLower()} the request. Please try again.");
+                    _dialogService.ShowAlert("Error", $"Could not {actionText.ToLower()} the request. Please try again.", PopUpIconType.Warning);
                 }
             }
             catch (TimeoutException timeoutEx)
