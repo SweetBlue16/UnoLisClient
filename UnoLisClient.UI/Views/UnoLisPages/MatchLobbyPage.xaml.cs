@@ -46,18 +46,6 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             await _viewModel.OnPageUnloaded();
             _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
-            try
-            {
-                var mainWindow = Application.Current.MainWindow as MainWindow;
-                if (mainWindow != null)
-                {
-                    await mainWindow.RestoreDefaultBackground();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error during lobby cleanup: {ex.Message}");
-            }
         }
 
         private static async Task SetLobbyBackgroundAsync()

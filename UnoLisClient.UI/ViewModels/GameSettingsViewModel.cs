@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -100,20 +101,24 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (response.Success)
                 {
-                    _dialogService.ShowAlert("Partida Creada", $"¡Éxito! Código de sala: {response.LobbyCode}", PopUpIconType.Success);
-
-                    // TODO (Fase 4): Pasar el 'response.LobbyCode' al constructor de MatchLobbyPage
-                    // TODO (Futuro): Cambiar esto para navegar primero a 'SelectBackgroundPage'
-                    _navigationService.NavigateTo(new MatchLobbyPage(response.LobbyCode));
+                    _navigationService.NavigateTo(new SelectBackgroundPage(response.LobbyCode));
                 }
                 else
                 {
                     HandleException(MessageCode.UnhandledException, response.Message, null);
                 }
             }
+            catch (TimeoutException ex)
+            {
+                HandleException(MessageCode.Timeout, "Server request timed out. Please try again.", ex);
+            }
+            catch (CommunicationException ex)
+            {
+                HandleException(MessageCode.ConnectionFailed, "Network error communicating with server.", ex);
+            }
             catch (Exception ex)
             {
-                HandleException(MessageCode.UnhandledException, "Error al intentar crear la partida", ex);
+                HandleException(MessageCode.UnhandledException, "Unexpected error creating match.", ex);
             }
             finally
             {

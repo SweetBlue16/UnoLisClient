@@ -24,4 +24,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="JoinMatchResponse" nillable="true" type="tns:JoinMatchResponse" />
+  <xs:complexType name="LobbySettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BackgroundVideoName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UseSpecialRules" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LobbySettings" nillable="true" type="tns:LobbySettings" />
 </xs:schema>

@@ -9,7 +9,8 @@
       xmlns:vm="clr-namespace:UnoLisClient.UI.ViewModels"
       xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
       d:DataContext="{d:DesignInstance vm:MatchBoardViewModel}"
-      Title="MatchBoardPage">
+      Title="MatchBoardPage"
+      Loaded="MatchBoardPage_Loaded">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -1,8 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using UnoLisClient.Logic.Enums;
+using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Properties.Langs;
@@ -16,7 +19,9 @@ namespace UnoLisClient.UI.ViewModels
     public class MatchBoardViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
+        private readonly IMatchmakingService _matchmakingService;
         private readonly Page _view;
+        public event Action<string> RequestSetBackground;
 
         private CardModel _discardPileTopCard;
         public CardModel DiscardPileTopCard 
@@ -72,6 +77,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             _view = view;
             _navigationService = (INavigationService)view;
+            _matchmakingService = MatchmakingService.Instance;
 
             DrawCardCommand = new RelayCommand(ExecuteDrawCard);
             CallUnoCommand = new RelayCommand(ExecuteCallUno);
@@ -80,6 +86,27 @@ namespace UnoLisClient.UI.ViewModels
             ReportPlayerCommand = new RelayCommand(ExecuteReportPlayer);
 
             LoadMockData();
+        }
+
+        public async Task InitializeMatchAsync(string lobbyCode)
+        {
+            if (string.IsNullOrEmpty(lobbyCode)) return;
+
+            try
+            {
+                var settings = await _matchmakingService.GetLobbySettingsAsync(lobbyCode);
+
+                if (settings != null && !string.IsNullOrEmpty(settings.BackgroundVideoName))
+                {
+                    RequestSetBackground?.Invoke(settings.BackgroundVideoName);
+
+                    // Aquí también podrías aplicar settings.UseSpecialRules si lo necesitas
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error loading match settings: {ex.Message}");
+            }
         }
 
         private void LoadMockData()
@@ -144,6 +171,8 @@ namespace UnoLisClient.UI.ViewModels
                 ImagePath = "pack://application:,,,/Assets/Cards/BackUNOCard.png"
             }, null);
             CurrentTurnNickname = "SweetBlue16";
+
+
             UpdatePlayableCards();
             UpdateUnoButtonStatus();
         }

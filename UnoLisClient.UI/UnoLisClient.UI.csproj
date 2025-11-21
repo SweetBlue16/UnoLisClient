@@ -103,7 +103,9 @@
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\SelectBackgroundViewModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\AvatarModel.cs" />
+    <Compile Include="ViewModels\ViewModelEntities\BackgroundItemViewModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\CardModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\ItemModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\LeaderboardEntry.cs" />
@@ -183,6 +185,9 @@
     </Compile>
     <Compile Include="Views\UnoLisPages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnoLisPages\SelectBackgroundPage.xaml.cs">
+      <DependentUpon>SelectBackgroundPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -404,6 +409,18 @@
     <Resource Include="Assets\buttonClick.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Assets\AnfiteatroImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\AnfiteatroVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\BancaImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\BancaVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\buttonClick.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -468,6 +485,18 @@
     <Resource Include="Assets\Items\ShieldItem.png" />
     <Resource Include="Assets\Items\SwapItem.png" />
     <Resource Include="Assets\Items\ThiefItem.png" />
+    <Content Include="Assets\CanchasImage.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\CanchaVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FeiImage.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FeiVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\lobbyVideo.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -584,6 +613,10 @@
     <Page Include="Views\UnoLisPages\RegisterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnoLisPages\SelectBackgroundPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UnoLisPages\SettingsPage.xaml">
       <SubType>Designer</SubType>

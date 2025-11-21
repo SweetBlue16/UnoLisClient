@@ -10,6 +10,7 @@ using UnoLisClient.Logic.Helpers;
 using MatchSettings = UnoLisClient.Logic.UnoLisServerReference.Matchmaking.MatchSettings;
 using CreateMatchResponse = UnoLisClient.Logic.UnoLisServerReference.Matchmaking.CreateMatchResponse;
 using JoinMatchResponse = UnoLisClient.Logic.UnoLisServerReference.Matchmaking.JoinMatchResponse;
+using LobbySettings = UnoLisClient.Logic.UnoLisServerReference.Matchmaking.LobbySettings;
 
 namespace UnoLisClient.Logic.Services
 {
@@ -34,9 +35,7 @@ namespace UnoLisClient.Logic.Services
             try
             {
                 proxy = new MatchmakingManagerClient("NetTcpBinding_IMatchmakingManager");
-
                 var response = await proxy.CreateMatchAsync(settings);
-
                 proxy.Close();
                 return response;
             }
@@ -110,10 +109,7 @@ namespace UnoLisClient.Logic.Services
             try
             {
                 proxy = new MatchmakingManagerClient("NetTcpBinding_IMatchmakingManager");
-
-                // WCF requiere Arrays, así que convertimos la lista antes de enviar
                 var result = await proxy.SendInvitationsAsync(lobbyCode, senderNickname, invitedNicknames.ToArray());
-
                 proxy.Close();
                 return result;
             }
@@ -134,6 +130,72 @@ namespace UnoLisClient.Logic.Services
                 AbortProxy(proxy);
                 LogManager.Error($"Unexpected error sending invites: {ex.Message}", ex);
                 return false;
+            }
+        }
+
+        public async Task<bool> SetLobbyBackgroundAsync(string lobbyCode, string backgroundName)
+        {
+            MatchmakingManagerClient proxy = null;
+            try
+            {
+                proxy = new MatchmakingManagerClient("NetTcpBinding_IMatchmakingManager");
+
+                var result = await proxy.SetLobbyBackgroundAsync(lobbyCode, backgroundName);
+
+                proxy.Close();
+                return result;
+            }
+            catch (TimeoutException ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Timeout setting invites: {ex.Message}", ex);
+                return false;
+            }
+            catch (CommunicationException ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Communication error setting background: {ex.Message}", ex);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Unexpected error setting background: {ex.Message}", ex);
+                return false;
+            }
+        }
+
+        public async Task<LobbySettings> GetLobbySettingsAsync(string lobbyCode)
+        {
+            MatchmakingManagerClient proxy = null;
+            try
+            {
+                proxy = new MatchmakingManagerClient("NetTcpBinding_IMatchmakingManager");
+
+                var result = await proxy.GetLobbySettingsAsync(lobbyCode);
+
+                proxy.Close();
+
+                // Null Object Pattern: Si el servidor devuelve null, entregamos objeto vacío
+                return result ?? new LobbySettings();
+            }
+            catch (TimeoutException ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Timeout getting lobby settings: {ex.Message}", ex);
+                return new LobbySettings();
+            }
+            catch (CommunicationException ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Communication error getting lobby settings: {ex.Message}", ex);
+                return new LobbySettings();
+            }
+            catch (Exception ex)
+            {
+                AbortProxy(proxy);
+                LogManager.Error($"Error getting lobby settings: {ex.Message}", ex);
+                return new LobbySettings();
             }
         }
 

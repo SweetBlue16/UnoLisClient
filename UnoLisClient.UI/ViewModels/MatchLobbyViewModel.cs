@@ -204,8 +204,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                // TODO: Pasar el LobbyCode al constructor de MatchBoardPage
-                _navigationService.NavigateTo(new MatchBoardPage());
+                _navigationService.NavigateTo(new MatchBoardPage(_currentLobbyCode));
             });
         }
 
@@ -267,8 +266,6 @@ namespace UnoLisClient.UI.ViewModels
         private async void ExecuteSendInvites()
         {
             SoundManager.PlayClick();
-
-            // 1. Obtener lista de seleccionados
             var invitedNicknames = Friends.Where(f => f.Invited).Select(f => f.Nickname).ToList();
 
             if (!invitedNicknames.Any())
@@ -280,7 +277,6 @@ namespace UnoLisClient.UI.ViewModels
             IsLoading = true;
             try
             {
-                // 2. Llamar al servicio REAL para enviar correos
                 bool success = await _matchmakingService.SendInvitationsAsync(
                     _currentLobbyCode,
                     _currentUserNickname,
@@ -289,8 +285,6 @@ namespace UnoLisClient.UI.ViewModels
                 if (success)
                 {
                     _dialogService.ShowAlert("Invitations Sent", "Email invitations have been sent successfully!", PopUpIconType.Success);
-
-                    // Limpiar selección
                     foreach (var f in Friends) f.Invited = false;
                 }
                 else

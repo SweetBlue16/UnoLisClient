@@ -49,11 +49,23 @@
   <wsdl:message name="IMatchmakingManager_JoinMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinMatchResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchmakingManager_SetLobbyBackground_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetLobbyBackground" />
+  </wsdl:message>
+  <wsdl:message name="IMatchmakingManager_SetLobbyBackground_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetLobbyBackgroundResponse" />
+  </wsdl:message>
   <wsdl:message name="IMatchmakingManager_SendInvitations_InputMessage">
     <wsdl:part name="parameters" element="tns:SendInvitations" />
   </wsdl:message>
   <wsdl:message name="IMatchmakingManager_SendInvitations_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendInvitationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchmakingManager_GetLobbySettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLobbySettings" />
+  </wsdl:message>
+  <wsdl:message name="IMatchmakingManager_GetLobbySettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLobbySettingsResponse" />
   </wsdl:message>
   <wsdl:portType name="IMatchmakingManager">
     <wsdl:operation name="CreateMatch">
@@ -64,9 +76,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/JoinMatch" message="tns:IMatchmakingManager_JoinMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchmakingManager/JoinMatchResponse" message="tns:IMatchmakingManager_JoinMatch_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SetLobbyBackground">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/SetLobbyBackground" message="tns:IMatchmakingManager_SetLobbyBackground_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchmakingManager/SetLobbyBackgroundResponse" message="tns:IMatchmakingManager_SetLobbyBackground_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SendInvitations">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/SendInvitations" message="tns:IMatchmakingManager_SendInvitations_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchmakingManager/SendInvitationsResponse" message="tns:IMatchmakingManager_SendInvitations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLobbySettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchmakingManager/GetLobbySettings" message="tns:IMatchmakingManager_GetLobbySettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchmakingManager/GetLobbySettingsResponse" message="tns:IMatchmakingManager_GetLobbySettings_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMatchmakingManager" type="tns:IMatchmakingManager">
@@ -90,8 +110,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetLobbyBackground">
+      <soap12:operation soapAction="http://tempuri.org/IMatchmakingManager/SetLobbyBackground" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SendInvitations">
       <soap12:operation soapAction="http://tempuri.org/IMatchmakingManager/SendInvitations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLobbySettings">
+      <soap12:operation soapAction="http://tempuri.org/IMatchmakingManager/GetLobbySettings" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -106,7 +144,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8131/MatchmakingManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>SWEETBLUE16\pswee</Upn>
+          <Upn>EVICTUS\meler</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

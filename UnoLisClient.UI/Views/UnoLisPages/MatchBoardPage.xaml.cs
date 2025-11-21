@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels;
+using UnoLisClient.UI.Views.UnoLisWindows;
 
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
@@ -11,10 +12,37 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     /// </summary>
     public partial class MatchBoardPage : Page, INavigationService
     {
-        public MatchBoardPage()
+        private readonly MatchBoardViewModel _viewModel;
+        private readonly string _lobbyCode;
+        public MatchBoardPage(string lobbyCode)
         {
             InitializeComponent();
-            DataContext = new MatchBoardViewModel(this, new AlertManager());
+            _lobbyCode = lobbyCode;
+
+            _viewModel = new MatchBoardViewModel(this, new AlertManager());
+
+            _viewModel.RequestSetBackground += OnBackgroundRequested;
+
+            this.DataContext = _viewModel;
+        }
+
+        private void MatchBoardPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_lobbyCode))
+            {
+                _ = _viewModel.InitializeMatchAsync(_lobbyCode);
+            }
+        }
+
+        private async void OnBackgroundRequested(string videoName)
+        {
+            string videoPath = $"Assets/{videoName}";
+            string musicPath = "Assets/lobbyMusic.mp3";
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                await mainWindow.SetBackgroundMedia(videoPath, musicPath);
+            }
         }
 
         public void NavigateTo(Page page)

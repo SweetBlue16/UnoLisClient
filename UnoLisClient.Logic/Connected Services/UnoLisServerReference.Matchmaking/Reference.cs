@@ -244,6 +244,67 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Matchmaking {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LobbySettings", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class LobbySettings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BackgroundVideoNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool UseSpecialRulesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BackgroundVideoName {
+            get {
+                return this.BackgroundVideoNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BackgroundVideoNameField, value) != true)) {
+                    this.BackgroundVideoNameField = value;
+                    this.RaisePropertyChanged("BackgroundVideoName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool UseSpecialRules {
+            get {
+                return this.UseSpecialRulesField;
+            }
+            set {
+                if ((this.UseSpecialRulesField.Equals(value) != true)) {
+                    this.UseSpecialRulesField = value;
+                    this.RaisePropertyChanged("UseSpecialRules");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Matchmaking.IMatchmakingManager")]
     public interface IMatchmakingManager {
@@ -260,11 +321,23 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Matchmaking {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/JoinMatch", ReplyAction="http://tempuri.org/IMatchmakingManager/JoinMatchResponse")]
         System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Matchmaking.JoinMatchResponse> JoinMatchAsync(string lobbyCode, string nickname);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/SetLobbyBackground", ReplyAction="http://tempuri.org/IMatchmakingManager/SetLobbyBackgroundResponse")]
+        bool SetLobbyBackground(string lobbyCode, string backgroundName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/SetLobbyBackground", ReplyAction="http://tempuri.org/IMatchmakingManager/SetLobbyBackgroundResponse")]
+        System.Threading.Tasks.Task<bool> SetLobbyBackgroundAsync(string lobbyCode, string backgroundName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/SendInvitations", ReplyAction="http://tempuri.org/IMatchmakingManager/SendInvitationsResponse")]
         bool SendInvitations(string lobbyCode, string senderNickname, string[] invitedNicknames);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/SendInvitations", ReplyAction="http://tempuri.org/IMatchmakingManager/SendInvitationsResponse")]
         System.Threading.Tasks.Task<bool> SendInvitationsAsync(string lobbyCode, string senderNickname, string[] invitedNicknames);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/GetLobbySettings", ReplyAction="http://tempuri.org/IMatchmakingManager/GetLobbySettingsResponse")]
+        UnoLisClient.Logic.UnoLisServerReference.Matchmaking.LobbySettings GetLobbySettings(string lobbyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchmakingManager/GetLobbySettings", ReplyAction="http://tempuri.org/IMatchmakingManager/GetLobbySettingsResponse")]
+        System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Matchmaking.LobbySettings> GetLobbySettingsAsync(string lobbyCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -310,12 +383,28 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Matchmaking {
             return base.Channel.JoinMatchAsync(lobbyCode, nickname);
         }
         
+        public bool SetLobbyBackground(string lobbyCode, string backgroundName) {
+            return base.Channel.SetLobbyBackground(lobbyCode, backgroundName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SetLobbyBackgroundAsync(string lobbyCode, string backgroundName) {
+            return base.Channel.SetLobbyBackgroundAsync(lobbyCode, backgroundName);
+        }
+        
         public bool SendInvitations(string lobbyCode, string senderNickname, string[] invitedNicknames) {
             return base.Channel.SendInvitations(lobbyCode, senderNickname, invitedNicknames);
         }
         
         public System.Threading.Tasks.Task<bool> SendInvitationsAsync(string lobbyCode, string senderNickname, string[] invitedNicknames) {
             return base.Channel.SendInvitationsAsync(lobbyCode, senderNickname, invitedNicknames);
+        }
+        
+        public UnoLisClient.Logic.UnoLisServerReference.Matchmaking.LobbySettings GetLobbySettings(string lobbyCode) {
+            return base.Channel.GetLobbySettings(lobbyCode);
+        }
+        
+        public System.Threading.Tasks.Task<UnoLisClient.Logic.UnoLisServerReference.Matchmaking.LobbySettings> GetLobbySettingsAsync(string lobbyCode) {
+            return base.Channel.GetLobbySettingsAsync(lobbyCode);
         }
     }
 }
