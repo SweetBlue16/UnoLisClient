@@ -156,9 +156,6 @@
   <data name="EnterMatchCodeLabel" xml:space="preserve">
     <value>Ingresa código de partida...</value>
   </data>
-  <data name="ExitLabel" xml:space="preserve">
-    <value>Salir</value>
-  </data>
   <data name="FriendsListLabel" xml:space="preserve">
     <value>Amigos</value>
   </data>
@@ -299,5 +296,23 @@
   </data>
   <data name="CloseButton" xml:space="preserve">
     <value>CERRAR</value>
+  </data>
+  <data name="InvalidOperationLabel" xml:space="preserve">
+    <value>Operación inválida</value>
+  </data>
+  <data name="TaskCanceledLabel" xml:space="preserve">
+    <value>Operación cancelada</value>
+  </data>
+  <data name="NullReferenceAnimation" xml:space="preserve">
+    <value>Error al encontrar el archivo</value>
+  </data>
+  <data name="FileNotFoundLabel" xml:space="preserve">
+    <value>Archivo no encontrado</value>
+  </data>
+  <data name="ExitLabel" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="UriFormatLabel" xml:space="preserve">
+    <value>Ruta no encontrada</value>
   </data>
 </root>

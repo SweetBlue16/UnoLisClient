@@ -214,6 +214,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        public static string FileNotFoundLabel {
+            get {
+                return ResourceManager.GetString("FileNotFoundLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Friends.
         /// </summary>
         public static string FriendsListLabel {
@@ -264,6 +273,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string HowToPlayLabel {
             get {
                 return ResourceManager.GetString("HowToPlayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid operation.
+        /// </summary>
+        public static string InvalidOperationLabel {
+            get {
+                return ResourceManager.GetString("InvalidOperationLabel", resourceCulture);
             }
         }
         
@@ -390,6 +408,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string NoConnectionMessageLabel {
             get {
                 return ResourceManager.GetString("NoConnectionMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error finding the element.
+        /// </summary>
+        public static string NullReferenceAnimation {
+            get {
+                return ResourceManager.GetString("NullReferenceAnimation", resourceCulture);
             }
         }
         
@@ -556,6 +583,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation canceled.
+        /// </summary>
+        public static string TaskCanceledLabel {
+            get {
+                return ResourceManager.GetString("TaskCanceledLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string TitlePlaceholderLabel {
@@ -570,6 +606,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string UnsuccessfulLabel {
             get {
                 return ResourceManager.GetString("UnsuccessfulLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path not found.
+        /// </summary>
+        public static string UriFormatLabel {
+            get {
+                return ResourceManager.GetString("UriFormatLabel", resourceCulture);
             }
         }
         

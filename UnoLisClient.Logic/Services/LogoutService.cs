@@ -8,56 +8,38 @@ using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.Logic.Services
 {
-    public class LogoutService
+    public interface ILogoutService
+    {
+        Task<ServiceResponse<object>> LogoutAsync(string nickname);
+    }
+    public class LogoutService : ILogoutService
     {
         public Task<ServiceResponse<object>> LogoutAsync(string nickname)
         {
             var taskCompletion = new TaskCompletionSource<ServiceResponse<object>>();
             LogoutManagerClient logoutClient = null;
 
-            try
-            {
-                Action<ServiceResponse<object>> callbackAction = (response) =>
-                {
-                    try
-                    {
-                        taskCompletion.TrySetResult(response);
-                    }
-                    finally
-                    {
-                        CloseClientHelper.CloseClient(logoutClient);
-                    }
-                };
-                var callbackHandler = new LogoutCallback(callbackAction);
-                var context = new InstanceContext(callbackHandler);
-                logoutClient = new LogoutManagerClient(context);
 
-                logoutClient.Logout(nickname);
-            }
-            catch (EndpointNotFoundException enfEx)
+            Action<ServiceResponse<object>> callbackAction = (response) =>
             {
-                LogManager.Error("Error de conexión (Logout): No se encontró el endpoint.", enfEx);
-                taskCompletion.TrySetException(enfEx);
-                CloseClientHelper.CloseClient(logoutClient);
-            }
-            catch (TimeoutException timeoutEx)
-            {
-                LogManager.Error("Error de conexión (Logout): Tiempo de espera agotado.", timeoutEx);
-                taskCompletion.TrySetException(timeoutEx);
-                CloseClientHelper.CloseClient(logoutClient);
-            }
-            catch (CommunicationException commEx)
-            {
-                LogManager.Error("Error de comunicación durante el cierre de sesión.", commEx);
-                taskCompletion.TrySetException(commEx);
-                CloseClientHelper.CloseClient(logoutClient);
-            }
-            catch (Exception ex)
-            {
-                LogManager.Error("Error inesperado durante el cierre de sesión.", ex);
-                taskCompletion.TrySetException(ex);
-                CloseClientHelper.CloseClient(logoutClient);
-            }
+                try
+                {
+                    taskCompletion.TrySetResult(response);
+                }
+                finally
+                {
+                    CloseClientHelper.CloseClient(logoutClient);
+                }
+            };
+            var callbackHandler = new LogoutCallback(callbackAction);
+            var context = new InstanceContext(callbackHandler);
+            logoutClient = new LogoutManagerClient(context);
+
+            WcfServiceHelper.ExecuteSafe(
+                action: () => logoutClient.Logout(nickname), taskCompletionSource: taskCompletion, 
+                client: logoutClient, operationName: "Logout"
+            );
+
             return taskCompletion.Task;
         }
     }

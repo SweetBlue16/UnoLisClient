@@ -98,6 +98,7 @@
     <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MatchBoardViewModel.cs" />
     <Compile Include="ViewModels\MatchLobbyViewModel.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />

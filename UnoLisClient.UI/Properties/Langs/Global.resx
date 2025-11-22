@@ -156,9 +156,6 @@
   <data name="EnterMatchCodeLabel" xml:space="preserve">
     <value>Enter match code...</value>
   </data>
-  <data name="ExitLabel" xml:space="preserve">
-    <value>Exit</value>
-  </data>
   <data name="FriendsListLabel" xml:space="preserve">
     <value>Friends</value>
   </data>
@@ -299,5 +296,23 @@
   </data>
   <data name="CloseButton" xml:space="preserve">
     <value>CLOSE</value>
+  </data>
+  <data name="InvalidOperationLabel" xml:space="preserve">
+    <value>Invalid operation</value>
+  </data>
+  <data name="TaskCanceledLabel" xml:space="preserve">
+    <value>Operation canceled</value>
+  </data>
+  <data name="NullReferenceAnimation" xml:space="preserve">
+    <value>Error finding the element</value>
+  </data>
+  <data name="FileNotFoundLabel" xml:space="preserve">
+    <value>File not found</value>
+  </data>
+  <data name="ExitLabel" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="UriFormatLabel" xml:space="preserve">
+    <value>Path not found</value>
   </data>
 </root>

@@ -8,21 +8,29 @@ using UnoLisClient.UI.Utilities;
 using UnoLisServer.Common.Models;
 using UnoLisClient.UI.Views.PopUpWindows;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Enums;
+using UnoLisClient.UI.Services;
+using System.IO;
+using UnoLisClient.UI.ViewModels;
+using System.Windows.Controls;
 
 namespace UnoLisClient.UI.Views.UnoLisWindows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ILogoutManagerCallback
+    public partial class MainWindow : Window, INavigationService
     {
-        private LogoutManagerClient _logoutClient;
-
+        private readonly MainViewModel _viewModel;
+        private bool _isCleanClose = false;
         public MainWindow()
         {
             InitializeComponent();
+
+            _viewModel = new MainViewModel(this, new AlertManager(), new LogoutService());
+            this.DataContext = _viewModel;
         }
 
         public void LogoutResponse(ServiceResponse<object> response)
@@ -41,26 +49,14 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             });
         }
 
-        private void VideoBackground_MediaEnded(object sender, RoutedEventArgs e)
-        {
-            VideoBackground.Position = TimeSpan.Zero;
-            VideoBackground.Play();
-        }
-
-        public void SetMusicVolume(double volume)
-        {
-            MusicPlayer.Volume = volume / 100.0;
-        }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                MainFrame.Navigate(new GamePage());
+                _viewModel.NavigateToInitialPage();
 
-                var introArgs = new AnimationUtils.IntroAnimationArgs(
-                    IntroMask,
-                    SplashLogo,
+                var introArgs = new AnimationUtils.IntroAnimationArgs(IntroMask, SplashLogo, 
                     MusicPlayer
                 );
 
@@ -68,20 +64,60 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Operación inválida en la animación de inicio: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
             }
             catch (TaskCanceledException ex)
             {
-                MessageBox.Show($"Tarea cancelada durante la animación: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Warning);
+                new SimplePopUpWindow(Global.TaskCanceledLabel, ex.Message).ShowDialog();
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show($"Elemento no inicializado en la ventana principal: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.NullReferenceAnimation, ex.Message).ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error inesperado al cargar la ventana principal: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
+        }
+
+        private async void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs close)
+        {
+            if (_isCleanClose)
+            {
+                return;
+            }
+
+            close.Cancel = true;
+            bool canClose = await _viewModel.TryLogoutAndCloseAsync();
+
+            if (canClose)
+            {
+                _isCleanClose = true;
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    this.Close();
+                });
+            }
+        }
+
+        public void NavigateTo(Page page)
+        {
+            Dispatcher.Invoke(() => MainFrame.Navigate(page));
+        }
+
+        public void GoBack()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (MainFrame.CanGoBack) MainFrame.GoBack();
+            });
+        }
+
+        private void VideoBackground_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            VideoBackground.Position = TimeSpan.Zero;
+            VideoBackground.Play();
         }
 
         private void MusicPlayer_MediaEnded(object sender, RoutedEventArgs e)
@@ -90,34 +126,36 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             MusicPlayer.Play();
         }
 
+        public void SetMusicVolume(double volume)
+        {
+            MusicPlayer.Volume = volume / 100.0;
+        }
+
         public async Task SetBackgroundMedia(string videoPath, string musicPath)
         {
             try
             {
                 var mediaArgs = new AnimationUtils.CrossfadeMediaArgs(
-                    VideoBackground,
-                    MusicPlayer,
-                    videoPath,
-                    musicPath
+                    VideoBackground,MusicPlayer, videoPath, musicPath
                 );
 
                 await AnimationUtils.CrossfadeMediaAsync(mediaArgs);
             }
             catch (UriFormatException ex)
             {
-                MessageBox.Show($"Ruta de archivo inválida: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.UriFormatLabel, ex.Message).ShowDialog();
             }
-            catch (System.IO.FileNotFoundException ex)
+            catch (FileNotFoundException ex)
             {
-                MessageBox.Show($"Archivo multimedia no encontrado: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Warning);
+                new SimplePopUpWindow(Global.FileNotFoundLabel, ex.Message).ShowDialog();
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Operación no válida en la transición de medios: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error cambiando medios de fondo: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
         }
 
@@ -127,33 +165,13 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             {
                 await AnimationUtils.RestoreDefaultMediaAsync(VideoBackground, MusicPlayer);
             }
-            catch (System.IO.FileNotFoundException ex)
+            catch (FileNotFoundException ex)
             {
-                MessageBox.Show($"Archivo multimedia por defecto no encontrado: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Warning);
+                new SimplePopUpWindow(Global.FileNotFoundLabel, ex.Message).ShowDialog();
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Operación inválida al restaurar el fondo: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error restaurando el fondo: {ex.Message}", "UNO LIS", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void LogoutCurrentUser()
-        {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(CurrentSession.CurrentUserNickname))
-                {
-                    var context = new InstanceContext(this);
-                    _logoutClient = new LogoutManagerClient(context);
-                    _logoutClient.LogoutAsync(CurrentSession.CurrentUserNickname);
-
-                    CurrentSession.CurrentUserNickname = null;
-                    CurrentSession.CurrentUserProfileData = null;
-                }
+                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
             }
             catch (Exception ex)
             {
@@ -161,17 +179,5 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             }
         }
 
-        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            var result = new QuestionPopUpWindow(Global.ConfirmationLabel, Global.LogoutMessageLabel, PopUpIconType.Logout).ShowDialog();
-            if (result == true)
-            {
-                LogoutCurrentUser();
-            }
-            else
-            {
-                e.Cancel = true;
-            }
-        }
     }
 }
