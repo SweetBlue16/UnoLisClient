@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoLisClient.UI", "UnoLisCl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoLisClient.Logic", "UnoLisClient.Logic\UnoLisClient.Logic.csproj", "{11FE31D0-71AB-43E9-9644-5797990F6F20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoLisClient.Test", "UnoLisClient.Test\UnoLisClient.Test.csproj", "{2B20B469-EA6C-4251-A364-E004A1DB3A59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{11FE31D0-71AB-43E9-9644-5797990F6F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FE31D0-71AB-43E9-9644-5797990F6F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FE31D0-71AB-43E9-9644-5797990F6F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B20B469-EA6C-4251-A364-E004A1DB3A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B20B469-EA6C-4251-A364-E004A1DB3A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B20B469-EA6C-4251-A364-E004A1DB3A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B20B469-EA6C-4251-A364-E004A1DB3A59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
