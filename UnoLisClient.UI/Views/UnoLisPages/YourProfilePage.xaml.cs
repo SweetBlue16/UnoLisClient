@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.ViewModels;
+using UnoLisClient.Logic.Services;
 
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
@@ -14,7 +15,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         public YourProfilePage()
         {
             InitializeComponent();
-            DataContext = new ProfileViewViewModel(this, new AlertManager());
+            this.DataContext = new ProfileViewViewModel(this, new AlertManager(), new ProfileViewService());
         }
 
         public void GoBack()

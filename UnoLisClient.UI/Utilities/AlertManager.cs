@@ -54,7 +54,13 @@ namespace UnoLisClient.UI.Utilities
             {
                 if (_loadingPopUpWindow == null || !_loadingPopUpWindow.IsVisible)
                 {
-                    _loadingPopUpWindow = new LoadingPopUpWindow { Owner = GetOwnerWindow(page) };
+                    Window owner = GetOwnerWindow(page);
+                    _loadingPopUpWindow = new LoadingPopUpWindow { Owner = owner };
+
+                    if (owner == null)
+                    {
+                        _loadingPopUpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    }
                     _loadingPopUpWindow.Show();
                 }
             }));
@@ -76,7 +82,16 @@ namespace UnoLisClient.UI.Utilities
 
         private static Window GetOwnerWindow(Page page)
         {
-            return Window.GetWindow(page);
+            if (page != null)
+            {
+                var window = Window.GetWindow(page);
+                if (window != null)
+                {
+                    return window;
+                }
+            }
+
+            return Application.Current.MainWindow;
         }
     }
 }

@@ -152,6 +152,7 @@
     <Compile Include="Enums\PopUpIconType.cs" />
     <Compile Include="Helpers\CloseClientHelper.cs" />
     <Compile Include="Helpers\LogManager.cs" />
+    <Compile Include="Helpers\WcfServiceHelper.cs" />
     <Compile Include="Mappers\FriendMapper.cs" />
     <Compile Include="Models\ClientProfileData.cs" />
     <Compile Include="Models\CurrentSession.cs" />
@@ -166,7 +167,7 @@
     <Compile Include="Services\IFriendsService.cs" />
     <Compile Include="Services\ILobbyService.cs" />
     <Compile Include="Services\IMatchmakingService.cs" />
-    <Compile Include="Services\IModalService.cs" />
+    <Compile Include="Services\IProfileViewService.cs" />
     <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\LogoutService.cs" />

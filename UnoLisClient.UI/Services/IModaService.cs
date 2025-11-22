@@ -1,10 +1,10 @@
-﻿using System.Windows; 
+﻿using System.Windows;
 
 namespace UnoLisClient.UI.Services
 {
     /// <summary>
-    /// Interfaz segregada (SRP) para diálogos que requieren input del usuario
-    /// (Confirmaciones Sí/No o entrada de texto).
+    /// Segregated interface (SRP) for dialogs that require user input
+    /// Yes/No confirmations or text input.
     /// </summary>
     public interface IModalService
     {

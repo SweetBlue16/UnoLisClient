@@ -23,8 +23,7 @@ namespace UnoLisClient.UI.ViewModels
     public class ProfileViewViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly ProfileViewService _profileService;
-        private readonly Page _view;
+        private readonly IProfileViewService _profileService;
 
         private bool _isGuest;
         public bool IsGuest
@@ -95,11 +94,11 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand BackCommand { get; }
         public ICommand OpenSocialLinkCommand { get; }
 
-        public ProfileViewViewModel(Page view, IDialogService dialogService) : base(dialogService)
+        public ProfileViewViewModel(INavigationService navigationService, IDialogService dialogService, 
+            IProfileViewService profileService) : base(dialogService)
         {
-            _view = view;
-            _navigationService = (INavigationService)view;
-            _profileService = new ProfileViewService();
+            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
+            _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
 
             LoadProfileCommand = new RelayCommand(async () => await LoadProfileData());
             ChangeAvatarCommand = new RelayCommand(ExecuteChangeAvatar, () => !IsGuest);
@@ -148,7 +147,7 @@ namespace UnoLisClient.UI.ViewModels
             catch (Exception ex)
             {
                 string logMessage = $"Fallo al cargar los datos del perfil: {ex.Message}";
-                HandleException(MessageCode.ProfileFetchFailed, logMessage, ex); // Código más específico
+                HandleException(MessageCode.ProfileFetchFailed, logMessage, ex);
             }
             finally
             {
@@ -220,7 +219,7 @@ namespace UnoLisClient.UI.ViewModels
 
             if (isLoading)
             {
-                _dialogService.ShowLoading(_view);
+                _dialogService.ShowLoading(null);
             }
             else
             {
@@ -287,7 +286,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             if (string.IsNullOrWhiteSpace(url) || !Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
             {
-                return null;
+                return null; //REVISAR LA FORMA DE CAMBIAR EL RETURN NULL POR ALGO MAS ADECUADO
             }
             return uri;
         }
