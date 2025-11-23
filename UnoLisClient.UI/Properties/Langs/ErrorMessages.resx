@@ -123,6 +123,9 @@
   <data name="AlreadyFriendsMessageLabel" xml:space="preserve">
     <value>{0} is already on your friends list.</value>
   </data>
+  <data name="AlreadyReportedRecentlyMessageLabel" xml:space="preserve">
+    <value>You've recently reported {0}. Please try again later.</value>
+  </data>
   <data name="AvatarLockedMessageLabel" xml:space="preserve">
     <value>You must unlock this avatar before using it.</value>
   </data>
@@ -368,6 +371,9 @@
   </data>
   <data name="RegistrationInternalErrorMessageLabel" xml:space="preserve">
     <value>Internal error in the registration module.</value>
+  </data>
+  <data name="ReportInternalErrorMessageLabel" xml:space="preserve">
+    <value>Internal error in the reports module.</value>
   </data>
   <data name="RewardProcessingErrorMessageLabel" xml:space="preserve">
     <value>An error occurred while processing the reward.</value>

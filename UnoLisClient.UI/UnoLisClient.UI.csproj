@@ -59,8 +59,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UnoLisServer.Common">
-      <HintPath>..\..\..\..\..\source\repos\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
+    <Reference Include="UnoLisServer.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\UnoLisServer\UnoLisServer\UnoLisServer.Common\bin\Debug\UnoLisServer.Common.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -85,8 +86,10 @@
     <Compile Include="Services\IModaService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IReportTrackerService.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\PopUpIconHelper.cs" />
+    <Compile Include="Utilities\SessionReportTracker.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
@@ -105,6 +108,7 @@
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ReportPlayerViewModel.cs" />
     <Compile Include="ViewModels\SelectBackgroundViewModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\AvatarModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\BackgroundItemViewModel.cs" />
@@ -221,6 +225,9 @@
       <DependentUpon>VisiblePasswordField.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\SoundManager.cs" />
+    <Compile Include="Views\UnoLisWindows\ReportPlayerWindow.xaml.cs">
+      <DependentUpon>ReportPlayerWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Views\PopUpWindows\InputPopUpWindow.xaml.cs">
@@ -661,6 +668,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\VisiblePasswordField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnoLisWindows\ReportPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.ServiceModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using UnoLisClient.Logic.Enums;
+using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
+using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using UnoLisClient.UI.Views.UnoLisWindows;
 using UnoLisServer.Common.Enums;
-using UnoLisClient.Logic.Helpers;
-using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
-using UnoLisClient.Logic.Enums;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -71,6 +74,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand ToggleChatCommand { get; }
         public ICommand LeaveMatchCommand { get; }
         public ICommand ReadyCommand { get; }
+        public ICommand OpenReportWindowCommand { get; }
 
         public MatchLobbyViewModel(INavigationService navigationService, IDialogService dialogService,
                                  IFriendsService friendsService, IChatService chatService, string lobbyCode)
@@ -97,8 +101,22 @@ namespace UnoLisClient.UI.ViewModels
             ToggleChatCommand = new RelayCommand(ExecuteToggleChat);
             LeaveMatchCommand = new RelayCommand(ExecuteLeaveMatch);
             ReadyCommand = new RelayCommand(ExecuteReady);
+            OpenReportWindowCommand = new RelayCommand(ExecuteOpenReportWindow);
 
             InitializeLobbySlots();
+        }
+
+        private void ExecuteOpenReportWindow()
+        {
+            SoundManager.PlayClick();
+            var playersList = PlayersInLobby
+                .Where(p => p.IsSlotFilled)
+                .Select(p => p.Nickname)
+                .ToList();
+            IsSettingsVisible = false;
+            var reportWindow = new ReportPlayerWindow(playersList);
+            reportWindow.Owner = Window.GetWindow(_navigationService as Page);
+            reportWindow.ShowDialog();
         }
 
         private void InitializeLobbySlots()

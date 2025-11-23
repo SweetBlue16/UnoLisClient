@@ -46,6 +46,8 @@ namespace UnoLisClient.UI.Utilities
                 { MessageCode.MatchUnoDeclared, Match.PlayerDeclaredUnoMessageLabel },
                 { MessageCode.MatchWinnerDeclared, Match.WinnerLabel },
                 { MessageCode.MatchScoreUpdated, Match.MatchResultsRecordedMessageLabel },
+                { MessageCode.SanctionApplied, Global.SanctionAppliedMessageLabel },
+                { MessageCode.ReportSubmitted, Global.ReportSubmittedMessageLabel },
 
                 { MessageCode.BadRequest, ErrorMessages.BadRequestMessageLabel },
                 { MessageCode.InvalidData, ErrorMessages.InvalidDataMessageLabel },
@@ -80,6 +82,7 @@ namespace UnoLisClient.UI.Utilities
                 { MessageCode.ItemNotInShop, ErrorMessages.ItemNotInShopMessageLabel },
                 { MessageCode.PlayerReported, Match.PlayerReportedMessageLabel },
                 { MessageCode.InvalidSearchQuery, ErrorMessages.InvalidSearchQueryMessageLabel },
+                { MessageCode.AlreadyReportedRecently, ErrorMessages.AlreadyReportedRecentlyMessageLabel },
 
                 { MessageCode.SessionExpired, ErrorMessages.SessionExpiredMessageLabel },
                 { MessageCode.UnauthorizedAccess, ErrorMessages.UnauthorizedAccessMessageLabel },
@@ -110,6 +113,7 @@ namespace UnoLisClient.UI.Utilities
                 { MessageCode.FileSystemError, ErrorMessages.FileSystemErrorMessageLabel },
                 { MessageCode.ServiceInitializationFailed, ErrorMessages.ServiceInitializationFailedMessageLabel },
                 { MessageCode.ShopInternalError, ErrorMessages.ShopInternalErrorMessageLabel },
+                { MessageCode.ReportInternalError, ErrorMessages.ReportInternalErrorMessageLabel },
 
                 { MessageCode.ConnectionLost, ErrorMessages.NoConnectionMessageLabel },
                 { MessageCode.Timeout, ErrorMessages.TimeoutMessageLabel },

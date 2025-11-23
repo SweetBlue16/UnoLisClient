@@ -315,4 +315,13 @@
   <data name="UriFormatLabel" xml:space="preserve">
     <value>Ruta no encontrada</value>
   </data>
+  <data name="SendButton" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="SanctionAppliedMessageLabel" xml:space="preserve">
+    <value>Tienes un baneo aplicado. Duración: {0}</value>
+  </data>
+  <data name="ReportSubmittedMessageLabel" xml:space="preserve">
+    <value>Reporte a {0} enviado.</value>
+  </data>
 </root>

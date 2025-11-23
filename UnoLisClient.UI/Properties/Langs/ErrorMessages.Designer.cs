@@ -79,6 +79,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve recently reported {0}. Please try again later..
+        /// </summary>
+        public static string AlreadyReportedRecentlyMessageLabel {
+            get {
+                return ResourceManager.GetString("AlreadyReportedRecentlyMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must unlock this avatar before using it..
         /// </summary>
         public static string AvatarLockedMessageLabel {
@@ -813,6 +822,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string RegistrationInternalErrorMessageLabel {
             get {
                 return ResourceManager.GetString("RegistrationInternalErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in the reports module..
+        /// </summary>
+        public static string ReportInternalErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("ReportInternalErrorMessageLabel", resourceCulture);
             }
         }
         

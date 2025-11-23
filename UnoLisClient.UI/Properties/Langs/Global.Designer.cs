@@ -493,6 +493,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report to {0} sent..
+        /// </summary>
+        public static string ReportSubmittedMessageLabel {
+            get {
+                return ResourceManager.GetString("ReportSubmittedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve been banned. Duration: {0}.
+        /// </summary>
+        public static string SanctionAppliedMessageLabel {
+            get {
+                return ResourceManager.GetString("SanctionAppliedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveButton {
@@ -516,6 +534,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ScoringTitleLabel {
             get {
                 return ResourceManager.GetString("ScoringTitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string SendButton {
+            get {
+                return ResourceManager.GetString("SendButton", resourceCulture);
             }
         }
         

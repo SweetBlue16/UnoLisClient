@@ -123,6 +123,9 @@
   <data name="AlreadyFriendsMessageLabel" xml:space="preserve">
     <value>{0} ya está en tu lista de amigos.</value>
   </data>
+  <data name="AlreadyReportedRecentlyMessageLabel" xml:space="preserve">
+    <value>Ya reportaste a {0} recientemente. Inténtalo más tarde.</value>
+  </data>
   <data name="AvatarLockedMessageLabel" xml:space="preserve">
     <value>Debes desbloquear este avatar antes de usarlo.</value>
   </data>
@@ -368,6 +371,9 @@
   </data>
   <data name="RegistrationInternalErrorMessageLabel" xml:space="preserve">
     <value>Error interno en el módulo de registro.</value>
+  </data>
+  <data name="ReportInternalErrorMessageLabel" xml:space="preserve">
+    <value>Error interno al enviar el reporte.</value>
   </data>
   <data name="RewardProcessingErrorMessageLabel" xml:space="preserve">
     <value>Ocurrió un error al procesar la recompensa.</value>
