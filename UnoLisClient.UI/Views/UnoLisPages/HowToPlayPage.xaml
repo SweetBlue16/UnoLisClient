@@ -39,13 +39,21 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0"
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,16">
+                <Image Source="pack://application:,,,/Assets/Other/HowToPlay.png"
+                       Width="50"
+                       Height="50"
+                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="0"
                        Text="{x:Static language:Global.HowToPlayLabel}"
                        FontSize="36"
                        Foreground="White"
                        FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                       Margin="0,0,0,0"
                        HorizontalAlignment="Left"/>
+            </StackPanel>
             <Button Grid.Column="0"
                     Content="{x:Static language:Global.CancelButton}"
                     Style="{DynamicResource SecondaryButtonStyle}"

@@ -16,19 +16,26 @@
                 Width="500"
                 Height="350">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
-
-                <TextBlock Text="{x:Static Langs:Global.JoinMatchLabel}"
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,16">
+                    <Image Source="pack://application:,,,/Assets/Other/MatchInvitation.png"
+                           Width="75"
+                           Height="75"
+                           Margin="0,0,20,0"/>
+                    <TextBlock Text="{x:Static Langs:Global.JoinMatchLabel}"
                            FontSize="36"
                            FontWeight="Bold"
                            Foreground="White"
                            HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
                            FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                           Margin="0,0,0,30"/>
-
+                           Margin="0,0,0,0"/>
+                </StackPanel>
                 <TextBox x:Name="CodeTextBox"
                          Style="{StaticResource TextBoxStyle}"
-                         Width="250"
-                         Height="40"
+                         Width="350"
+                         Height="50"
                          Tag="{x:Static Langs:Global.EnterMatchCodeLabel}"
                          FontSize="18"
                          HorizontalAlignment="Center"
@@ -41,7 +48,7 @@
                     <Button Content="{x:Static Langs:Global.JoinButton}"
                             Style="{StaticResource PrimaryButtonStyle}"
                             Width="130"
-                            Height="55"
+                            Height="70"
                             FontSize="18"
                             Cursor="Hand"
                             Margin="0,0,20,0"
@@ -49,7 +56,7 @@
                     <Button Content="{x:Static Langs:Global.BackJoinButton}"
                             Style="{StaticResource SecondaryButtonStyle}"
                             Width="140"
-                            Height="59"
+                            Height="70"
                             FontSize="18"
                             Cursor="Hand"
                             Margin="20,0,0,0"

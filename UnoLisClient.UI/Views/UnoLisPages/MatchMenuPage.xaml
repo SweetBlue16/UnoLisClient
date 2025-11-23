@@ -58,16 +58,26 @@
                                VerticalAlignment="Top"
                                MouseDown="BackIcon_MouseDown"
                                Margin="0,0,0,10"/>
-
-                    <!-- Título -->
-                    <TextBlock Grid.Column="1"
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                Margin="20,0,20,0">
+                        <Image Source="pack://application:,,,/Assets/Other/MatchInvitation.png"
+                               Width="60"
+                               Height="60"
+                               Margin="0,0,10,0"/>
+                        <!-- Título -->
+                        <TextBlock Grid.Column="1"
                                Text="{x:Static Langs:Global.MatchMenuLabel}"
-                               FontSize="36"
+                               FontSize="34"
                                FontWeight="Bold"
+                               TextWrapping="Wrap"
                                Foreground="White"
                                FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                                HorizontalAlignment="Center"
-                               Margin="0,0,0,30"/>
+                               VerticalAlignment="Center"
+                               Margin="0,0,0,0"/>
+                    </StackPanel>
                 </Grid>
 
                 <!-- Contenido principal -->

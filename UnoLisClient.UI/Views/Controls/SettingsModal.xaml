@@ -16,14 +16,22 @@
             VerticalAlignment="Center">
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-
-            <TextBlock Text="{x:Static Langs:Global.SettingsLabel}"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,16">
+                <Image Source="pack://application:,,,/Assets/Other/Settings.png"
+                       Width="45"
+                       Height="45"
+                       Margin="0,0,10,0"/>
+                <TextBlock Text="{x:Static Langs:Global.SettingsLabel}"
                        FontSize="25"
                        FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
                        FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                       Margin="0,0,0,20"/>
+                       Margin="0,0,0,0"/>
+            </StackPanel>
             <TextBlock Text="{x:Static Langs:Global.VolumeLabel}"
                        FontSize="16"
                        Foreground="White"

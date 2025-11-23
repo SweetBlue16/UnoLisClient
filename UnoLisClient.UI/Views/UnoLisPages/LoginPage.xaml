@@ -23,13 +23,20 @@
 			HorizontalAlignment="Center"
             VerticalAlignment="Center">
 		<StackPanel>
-            <Label Content="{x:Static language:SignIn.WelcomeLabel}"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,16">
+                <Image Source="pack://application:,,,/Assets/Other/Login.png"
+                       Width="40"
+                       Height="40"
+                       Margin="0,0,10,0"/>
+                <Label Content="{x:Static language:SignIn.WelcomeLabel}"
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,16"
                    VerticalAlignment="Top"
                    FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                    Foreground="White"
                    FontSize="30"/>
+            </StackPanel>
             <Label Content="{x:Static language:SignIn.NicknameLabel}"
                    HorizontalAlignment="Left"
                    Margin="0,0,34,0"
@@ -39,11 +46,13 @@
                    FontSize="15"/>
             <TextBox x:Name="NicknameTextBox"
                      Style="{DynamicResource TextBoxStyle}"
-                     Margin="0,0,34,16"
+                     Margin="9,0,0,16"
+                     Width="298"
+                     HorizontalAlignment="Left"
                      Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="{x:Static language:Global.PasswordLabel}"
                    HorizontalAlignment="Left"
-                   Margin="0,0,34,0"
+                   Margin="0,0,65,0"
                    VerticalAlignment="Top"
                    FontFamily="pack://application:,,,/Fonts/#Lato"
                    Foreground="White"
@@ -52,11 +61,13 @@
                                            Margin="0,0,0,16"
                                            Password="{Binding Password,
                                                       Mode=TwoWay,
-                                                      UpdateSourceTrigger=PropertyChanged}"/>
+                                                      UpdateSourceTrigger=PropertyChanged}"
+                                           HorizontalAlignment="Left"
+                                           Width="350"/>
             <DockPanel Margin="10,5">
                 <Button Content="{x:Static language:SignIn.LoginButton}"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
                         Style="{DynamicResource PrimaryButtonStyle}"
                         Height="56"
                         Margin="0,0,15,0"
@@ -66,8 +77,8 @@
                         IsEnabled="{Binding IsLoading,
                                     Converter={StaticResource InvertedBoolToVisibilityConverter}, ConverterParameter='Invert'}"/>
                 <Button Content="{x:Static language:Global.CancelButton}"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
                         Style="{DynamicResource SecondaryButtonStyle}"
                         Height="56"
                         Margin="0,0,0,0"

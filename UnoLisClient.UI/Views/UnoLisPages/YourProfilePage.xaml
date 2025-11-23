@@ -27,11 +27,16 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="{x:Static language:Global.ProfileLabel}"
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Image Source="pack://application:,,,/Assets/Other/Profile.png"
+                       Width="40"
+                       Height="40"
+                       Margin="0,0,10,0"/>
+                <TextBlock Text="{x:Static language:Global.ProfileLabel}"
                        FontSize="30"
                        FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                       Foreground="White"
-                       Margin="0,0,0,20"/>
+                       Foreground="White"/>
+            </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -155,11 +160,16 @@
             </Grid>
 
             <StackPanel Grid.Row="2" Margin="0,30,0,0">
-                <TextBlock Text="{x:Static language:Global.StatisticsLabel}"
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Image Source="pack://application:,,,/Assets/Other/Statistics.png"
+                           Width="40"
+                           Height="40"
+                           Margin="0,0,10,0"/>
+                    <TextBlock Text="{x:Static language:Global.StatisticsLabel}"
                            FontSize="30"
                            FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                           Foreground="White"
-                           Margin="0,0,0,20"/>
+                           Foreground="White"/>
+                </StackPanel>
                 <DataGrid x:Name="PlayerStatisticsDataGrid"
                           Style="{DynamicResource DataGridStyle}"
                           ItemsSource="{Binding Stats}"

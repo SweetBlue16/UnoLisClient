@@ -29,7 +29,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToProfileCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/profileIcon.png"
+                <Image Source="/Assets/Other/Profile.png"
                        Width="26" Height="26"
                        VerticalAlignment="Center"
                        Margin="0,0,8,0"/>
@@ -48,7 +48,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToFriendsCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/friendsIcon.png"
+                <Image Source="/Assets/Other/Friends.png"
                        Width="26" Height="26"
                        VerticalAlignment="Center"
                        Margin="0,0,8,0"/>
@@ -145,7 +145,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToShopCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/shopIcon.png"
+                <Image Source="/Assets/Other/Shop.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
                 <Label x:Name="ShopLabel"
@@ -160,7 +160,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToSettingsCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/settingsIcon.png"
+                <Image Source="/Assets/Other/Settings.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
                 <Label x:Name="SettingsLabel"
@@ -175,7 +175,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToLeaderboardsCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/statsIcon.png"
+                <Image Source="/Assets/Other/Achievement.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
                 <Label x:Name="StatisticsLabel"
@@ -190,7 +190,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToHowToPlayCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/rulesIcon.png"
+                <Image Source="/Assets/Other/HowToPlay.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
                 <Label x:Name="HowToPlayLabel"
@@ -205,7 +205,7 @@
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding LogoutCommand}"/>
                 </StackPanel.InputBindings>
-                <Image Source="/Assets/exitIcon.png"
+                <Image Source="/Assets/Other/Logout.png"
                        Width="40" Height="40"
                        HorizontalAlignment="Center" Margin="0,0,0,5"/>
                 <Label x:Name="ExitLabel"

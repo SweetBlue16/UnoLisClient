@@ -341,32 +341,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Avatars\CC2Projector.png" />
-    <Resource Include="Avatars\DraKaren.png" />
-    <Resource Include="Avatars\DraLizbeth.png" />
-    <Resource Include="Avatars\DrOcharan.png" />
-    <Resource Include="Avatars\DrSaul.png" />
-    <Resource Include="Avatars\ElRevo.png" />
-    <Resource Include="Avatars\Gatito.png" />
-    <Resource Include="Avatars\LogoUNO.png" />
-    <Resource Include="Avatars\MtroWillian.png" />
-    <Resource Include="Fonts\Bangers.ttf" />
-    <Resource Include="Fonts\Bubblegum-Sans.ttf" />
-    <Resource Include="Fonts\Lato.ttf" />
-    <Resource Include="Fonts\Luckiest-Guy.ttf" />
-    <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\Other\1stPlace.png" />
     <Resource Include="Assets\Other\2ndPlace.png" />
     <Resource Include="Assets\Other\3rdPlace.png" />
@@ -398,6 +372,42 @@
     <Resource Include="Assets\Other\Timer.png" />
     <Resource Include="Assets\Other\UNOButton.png" />
     <Resource Include="Assets\Other\WarningAlert.png" />
+    <Resource Include="Avatars\CC2Projector.png" />
+    <Resource Include="Avatars\DraKaren.png" />
+    <Resource Include="Avatars\DraLizbeth.png" />
+    <Resource Include="Avatars\DrOcharan.png" />
+    <Resource Include="Avatars\DrSaul.png" />
+    <Resource Include="Avatars\ElRevo.png" />
+    <Resource Include="Avatars\Gatito.png" />
+    <Resource Include="Avatars\LogoUNO.png" />
+    <Resource Include="Avatars\MtroWillian.png" />
+    <Resource Include="Fonts\Bangers.ttf" />
+    <Resource Include="Fonts\Bubblegum-Sans.ttf" />
+    <Resource Include="Fonts\Lato.ttf" />
+    <Resource Include="Fonts\Luckiest-Guy.ttf" />
+    <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Other\Delete.png" />
+    <Resource Include="Assets\Other\Edit.png" />
+    <Resource Include="Assets\Other\Friends.png" />
+    <Resource Include="Assets\Other\Language.png" />
+    <Resource Include="Assets\Other\MatchInvitation.png" />
+    <Resource Include="Assets\Other\Notification.png" />
+    <Resource Include="Assets\Other\PendingFriendRequests.png" />
+    <Resource Include="Assets\Other\Profile.png" />
+    <Resource Include="Assets\Other\Settings.png" />
+    <Resource Include="Assets\Other\Shop.png" />
     <Resource Include="Avatars\+10Card.png" />
     <Resource Include="Avatars\Jamon.png" />
     <Resource Include="Avatars\Mau.png" />
