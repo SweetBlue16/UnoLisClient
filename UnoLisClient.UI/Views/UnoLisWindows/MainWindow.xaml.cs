@@ -1,20 +1,19 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.Logic.UnoLisServerReference.Logout;
 using UnoLisClient.UI.Utilities;
 using UnoLisServer.Common.Models;
 using UnoLisClient.UI.Views.PopUpWindows;
-using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisClient.Logic.Services;
-using UnoLisClient.Logic.Models;
-using UnoLisClient.Logic.Enums;
 using UnoLisClient.UI.Services;
 using System.IO;
 using UnoLisClient.UI.ViewModels;
 using System.Windows.Controls;
+using UnoLisClient.Logic.Callbacks;
+using UnoLisClient.Logic.Models;
+using UnoLisClient.Logic.Enums;
+using UnoLisClient.UI.Views.UnoLisPages;
 
 namespace UnoLisClient.UI.Views.UnoLisWindows
 {
@@ -31,6 +30,7 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
 
             _viewModel = new MainViewModel(this, new AlertManager(), new LogoutService());
             this.DataContext = _viewModel;
+            ReportCallback.OnResponse += HandlePlayerKicked;
         }
 
         public void LogoutResponse(ServiceResponse<object> response)
@@ -49,6 +49,99 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             });
         }
 
+        public void NavigateTo(Page page)
+        {
+            Dispatcher.Invoke(() => MainFrame.Navigate(page));
+        }
+
+        public void GoBack()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (MainFrame.CanGoBack) MainFrame.GoBack();
+            });
+        }
+
+        public void SetMusicVolume(double volume)
+        {
+            MusicPlayer.Volume = volume / 100.0;
+        }
+
+        public async Task SetBackgroundMedia(string videoPath, string musicPath)
+        {
+            try
+            {
+                var mediaArgs = new AnimationUtils.CrossfadeMediaArgs(
+                    VideoBackground, MusicPlayer, videoPath, musicPath
+                );
+
+                await AnimationUtils.CrossfadeMediaAsync(mediaArgs);
+            }
+            catch (UriFormatException ex)
+            {
+                new SimplePopUpWindow(Global.UriFormatLabel, ex.Message).ShowDialog();
+            }
+            catch (FileNotFoundException ex)
+            {
+                new SimplePopUpWindow(Global.FileNotFoundLabel, ex.Message).ShowDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
+            }
+        }
+
+        public async Task RestoreDefaultBackground()
+        {
+            try
+            {
+                await AnimationUtils.RestoreDefaultMediaAsync(VideoBackground, MusicPlayer);
+            }
+            catch (FileNotFoundException ex)
+            {
+                new SimplePopUpWindow(Global.FileNotFoundLabel, ex.Message).ShowDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
+            }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            ReportCallback.OnResponse -= HandlePlayerKicked;
+            base.OnClosed(e);
+        }
+
+        private void HandlePlayerKicked(ServiceResponse<object> response)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                CurrentSession.CurrentUserNickname = null;
+                CurrentSession.CurrentUserProfileData = null;
+
+                var popUp = new SimplePopUpWindow(Global.OopsLabel,
+                    MessageTranslator.GetMessage(response.Code),
+                    PopUpIconType.Warning
+                );
+                popUp.Owner = this;
+                popUp.ShowDialog();
+
+                MainFrame.Navigate(new GamePage());
+                while (MainFrame.CanGoBack)
+                {
+                    MainFrame.RemoveBackEntry();
+                }
+            });
+        }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -101,19 +194,6 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             }
         }
 
-        public void NavigateTo(Page page)
-        {
-            Dispatcher.Invoke(() => MainFrame.Navigate(page));
-        }
-
-        public void GoBack()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (MainFrame.CanGoBack) MainFrame.GoBack();
-            });
-        }
-
         private void VideoBackground_MediaEnded(object sender, RoutedEventArgs e)
         {
             VideoBackground.Position = TimeSpan.Zero;
@@ -125,59 +205,5 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             MusicPlayer.Position = TimeSpan.Zero;
             MusicPlayer.Play();
         }
-
-        public void SetMusicVolume(double volume)
-        {
-            MusicPlayer.Volume = volume / 100.0;
-        }
-
-        public async Task SetBackgroundMedia(string videoPath, string musicPath)
-        {
-            try
-            {
-                var mediaArgs = new AnimationUtils.CrossfadeMediaArgs(
-                    VideoBackground,MusicPlayer, videoPath, musicPath
-                );
-
-                await AnimationUtils.CrossfadeMediaAsync(mediaArgs);
-            }
-            catch (UriFormatException ex)
-            {
-                new SimplePopUpWindow(Global.UriFormatLabel, ex.Message).ShowDialog();
-            }
-            catch (FileNotFoundException ex)
-            {
-                new SimplePopUpWindow(Global.FileNotFoundLabel, ex.Message).ShowDialog();
-            }
-            catch (InvalidOperationException ex)
-            {
-                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
-            }
-        }
-
-        public async Task RestoreDefaultBackground()
-        {
-            try
-            {
-                await AnimationUtils.RestoreDefaultMediaAsync(VideoBackground, MusicPlayer);
-            }
-            catch (FileNotFoundException ex)
-            {
-                new SimplePopUpWindow(Global.FileNotFoundLabel, ex.Message).ShowDialog();
-            }
-            catch (InvalidOperationException ex)
-            {
-                new SimplePopUpWindow(Global.InvalidOperationLabel, ex.Message).ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
-            }
-        }
-
     }
 }

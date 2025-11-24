@@ -8,11 +8,25 @@ namespace UnoLisClient.Logic.Callbacks
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class ReportCallback : IReportManagerCallback
     {
-        private readonly Action<ServiceResponse<object>> _onResponse;
+        public static event Action<ServiceResponse<object>> OnResponse;
 
         public ReportCallback(Action<ServiceResponse<object>> onResponse)
         {
-            _onResponse = onResponse;
+            OnResponse = onResponse;
+        }
+
+        public void OnPlayerKicked(ServiceResponse<object> response)
+        {
+            Console.WriteLine($"[DEBUG] Callback recibido - Success: {response.Success}");
+            try
+            {
+                OnResponse?.Invoke(response);
+                Console.WriteLine($"[DEBUG] Callback completado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] En callback: {ex.Message}");
+            }
         }
 
         public void ReportPlayerResponse(ServiceResponse<object> response)
@@ -20,7 +34,7 @@ namespace UnoLisClient.Logic.Callbacks
             Console.WriteLine($"[DEBUG] Callback recibido - Success: {response.Success}");
             try
             {
-                _onResponse?.Invoke(response);
+                OnResponse?.Invoke(response);
                 Console.WriteLine($"[DEBUG] Callback completado exitosamente");
             }
             catch (Exception ex)
