@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisServer.Common.Enums;
+using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -80,31 +82,7 @@ namespace UnoLisClient.UI.ViewModels
             try
             {
                 var response = await _loginService.LoginAsync(credentials);
-                string message = MessageTranslator.GetMessage(response.Code);
-
-                if (response.Success)
-                {
-                    CurrentSession.CurrentUserNickname = Nickname;
-                    try
-                    {
-                        ChatService.Instance.Initialize(Nickname);
-                        FriendsService.Instance.Initialize(Nickname);
-                    }
-                    catch (Exception chatEx)
-                    {
-                        string logMessage = $"Fallo al inicializar el servicio de chat: {chatEx.Message}";
-                        HandleException(MessageCode.UnhandledException, logMessage, chatEx);
-                    }
-                    string successMessage = string.Format(message, Nickname);
-                    SoundManager.PlayClick();
-                    _navigationService.NavigateTo(new MainMenuPage());
-                    _dialogService.ShowAlert(Global.SuccessLabel, successMessage, PopUpIconType.Success);
-                }
-                else
-                {
-                    ErrorMessage = message;
-                    _dialogService.ShowWarning(ErrorMessage);
-                }
+                HandleLoginResponse(response);
             }
             catch (EndpointNotFoundException enfEx)
             {
@@ -159,6 +137,67 @@ namespace UnoLisClient.UI.ViewModels
             { 
                 _dialogService.HideLoading(); 
             }
+        }
+
+        private void HandleLoginResponse(ServiceResponse<object> response)
+        {
+            if (response.Success)
+            {
+                HandleLoginSuccessful(response);
+            }
+            else if (IsBanned(response.Code))
+            {
+                HandleBannedPlayer(response.Data);
+            }
+            else
+            {
+                string errorMessage = MessageTranslator.GetMessage(response.Code);
+                ErrorMessage = errorMessage;
+                _dialogService.ShowWarning(errorMessage);
+            }
+        }
+
+        private void HandleLoginSuccessful(ServiceResponse<object> response)
+        {
+            CurrentSession.CurrentUserNickname = Nickname;
+            try
+            {
+                ChatService.Instance.Initialize(Nickname);
+                FriendsService.Instance.Initialize(Nickname);
+            }
+            catch (Exception chatEx)
+            {
+                string logMessage = $"Fallo al inicializar el servicio de chat: {chatEx.Message}";
+                HandleException(MessageCode.UnhandledException, logMessage, chatEx);
+            }
+
+            string successMessage = string.Format(MessageTranslator.GetMessage(response.Code), Nickname);
+            SoundManager.PlayClick();
+            _navigationService.NavigateTo(new MainMenuPage());
+            _dialogService.ShowAlert(Global.SuccessLabel, successMessage, PopUpIconType.Success);
+        }
+
+        private void HandleBannedPlayer(object data)
+        {
+            BanInfo banInfo = data as BanInfo;
+            if (banInfo == null)
+            {
+                return;
+            }
+            string banMessage = string.Format(
+                MessageTranslator.GetMessage(MessageCode.PlayerBanned),
+                banInfo.FormattedTimeRemaining
+            );
+            _dialogService.ShowWarning(banMessage);
+        }
+
+        private bool IsBanned(MessageCode code)
+        {
+            if (code != MessageCode.PlayerBanned)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

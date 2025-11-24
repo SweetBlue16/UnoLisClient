@@ -74,6 +74,99 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Login {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BanInfo", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class BanInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EndDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FormattedTimeRemainingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReasonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double RemainingHoursField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndDate {
+            get {
+                return this.EndDateField;
+            }
+            set {
+                if ((this.EndDateField.Equals(value) != true)) {
+                    this.EndDateField = value;
+                    this.RaisePropertyChanged("EndDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FormattedTimeRemaining {
+            get {
+                return this.FormattedTimeRemainingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FormattedTimeRemainingField, value) != true)) {
+                    this.FormattedTimeRemainingField = value;
+                    this.RaisePropertyChanged("FormattedTimeRemaining");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reason {
+            get {
+                return this.ReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReasonField, value) != true)) {
+                    this.ReasonField = value;
+                    this.RaisePropertyChanged("Reason");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double RemainingHours {
+            get {
+                return this.RemainingHoursField;
+            }
+            set {
+                if ((this.RemainingHoursField.Equals(value) != true)) {
+                    this.RemainingHoursField = value;
+                    this.RaisePropertyChanged("RemainingHours");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Login.ILoginManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.Login.ILoginManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface ILoginManager {
@@ -90,6 +183,7 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Login {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILoginManager/LoginResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Login.BanInfo))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Login.AuthCredentials))]
         void LoginResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }

@@ -154,7 +154,7 @@
     <value>Lugar</value>
   </data>
   <data name="PlayerBannedMessageLabel" xml:space="preserve">
-    <value>{0} fue baneado de la partida.</value>
+    <value>Has sido vetado, tiempo restante: {0}</value>
   </data>
   <data name="PlayerBlockedMessageLabel" xml:space="preserve">
     <value>{0} ha sido bloqueado con éxito.</value>

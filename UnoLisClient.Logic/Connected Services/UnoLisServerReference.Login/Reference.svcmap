@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:8100" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="9b17634a-63e1-40c6-b24b-3dc1c6a6f34f" SourceId="1" SourceUrl="http://localhost:8100/?xsd=xsd1" />
+    <MetadataFile FileName="LoginManager.wsdl" MetadataType="Wsdl" ID="67389ab2-86a0-4ffc-9c9f-f138e7e27100" SourceId="1" SourceUrl="http://localhost:8100/?wsdl" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="faf50a42-6708-4302-8d8e-395872f25600" SourceId="1" SourceUrl="http://localhost:8100/?disco" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="9ca4bba3-8972-474e-bb19-2735e578c608" SourceId="1" SourceUrl="http://localhost:8100/?xsd=xsd4" />
     <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="08522341-b829-4df4-bf9f-893685bc6c1a" SourceId="1" SourceUrl="http://localhost:8100/?xsd=xsd3" />
     <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="5480cd24-6602-4ae1-a9a5-0b02146a2a5d" SourceId="1" SourceUrl="http://localhost:8100/?xsd=xsd2" />
-    <MetadataFile FileName="LoginManager.wsdl" MetadataType="Wsdl" ID="67389ab2-86a0-4ffc-9c9f-f138e7e27100" SourceId="1" SourceUrl="http://localhost:8100/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="9b17634a-63e1-40c6-b24b-3dc1c6a6f34f" SourceId="1" SourceUrl="http://localhost:8100/?xsd=xsd1" />
     <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="31f06a81-5245-4f30-8bd2-686099f6d4b1" SourceId="1" SourceUrl="http://localhost:8100/?xsd=xsd0" />
   </Metadata>
   <Extensions>
