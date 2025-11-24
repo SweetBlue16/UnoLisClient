@@ -108,6 +108,11 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Report {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Report.ReportData))]
         void ReportPlayerResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/OnPlayerKicked")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Report.ReportData))]
+        void OnPlayerKicked(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
