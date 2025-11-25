@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using UnoLisClient.Logic.Callbacks;
 using UnoLisClient.Logic.Helpers;
@@ -18,30 +17,31 @@ namespace UnoLisClient.Logic.Services
         public Task<ServiceResponse<object>> ReportPlayerAsync(ReportData reportData)
         {
             Console.WriteLine($"[DEBUG] Iniciando ReportPlayerAsync para: {reportData.ReportedNickname}");
+            SafeReportManagerClient reportManagerClient = null;
+            var callbackHandler = new ReportCallback();
             var taskCompletion = new TaskCompletionSource<ServiceResponse<object>>();
-            ReportManagerClient reportManagerClient = null;
 
-            Action<ServiceResponse<object>> callbackAction = (response) =>
+            callbackHandler.OnReportResponse += (response) =>
             {
-                try
-                {
-                    taskCompletion.TrySetResult(response);
-                }
-                finally
-                {
-                    CloseClientHelper.CloseClient(reportManagerClient);
-                }
+                taskCompletion.TrySetResult(response);
             };
 
-            var callbackHandler = new ReportCallback(callbackAction);
-            var context = new InstanceContext(callbackHandler);
-            reportManagerClient = new ReportManagerClient(context);
-
-            WcfServiceHelper.ExecuteSafe(
-                    action: () => reportManagerClient.ReportPlayer(reportData), taskCompletionSource: taskCompletion,
-                    client: reportManagerClient, operationName: "ReportPlayer"
+            try
+            {
+                reportManagerClient = new SafeReportManagerClient(callbackHandler);
+                WcfServiceHelper.ExecuteSafe(
+                    action: () => reportManagerClient.ReportPlayer(reportData),
+                    taskCompletionSource: taskCompletion,
+                    client: reportManagerClient.InnerClient,
+                    operationName: "ReportPlayer"
                 );
-            return taskCompletion.Task;
+                return taskCompletion.Task;
+            }
+            catch (Exception ex)
+            {
+                taskCompletion.TrySetException(ex);
+                return taskCompletion.Task;
+            }
         }
     }
 }

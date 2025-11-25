@@ -30,7 +30,9 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
 
             _viewModel = new MainViewModel(this, new AlertManager(), new LogoutService());
             this.DataContext = _viewModel;
-            ReportCallback.OnResponse += HandlePlayerKicked;
+            
+            var callback = new ReportCallback();
+            SubscribePlayerKicked(callback);
         }
 
         public void LogoutResponse(ServiceResponse<object> response)
@@ -115,32 +117,30 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             }
         }
 
-        protected override void OnClosed(EventArgs e)
+        private void SubscribePlayerKicked(ReportCallback callback)
         {
-            ReportCallback.OnResponse -= HandlePlayerKicked;
-            base.OnClosed(e);
-        }
-
-        private void HandlePlayerKicked(ServiceResponse<object> response)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
+            callback.OnPlayerKickedResponse += response =>
             {
-                CurrentSession.CurrentUserNickname = null;
-                CurrentSession.CurrentUserProfileData = null;
-
-                var popUp = new SimplePopUpWindow(Global.OopsLabel,
-                    MessageTranslator.GetMessage(response.Code),
-                    PopUpIconType.Warning
-                );
-                popUp.Owner = this;
-                popUp.ShowDialog();
-
-                MainFrame.Navigate(new GamePage());
-                while (MainFrame.CanGoBack)
+                Dispatcher.Invoke(() =>
                 {
-                    MainFrame.RemoveBackEntry();
-                }
-            });
+                    CurrentSession.CurrentUserProfileData = null;
+                    CurrentSession.CurrentUserNickname = null;
+
+                    var popup = new SimplePopUpWindow(
+                        Global.OopsLabel,
+                        MessageTranslator.GetMessage(response.Code),
+                        PopUpIconType.Warning);
+
+                    popup.Owner = this;
+                    popup.ShowDialog();
+
+                    MainFrame.Navigate(new GamePage());
+                    while (MainFrame.CanGoBack)
+                    {
+                        MainFrame.RemoveBackEntry();
+                    }
+                });
+            };
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
