@@ -162,6 +162,9 @@
   <data name="ConnectionRejectedMessageLabel" xml:space="preserve">
     <value>El servidor rechazó la conexión.</value>
   </data>
+  <data name="CouldNotLoadRankingMessageLabel" xml:space="preserve">
+    <value>No se pudo cargar el ranking global.</value>
+  </data>
   <data name="DatabaseErrorMessageLabel" xml:space="preserve">
     <value>Error en la base de datos.</value>
   </data>

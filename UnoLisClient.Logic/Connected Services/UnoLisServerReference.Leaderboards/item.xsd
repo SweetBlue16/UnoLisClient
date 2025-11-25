@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfLeaderboardEntry">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8120/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" />
+  <xs:import schemaLocation="http://localhost:8120/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+  <xs:complexType name="ServiceResponseOfArrayOfLeaderboardEntryvXwyyaSB">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ServiceResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfLeaderboardEntry" Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="LeaderboardEntry" nillable="true" type="tns:LeaderboardEntry" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" minOccurs="0" name="Code" type="q1:MessageCode" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="Data" nillable="true" type="q2:ArrayOfLeaderboardEntry" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfLeaderboardEntry" nillable="true" type="tns:ArrayOfLeaderboardEntry" />
-  <xs:complexType name="LeaderboardEntry">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="GlobalPoints" type="xs:int" />
-      <xs:element minOccurs="0" name="MatchesPlayed" type="xs:int" />
-      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Rank" type="xs:int" />
-      <xs:element minOccurs="0" name="Wins" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="LeaderboardEntry" nillable="true" type="tns:LeaderboardEntry" />
+  <xs:element name="ServiceResponseOfArrayOfLeaderboardEntryvXwyyaSB" nillable="true" type="tns:ServiceResponseOfArrayOfLeaderboardEntryvXwyyaSB" />
 </xs:schema>

@@ -5,9 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UnoLisClient.UI.Views.UnoLisPages"
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       mc:Ignorable="d"
       MaxWidth="900"
       Title="LeaderboardsPage">
+    <Page.Resources>
+        <converters:RankToImageConverter x:Key="RankToImageConverter"/>
+    </Page.Resources>
 
     <Border Background="#AA000000"
             CornerRadius="15"
@@ -19,26 +23,35 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="0,0,0,30">
-                <TextBlock Grid.Row="0"
+            <Grid Grid.Row="0" Margin="0,0,0,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Source="pack://application:,,,/Assets/Other/Achievement.png"
+                       Width="48"
+                       Height="48"
+                       Margin="0,0,20,0"
+                       VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1"
                            Text="{x:Static language:Global.LeaderboardLabel}"
-                           FontSize="36"
+                           FontSize="30"
                            FontWeight="Bold"
                            Foreground="White"
                            FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                            Margin="0,0,60,0"
-                           HorizontalAlignment="Left"/>
-                <Button Grid.Row="0"
+                           VerticalAlignment="Center"
+                           TextTrimming="None"/>
+                <Button Grid.Column="2"
                         Content="{x:Static language:Global.CancelButton}"
-                        Style="{DynamicResource SecondaryButtonStyle}"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
+                        Style="{DynamicResource PrimaryButtonStyle}"
                         Width="140"
+                        VerticalAlignment="Center"
                         Command="{Binding BackCommand}"/>
-            </StackPanel>
+            </Grid>
             <DataGrid Grid.Row="1"
                       ItemsSource="{Binding LeaderboardEntries}"
                       AutoGenerateColumns="False"
@@ -46,8 +59,21 @@
                       Style="{DynamicResource DataGridStyle}"
                       MaxWidth="600">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static language:Global.RankColumn}"
-                                        Binding="{Binding Rank}"/>
+                    <DataGridTemplateColumn Header="{x:Static language:Global.RankColumn}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
+                                    <Image Width="22" Height="22"
+                                           Source="{Binding Rank, Converter={StaticResource RankToImageConverter}}"
+                                           Margin="0,0,8,0"/>
+                                    <TextBlock Text="{Binding Rank}"
+                                               VerticalAlignment="Center"
+                                               Foreground="White"
+                                               FontWeight="Bold"/>  
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="{x:Static language:Global.PlayerNameColumn}"
                                         Binding="{Binding PlayerName}" Width="*"/>
                     <DataGridTextColumn Header="{x:Static language:Global.GlobalPointsColumn}"

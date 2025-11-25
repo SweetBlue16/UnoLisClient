@@ -196,6 +196,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The global ranking couldn&apos;t be loaded..
+        /// </summary>
+        public static string CouldNotLoadRankingMessageLabel {
+            get {
+                return ResourceManager.GetString("CouldNotLoadRankingMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database error..
         /// </summary>
         public static string DatabaseErrorMessageLabel {

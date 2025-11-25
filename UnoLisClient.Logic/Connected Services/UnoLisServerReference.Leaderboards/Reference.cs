@@ -23,9 +23,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Leaderboards {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FullNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GlobalPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -38,6 +35,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Leaderboards {
         private int RankField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WinRateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int WinsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -47,19 +47,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Leaderboards {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FullName {
-            get {
-                return this.FullNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FullNameField, value) != true)) {
-                    this.FullNameField = value;
-                    this.RaisePropertyChanged("FullName");
-                }
             }
         }
         
@@ -116,6 +103,19 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Leaderboards {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WinRate {
+            get {
+                return this.WinRateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WinRateField, value) != true)) {
+                    this.WinRateField = value;
+                    this.RaisePropertyChanged("WinRate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Wins {
             get {
                 return this.WinsField;
@@ -139,30 +139,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Leaderboards {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Leaderboards.ILeaderboardsManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.Leaderboards.ILeaderboardsManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Leaderboards.ILeaderboardsManager")]
     public interface ILeaderboardsManager {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILeaderboardsManager/GetLeaderboard")]
-        void GetLeaderboard();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardsManager/GetGlobalLeaderboard", ReplyAction="http://tempuri.org/ILeaderboardsManager/GetGlobalLeaderboardResponse")]
+        UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry[]> GetGlobalLeaderboard();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILeaderboardsManager/GetLeaderboard")]
-        System.Threading.Tasks.Task GetLeaderboardAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILeaderboardsManager/GetPlayerRank")]
-        void GetPlayerRank(string nickname);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILeaderboardsManager/GetPlayerRank")]
-        System.Threading.Tasks.Task GetPlayerRankAsync(string nickname);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ILeaderboardsManagerCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardsManager/LeaderboardReceived", ReplyAction="http://tempuri.org/ILeaderboardsManager/LeaderboardReceivedResponse")]
-        void LeaderboardReceived(UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry[] entries);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardsManager/PlayerRankReceived", ReplyAction="http://tempuri.org/ILeaderboardsManager/PlayerRankReceivedResponse")]
-        void PlayerRankReceived(UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry entry);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardsManager/GetGlobalLeaderboard", ReplyAction="http://tempuri.org/ILeaderboardsManager/GetGlobalLeaderboardResponse")]
+        System.Threading.Tasks.Task<UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry[]>> GetGlobalLeaderboardAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -171,42 +155,33 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Leaderboards {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LeaderboardsManagerClient : System.ServiceModel.DuplexClientBase<UnoLisClient.Logic.UnoLisServerReference.Leaderboards.ILeaderboardsManager>, UnoLisClient.Logic.UnoLisServerReference.Leaderboards.ILeaderboardsManager {
+    public partial class LeaderboardsManagerClient : System.ServiceModel.ClientBase<UnoLisClient.Logic.UnoLisServerReference.Leaderboards.ILeaderboardsManager>, UnoLisClient.Logic.UnoLisServerReference.Leaderboards.ILeaderboardsManager {
         
-        public LeaderboardsManagerClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public LeaderboardsManagerClient() {
         }
         
-        public LeaderboardsManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public LeaderboardsManagerClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public LeaderboardsManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public LeaderboardsManagerClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public LeaderboardsManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public LeaderboardsManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public LeaderboardsManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public LeaderboardsManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
-        public void GetLeaderboard() {
-            base.Channel.GetLeaderboard();
+        public UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry[]> GetGlobalLeaderboard() {
+            return base.Channel.GetGlobalLeaderboard();
         }
         
-        public System.Threading.Tasks.Task GetLeaderboardAsync() {
-            return base.Channel.GetLeaderboardAsync();
-        }
-        
-        public void GetPlayerRank(string nickname) {
-            base.Channel.GetPlayerRank(nickname);
-        }
-        
-        public System.Threading.Tasks.Task GetPlayerRankAsync(string nickname) {
-            return base.Channel.GetPlayerRankAsync(nickname);
+        public System.Threading.Tasks.Task<UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry[]>> GetGlobalLeaderboardAsync() {
+            return base.Channel.GetGlobalLeaderboardAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels;
@@ -14,12 +15,12 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         public LeaderboardsPage()
         {
             InitializeComponent();
-            DataContext = new LeaderboardsViewModel(this, new AlertManager());
-            Loaded += (s, e) =>
+            DataContext = new LeaderboardsViewModel(new LeaderboardsService(), this, new AlertManager());
+            Loaded += async (s, e) =>
             {
                 if (DataContext is LeaderboardsViewModel viewModel)
                 {
-                    viewModel.LoadLeaderboardsCommand.Execute(null);
+                    await viewModel.LoadLeaderboardData();
                 }
             };
         }

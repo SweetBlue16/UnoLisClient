@@ -172,6 +172,7 @@
     <Compile Include="Services\FriendsService.cs" />
     <Compile Include="Services\IChatService.cs" />
     <Compile Include="Services\IFriendsService.cs" />
+    <Compile Include="Services\ILeaderboardsService.cs" />
     <Compile Include="Services\ILobbyService.cs" />
     <Compile Include="Services\IMatchmakingService.cs" />
     <Compile Include="Services\IProfileViewService.cs" />
@@ -273,7 +274,16 @@
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\item31.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\LeaderboardsManager.wsdl" />
+    <None Include="Connected Services\UnoLisServerReference.Leaderboards\UnoLisClient.Logic.UnoLisServerReference.Leaderboards.LeaderboardEntry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.LobbyDuplex\item.xsd">
       <SubType>Designer</SubType>
     </None>
