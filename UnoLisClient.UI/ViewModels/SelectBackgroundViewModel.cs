@@ -68,7 +68,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 Backgrounds.Add(new BackgroundItemViewModel("FEI", "/Assets/FeiImage.png", "FeiVideo.mp4"));
                 Backgrounds.Add(new BackgroundItemViewModel("Anfiteatro", "/Assets/AnfiteatroImage.png", "AnfiteatroVideo.mp4"));
-                Backgrounds.Add(new BackgroundItemViewModel("Canchas", "/Assets/CanchasImage.png", "CanchasVideo.mp4"));
+                Backgrounds.Add(new BackgroundItemViewModel("Canchas", "/Assets/CanchasImage.png", "CanchaVideo.mp4"));
                 Backgrounds.Add(new BackgroundItemViewModel("Banca", "/Assets/BancaImage.png", "BancaVideo.mp4"));
 
                 if (Backgrounds.Any())
