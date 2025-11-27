@@ -159,6 +159,7 @@
     <Compile Include="Helpers\CloseClientHelper.cs" />
     <Compile Include="Helpers\LogManager.cs" />
     <Compile Include="Helpers\SafeReportManagerClient.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Helpers\WcfServiceHelper.cs" />
     <Compile Include="Mappers\FriendMapper.cs" />
     <Compile Include="Models\ClientProfileData.cs" />

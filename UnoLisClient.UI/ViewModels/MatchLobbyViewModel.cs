@@ -135,9 +135,6 @@ namespace UnoLisClient.UI.ViewModels
             _lobbyService.OnPlayerReadyStatusChanged += HandlePlayerReadyStatus;
             _lobbyService.OnGameStarted += HandleGameStarted;
 
-            await ChatVM.InitializeAsync();
-            await LoadFriendsAsync();
-
             try
             {
                 await _lobbyService.ConnectToLobbyAsync(_currentLobbyCode, _currentUserNickname);
@@ -146,6 +143,25 @@ namespace UnoLisClient.UI.ViewModels
             {
                 HandleException(MessageCode.ConnectionFailed, "Could not connect to Lobby.", ex);
                 _navigationService.GoBack();
+                return;
+            }
+
+            try
+            {
+                await ChatVM.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                LogManager.Error($"Failed to initialize chat: {ex.Message}");
+            }
+
+            if (!UserHelper.IsGuest(_currentUserNickname))
+            {
+                await LoadFriendsAsync();
+            }
+            else
+            {
+                Friends.Clear();
             }
         }
 
@@ -252,6 +268,12 @@ namespace UnoLisClient.UI.ViewModels
 
         private async Task LoadFriendsAsync()
         {
+
+            if (UserHelper.IsGuest(_currentUserNickname))
+            {
+                return;
+            }
+
             IsLoading = true;
             try
             {

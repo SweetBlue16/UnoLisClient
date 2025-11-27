@@ -58,6 +58,7 @@ namespace UnoLisClient.UI.ViewModels
 
             try
             {
+                _chatService.Initialize(_currentUserNickname);
                 await _chatService.JoinChannelAsync(_channelId);
             }
             catch (Exception ex)

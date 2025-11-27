@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using UnoLisClient.Logic.Helpers;
 using System.Threading.Tasks;
 using UnoLisClient.Logic.Callbacks;
 using UnoLisClient.Logic.UnoLisServerReference.Chat;
@@ -109,25 +110,30 @@ namespace UnoLisClient.Logic.Services
                 _proxy.GetChatHistory(channelId);
                 return Task.CompletedTask;
             }
+            catch(NullReferenceException ex)
+            {
+                LogManager.Error($"[ChatService.JoinChannel] Proxy is null: {ex.Message}");
+                throw;
+            }
             catch (TimeoutException ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ChatService.JoinChannel] Timeout: {ex.Message}");
+                LogManager.Error($"[ChatService.JoinChannel] Timeout: {ex.Message}");
                 throw;
             }
             catch (InvalidOperationException ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ChatService.JoinChannel] Channel faulted: {ex.Message}");
+                LogManager.Error($"[ChatService.JoinChannel] Channel faulted: {ex.Message}");
                 Cleanup();
                 throw new CommunicationException("Chat channel was faulted, please reconnect.", ex);
             }
             catch (CommunicationException ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ChatService.JoinChannel] Communication error: {ex.Message}");
+                LogManager.Error($"[ChatService.JoinChannel] Communication error: {ex.Message}");
                 throw;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ChatService.JoinChannel] Unexpected error: {ex.Message}");
+                LogManager.Error($"[ChatService.JoinChannel] Unexpected error: {ex.Message}");
                 throw;
             }
         }
