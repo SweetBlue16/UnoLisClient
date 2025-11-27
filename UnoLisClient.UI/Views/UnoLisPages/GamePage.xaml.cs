@@ -30,7 +30,8 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         private void ClickPlayGuestButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            CurrentSession.CurrentUserNickname = "Guest";
+            int randomSuffix = new Random().Next(1000, 9999);
+            CurrentSession.CurrentUserNickname = $"Guest_{randomSuffix}";
             NavigationService?.Navigate(new MainMenuPage());
         }
 

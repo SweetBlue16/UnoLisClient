@@ -31,7 +31,6 @@ namespace UnoLisClient.UI.Views.Controls
 
             if (result == true)
             {
-                // Avisa al "padre" que el usuario confirmó la salida
                 LeaveMatchRequested?.Invoke(this, EventArgs.Empty);
             }
             else
