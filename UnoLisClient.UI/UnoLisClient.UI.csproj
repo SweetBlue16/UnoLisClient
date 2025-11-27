@@ -88,6 +88,7 @@
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IReportTrackerService.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
+    <Compile Include="Utilities\AutoScrollBehavior.cs" />
     <Compile Include="Utilities\PopUpIconHelper.cs" />
     <Compile Include="Utilities\SessionReportTracker.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
