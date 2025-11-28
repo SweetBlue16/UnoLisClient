@@ -120,16 +120,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\UnoLisServerReference.PartyClient\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\UnoLisServerReference.PartyHost\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\UnoLisServerReference.ProfileEdit\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -156,6 +146,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Enums\PopUpIconType.cs" />
+    <Compile Include="Helpers\BanSessionManager.cs" />
     <Compile Include="Helpers\CloseClientHelper.cs" />
     <Compile Include="Helpers\LogManager.cs" />
     <Compile Include="Helpers\SafeReportManagerClient.cs" />
@@ -356,23 +347,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Notifications\NotificationsManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\PartyClientManager.wsdl" />
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\PartyHostManager.wsdl" />
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -461,8 +435,6 @@
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Logout\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Matchmaking\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Notifications\" />
-    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyClient\" />
-    <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.PartyHost\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.ProfileEdit\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.ProfileView\" />
     <WCFMetadataStorage Include="Connected Services\UnoLisServerReference.Register\" />
@@ -540,36 +512,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UnoLisServerReference.ProfileEdit\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyClient\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UnoLisServerReference.PartyHost\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

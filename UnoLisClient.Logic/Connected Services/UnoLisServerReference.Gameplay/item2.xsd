@@ -23,21 +23,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CardPlayedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="CardDrawn">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CardDrawnResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="TurnChanged">
@@ -47,11 +37,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="TurnChangedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="MatchEnded">
     <xs:complexType>
       <xs:sequence>
@@ -59,9 +44,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MatchEndedResponse">
+  <xs:element name="ReceiveInitialHand">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="hand" nillable="true" type="q4:ArrayOfCard" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

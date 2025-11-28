@@ -9,7 +9,7 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
     {
         public Card CardData { get; }
 
-        public string ImagePath => CardData.ImagePath ?? "pack://application:,,,/Assets/Cards/DrawFour.png";
+        public string ImagePath => /*CardData. ??*/ "pack://application:,,,/Assets/Cards/DrawFour.png";
 
         private bool _isPlayable;
         public bool IsPlayable

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
+using UnoLisClient.Logic.UnoLisServerReference.Login;
 
 namespace UnoLisClient.Logic.Callbacks
 {
@@ -41,6 +43,11 @@ namespace UnoLisClient.Logic.Callbacks
         public void GameStarted()
         {
             GameStartedReceived?.Invoke();
+        }
+
+        public void OnPlayerBanned(BanInfo banInfo)
+        {
+            BanSessionManager.TriggerBan(banInfo);
         }
     }
 }

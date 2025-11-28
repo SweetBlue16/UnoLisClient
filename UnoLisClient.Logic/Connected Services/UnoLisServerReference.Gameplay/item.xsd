@@ -6,8 +6,7 @@
       <xs:enumeration value="Yellow" />
       <xs:enumeration value="Green" />
       <xs:enumeration value="Blue" />
-      <xs:enumeration value="Black" />
-      <xs:enumeration value="Silver" />
+      <xs:enumeration value="Wild" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CardColor" nillable="true" type="tns:CardColor" />
@@ -28,8 +27,8 @@
       <xs:enumeration value="DrawTwo" />
       <xs:enumeration value="Wild" />
       <xs:enumeration value="WildDrawFour" />
-      <xs:enumeration value="DrawTen" />
-      <xs:enumeration value="WildDrawFourReverse" />
+      <xs:enumeration value="WildDrawTen" />
+      <xs:enumeration value="WildDrawSkipReverseFour" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CardValue" nillable="true" type="tns:CardValue" />

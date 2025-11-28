@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.UnoLisServerReference.Chat;
+using UnoLisClient.Logic.UnoLisServerReference.Login;
 
 namespace UnoLisClient.Logic.Callbacks
 {
@@ -32,6 +34,11 @@ namespace UnoLisClient.Logic.Callbacks
         {
             OnSessionExpired?.Invoke();
             MessageBox.Show("Tu sesión ha expirado. Serás desconectado.", "Sesión Terminada");
+        }
+
+        public void OnPlayerBanned(BanInfo banInfo)
+        {
+            BanSessionManager.TriggerBan(banInfo);
         }
     }
 }

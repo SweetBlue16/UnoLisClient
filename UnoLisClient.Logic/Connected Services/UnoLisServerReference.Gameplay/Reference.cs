@@ -87,10 +87,7 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         private UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor ColorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ImagePathField;
+        private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardValue ValueField;
@@ -119,27 +116,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
+        public string Id {
             get {
-                return this.DescriptionField;
+                return this.IdField;
             }
             set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ImagePath {
-            get {
-                return this.ImagePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImagePathField, value) != true)) {
-                    this.ImagePathField = value;
-                    this.RaisePropertyChanged("ImagePath");
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -184,10 +168,7 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         Blue = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Black = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Silver = 5,
+        Wild = 4,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -240,10 +221,10 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         WildDrawFour = 14,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        DrawTen = 15,
+        WildDrawTen = 15,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        WildDrawFourReverse = 16,
+        WildDrawSkipReverseFour = 16,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -359,17 +340,20 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGameplayManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameplayManager/CardPlayed", ReplyAction="http://tempuri.org/IGameplayManager/CardPlayedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/CardPlayed")]
         void CardPlayed(string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card card);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameplayManager/CardDrawn", ReplyAction="http://tempuri.org/IGameplayManager/CardDrawnResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/CardDrawn")]
         void CardDrawn(string nickname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameplayManager/TurnChanged", ReplyAction="http://tempuri.org/IGameplayManager/TurnChangedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/TurnChanged")]
         void TurnChanged(string nextPlayerNickname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameplayManager/MatchEnded", ReplyAction="http://tempuri.org/IGameplayManager/MatchEndedResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/MatchEnded")]
         void MatchEnded(UnoLisClient.Logic.UnoLisServerReference.Gameplay.ResultData[] results);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ReceiveInitialHand")]
+        void ReceiveInitialHand(UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card[] hand);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

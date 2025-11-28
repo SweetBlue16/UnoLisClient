@@ -11,8 +11,7 @@
   <xs:complexType name="Card">
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" minOccurs="0" name="Color" type="q1:CardColor" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ImagePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" minOccurs="0" name="Value" type="q2:CardValue" />
     </xs:sequence>
   </xs:complexType>
@@ -32,4 +31,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ResultData" nillable="true" type="tns:ResultData" />
+  <xs:complexType name="ArrayOfCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Card" nillable="true" type="tns:Card" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCard" nillable="true" type="tns:ArrayOfCard" />
 </xs:schema>

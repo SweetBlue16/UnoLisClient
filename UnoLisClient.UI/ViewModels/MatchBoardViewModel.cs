@@ -124,31 +124,31 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Color = CardColor.Red,
                 Value = CardValue.Two,
-                ImagePath = "pack://application:,,,/Assets/Cards/TwoRedCard.png"
+                //ImagePath = "pack://application:,,,/Assets/Cards/TwoRedCard.png"
             };
             var card2 = new Card()
             {
                 Color = CardColor.Blue,
                 Value = CardValue.DrawTwo,
-                ImagePath = "pack://application:,,,/Assets/Cards/DrawTwoBlueCard.png"
+                //ImagePath = "pack://application:,,,/Assets/Cards/DrawTwoBlueCard.png"
             };
             var card3 = new Card()
             {
-                Color = CardColor.Black,
+                Color = CardColor.Wild,
                 Value = CardValue.WildDrawFour,
-                ImagePath = "pack://application:,,,/Assets/Cards/WildDrawFourCard.png"
+                //ImagePath = "pack://application:,,,/Assets/Cards/WildDrawFourCard.png"
             };
             var card4 = new Card()
             {
-                Color = CardColor.Silver,
-                Value = CardValue.DrawTen,
-                ImagePath = "pack://application:,,,/Assets/Cards/WildDrawTenCard.png"
+                Color = CardColor.Wild,
+                Value = CardValue.WildDrawTen,
+                //ImagePath = "pack://application:,,,/Assets/Cards/WildDrawTenCard.png"
             };
             var card5 = new Card()
             {
-                Color = CardColor.Silver,
-                Value = CardValue.WildDrawFourReverse,
-                ImagePath = "pack://application:,,,/Assets/Cards/WildDrawSkipReverseCard.png"
+                Color = CardColor.Wild,
+                Value = CardValue.WildDrawSkipReverseFour,
+                //ImagePath = "pack://application:,,,/Assets/Cards/WildDrawSkipReverseCard.png"
             };
 
             PlayerHand.Clear();
@@ -162,13 +162,13 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Color = CardColor.Green,
                 Value = CardValue.Five,
-                ImagePath = "pack://application:,,,/Assets/Cards/FiveGreenCard.png"
+                //ImagePath = "pack://application:,,,/Assets/Cards/FiveGreenCard.png"
             }, null);
             DeckPileCard = new CardModel(new Card()
             {
-                Color = CardColor.Black,
+                Color = CardColor.Wild,
                 Value = CardValue.Zero,
-                ImagePath = "pack://application:,,,/Assets/Cards/BackUNOCard.png"
+                //ImagePath = "pack://application:,,,/Assets/Cards/BackUNOCard.png"
             }, null);
             CurrentTurnNickname = "SweetBlue16";
 
@@ -200,7 +200,7 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Color = CardColor.Yellow,
                 Value = CardValue.Seven,
-                ImagePath = "pack://application:,,,/Assets/Cards/SevenYellowCard.png"
+                //ImagePath = "pack://application:,,,/Assets/Cards/SevenYellowCard.png"
             }, (card) => ExecutePlayCard(card)));
             UpdatePlayableCards();
             UpdateUnoButtonStatus();

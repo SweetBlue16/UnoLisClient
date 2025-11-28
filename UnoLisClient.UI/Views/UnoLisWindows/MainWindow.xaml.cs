@@ -64,6 +64,15 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             });
         }
 
+        public void NavigateToInitialPageAndClearHistory(Page page)
+        {
+            MainFrame.Navigate(new GamePage());
+            while (MainFrame.CanGoBack)
+            {
+                MainFrame.RemoveBackEntry();
+            }
+        }
+
         public void SetMusicVolume(double volume)
         {
             MusicPlayer.Volume = volume / 100.0;

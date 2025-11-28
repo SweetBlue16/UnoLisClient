@@ -8,6 +8,14 @@ using UnoLisClient.Logic.UnoLisServerReference.Logout;
 using UnoLisClient.UI.Utilities;
 using UnoLisServer.Common.Models;
 using UnoLisClient.Logic.Helpers;
+using UnoLisClient.Logic.UnoLisServerReference.Login;
+using UnoLisClient.UI.Views.UnoLisWindows;
+using UnoLisServer.Common.Enums;
+using UnoLisClient.UI.Views.PopUpWindows;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.Logic.Enums;
+using System.Linq;
+using UnoLisClient.UI.Views.UnoLisPages;
 
 namespace UnoLisClient.UI
 {
@@ -34,6 +42,7 @@ namespace UnoLisClient.UI
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            BanSessionManager.PlayerBanned += HandleGlobalBan;
 
             LogManager.Info("🎮 UNO LIS Client iniciado.");
 
@@ -84,6 +93,41 @@ namespace UnoLisClient.UI
         {
             CurrentSession.CurrentUserNickname = null;
             CurrentSession.CurrentUserProfileData = null;
+        }
+
+        private void HandleGlobalBan(BanInfo banInfo)
+        {
+            Current.Dispatcher.Invoke(() =>
+            {
+                var mainWindow = Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                var openWindows = Current.Windows.OfType<Window>().ToList();
+                foreach (var window in openWindows)
+                {
+                    if (window.GetType() != typeof(MainWindow))
+                    {
+                        window.Close();
+                    }
+                }
+
+                string message = string.Format(MessageTranslator.GetMessage(MessageCode.SanctionApplied), banInfo.FormattedTimeRemaining);
+                new SimplePopUpWindow(Global.OopsLabel, message, PopUpIconType.Warning).ShowDialog();
+
+                if (mainWindow != null)
+                {
+                    if (mainWindow.WindowState == WindowState.Minimized)
+                    {
+                        mainWindow.WindowState = WindowState.Normal;
+                    }
+                    mainWindow.Activate();
+                    mainWindow.NavigateToInitialPageAndClearHistory(new GamePage());
+                }
+                else
+                {
+                    var newTitlePage = new MainWindow();
+                    newTitlePage.Show();
+                }
+                ClearLocalSession();
+            });
         }
     }
 }
