@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.UnoLisServerReference.Report;
 using UnoLisServer.Common.Models;
 
@@ -11,18 +12,9 @@ namespace UnoLisClient.Logic.Callbacks
         public event Action<ServiceResponse<object>> OnReportResponse;
         public event Action<ServiceResponse<object>> OnPlayerKickedResponse;
 
-        public void OnPlayerKicked(ServiceResponse<object> response)
+        public void OnPlayerBanned(ServiceResponse<BanInfo> response)
         {
-            Console.WriteLine($"[DEBUG] Callback recibido - Success: {response.Success}");
-            try
-            {
-                OnPlayerKickedResponse?.Invoke(response);
-                Console.WriteLine($"[DEBUG] Callback completado exitosamente");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[ERROR] En callback: {ex.Message}");
-            }
+            BanSessionManager.TriggerBan(response.Data as BanInfo);
         }
 
         public void ReportPlayerResponse(ServiceResponse<object> response)

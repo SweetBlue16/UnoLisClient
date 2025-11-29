@@ -41,21 +41,33 @@
   <wsdl:message name="IReportManager_ReportPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:ReportPlayer" />
   </wsdl:message>
+  <wsdl:message name="IReportManager_SuscrbeToBanNotifications_InputMessage">
+    <wsdl:part name="parameters" element="tns:SuscrbeToBanNotifications" />
+  </wsdl:message>
+  <wsdl:message name="IReportManager_UnsubscribeFromBanNotifications_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeFromBanNotifications" />
+  </wsdl:message>
   <wsdl:message name="IReportManager_ReportPlayerResponse_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReportPlayerResponse" />
   </wsdl:message>
-  <wsdl:message name="IReportManager_OnPlayerKicked_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:OnPlayerKicked" />
+  <wsdl:message name="IReportManager_OnPlayerBanned_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnPlayerBanned" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IReportManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReportPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportManager/ReportPlayer" message="tns:IReportManager_ReportPlayer_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SuscrbeToBanNotifications">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportManager/SuscrbeToBanNotifications" message="tns:IReportManager_SuscrbeToBanNotifications_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UnsubscribeFromBanNotifications">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportManager/UnsubscribeFromBanNotifications" message="tns:IReportManager_UnsubscribeFromBanNotifications_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReportPlayerResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IReportManager/ReportPlayerResponse" message="tns:IReportManager_ReportPlayerResponse_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnPlayerKicked">
-      <wsdl:output wsaw:Action="http://tempuri.org/IReportManager/OnPlayerKicked" message="tns:IReportManager_OnPlayerKicked_OutputCallbackMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnPlayerBanned">
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportManager/OnPlayerBanned" message="tns:IReportManager_OnPlayerBanned_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IReportManager" type="tns:IReportManager">
@@ -67,14 +79,26 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SuscrbeToBanNotifications">
+      <soap12:operation soapAction="http://tempuri.org/IReportManager/SuscrbeToBanNotifications" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeFromBanNotifications">
+      <soap12:operation soapAction="http://tempuri.org/IReportManager/UnsubscribeFromBanNotifications" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ReportPlayerResponse">
       <soap12:operation soapAction="http://tempuri.org/IReportManager/ReportPlayerResponse" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="OnPlayerKicked">
-      <soap12:operation soapAction="http://tempuri.org/IReportManager/OnPlayerKicked" style="document" />
+    <wsdl:operation name="OnPlayerBanned">
+      <soap12:operation soapAction="http://tempuri.org/IReportManager/OnPlayerBanned" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

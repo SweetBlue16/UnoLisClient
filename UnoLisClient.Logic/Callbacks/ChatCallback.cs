@@ -35,10 +35,5 @@ namespace UnoLisClient.Logic.Callbacks
             OnSessionExpired?.Invoke();
             MessageBox.Show("Tu sesión ha expirado. Serás desconectado.", "Sesión Terminada");
         }
-
-        public void OnPlayerBanned(BanInfo banInfo)
-        {
-            BanSessionManager.TriggerBan(banInfo);
-        }
     }
 }

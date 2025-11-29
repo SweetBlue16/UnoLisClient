@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using UnoLisClient.Logic.Callbacks;
 using UnoLisClient.Logic.Helpers;
@@ -41,6 +42,76 @@ namespace UnoLisClient.Logic.Services
             {
                 taskCompletion.TrySetException(ex);
                 return taskCompletion.Task;
+            }
+        }
+    }
+
+    public class ReportSessionService
+    {
+        private static ReportSessionService _instance;
+        public static ReportSessionService Instance => _instance ?? (_instance = new ReportSessionService());
+
+        private ReportManagerClient _reportManagerClient;
+        public bool IsConnected { get; private set; }
+
+        public void Initialize(string nickname)
+        {
+            if (IsConnected)
+            {
+                return;
+            }
+
+            try
+            {
+                var context = new InstanceContext(new ReportCallback());
+                _reportManagerClient = new ReportManagerClient(context);
+                _reportManagerClient.SuscrbeToBanNotifications(nickname);
+                IsConnected = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] No se pudo inicializar ReportSessionService: {ex.Message}");
+                IsConnected = false;
+            }
+        }
+
+        public void SendReport(ReportData reportData)
+        {
+            if (!IsConnected)
+            {
+                Console.WriteLine("[WARNING] ReportSessionService no está conectado. No se puede enviar el reporte.");
+                return;
+            }
+
+            try
+            {
+                _reportManagerClient.ReportPlayer(reportData);
+                Console.WriteLine($"[DEBUG] Reporte enviado para: {reportData.ReportedNickname}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Error al enviar el reporte: {ex.Message}");
+            }
+        }
+
+        public void Disconnect(string nickname)
+        {
+            try
+            {
+                if (IsConnected && _reportManagerClient != null)
+                {
+                    _reportManagerClient.UnsubscribeFromBanNotifications(nickname);
+                    CloseClientHelper.CloseClient(_reportManagerClient);
+                }
+            }
+            catch (Exception ex)
+            {
+                _reportManagerClient.Abort();
+                Console.WriteLine($"[ERROR] Error al desconectar ReportSessionService: {ex.Message}");
+            }
+            finally
+            {
+                IsConnected = false;
             }
         }
     }

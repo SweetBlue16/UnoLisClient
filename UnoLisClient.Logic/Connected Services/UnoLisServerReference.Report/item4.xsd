@@ -8,4 +8,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ReportData" nillable="true" type="tns:ReportData" />
+  <xs:complexType name="BanInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FormattedTimeRemaining" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RemainingHours" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BanInfo" nillable="true" type="tns:BanInfo" />
 </xs:schema>

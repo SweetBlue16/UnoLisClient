@@ -90,6 +90,99 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Report {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BanInfo", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class BanInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EndDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FormattedTimeRemainingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReasonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double RemainingHoursField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndDate {
+            get {
+                return this.EndDateField;
+            }
+            set {
+                if ((this.EndDateField.Equals(value) != true)) {
+                    this.EndDateField = value;
+                    this.RaisePropertyChanged("EndDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FormattedTimeRemaining {
+            get {
+                return this.FormattedTimeRemainingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FormattedTimeRemainingField, value) != true)) {
+                    this.FormattedTimeRemainingField = value;
+                    this.RaisePropertyChanged("FormattedTimeRemaining");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reason {
+            get {
+                return this.ReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReasonField, value) != true)) {
+                    this.ReasonField = value;
+                    this.RaisePropertyChanged("Reason");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double RemainingHours {
+            get {
+                return this.RemainingHoursField;
+            }
+            set {
+                if ((this.RemainingHoursField.Equals(value) != true)) {
+                    this.RemainingHoursField = value;
+                    this.RaisePropertyChanged("RemainingHours");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Report.IReportManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.Report.IReportManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IReportManager {
@@ -99,6 +192,18 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Report {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/ReportPlayer")]
         System.Threading.Tasks.Task ReportPlayerAsync(UnoLisClient.Logic.UnoLisServerReference.Report.ReportData reportData);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/SuscrbeToBanNotifications")]
+        void SuscrbeToBanNotifications(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/SuscrbeToBanNotifications")]
+        System.Threading.Tasks.Task SuscrbeToBanNotificationsAsync(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/UnsubscribeFromBanNotifications")]
+        void UnsubscribeFromBanNotifications(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/UnsubscribeFromBanNotifications")]
+        System.Threading.Tasks.Task UnsubscribeFromBanNotificationsAsync(string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -106,13 +211,13 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Report {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/ReportPlayerResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Report.BanInfo>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Report.ReportData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Report.BanInfo))]
         void ReportPlayerResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/OnPlayerKicked")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.Report.ReportData))]
-        void OnPlayerKicked(UnoLisServer.Common.Models.ServiceResponse<object> response);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReportManager/OnPlayerBanned")]
+        void OnPlayerBanned(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.Report.BanInfo> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -149,6 +254,22 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Report {
         
         public System.Threading.Tasks.Task ReportPlayerAsync(UnoLisClient.Logic.UnoLisServerReference.Report.ReportData reportData) {
             return base.Channel.ReportPlayerAsync(reportData);
+        }
+        
+        public void SuscrbeToBanNotifications(string nickname) {
+            base.Channel.SuscrbeToBanNotifications(nickname);
+        }
+        
+        public System.Threading.Tasks.Task SuscrbeToBanNotificationsAsync(string nickname) {
+            return base.Channel.SuscrbeToBanNotificationsAsync(nickname);
+        }
+        
+        public void UnsubscribeFromBanNotifications(string nickname) {
+            base.Channel.UnsubscribeFromBanNotifications(nickname);
+        }
+        
+        public System.Threading.Tasks.Task UnsubscribeFromBanNotificationsAsync(string nickname) {
+            return base.Channel.UnsubscribeFromBanNotificationsAsync(nickname);
         }
     }
 }

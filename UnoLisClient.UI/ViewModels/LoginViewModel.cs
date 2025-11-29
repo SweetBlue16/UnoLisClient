@@ -164,6 +164,7 @@ namespace UnoLisClient.UI.ViewModels
             {
                 ChatService.Instance.Initialize(Nickname);
                 FriendsService.Instance.Initialize(Nickname);
+                ReportSessionService.Instance.Initialize(Nickname);
             }
             catch (Exception chatEx)
             {

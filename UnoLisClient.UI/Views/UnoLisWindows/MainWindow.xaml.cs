@@ -10,7 +10,6 @@ using UnoLisClient.UI.Services;
 using System.IO;
 using UnoLisClient.UI.ViewModels;
 using System.Windows.Controls;
-using UnoLisClient.Logic.Callbacks;
 using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Enums;
 using UnoLisClient.UI.Views.UnoLisPages;
@@ -24,15 +23,13 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
     {
         private readonly MainViewModel _viewModel;
         private bool _isCleanClose = false;
+
         public MainWindow()
         {
             InitializeComponent();
 
             _viewModel = new MainViewModel(this, new AlertManager(), new LogoutService());
-            this.DataContext = _viewModel;
-            
-            var callback = new ReportCallback();
-            SubscribePlayerKicked(callback);
+            DataContext = _viewModel;
         }
 
         public void LogoutResponse(ServiceResponse<object> response)
@@ -62,15 +59,6 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             {
                 if (MainFrame.CanGoBack) MainFrame.GoBack();
             });
-        }
-
-        public void NavigateToInitialPageAndClearHistory(Page page)
-        {
-            MainFrame.Navigate(new GamePage());
-            while (MainFrame.CanGoBack)
-            {
-                MainFrame.RemoveBackEntry();
-            }
         }
 
         public void SetMusicVolume(double volume)
@@ -124,32 +112,6 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             {
                 new SimplePopUpWindow(Global.UnsuccessfulLabel, ex.Message).ShowDialog();
             }
-        }
-
-        private void SubscribePlayerKicked(ReportCallback callback)
-        {
-            callback.OnPlayerKickedResponse += response =>
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    CurrentSession.CurrentUserProfileData = null;
-                    CurrentSession.CurrentUserNickname = null;
-
-                    var popup = new SimplePopUpWindow(
-                        Global.OopsLabel,
-                        MessageTranslator.GetMessage(response.Code),
-                        PopUpIconType.Warning);
-
-                    popup.Owner = this;
-                    popup.ShowDialog();
-
-                    MainFrame.Navigate(new GamePage());
-                    while (MainFrame.CanGoBack)
-                    {
-                        MainFrame.RemoveBackEntry();
-                    }
-                });
-            };
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)

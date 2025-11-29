@@ -44,10 +44,5 @@ namespace UnoLisClient.Logic.Callbacks
         {
             GameStartedReceived?.Invoke();
         }
-
-        public void OnPlayerBanned(BanInfo banInfo)
-        {
-            BanSessionManager.TriggerBan(banInfo);
-        }
     }
 }

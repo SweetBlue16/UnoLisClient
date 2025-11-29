@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8134/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" />
+  <xs:import schemaLocation="http://localhost:8134/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
   <xs:complexType name="ServiceResponseOfanyType">
     <xs:annotation>
       <xs:appinfo>
@@ -16,4 +17,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ServiceResponseOfanyType" nillable="true" type="tns:ServiceResponseOfanyType" />
+  <xs:complexType name="ServiceResponseOfBanInfovXwyyaSB">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ServiceResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="BanInfo" Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" minOccurs="0" name="Code" type="q2:MessageCode" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="Data" nillable="true" type="q3:BanInfo" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceResponseOfBanInfovXwyyaSB" nillable="true" type="tns:ServiceResponseOfBanInfovXwyyaSB" />
 </xs:schema>

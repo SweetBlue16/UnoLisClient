@@ -1,5 +1,5 @@
 ﻿using System;
-using UnoLisClient.Logic.UnoLisServerReference.Login;
+using UnoLisClient.Logic.UnoLisServerReference.Report;
 
 namespace UnoLisClient.Logic.Helpers
 {
