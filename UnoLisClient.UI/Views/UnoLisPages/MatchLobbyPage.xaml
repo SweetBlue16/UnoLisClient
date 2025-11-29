@@ -253,11 +253,11 @@
             <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,20,0">
                 <Button Width="42" Height="42" Background="Transparent" BorderThickness="0"
                         Command="{Binding ToggleSettingsCommand}">
-                    <Image Source="/Assets/settingsIcon.png" Width="26" Height="26"/>
+                    <Image Source="/Assets/Other/Settings.png" Width="26" Height="26"/>
                 </Button>
                 <Button Width="42" Height="42" Background="Transparent" BorderThickness="0"
                         Command="{Binding ToggleChatCommand}" Margin="0,12,0,0">
-                    <Image Source="/Assets/friendsIcon.png" Width="26" Height="26"/>
+                    <Image Source="/Assets/Other/MatchHistory.png" Width="26" Height="26"/>
                 </Button>
             </StackPanel>
 

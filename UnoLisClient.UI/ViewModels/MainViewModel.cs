@@ -81,8 +81,8 @@ namespace UnoLisClient.UI.ViewModels
 
                 ChatService.Instance.Cleanup();
                 FriendsService.Instance.Cleanup();
+                ReportSessionService.Instance.Disconnect(CurrentSession.CurrentUserNickname);
             }
-
             return true;
         }
     }

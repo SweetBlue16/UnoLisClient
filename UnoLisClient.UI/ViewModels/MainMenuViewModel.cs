@@ -133,6 +133,11 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteGoToShop()
         {
             SoundManager.PlayClick();
+            if (IsGuest())
+            {
+                _dialogService.ShowWarning(ErrorMessages.OperationNotSupportedMessageLabel);
+                return;
+            }
             _navigationService.NavigateTo(new AvatarShopPage());
         }
 
@@ -151,6 +156,11 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteGoToFriends()
         {
             SoundManager.PlayClick();
+            if (IsGuest())
+            {
+                _dialogService.ShowWarning(ErrorMessages.OperationNotSupportedMessageLabel);
+                return;
+            }
             _navigationService.NavigateTo(new FriendsPage());
         }
 
@@ -191,7 +201,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private static bool IsGuest()
         {
-            return string.Equals(CurrentSession.CurrentUserNickname, "Guest", StringComparison.OrdinalIgnoreCase);
+            return CurrentSession.CurrentUserNickname.Contains("Guest"); ;
         }
     }
 }

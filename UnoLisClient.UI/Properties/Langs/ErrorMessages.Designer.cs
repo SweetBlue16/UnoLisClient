@@ -646,7 +646,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation not supported..
+        ///   Looks up a localized string similar to Operation not supported for a guest..
         /// </summary>
         public static string OperationNotSupportedMessageLabel {
             get {

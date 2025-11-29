@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using UnoLisClient.UI.Views.PopUpWindows;
 using UnoLisClient.UI.Utilities;
+using UnoLisClient.Logic.Enums;
+using UnoLisClient.UI.Properties.Langs;
 
 namespace UnoLisClient.UI.Views.Controls
 {
@@ -26,7 +28,9 @@ namespace UnoLisClient.UI.Views.Controls
         {
             SoundManager.PlayClick();
 
-            var questionPopup = new QuestionPopUpWindow("Confirm", "Are you sure you want to leave the match?");
+            var questionPopup = new QuestionPopUpWindow(Global.ConfirmationLabel,
+                Match.ExitMatchConfirmationLabel,
+                PopUpIconType.Logout);
             bool? result = questionPopup.ShowDialog();
 
             if (result == true)

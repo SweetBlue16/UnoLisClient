@@ -313,7 +313,7 @@
     <value>No es tu turno de tirar carta.</value>
   </data>
   <data name="OperationNotSupportedMessageLabel" xml:space="preserve">
-    <value>Operación no soportada.</value>
+    <value>Operación no soportada para un invitado.</value>
   </data>
   <data name="PasswordDontMatchMessageLabel" xml:space="preserve">
     <value>Las contraseñas no coinciden, por favor verifícalo.</value>

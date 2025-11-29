@@ -70,7 +70,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand DrawCardCommand { get; }
         public ICommand CallUnoCommand { get; }
         public ICommand ToggleSettingsCommand { get; }
-        public ICommand ExitGameCommand { get; }
+        public ICommand LeaveMatchCommand { get; }
         public ICommand ReportPlayerCommand { get; }
 
         public MatchBoardViewModel(Page view, IDialogService dialogService) : base(dialogService)
@@ -82,7 +82,7 @@ namespace UnoLisClient.UI.ViewModels
             DrawCardCommand = new RelayCommand(ExecuteDrawCard);
             CallUnoCommand = new RelayCommand(ExecuteCallUno);
             ToggleSettingsCommand = new RelayCommand(ExecuteToggleSettings);
-            ExitGameCommand = new RelayCommand(ExecuteExitGame);
+            LeaveMatchCommand = new RelayCommand(ExecuteExitGame);
             ReportPlayerCommand = new RelayCommand(ExecuteReportPlayer);
 
             LoadMockData();
@@ -247,10 +247,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteExitGame()
         {
-            if (_dialogService.ShowQuestionDialog(Global.ConfirmationLabel, Global.LogoutMessageLabel, PopUpIconType.Question))
-            {
-                _navigationService.NavigateTo(new MainMenuPage());
-            }
+            _navigationService.NavigateTo(new MainMenuPage());
         }
 
         private void ExecuteReportPlayer()

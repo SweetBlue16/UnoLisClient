@@ -37,20 +37,30 @@
                 <!-- 🔝 Header: Título + botón de cerrar -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
+
+                    <Image x:Name="SettingsIcon"
+                           Source="pack://application:,,,/Assets/Other/Settings.png"
+                           Width="40" Height="40"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"/>
 
                     <Label x:Name="SettingsTitleLabel"
                            Content="{x:Static language:Global.SettingsLabel}"
                            FontSize="28" FontWeight="Bold"
                            Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                           Grid.Column="1"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,10"/>
 
                     <!-- Botón de cerrar -->
                     <Button x:Name="CloseButton"
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Content="✖"
                             FontWeight="Bold"
                             FontSize="18"
@@ -103,6 +113,7 @@
                            Content="{x:Static language:Settings.LanguageLabel}"
                            Foreground="White"
                            FontSize="16"
+                           FontFamily="pack://application:,,,/Fonts/#Lato"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"/>
 
@@ -128,6 +139,7 @@
                     <Label x:Name="VolumeLabel"
                            Content="{x:Static language:Global.VolumeLabel}"
                            Foreground="White"
+                           FontFamily="pack://application:,,,/Fonts/#Lato"
                            FontSize="16"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"/>

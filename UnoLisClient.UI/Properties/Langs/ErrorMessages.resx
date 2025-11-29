@@ -313,7 +313,7 @@
     <value>It's not your turn to play a card.</value>
   </data>
   <data name="OperationNotSupportedMessageLabel" xml:space="preserve">
-    <value>Operation not supported.</value>
+    <value>Operation not supported for a guest.</value>
   </data>
   <data name="PasswordDontMatchMessageLabel" xml:space="preserve">
     <value>Passwords don't match, please verify them.</value>

@@ -101,8 +101,8 @@ namespace UnoLisClient.UI.ViewModels
             _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
 
             LoadProfileCommand = new RelayCommand(async () => await LoadProfileData());
-            ChangeAvatarCommand = new RelayCommand(ExecuteChangeAvatar, () => !IsGuest);
-            ChangeDataCommand = new RelayCommand(ExecuteChangeData, () => !IsGuest);
+            ChangeAvatarCommand = new RelayCommand(ExecuteChangeAvatar);
+            ChangeDataCommand = new RelayCommand(ExecuteChangeData);
             BackCommand = new RelayCommand(ExecuteGoBack);
             OpenSocialLinkCommand = new RelayCommand<string>(ExecuteOpenSocialLink);
         }
@@ -158,12 +158,22 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteChangeAvatar()
         {
             SoundManager.PlayClick();
+            if (IsGuest)
+            {
+                _dialogService.ShowWarning(ErrorMessages.OperationNotSupportedMessageLabel);
+                return;
+            }
             _navigationService.NavigateTo(new AvatarSelectionPage());
         }
 
         private void ExecuteChangeData()
         {
             SoundManager.PlayClick();
+            if (IsGuest)
+            {
+                _dialogService.ShowWarning(ErrorMessages.OperationNotSupportedMessageLabel);
+                return;
+            }
             if (CurrentSession.CurrentUserProfileData == null)
             {
                 _dialogService.ShowWarning(ErrorMessages.ProfileNotLoadedMessageLabel);
@@ -229,7 +239,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private bool IsGuestCheck()
         {
-            IsGuest = string.Equals(CurrentSession.CurrentUserNickname, "Guest", StringComparison.OrdinalIgnoreCase);
+            IsGuest = CurrentSession.CurrentUserNickname.Contains("Guest");
             return IsGuest;
         }
 

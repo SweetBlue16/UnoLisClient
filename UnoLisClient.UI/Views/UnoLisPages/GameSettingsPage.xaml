@@ -31,17 +31,26 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
+                    <Image x:Name="SettingsIcon"
+                           Source="pack://application:,,,/Assets/Other/Settings.png"
+                           Width="40" Height="40"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Margin="0,0,20,0"/>
                     <TextBlock Text="{x:Static language:Global.GameSettingsLabel}"
                                FontSize="28"
                                FontWeight="Bold"
+                               Grid.Column="1"
+                               FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                                Foreground="White"
                                HorizontalAlignment="Center"
-                               Margin="0,0,0,10"/>
+                               Margin="0,0,20,10"/>
                     <Button x:Name="CloseButton"
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Content="✖"
                             FontWeight="Bold"
                             FontSize="18"
@@ -82,18 +91,23 @@
                 <StackPanel Grid.Row="1">
                     <StackPanel Orientation="Vertical" Margin="0,0,0,15">
                         <Label Content="{x:Static language:Settings.PlayerSettingsLabel}"
-                               Foreground="White" FontSize="16"/>
+                               Foreground="White" FontSize="16" FontFamily="pack://application:,,,/Fonts/#Lato"/>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <RadioButton GroupName="Players" Content="2" Foreground="White"
+                                         FontFamily="pack://application:,,,/Fonts/#Lato"
+                                         Margin="0,0,10,0"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=2}"
                                          Command="{Binding SetPlayerCountCommand}" CommandParameter="2"/>
 
                             <RadioButton GroupName="Players" Content="3" Foreground="White"
+                                         FontFamily="pack://application:,,,/Fonts/#Lato"
+                                         Margin="0,0,10,0"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=3}"
                                          Command="{Binding SetPlayerCountCommand}" CommandParameter="3"/>
 
                             <RadioButton GroupName="Players" Content="4" Foreground="White"
+                                         FontFamily="pack://application:,,,/Fonts/#Lato"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=4}"
                                          Command="{Binding SetPlayerCountCommand}" CommandParameter="4"/>
                         </StackPanel>
@@ -101,7 +115,8 @@
                     <Separator Margin="0,10"/>
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.SpecialRulesSettingsLabel}"
-                               Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                               Foreground="White" FontSize="16" DockPanel.Dock="Left"
+                               FontFamily="pack://application:,,,/Fonts/#Lato"/>
                         <CheckBox x:Name="SpecialRulesCheckBox"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Center"
@@ -111,7 +126,8 @@
 
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.MusicSettingsLabel}"
-                               Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                               Foreground="White" FontSize="16" DockPanel.Dock="Left"
+                               FontFamily="pack://application:,,,/Fonts/#Lato"/>
 
                         <ToggleButton x:Name="MusicToggle"
                                       Width="40" Height="40"
@@ -138,7 +154,8 @@
                     <Separator Margin="0,10"/>
                     <DockPanel Margin="0,5">
                         <Label Content="{x:Static language:Settings.SoundEffectsSettingsLabel}"
-                               Foreground="White" FontSize="16" DockPanel.Dock="Left"/>
+                               Foreground="White" FontSize="16" DockPanel.Dock="Left"
+                               FontFamily="pack://application:,,,/Fonts/#Lato"/>
                         <ToggleButton x:Name="SoundToggle"
                                       Width="40" Height="40"
                                       FontSize="20"
