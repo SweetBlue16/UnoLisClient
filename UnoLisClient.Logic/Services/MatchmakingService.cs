@@ -42,7 +42,7 @@ namespace UnoLisClient.Logic.Services
             catch (TimeoutException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Timeout calling CreateMatchAsync: {ex.Message}", ex);
+                Logger.Error($"Timeout calling CreateMatchAsync: {ex.Message}", ex);
                 return new CreateMatchResponse 
                 { 
                     Success = false, 
@@ -52,7 +52,7 @@ namespace UnoLisClient.Logic.Services
             catch (CommunicationException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Communication error in CreateMatchAsync: {ex.Message}", ex);
+                Logger.Error($"Communication error in CreateMatchAsync: {ex.Message}", ex);
                 return new CreateMatchResponse 
                 { 
                     Success = false, 
@@ -62,7 +62,7 @@ namespace UnoLisClient.Logic.Services
             catch (Exception ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Fatal error in CreateMatchAsync: {ex.Message}", ex);
+                Logger.Error($"Fatal error in CreateMatchAsync: {ex.Message}", ex);
                 return new CreateMatchResponse 
                 { 
                     Success = false, 
@@ -86,19 +86,19 @@ namespace UnoLisClient.Logic.Services
             catch (TimeoutException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Timeout joining match {lobbyCode}: {ex.Message}", ex);
+                Logger.Error($"Timeout joining match {lobbyCode}: {ex.Message}", ex);
                 return new JoinMatchResponse { Success = false, Message = "Server timeout joining match." };
             }
             catch (CommunicationException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Network error joining match {lobbyCode}: {ex.Message}", ex);
+                Logger.Error($"Network error joining match {lobbyCode}: {ex.Message}", ex);
                 return new JoinMatchResponse { Success = false, Message = "Connection error. Check your internet." };
             }
             catch (Exception ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Unexpected error joining match {lobbyCode}: {ex.Message}", ex);
+                Logger.Error($"Unexpected error joining match {lobbyCode}: {ex.Message}", ex);
                 return new JoinMatchResponse { Success = false, Message = "An unexpected error occurred." };
             }
         }
@@ -116,19 +116,19 @@ namespace UnoLisClient.Logic.Services
             catch (TimeoutException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Timeout sending invites: {ex.Message}", ex);
+                Logger.Error($"Timeout sending invites: {ex.Message}", ex);
                 return false;
             }
             catch (CommunicationException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Communication error sending invites: {ex.Message}", ex);
+                Logger.Error($"Communication error sending invites: {ex.Message}", ex);
                 return false;
             }
             catch (Exception ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Unexpected error sending invites: {ex.Message}", ex);
+                Logger.Error($"Unexpected error sending invites: {ex.Message}", ex);
                 return false;
             }
         }
@@ -148,19 +148,19 @@ namespace UnoLisClient.Logic.Services
             catch (TimeoutException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Timeout setting invites: {ex.Message}", ex);
+                Logger.Error($"Timeout setting invites: {ex.Message}", ex);
                 return false;
             }
             catch (CommunicationException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Communication error setting background: {ex.Message}", ex);
+                Logger.Error($"Communication error setting background: {ex.Message}", ex);
                 return false;
             }
             catch (Exception ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Unexpected error setting background: {ex.Message}", ex);
+                Logger.Error($"Unexpected error setting background: {ex.Message}", ex);
                 return false;
             }
         }
@@ -182,19 +182,19 @@ namespace UnoLisClient.Logic.Services
             catch (TimeoutException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Timeout getting lobby settings: {ex.Message}", ex);
+                Logger.Error($"Timeout getting lobby settings: {ex.Message}", ex);
                 return new LobbySettings();
             }
             catch (CommunicationException ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Communication error getting lobby settings: {ex.Message}", ex);
+                Logger.Error($"Communication error getting lobby settings: {ex.Message}", ex);
                 return new LobbySettings();
             }
             catch (Exception ex)
             {
                 AbortProxy(proxy);
-                LogManager.Error($"Error getting lobby settings: {ex.Message}", ex);
+                Logger.Error($"Error getting lobby settings: {ex.Message}", ex);
                 return new LobbySettings();
             }
         }

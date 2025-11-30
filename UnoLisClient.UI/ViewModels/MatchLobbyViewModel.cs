@@ -34,6 +34,7 @@ namespace UnoLisClient.UI.ViewModels
         private readonly string _currentLobbyCode;
 
         private bool _isMeReady = false;
+        private bool _isNavigatingToGame = false;
 
         public ChatViewModel ChatVM { get; }
 
@@ -152,7 +153,7 @@ namespace UnoLisClient.UI.ViewModels
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Failed to initialize chat: {ex.Message}");
+                Logger.Error($"Failed to initialize chat: {ex.Message}");
             }
 
             if (!UserHelper.IsGuest(_currentUserNickname))
@@ -167,13 +168,21 @@ namespace UnoLisClient.UI.ViewModels
 
         public async Task OnPageUnloaded()
         {
+            if (_isNavigatingToGame)
+            {
+                // Opcional: Desuscribir eventos visuales pero mantener la sesión lógica si el servidor lo requiere
+                // Pero generalmente, al cambiar de contexto a MatchBoard, el LobbyService ya no se usa.
+                // Lo importante es NO llamar a DisconnectFromLobbyAsync.
+                return;
+            }
+
             try
             {
                 await _lobbyService.DisconnectFromLobbyAsync(_currentLobbyCode, _currentUserNickname);
             }
             catch 
             {
-                LogManager.Error("Error while trying to disconnect.");
+                Logger.Error("Error while trying to disconnect.");
             }
 
             _lobbyService.OnPlayerListUpdated -= HandlePlayerListUpdated;
@@ -238,6 +247,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
+                _isNavigatingToGame = true;
                 _navigationService.NavigateTo(new MatchBoardPage(_currentLobbyCode));
             });
         }
@@ -249,7 +259,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private void HandlePlayerLeft(string nickname)
         {
-            LogManager.Info($"Player left: {nickname}");
+            Logger.Info($"Player left: {nickname}");
         }
 
         private async void ExecuteReady()

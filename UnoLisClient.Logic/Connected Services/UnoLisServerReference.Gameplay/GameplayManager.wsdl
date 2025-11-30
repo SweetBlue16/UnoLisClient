@@ -35,6 +35,7 @@
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
+      <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameplayManager_PlayCard_InputMessage">
@@ -42,6 +43,9 @@
   </wsdl:message>
   <wsdl:message name="IGameplayManager_DrawCard_InputMessage">
     <wsdl:part name="parameters" element="tns:DrawCard" />
+  </wsdl:message>
+  <wsdl:message name="IGameplayManager_ConnectToGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectToGame" />
   </wsdl:message>
   <wsdl:message name="IGameplayManager_CardPlayed_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CardPlayed" />
@@ -58,12 +62,21 @@
   <wsdl:message name="IGameplayManager_ReceiveInitialHand_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveInitialHand" />
   </wsdl:message>
+  <wsdl:message name="IGameplayManager_ReceiveCards_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveCards" />
+  </wsdl:message>
+  <wsdl:message name="IGameplayManager_ReceivePlayerList_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceivePlayerList" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IGameplayManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/PlayCard" message="tns:IGameplayManager_PlayCard_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DrawCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/DrawCard" message="tns:IGameplayManager_DrawCard_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConnectToGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/ConnectToGame" message="tns:IGameplayManager_ConnectToGame_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CardPlayed">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/CardPlayed" message="tns:IGameplayManager_CardPlayed_OutputCallbackMessage" />
@@ -80,6 +93,12 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReceiveInitialHand">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/ReceiveInitialHand" message="tns:IGameplayManager_ReceiveInitialHand_OutputCallbackMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReceiveCards">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/ReceiveCards" message="tns:IGameplayManager_ReceiveCards_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReceivePlayerList">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/ReceivePlayerList" message="tns:IGameplayManager_ReceivePlayerList_OutputCallbackMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameplayManager" type="tns:IGameplayManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IGameplayManager_policy" />
@@ -92,6 +111,12 @@
     </wsdl:operation>
     <wsdl:operation name="DrawCard">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/DrawCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ConnectToGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/ConnectToGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -126,6 +151,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ReceiveCards">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/ReceiveCards" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceivePlayerList">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/ReceivePlayerList" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameplayManager">
     <wsdl:port name="NetTcpBinding_IGameplayManager" binding="tns:NetTcpBinding_IGameplayManager">
@@ -133,7 +170,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8115/GameplayManager</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>SWEETBLUE16\pswee</Upn>
+          <Upn>EVICTUS\meler</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

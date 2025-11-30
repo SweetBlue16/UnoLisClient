@@ -36,25 +36,25 @@ namespace UnoLisClient.Logic.Services
             }
             catch (EndpointNotFoundException enfEx)
             {
-                LogManager.Error("Error de conexión (Login): No se encontró el endpoint.", enfEx);
+                Logger.Error("Error de conexión (Login): No se encontró el endpoint.", enfEx);
                 taskCompletion.TrySetException(enfEx);
                 CloseClientHelper.CloseClient(loginClient);
             }
             catch (TimeoutException timeoutEx)
             {
-                LogManager.Error("Error de conexión (Login): Tiempo de espera agotado.", timeoutEx);
+                Logger.Error("Error de conexión (Login): Tiempo de espera agotado.", timeoutEx);
                 taskCompletion.TrySetException(timeoutEx);
                 CloseClientHelper.CloseClient(loginClient);
             }
             catch (CommunicationException commEx)
             {
-                LogManager.Error("Error de comunicación durante el inicio de sesión.", commEx);
+                Logger.Error("Error de comunicación durante el inicio de sesión.", commEx);
                 taskCompletion.TrySetException(commEx);
                 CloseClientHelper.CloseClient(loginClient);
             }
             catch (Exception ex)
             {
-                LogManager.Error("Error inesperado durante el inicio de sesión.", ex);
+                Logger.Error("Error inesperado durante el inicio de sesión.", ex);
                 taskCompletion.TrySetException(ex);
                 CloseClientHelper.CloseClient(loginClient);
             }

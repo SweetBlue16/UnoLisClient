@@ -89,6 +89,7 @@
     <Compile Include="Services\IReportTrackerService.cs" />
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\AutoScrollBehavior.cs" />
+    <Compile Include="Utilities\CardAssetHelper.cs" />
     <Compile Include="Utilities\PopUpIconHelper.cs" />
     <Compile Include="Utilities\SessionReportTracker.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
@@ -387,6 +388,15 @@
     <Resource Include="Fonts\Lato.ttf" />
     <Resource Include="Fonts\Luckiest-Guy.ttf" />
     <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
+    <Resource Include="Assets\card_flip.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\shuffle_deck.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

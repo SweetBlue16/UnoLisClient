@@ -112,28 +112,28 @@ namespace UnoLisClient.Logic.Services
             }
             catch(NullReferenceException ex)
             {
-                LogManager.Error($"[ChatService.JoinChannel] Proxy is null: {ex.Message}");
+                Logger.Error($"[ChatService.JoinChannel] Proxy is null: {ex.Message}");
                 throw;
             }
             catch (TimeoutException ex)
             {
-                LogManager.Error($"[ChatService.JoinChannel] Timeout: {ex.Message}");
+                Logger.Error($"[ChatService.JoinChannel] Timeout: {ex.Message}");
                 throw;
             }
             catch (InvalidOperationException ex)
             {
-                LogManager.Error($"[ChatService.JoinChannel] Channel faulted: {ex.Message}");
+                Logger.Error($"[ChatService.JoinChannel] Channel faulted: {ex.Message}");
                 Cleanup();
                 throw new CommunicationException("Chat channel was faulted, please reconnect.", ex);
             }
             catch (CommunicationException ex)
             {
-                LogManager.Error($"[ChatService.JoinChannel] Communication error: {ex.Message}");
+                Logger.Error($"[ChatService.JoinChannel] Communication error: {ex.Message}");
                 throw;
             }
             catch (Exception ex)
             {
-                LogManager.Error($"[ChatService.JoinChannel] Unexpected error: {ex.Message}");
+                Logger.Error($"[ChatService.JoinChannel] Unexpected error: {ex.Message}");
                 throw;
             }
         }

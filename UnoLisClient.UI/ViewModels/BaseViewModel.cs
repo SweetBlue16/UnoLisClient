@@ -32,7 +32,7 @@ namespace UnoLisClient.UI.ViewModels
         protected void HandleException(MessageCode code, string logMessage, Exception ex)
         {
             IsLoading = false;
-            LogManager.Error(logMessage, ex);
+            Logger.Error(logMessage, ex);
 
             string userMessage = MessageTranslator.GetMessage(code);
 

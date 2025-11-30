@@ -58,6 +58,7 @@
     <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Callbacks\ConfirmationCodeCallback.cs" />
     <Compile Include="Callbacks\FriendsCallback.cs" />
+    <Compile Include="Callbacks\GameplayCallback.cs" />
     <Compile Include="Callbacks\LobbyCallback.cs" />
     <Compile Include="Callbacks\LoginCallback.cs" />
     <Compile Include="Callbacks\LogoutCallback.cs" />
@@ -147,8 +148,8 @@
     </Compile>
     <Compile Include="Enums\PopUpIconType.cs" />
     <Compile Include="Helpers\BanSessionManager.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\CloseClientHelper.cs" />
-    <Compile Include="Helpers\LogManager.cs" />
     <Compile Include="Helpers\SafeReportManagerClient.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Helpers\WcfServiceHelper.cs" />
@@ -162,8 +163,10 @@
     <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\ConfirmationCodeService.cs" />
     <Compile Include="Services\FriendsService.cs" />
+    <Compile Include="Services\GameplayService.cs" />
     <Compile Include="Services\IChatService.cs" />
     <Compile Include="Services\IFriendsService.cs" />
+    <Compile Include="Services\IGameplayService.cs" />
     <Compile Include="Services\ILeaderboardsService.cs" />
     <Compile Include="Services\ILobbyService.cs" />
     <Compile Include="Services\IMatchmakingService.cs" />
@@ -255,6 +258,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Gameplay\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\item.xsd">

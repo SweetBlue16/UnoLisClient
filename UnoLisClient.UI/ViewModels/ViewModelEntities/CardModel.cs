@@ -5,25 +5,49 @@ using UnoLisClient.UI.Commands;
 
 namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
-    public class CardModel : ObservableObject
+    public class CardModel : ObservableObject 
     {
         public Card CardData { get; }
 
-        public string ImagePath => /*CardData. ??*/ "pack://application:,,,/Assets/Cards/DrawFour.png";
+        private string _imagePath;
+        public string ImagePath
+        {
+            get => _imagePath;
+            set => SetProperty(ref _imagePath, value);
+        }
 
         private bool _isPlayable;
         public bool IsPlayable
         {
             get => _isPlayable;
-            set => SetProperty(ref _isPlayable, value);
+            set
+            {
+                if (SetProperty(ref _isPlayable, value))
+                {
+                    UpdateCanExecute();
+                }
+            }
         }
 
         public ICommand PlayCardCommand { get; }
+        private readonly Action<CardModel> _playAction;
 
-        public CardModel(Card cardData, Action<CardModel> onPlayCard)
+        public CardModel(Card cardData, Action<CardModel> playAction)
         {
             CardData = cardData;
-            PlayCardCommand = new RelayCommand(() => onPlayCard(this), () => IsPlayable);
+            _playAction = playAction;
+            PlayCardCommand = new RelayCommand(ExecutePlay, CanPlay);
+            IsPlayable = false;
+        }
+
+        private void ExecutePlay()
+        {
+            _playAction?.Invoke(this);
+        }
+
+        private bool CanPlay()
+        {
+            return IsPlayable;
         }
 
         public void UpdateCanExecute()

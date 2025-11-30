@@ -25,6 +25,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             _viewModel = new MatchBoardViewModel(this, new AlertManager());
             _viewModel.RequestSetBackground += OnBackgroundRequested;
             DataContext = _viewModel;
+            _viewModel.PropertyChanged += (s, e) => ViewModel_PropertyChanged(s, e);
         }
 
         public void NavigateTo(Page page)
@@ -69,24 +70,24 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             }
         }
 
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e, UIElement settingsModal)
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MatchBoardViewModel.IsSettingsMenuVisible))
             {
                 if (_viewModel.IsSettingsMenuVisible)
                 {
-                    AnimationUtils.FadeIn(element: settingsModal);
+                    AnimationUtils.FadeIn(GameSettingsModal);
                 }
                 else
                 {
-                    AnimationUtils.FadeOut(element: settingsModal);
+                    AnimationUtils.FadeOut(GameSettingsModal);
                 }
             }
         }
 
         private async void LeaveMatchRequestedSettingsModal(object sender, EventArgs e)
         {
-            await AnimationUtils.FadeOut(new SettingsModal());
+            await AnimationUtils.FadeOut(GameSettingsModal);
             await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.5);
             _viewModel.LeaveMatchCommand.Execute(null);
         }

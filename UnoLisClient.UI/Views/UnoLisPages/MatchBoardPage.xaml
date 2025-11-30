@@ -130,7 +130,8 @@
 
             <Grid Background="#80000000"
                   Visibility="{Binding IsSettingsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <controls:SettingsModal HorizontalAlignment="Center"
+                <controls:SettingsModal x:Name="GameSettingsModal" 
+                                        HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Width="400"
                                         Height="500"

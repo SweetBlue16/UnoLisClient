@@ -36,25 +36,25 @@ namespace UnoLisClient.Logic.Services
             }
             catch (EndpointNotFoundException enfEx)
             {
-                LogManager.Error("Error de conexión (ConfirmCode): No se encontró el endpoint.", enfEx);
+                Logger.Error("Error de conexión (ConfirmCode): No se encontró el endpoint.", enfEx);
                 taskCompletion.TrySetException(enfEx);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
             catch (TimeoutException timeoutEx)
             {
-                LogManager.Error("Error de conexión (ConfirmCode): Tiempo de espera agotado.", timeoutEx);
+                Logger.Error("Error de conexión (ConfirmCode): Tiempo de espera agotado.", timeoutEx);
                 taskCompletion.TrySetException(timeoutEx);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
             catch (CommunicationException commEx)
             {
-                LogManager.Error("Error de comunicación durante la confirmación de código de verificación.", commEx);
+                Logger.Error("Error de comunicación durante la confirmación de código de verificación.", commEx);
                 taskCompletion.TrySetException(commEx);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
             catch (Exception ex)
             {
-                LogManager.Error("Error inesperado durante la confirmación de código de verificación.", ex);
+                Logger.Error("Error inesperado durante la confirmación de código de verificación.", ex);
                 taskCompletion.TrySetException(ex);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
@@ -87,25 +87,25 @@ namespace UnoLisClient.Logic.Services
             }
             catch (EndpointNotFoundException enfEx)
             {
-                LogManager.Error("Error de conexión (ResendCode): No se encontró el endpoint.", enfEx);
+                Logger.Error("Error de conexión (ResendCode): No se encontró el endpoint.", enfEx);
                 taskCompletion.TrySetException(enfEx);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
             catch (TimeoutException timeoutEx)
             {
-                LogManager.Error("Error de conexión (ResendCode): Tiempo de espera agotado.", timeoutEx);
+                Logger.Error("Error de conexión (ResendCode): Tiempo de espera agotado.", timeoutEx);
                 taskCompletion.TrySetException(timeoutEx);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
             catch (CommunicationException commEx)
             {
-                LogManager.Error("Error de comunicación durante la confirmación de código de verificación.", commEx);
+                Logger.Error("Error de comunicación durante la confirmación de código de verificación.", commEx);
                 taskCompletion.TrySetException(commEx);
                 CloseClientHelper.CloseClient(confirmationClient);
             }
             catch (Exception ex)
             {
-                LogManager.Error("Error inesperado durante la confirmación de código de verificación.", ex);
+                Logger.Error("Error inesperado durante la confirmación de código de verificación.", ex);
                 taskCompletion.TrySetException(ex);
                 CloseClientHelper.CloseClient(confirmationClient);
             }

@@ -27,25 +27,25 @@ namespace UnoLisClient.Logic.Helpers
             }
             catch (EndpointNotFoundException ex)
             {
-                LogManager.Error($"Connection error ({operationName}): Endponit not found.", ex);
+                Logger.Error($"Connection error ({operationName}): Endponit not found.", ex);
                 taskCompletionSource.TrySetException(ex);
                 CloseClientHelper.CloseClient(client);
             }
             catch (TimeoutException ex)
             {
-                LogManager.Error($"Connection Error ({operationName}): Waiting time exceeded.", ex);
+                Logger.Error($"Connection Error ({operationName}): Waiting time exceeded.", ex);
                 taskCompletionSource.TrySetException(ex);
                 CloseClientHelper.CloseClient(client);
             }
             catch (CommunicationException ex)
             {
-                LogManager.Error($"Communication Error in ({operationName}).", ex);
+                Logger.Error($"Communication Error in ({operationName}).", ex);
                 taskCompletionSource.TrySetException(ex);
                 CloseClientHelper.CloseClient(client);
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Unexpected Error in ({operationName}).", ex);
+                Logger.Error($"Unexpected Error in ({operationName}).", ex);
                 taskCompletionSource.TrySetException(ex);
                 CloseClientHelper.CloseClient(client);
             }

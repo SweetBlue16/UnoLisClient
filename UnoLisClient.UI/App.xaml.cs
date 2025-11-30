@@ -31,12 +31,12 @@ namespace UnoLisClient.UI
         {
             if (response.Success)
             {
-                LogManager.Info("Servidor confirmó el cierre de sesión de OnExit.");
+                Logger.Info("Servidor confirmó el cierre de sesión de OnExit.");
             }
             else
             {
                 string message = MessageTranslator.GetMessage(response.Code);
-                LogManager.Warn($"Servidor reportó un error al cerrar sesión de OnExit: {message}");
+                Logger.Warn($"Servidor reportó un error al cerrar sesión de OnExit: {message}");
             }
         }
 
@@ -45,7 +45,7 @@ namespace UnoLisClient.UI
             base.OnStartup(e);
             BanSessionManager.PlayerBanned += OnGlobalPlayerBanned;
 
-            LogManager.Info("🎮 UNO LIS Client iniciado.");
+            Logger.Info("🎮 UNO LIS Client iniciado.");
 
             var langCode = UI.Properties.Settings.Default.languageCode;
             if (string.IsNullOrWhiteSpace(langCode))
@@ -80,12 +80,12 @@ namespace UnoLisClient.UI
             }
             catch (CommunicationException ex)
             {
-                LogManager.Error("Error de comunicación al notificar logout en OnExit.", ex);
+                Logger.Error("Error de comunicación al notificar logout en OnExit.", ex);
                 CloseClientHelper.CloseClient(_logoutClient);
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error inesperado en ExecuteExitLogout: {ex.Message}", ex);
+                Logger.Error($"Error inesperado en ExecuteExitLogout: {ex.Message}", ex);
                 CloseClientHelper.CloseClient(_logoutClient);
             }
         }

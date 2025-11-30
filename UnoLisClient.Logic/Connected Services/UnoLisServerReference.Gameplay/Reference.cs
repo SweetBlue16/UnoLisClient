@@ -23,10 +23,16 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LobbyCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NicknameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card PlayedCardField;
+        private System.Nullable<int> SelectedColorIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -35,6 +41,32 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardId {
+            get {
+                return this.CardIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardIdField, value) != true)) {
+                    this.CardIdField = value;
+                    this.RaisePropertyChanged("CardId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LobbyCode {
+            get {
+                return this.LobbyCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LobbyCodeField, value) != true)) {
+                    this.LobbyCodeField = value;
+                    this.RaisePropertyChanged("LobbyCode");
+                }
             }
         }
         
@@ -52,14 +84,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card PlayedCard {
+        public System.Nullable<int> SelectedColorId {
             get {
-                return this.PlayedCardField;
+                return this.SelectedColorIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.PlayedCardField, value) != true)) {
-                    this.PlayedCardField = value;
-                    this.RaisePropertyChanged("PlayedCard");
+                if ((this.SelectedColorIdField.Equals(value) != true)) {
+                    this.SelectedColorIdField = value;
+                    this.RaisePropertyChanged("SelectedColorId");
                 }
             }
         }
@@ -331,10 +363,16 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         System.Threading.Tasks.Task PlayCardAsync(UnoLisClient.Logic.UnoLisServerReference.Gameplay.PlayCardData data);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/DrawCard")]
-        void DrawCard(string nickname);
+        void DrawCard(string lobbyCode, string nickname);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/DrawCard")]
-        System.Threading.Tasks.Task DrawCardAsync(string nickname);
+        System.Threading.Tasks.Task DrawCardAsync(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ConnectToGame")]
+        void ConnectToGame(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ConnectToGame")]
+        System.Threading.Tasks.Task ConnectToGameAsync(string lobbyCode, string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -354,6 +392,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ReceiveInitialHand")]
         void ReceiveInitialHand(UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card[] hand);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ReceiveCards")]
+        void ReceiveCards(UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card[] cards);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ReceivePlayerList")]
+        void ReceivePlayerList(string[] players);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -392,12 +436,20 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
             return base.Channel.PlayCardAsync(data);
         }
         
-        public void DrawCard(string nickname) {
-            base.Channel.DrawCard(nickname);
+        public void DrawCard(string lobbyCode, string nickname) {
+            base.Channel.DrawCard(lobbyCode, nickname);
         }
         
-        public System.Threading.Tasks.Task DrawCardAsync(string nickname) {
-            return base.Channel.DrawCardAsync(nickname);
+        public System.Threading.Tasks.Task DrawCardAsync(string lobbyCode, string nickname) {
+            return base.Channel.DrawCardAsync(lobbyCode, nickname);
+        }
+        
+        public void ConnectToGame(string lobbyCode, string nickname) {
+            base.Channel.ConnectToGame(lobbyCode, nickname);
+        }
+        
+        public System.Threading.Tasks.Task ConnectToGameAsync(string lobbyCode, string nickname) {
+            return base.Channel.ConnectToGameAsync(lobbyCode, nickname);
         }
     }
 }

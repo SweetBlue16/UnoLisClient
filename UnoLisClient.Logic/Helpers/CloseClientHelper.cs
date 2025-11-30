@@ -24,17 +24,17 @@ namespace UnoLisClient.Logic.Helpers
             }
             catch (CommunicationException communicationEx)
             {
-                LogManager.Error($"Fallo 'CommunicationException' al cerrar el cliente. Abortando canal.", communicationEx);
+                Logger.Error($"Fallo 'CommunicationException' al cerrar el cliente. Abortando canal.", communicationEx);
                 client.Abort();
             }
             catch (TimeoutException timeoutEx)
             {
-                LogManager.Error($"Fallo 'TimeoutException' al cerrar el cliente. Abortando canal.", timeoutEx);
+                Logger.Error($"Fallo 'TimeoutException' al cerrar el cliente. Abortando canal.", timeoutEx);
                 client.Abort();
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Fallo desconocido al cerrar el cliente. Abortando canal.", ex);
+                Logger.Error($"Fallo desconocido al cerrar el cliente. Abortando canal.", ex);
                 client.Abort();
             }
         }

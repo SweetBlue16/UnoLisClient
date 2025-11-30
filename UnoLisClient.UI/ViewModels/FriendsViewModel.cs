@@ -229,7 +229,7 @@ namespace UnoLisClient.UI.ViewModels
             }
             catch (FormatException) //¿Esta excepción puede quedarse sin nada dentro, sugerencia de la IA?
             {
-                LogManager.Error("String format error in HandleFriendRequestResult message formatting.");
+                Logger.Error("String format error in HandleFriendRequestResult message formatting.");
             }
 
             if (result == FriendRequestResult.Success)

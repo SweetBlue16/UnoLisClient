@@ -28,25 +28,25 @@ namespace UnoLisClient.Logic.Services
             }
             catch (EndpointNotFoundException enfEx)
             {
-                LogManager.Error("Error de conexión (GetAvatar): No se encontró el endpoint.", enfEx);
+                Logger.Error("Error de conexión (GetAvatar): No se encontró el endpoint.", enfEx);
                 taskCompletion.TrySetException(enfEx);
                 CloseClientHelper.CloseClient(avatarClient);
             }
             catch (TimeoutException timeoutEx)
             {
-                LogManager.Error("Error de conexión (GetAvatar): Tiempo de espera agotado.", timeoutEx);
+                Logger.Error("Error de conexión (GetAvatar): Tiempo de espera agotado.", timeoutEx);
                 taskCompletion.TrySetException(timeoutEx);
                 CloseClientHelper.CloseClient(avatarClient);
             }
             catch (CommunicationException commEx)
             {
-                LogManager.Error("Error de comunicación durante la obtención de avatares.", commEx);
+                Logger.Error("Error de comunicación durante la obtención de avatares.", commEx);
                 taskCompletion.TrySetException(commEx);
                 CloseClientHelper.CloseClient(avatarClient);
             }
             catch (Exception ex)
             {
-                LogManager.Error("Error inesperado durante la obtención de avatares.", ex);
+                Logger.Error("Error inesperado durante la obtención de avatares.", ex);
                 taskCompletion.TrySetException(ex);
                 CloseClientHelper.CloseClient(avatarClient);
             }
@@ -71,25 +71,25 @@ namespace UnoLisClient.Logic.Services
             }
             catch (EndpointNotFoundException enfEx)
             {
-                LogManager.Error("Error de conexión (SetAvatar): No se encontró el endpoint.", enfEx);
+                Logger.Error("Error de conexión (SetAvatar): No se encontró el endpoint.", enfEx);
                 taskCompletion.TrySetException(enfEx);
                 CloseClientHelper.CloseClient(avatarClient);
             }
             catch (TimeoutException timeoutEx)
             {
-                LogManager.Error("Error de conexión (SetAvatar): Tiempo de espera agotado.", timeoutEx);
+                Logger.Error("Error de conexión (SetAvatar): Tiempo de espera agotado.", timeoutEx);
                 taskCompletion.TrySetException(timeoutEx);
                 CloseClientHelper.CloseClient(avatarClient);
             }
             catch (CommunicationException commEx)
             {
-                LogManager.Error("Error de comunicación durante la actualización de avatar.", commEx);
+                Logger.Error("Error de comunicación durante la actualización de avatar.", commEx);
                 taskCompletion.TrySetException(commEx);
                 CloseClientHelper.CloseClient(avatarClient);
             }
             catch (Exception ex)
             {
-                LogManager.Error("Error inesperado durante la actualización de avatar.", ex);
+                Logger.Error("Error inesperado durante la actualización de avatar.", ex);
                 taskCompletion.TrySetException(ex);
                 CloseClientHelper.CloseClient(avatarClient);
             }

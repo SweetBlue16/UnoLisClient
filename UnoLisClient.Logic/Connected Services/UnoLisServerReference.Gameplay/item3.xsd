@@ -3,8 +3,10 @@
   <xs:import schemaLocation="http://localhost:8114/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
   <xs:complexType name="PlayCardData">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CardId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LobbyCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PlayedCard" nillable="true" type="tns:Card" />
+      <xs:element minOccurs="0" name="SelectedColorId" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayCardData" nillable="true" type="tns:PlayCardData" />

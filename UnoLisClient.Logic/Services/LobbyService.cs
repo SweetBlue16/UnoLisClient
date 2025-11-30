@@ -58,7 +58,7 @@ namespace UnoLisClient.Logic.Services
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error connecting to lobby {lobbyCode}: {ex.Message}", ex);
+                Logger.Error($"Error connecting to lobby {lobbyCode}: {ex.Message}", ex);
                 AbortProxy();
                 throw;
             }
@@ -75,7 +75,7 @@ namespace UnoLisClient.Logic.Services
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error disconnecting from lobby: {ex.Message}", ex);
+                Logger.Error($"Error disconnecting from lobby: {ex.Message}", ex);
                 AbortProxy();
             }
         }
@@ -89,7 +89,7 @@ namespace UnoLisClient.Logic.Services
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error setting ready status: {ex.Message}", ex);
+                Logger.Error($"Error setting ready status: {ex.Message}", ex);
             }
         }
 
@@ -106,7 +106,7 @@ namespace UnoLisClient.Logic.Services
                 } 
                 catch 
                 {
-                    LogManager.Error("Error aborting the lobby proxy.");
+                    Logger.Error("Error aborting the lobby proxy.");
                 }
                 _proxy = null;
             }

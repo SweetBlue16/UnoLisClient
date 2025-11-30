@@ -55,23 +55,23 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (!response.Success)
                 {
-                    Logic.Helpers.LogManager.Warn($"Logout failed for user {CurrentSession.CurrentUserNickname}: {response}");
+                    Logger.Warn($"Logout failed for user {CurrentSession.CurrentUserNickname}: {response}");
                     System.Diagnostics.Debug.WriteLine($"Logout failed: {response}");
                 }
             }
             catch (TimeoutException ex)
             {
-                Logic.Helpers.LogManager.Error($"Timeout during logout for user {CurrentSession.CurrentUserNickname}", ex);
+                Logger.Error($"Timeout during logout for user {CurrentSession.CurrentUserNickname}", ex);
                 System.Diagnostics.Debug.WriteLine($"Logout Timeout: {ex.Message}");
             }
             catch (CommunicationException ex)
             {
-                Logic.Helpers.LogManager.Error($"Network error during logout for user {CurrentSession.CurrentUserNickname}", ex);
+                Logger.Error($"Network error during logout for user {CurrentSession.CurrentUserNickname}", ex);
                 System.Diagnostics.Debug.WriteLine($"Logout Network Error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Logic.Helpers.LogManager.Error($"Unexpected error during logout for user {CurrentSession.CurrentUserNickname}", ex);
+                Logger.Error($"Unexpected error during logout for user {CurrentSession.CurrentUserNickname}", ex);
                 System.Diagnostics.Debug.WriteLine($"Error closing session: {ex.Message}");
             }
             finally

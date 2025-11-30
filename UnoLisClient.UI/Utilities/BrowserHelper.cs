@@ -31,7 +31,7 @@ namespace UnoLisClient.UI.Utilities
 
                 if (!Uri.TryCreate(url, UriKind.Absolute, out _))
                 {
-                    LogManager.Warn($"Intento de abrir URL mal formada: {url}");
+                    Logger.Warn($"Intento de abrir URL mal formada: {url}");
                     ShowBrowserError();
                     return;
                 }
@@ -46,12 +46,12 @@ namespace UnoLisClient.UI.Utilities
             }
             catch (Win32Exception winEx)
             {
-                LogManager.Error($"Error de Win32 al abrir URL '{url}'.", winEx);
+                Logger.Error($"Error de Win32 al abrir URL '{url}'.", winEx);
                 ShowBrowserError();
             }
             catch (Exception ex)
             {
-                LogManager.Error($"Error inesperado al abrir URL '{url}'.", ex);
+                Logger.Error($"Error inesperado al abrir URL '{url}'.", ex);
                 ShowBrowserError();
             }
         }
