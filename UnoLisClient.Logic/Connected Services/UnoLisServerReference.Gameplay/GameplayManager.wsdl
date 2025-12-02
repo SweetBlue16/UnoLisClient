@@ -35,7 +35,6 @@
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
-      <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameplayManager_PlayCard_InputMessage">
@@ -68,6 +67,9 @@
   <wsdl:message name="IGameplayManager_ReceivePlayerList_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceivePlayerList" />
   </wsdl:message>
+  <wsdl:message name="IGameplayManager_GameMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameMessage" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IGameplayManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/PlayCard" message="tns:IGameplayManager_PlayCard_InputMessage" />
@@ -98,6 +100,9 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReceivePlayerList">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/ReceivePlayerList" message="tns:IGameplayManager_ReceivePlayerList_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GameMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/GameMessage" message="tns:IGameplayManager_GameMessage_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameplayManager" type="tns:IGameplayManager">
@@ -159,6 +164,12 @@
     </wsdl:operation>
     <wsdl:operation name="ReceivePlayerList">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/ReceivePlayerList" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameMessage">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/GameMessage" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

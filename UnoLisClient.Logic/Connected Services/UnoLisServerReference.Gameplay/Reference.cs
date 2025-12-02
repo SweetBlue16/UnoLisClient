@@ -352,6 +352,83 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GamePlayer", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class GamePlayer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AvatarNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CardCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AvatarName {
+            get {
+                return this.AvatarNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AvatarNameField, value) != true)) {
+                    this.AvatarNameField = value;
+                    this.RaisePropertyChanged("AvatarName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CardCount {
+            get {
+                return this.CardCountField;
+            }
+            set {
+                if ((this.CardCountField.Equals(value) != true)) {
+                    this.CardCountField = value;
+                    this.RaisePropertyChanged("CardCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Gameplay.IGameplayManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.Gameplay.IGameplayManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IGameplayManager {
@@ -397,7 +474,10 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         void ReceiveCards(UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card[] cards);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ReceivePlayerList")]
-        void ReceivePlayerList(string[] players);
+        void ReceivePlayerList(UnoLisClient.Logic.UnoLisServerReference.Gameplay.GamePlayer[] players);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/GameMessage")]
+        void GameMessage(string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

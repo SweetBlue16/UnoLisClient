@@ -25,8 +25,10 @@ namespace UnoLisClient.Logic.Services
         public event Action<string> PlayerDrewCard;
         public event Action<string> TurnChanged;
         public event Action<List<Card>> InitialHandReceived;
+        public event Action<List<GamePlayer>> PlayerListReceived;
         public event Action<List<Card>> CardsReceived;
         public event Action<List<ResultData>> GameEnded;
+        public event Action<string> GameMessageReceived;
 
         private GameplayService()
         {
@@ -34,8 +36,10 @@ namespace UnoLisClient.Logic.Services
             GameplayCallback.OnCardDrawn += (nick) => PlayerDrewCard?.Invoke(nick);
             GameplayCallback.OnTurnChanged += (nick) => TurnChanged?.Invoke(nick);
             GameplayCallback.OnInitialHandReceived += (hand) => InitialHandReceived?.Invoke(hand);
+            GameplayCallback.OnPlayerListReceived += (list) => PlayerListReceived?.Invoke(list);
             GameplayCallback.OnCardsReceived += (cards) => CardsReceived?.Invoke(cards);
             GameplayCallback.OnMatchEnded += (results) => GameEnded?.Invoke(results);
+            GameplayCallback.OnGameMessageReceived += (msg) => GameMessageReceived?.Invoke(msg);
         }
 
         public void Initialize(string nickname)
@@ -44,20 +48,12 @@ namespace UnoLisClient.Logic.Services
 
             try
             {
-                // 1. Instanciación del Callback (Puede fallar si hay error en su constructor)
                 _currentUserNickname = nickname;
                 _callback = new GameplayCallback();
                 var context = new InstanceContext(_callback);
-
-                // 2. Creación del Factory (Punto crítico de Configuración)
-                // Lanza InvalidOperationException si no encuentra "NetTcpBinding_IGameplayManager" en App.config
                 _factory = new DuplexChannelFactory<IGameplayManager>(context, "NetTcpBinding_IGameplayManager");
 
                 _proxy = _factory.CreateChannel();
-
-                // Nota: CreateChannel() es "perezoso" (lazy). No conecta a la red todavía.
-                // La conexión real ocurre la primera vez que llamas a un método (ej. ConnectToGame).
-                // Por eso aquí no atrapamos EndpointNotFoundException (eso va en ConnectToGame).
             }
             catch (InvalidOperationException configEx)
             {
@@ -144,7 +140,7 @@ namespace UnoLisClient.Logic.Services
             catch (TimeoutException timeoutEx)
             {
                 Logger.Warn($"[CLIENT] Timeout closing channel: {timeoutEx.Message}");
-                _factory.Abort(); // Forzamos el cierre local
+                _factory.Abort();
             }
             catch (CommunicationException commEx)
             {

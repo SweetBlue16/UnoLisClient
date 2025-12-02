@@ -70,11 +70,29 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a Color.
+        /// </summary>
+        public static string ChooseColorLabel {
+            get {
+                return ResourceManager.GetString("ChooseColorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Write the reason for the report:.
         /// </summary>
         public static string DescriptionReportLabel {
             get {
                 return ResourceManager.GetString("DescriptionReportLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw a card.
+        /// </summary>
+        public static string DrawCardTooltip {
+            get {
+                return ResourceManager.GetString("DrawCardTooltip", resourceCulture);
             }
         }
         

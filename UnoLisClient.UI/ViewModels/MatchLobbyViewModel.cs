@@ -122,9 +122,14 @@ namespace UnoLisClient.UI.ViewModels
 
         private void InitializeLobbySlots()
         {
+            int lobbyPlayers = 4;
             PlayersInLobby.Clear();
-            for (int i = 0; i < 4; i++) PlayersInLobby.Add(new LobbyPlayerViewModel());
+            for (int i = 0; i < lobbyPlayers; i++)
+            {
+                PlayersInLobby.Add(new LobbyPlayerViewModel());
+            }
         }
+
 
 
         public async Task OnPageLoaded()
@@ -170,9 +175,6 @@ namespace UnoLisClient.UI.ViewModels
         {
             if (_isNavigatingToGame)
             {
-                // Opcional: Desuscribir eventos visuales pero mantener la sesión lógica si el servidor lo requiere
-                // Pero generalmente, al cambiar de contexto a MatchBoard, el LobbyService ya no se usa.
-                // Lo importante es NO llamar a DisconnectFromLobbyAsync.
                 return;
             }
 
@@ -199,7 +201,8 @@ namespace UnoLisClient.UI.ViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                for (int i = 0; i < 4; i++)
+                int lobbyPlayers = 4;
+                for (int i = 0; i < lobbyPlayers; i++)
                 {
                     if (i < players.Length)
                     {
@@ -238,8 +241,8 @@ namespace UnoLisClient.UI.ViewModels
 
         private void UpdateReadyCount()
         {
-            int totalPlayers = PlayersInLobby.Count(p => p.IsSlotFilled);
-            int readyCount = PlayersInLobby.Count(p => p.IsSlotFilled && p.IsReady);
+            int totalPlayers = PlayersInLobby.Count(player => player.IsSlotFilled);
+            int readyCount = PlayersInLobby.Count(player => player.IsSlotFilled && player.IsReady);
             ReadyStatusText = $"{readyCount} / {totalPlayers} Players Ready";
         }
 
@@ -290,7 +293,7 @@ namespace UnoLisClient.UI.ViewModels
                 var friendList = await _friendsService.GetFriendsListAsync(_currentUserNickname);
 
                 Friends.Clear();
-                foreach (var friend in friendList.OrderBy(f => f.Nickname))
+                foreach (var friend in friendList.OrderBy(friend => friend.Nickname))
                 {
                     var friendViewModel = new LobbyFriendViewModel(friend);
                     Friends.Add(friendViewModel);
@@ -316,7 +319,7 @@ namespace UnoLisClient.UI.ViewModels
         private async void ExecuteSendInvites()
         {
             SoundManager.PlayClick();
-            var invitedNicknames = Friends.Where(f => f.Invited).Select(f => f.Nickname).ToList();
+            var invitedNicknames = Friends.Where(friend => friend.Invited).Select(friend => friend.Nickname).ToList();
 
             if (!invitedNicknames.Any())
             {
@@ -335,7 +338,7 @@ namespace UnoLisClient.UI.ViewModels
                 if (success)
                 {
                     _dialogService.ShowAlert("Invitations Sent", "Email invitations have been sent successfully!", PopUpIconType.Success);
-                    foreach (var f in Friends) f.Invited = false;
+                    foreach (var friend in Friends) friend.Invited = false;
                 }
                 else
                 {
@@ -366,7 +369,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteLeaveMatch()
         {
-            //TODO: Llamar al servicio para salir del lobby en el servidor
             _navigationService.NavigateTo(new MainMenuPage());
         }
     }

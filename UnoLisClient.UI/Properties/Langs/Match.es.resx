@@ -120,8 +120,14 @@
   <data name="CardDrawnMessageLabel" xml:space="preserve">
     <value>{0} ha robado {1}.</value>
   </data>
+  <data name="ChooseColorLabel" xml:space="preserve">
+    <value>Elige un Color</value>
+  </data>
   <data name="DescriptionReportLabel" xml:space="preserve">
     <value>Escribe el motivo del reporte:</value>
+  </data>
+  <data name="DrawCardTooltip" xml:space="preserve">
+    <value>Roba una carta</value>
   </data>
   <data name="ExitMatchConfirmationLabel" xml:space="preserve">
     <value>¿Estás seguro de que deseas abandonar la partida?</value>

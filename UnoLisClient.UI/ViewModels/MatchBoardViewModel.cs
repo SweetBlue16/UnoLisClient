@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Helpers;
+using System.Windows.Threading;
+using System.Windows.Media;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
 using UnoLisClient.UI.Commands;
@@ -24,13 +26,20 @@ namespace UnoLisClient.UI.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IMatchmakingService _matchmakingService;
         private readonly IGameplayService _gameplayService;
+        private readonly DispatcherTimer _localTurnTimer;
         private readonly Page _view;
+
+        private const int TurnDuration = 30;
 
         public event Action<string> RequestSetBackground;
 
         private string _currentLobbyCode;
         private string _currentUserNickname;
-        private List<string> _allPlayersOrdered;
+        private List<GamePlayer> _allPlayersData;
+        private CardModel _pendingWildCard;
+        private OpponentModel _opponentTop;
+        private OpponentModel _opponentLeft;
+        private OpponentModel _opponentRight;
 
         private CardModel _discardPileTopCard;
         public CardModel DiscardPileTopCard 
@@ -55,9 +64,24 @@ namespace UnoLisClient.UI.ViewModels
 
         public ObservableCollection<CardModel> PlayerHand { get; }
             = new ObservableCollection<CardModel>();
-        public OpponentModel OpponentTop { get; set; }
-        public OpponentModel OpponentLeft { get; set; }
-        public OpponentModel OpponentRight { get; set; }
+
+        public OpponentModel OpponentTop
+        {
+            get => _opponentTop;
+            set => SetProperty(ref _opponentTop, value);
+        }
+
+        public OpponentModel OpponentLeft
+        {
+            get => _opponentLeft;
+            set => SetProperty(ref _opponentLeft, value);
+        }
+
+        public OpponentModel OpponentRight
+        {
+            get => _opponentRight;
+            set => SetProperty(ref _opponentRight, value);
+        }
 
         public ObservableCollection<ItemModel> Items { get; }
             = new ObservableCollection<ItemModel>();
@@ -76,11 +100,40 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _isSettingsMenuVisible, value);
         }
 
+        private bool _isColorSelectorVisible;
+        public bool IsColorSelectorVisible
+        {
+            get => _isColorSelectorVisible;
+            set => SetProperty(ref _isColorSelectorVisible, value);
+        }
+
+        private string _currentTurnAvatarPath;
+        public string CurrentTurnAvatarPath
+        {
+            get => _currentTurnAvatarPath;
+            set => SetProperty(ref _currentTurnAvatarPath, value);
+        }
+
+        private int _currentTurnSeconds;
+        public int CurrentTurnSeconds
+        {
+            get => _currentTurnSeconds;
+            set => SetProperty(ref _currentTurnSeconds, value);
+        }
+
+        private bool _isTimerWarning;
+        public bool IsTimerWarning
+        {
+            get => _isTimerWarning;
+            set => SetProperty(ref _isTimerWarning, value);
+        }
+
         public ICommand DrawCardCommand { get; }
         public ICommand CallUnoCommand { get; }
         public ICommand ToggleSettingsCommand { get; }
         public ICommand LeaveMatchCommand { get; }
         public ICommand ReportPlayerCommand { get; }
+        public ICommand SelectColorCommand { get; }
 
         public MatchBoardViewModel(Page view, IDialogService dialogService) : base(dialogService)
         {
@@ -92,11 +145,16 @@ namespace UnoLisClient.UI.ViewModels
             _currentUserNickname = Logic.Models.CurrentSession.CurrentUserNickname;
             _gameplayService.Initialize(_currentUserNickname);
 
+            _localTurnTimer = new DispatcherTimer();
+            _localTurnTimer.Interval = TimeSpan.FromSeconds(1);
+            _localTurnTimer.Tick += LocalTurnTimer_Tick;
+
             DrawCardCommand = new RelayCommand(ExecuteDrawCard);
             CallUnoCommand = new RelayCommand(ExecuteCallUno);
             ToggleSettingsCommand = new RelayCommand(ExecuteToggleSettings);
             LeaveMatchCommand = new RelayCommand(ExecuteExitGame);
             ReportPlayerCommand = new RelayCommand(ExecuteReportPlayer);
+            SelectColorCommand = new RelayCommand<string>(ExecuteSelectColor);
 
             PlayerHand = new ObservableCollection<CardModel>();
         }
@@ -107,22 +165,20 @@ namespace UnoLisClient.UI.ViewModels
 
             _currentLobbyCode = lobbyCode;
 
-            // LOG: Confirmamos que entró al método
             System.Diagnostics.Debug.WriteLine($"[CLIENT] Initializing match for: {lobbyCode}");
 
-            // 1. Delay Táctico (Vital para WCF Duplex)
             await Task.Delay(1000);
 
             try
             {
-                // Suscripciones
                 _gameplayService.InitialHandReceived += HandleInitialHand;
                 _gameplayService.CardsReceived += HandleCardsReceived;
                 _gameplayService.PlayerPlayedCard += HandlePlayerPlayedCard;
                 _gameplayService.PlayerDrewCard += HandlePlayerDrewCard;
                 _gameplayService.TurnChanged += HandleTurnChanged;
+                _gameplayService.PlayerListReceived += HandlePlayerListReceived;
+                _gameplayService.GameMessageReceived += HandleGameMessage;
 
-                // Carga de Configuración (Fondo)
                 try
                 {
                     var settings = await _matchmakingService.GetLobbySettingsAsync(lobbyCode);
@@ -136,7 +192,6 @@ namespace UnoLisClient.UI.ViewModels
                     System.Diagnostics.Debug.WriteLine($"[CLIENT] Background error (ignored): {ex.Message}");
                 }
 
-                // Conexión con Reintentos
                 int retries = 3;
                 while (retries > 0)
                 {
@@ -160,11 +215,7 @@ namespace UnoLisClient.UI.ViewModels
             }
             catch (Exception ex)
             {
-                // Error Fatal
                 System.Diagnostics.Debug.WriteLine($"[CLIENT] FATAL INIT ERROR: {ex.Message}");
-                // Logger.Error($"FATAL Error: {ex.Message}"); // Si tienes logger
-
-                // NO hacemos GoBack() para poder leer los logs sin que se cierre la página
                 _dialogService.ShowAlert("Game Error", $"Could not connect: {ex.Message}", PopUpIconType.Error);
             }
         }
@@ -256,6 +307,19 @@ namespace UnoLisClient.UI.ViewModels
                 CurrentTurnNickname = nickname;
                 bool isMyTurn = (nickname == _currentUserNickname);
 
+                if (_allPlayersData != null)
+                {
+                    var currentPlayerObj = _allPlayersData.FirstOrDefault(p => p.Nickname == nickname);
+                    string avatarName = currentPlayerObj?.AvatarName ?? "LogoUNO";
+
+                    CurrentTurnAvatarPath = $"pack://application:,,,/Avatars/{avatarName}.png";
+                }
+
+                _localTurnTimer.Stop();
+                CurrentTurnSeconds = TurnDuration;
+                IsTimerWarning = false;
+                _localTurnTimer.Start();
+
                 foreach (var card in PlayerHand)
                 {
                     card.IsPlayable = true; // Falta validar color/valor (lo vemos en Fase 2)
@@ -267,6 +331,34 @@ namespace UnoLisClient.UI.ViewModels
             });
         }
 
+        private void HandleGameMessage(string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _dialogService.ShowAlert("Aviso de Juego", message, PopUpIconType.Info);
+                SoundManager.PlaySound("notification.mp3");
+            });
+        }
+
+        private void LocalTurnTimer_Tick(object sender, EventArgs e)
+        {
+            if (CurrentTurnSeconds > 0)
+            {
+                CurrentTurnSeconds--;
+                IsTimerWarning = CurrentTurnSeconds <= 10;
+
+                if (CurrentTurnSeconds <= 5)
+                {
+                    // Opcional: Sonido de tictac
+                    // SoundManager.PlaySound("tick.mp3"); 
+                }
+            }
+            else
+            {
+                _localTurnTimer.Stop();
+            }
+        }
+
         private async void ExecutePlayCard(CardModel cardModel)
         {
             if (CurrentTurnNickname != _currentUserNickname)
@@ -274,21 +366,52 @@ namespace UnoLisClient.UI.ViewModels
                 return;
             }
 
-            try
-            {
-                int? colorId = null;
+            
                 if (IsWild(cardModel.CardData.Value))
                 {
-                    // TODO: Mostrar Popup de selección de color
-                    // var selectedColor = _dialogService.ShowColorPicker();
-                    colorId = (int)CardColor.Red; // Temporal hardcodeado
+                    _pendingWildCard = cardModel;
+                    IsColorSelectorVisible = true;
+                    SoundManager.PlayClick();
+                    return;
                 }
+            try
+            {
 
-                await _gameplayService.PlayCardAsync(_currentLobbyCode, _currentUserNickname, cardModel.CardData.Id, colorId);
+                await _gameplayService.PlayCardAsync(_currentLobbyCode, _currentUserNickname, cardModel.CardData.Id, null);
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error playing card: {ex.Message}");
+            }
+        }
+
+        private async void ExecuteSelectColor(string colorName)
+        {
+            if (_pendingWildCard == null) return;
+
+            IsColorSelectorVisible = false; // Ocultar popup
+
+            // Convertir string "Red" a int (enum)
+            int selectedColorId = (int)CardColor.Red; // Default
+            if (Enum.TryParse(colorName, out CardColor parsedColor))
+            {
+                selectedColorId = (int)parsedColor;
+            }
+
+            try
+            {
+                // Enviar la jugada al servidor CON el color seleccionado
+                await _gameplayService.PlayCardAsync(
+                    _currentLobbyCode,
+                    _currentUserNickname,
+                    _pendingWildCard.CardData.Id,
+                    selectedColorId);
+
+                _pendingWildCard = null; // Limpiar
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error playing Wild card: {ex.Message}");
             }
         }
 
@@ -337,77 +460,77 @@ namespace UnoLisClient.UI.ViewModels
             IsUnoButtonVisible = (PlayerHand.Count == 2);
         }
 
-        private void HandlePlayerListReceived(List<string> players)
+        private void HandlePlayerListReceived(List<GamePlayer> players)
         {
-            _allPlayersOrdered = players;
-            InitializeOpponents();
+            System.Diagnostics.Debug.WriteLine($"[CLIENT] Player List Received: {string.Join(", ", players)}");
+            _allPlayersData = players; 
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                InitializeOpponents();
+            });
         }
 
         private void InitializeOpponents()
         {
-            if (_allPlayersOrdered == null || !_allPlayersOrdered.Contains(_currentUserNickname)) return;
+            if (_allPlayersData == null || !_allPlayersData.Any(p => p.Nickname == _currentUserNickname))
+            {
+                return;
+            }
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                int myIndex = _allPlayersOrdered.IndexOf(_currentUserNickname);
-                int totalPlayers = _allPlayersOrdered.Count;
+                var myPlayerObj = _allPlayersData.First(p => p.Nickname == _currentUserNickname);
+                int myIndex = _allPlayersData.IndexOf(myPlayerObj);
+                int totalPlayers = _allPlayersData.Count;
 
-                // Limpiar oponentes visuales
                 OpponentLeft = null;
                 OpponentTop = null;
                 OpponentRight = null;
-                // (Asegúrate de notificar a la vista con OnPropertyChanged si no usas ObservableObject automático)
-                // Ojo: Si OpponentModel implementa INotifyPropertyChanged, mejor actualiza sus propiedades en lugar de anular el objeto.
-                // Asumiré que re-creas los objetos o limpias sus datos.
 
-                // Algoritmo de Mesa Redonda
+                OnPropertyChanged(nameof(OpponentLeft));
+                OnPropertyChanged(nameof(OpponentTop));
+                OnPropertyChanged(nameof(OpponentRight));
+
+                System.Diagnostics.Debug.WriteLine($"[CLIENT] Rendering Opponents. Total Players in List: {totalPlayers}");
+
                 for (int i = 1; i < totalPlayers; i++)
                 {
-                    // Calculamos el índice del rival relativo a mí (sentido horario)
                     int rivalIndex = (myIndex + i) % totalPlayers;
-                    string rivalNick = _allPlayersOrdered[rivalIndex];
+                    var rivalData = _allPlayersData[rivalIndex];
 
-                    // Posicionamiento visual según cantidad de jugadores
-                    if (totalPlayers == 2)
+                    int duo = 2;
+                    int trio = 3;
+                    if (totalPlayers == duo)
                     {
-                        // 1 vs 1: El rival va ARRIBA
-                        OpponentTop = CreateOpponent(rivalNick);
+                        OpponentTop = CreateOpponent(rivalData);
                     }
-                    else if (totalPlayers == 3)
+                    else if (totalPlayers == trio)
                     {
-                        // 1 vs 2: Izquierda y Derecha (o Arriba)
-                        // i=1 (Siguiente) -> Izquierda
-                        // i=2 (Último) -> Derecha
-                        if (i == 1) OpponentLeft = CreateOpponent(rivalNick);
-                        else if (i == 2) OpponentRight = CreateOpponent(rivalNick); // O Top, según prefieras
+                        if (i == 1) OpponentLeft = CreateOpponent(rivalData);
+                        else if (i == 2) OpponentRight = CreateOpponent(rivalData);
                     }
-                    else // 4 Jugadores
+                    else 
                     {
-                        // i=1 -> Izquierda
-                        // i=2 -> Arriba (Frente)
-                        // i=3 -> Derecha
-                        if (i == 1) OpponentLeft = CreateOpponent(rivalNick);
-                        else if (i == 2) OpponentTop = CreateOpponent(rivalNick);
-                        else if (i == 3) OpponentRight = CreateOpponent(rivalNick);
+                        if (i == 1) OpponentLeft = CreateOpponent(rivalData);
+                        else if (i == 2) OpponentTop = CreateOpponent(rivalData);
+                        else if (i == 3) OpponentRight = CreateOpponent(rivalData);
                     }
                 }
 
-                // Notificar cambios a la UI (si tus propiedades usan SetProperty)
                 OnPropertyChanged(nameof(OpponentLeft));
                 OnPropertyChanged(nameof(OpponentTop));
                 OnPropertyChanged(nameof(OpponentRight));
             });
         }
 
-        private OpponentModel CreateOpponent(string nickname)
+        private OpponentModel CreateOpponent(GamePlayer playerData)
         {
-            // Aquí deberías recuperar el Avatar real si puedes (Fase 2), 
-            // por ahora usa un placeholder o intenta sacarlo de cache local si lo tienes.
+            string avatarName = string.IsNullOrEmpty(playerData.AvatarName) ? "LogoUNO" : playerData.AvatarName;
             return new OpponentModel
             {
-                Nickname = nickname,
-                CardCount = 7, // Todos empiezan con 7
-                AvatarImagePath = "pack://application:,,,/Avatars/LogoUNO.png" // Placeholder
+                Nickname = playerData.Nickname,
+                CardCount = playerData.CardCount,
+                AvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png"
             };
         }
 
@@ -420,7 +543,8 @@ namespace UnoLisClient.UI.ViewModels
                 item.Count--;
                 item.UpdateCanExecute();
             }
-            _dialogService.ShowAlert(Match.ItemUsedLabel, string.Format(Match.ItemUsedMessageLabel, CurrentTurnNickname, item.Type), PopUpIconType.Info);
+            _dialogService.ShowAlert(Match.ItemUsedLabel, string.Format(Match.ItemUsedMessageLabel, 
+                CurrentTurnNickname, item.Type), PopUpIconType.Info);
         }
 
         private void UpdatePlayableCards()
@@ -441,6 +565,7 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteExitGame()
         {
             _navigationService.NavigateTo(new MainMenuPage());
+            _localTurnTimer.Stop();
         }
 
         private void ExecuteReportPlayer()

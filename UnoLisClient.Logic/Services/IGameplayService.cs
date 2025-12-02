@@ -11,8 +11,10 @@ namespace UnoLisClient.Logic.Services
         event Action<string> PlayerDrewCard;
         event Action<string> TurnChanged;
         event Action<List<Card>> InitialHandReceived;
+        event Action<List<GamePlayer>> PlayerListReceived;
         event Action<List<Card>> CardsReceived;
         event Action<List<ResultData>> GameEnded;
+        event Action<string> GameMessageReceived;
 
         void Initialize(string nickname);
         Task ConnectToGameAsync(string lobbyCode, string nickname);

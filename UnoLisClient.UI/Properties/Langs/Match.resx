@@ -120,8 +120,14 @@
   <data name="CardDrawnMessageLabel" xml:space="preserve">
     <value>{0} has drawn {1}.</value>
   </data>
+  <data name="ChooseColorLabel" xml:space="preserve">
+    <value>Choose a Color</value>
+  </data>
   <data name="DescriptionReportLabel" xml:space="preserve">
     <value>Write the reason for the report:</value>
+  </data>
+  <data name="DrawCardTooltip" xml:space="preserve">
+    <value>Draw a card</value>
   </data>
   <data name="ExitMatchConfirmationLabel" xml:space="preserve">
     <value>Are you sure you want to leave the match?</value>

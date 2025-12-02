@@ -13,7 +13,8 @@ namespace UnoLisClient.Logic.Callbacks
         public static event Action<List<ResultData>> OnMatchEnded;
         public static event Action<List<Card>> OnInitialHandReceived;
         public static event Action<List<Card>> OnCardsReceived;
-        public static event Action<List<string>> OnPlayerListReceived;
+        public static event Action<List<GamePlayer>> OnPlayerListReceived;
+        public static event Action<string> OnGameMessageReceived;
 
         public void CardPlayed(string nickname, Card card)
         {
@@ -45,9 +46,14 @@ namespace UnoLisClient.Logic.Callbacks
             OnCardsReceived?.Invoke(cards.ToList());
         }
 
-        public void ReceivePlayerList(string[] players)
+        public void ReceivePlayerList(GamePlayer[] players)
         {
             OnPlayerListReceived?.Invoke(players.ToList());
+        }
+
+        public void GameMessage(string message)
+        {
+            OnGameMessageReceived?.Invoke(message);
         }
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToThicknessConverter.cs" />
     <Compile Include="Converters\EqualityConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\RankToImageConverter.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IModaService.cs" />
@@ -388,9 +389,9 @@
     <Resource Include="Fonts\Lato.ttf" />
     <Resource Include="Fonts\Luckiest-Guy.ttf" />
     <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
-    <Resource Include="Assets\card_flip.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Content Include="Assets\card_flip.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Assets\shuffle_deck.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

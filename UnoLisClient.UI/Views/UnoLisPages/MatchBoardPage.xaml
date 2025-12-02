@@ -8,9 +8,11 @@
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       xmlns:vm="clr-namespace:UnoLisClient.UI.ViewModels"
       xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
+      xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       d:DataContext="{d:DesignInstance vm:MatchBoardViewModel}"
       Title="MatchBoardPage"
       Loaded="MatchBoardPage_Loaded">
+
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,6 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         </ResourceDictionary>
     </Page.Resources>
 
@@ -26,7 +29,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="160" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="160" />
+                <RowDefinition Height="180" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230" />
@@ -34,36 +37,52 @@
                 <ColumnDefinition Width="230" />
             </Grid.ColumnDefinitions>
 
-            <controls:OpponentHandControl Grid.Row="0"
-                                          Grid.Column="1"
+            <controls:OpponentHandControl Grid.Row="0" Grid.Column="1"
                                           DataContext="{Binding OpponentTop}"
+                                          Visibility="{Binding DataContext.OpponentTop, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource NullToVisibilityConverter}}"
                                           HorizontalAlignment="Center"
-                                          VerticalAlignment="Top"/>
-            <controls:OpponentHandControl Grid.Row="1"
-                                          Grid.Column="0"
+                                          VerticalAlignment="Top"
+                                          Margin="0,10,0,0"/>
+
+            <controls:OpponentHandControl Grid.Row="1" Grid.Column="0"
                                           DataContext="{Binding OpponentLeft}"
+                                          Visibility="{Binding DataContext.OpponentLeft, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource NullToVisibilityConverter}}"
                                           HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"/>
-            <controls:OpponentHandControl Grid.Row="1"
-                                          Grid.Column="2"
+                                          VerticalAlignment="Center"
+                                          Margin="10,0,0,0"/>
+
+            <controls:OpponentHandControl Grid.Row="1" Grid.Column="2"
                                           DataContext="{Binding OpponentRight}"
+                                          Visibility="{Binding DataContext.OpponentRight, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource NullToVisibilityConverter}}"
                                           HorizontalAlignment="Right"
-                                          VerticalAlignment="Center"/>
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,10,0"/>
+
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" 
                         HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Border Width="90" Height="140" Margin="10">
-                    <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" ToolTip="Robar Carta"/>
+
+                <Border Width="100" Height="150" Margin="15" Cursor="Hand">
+                    <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" ToolTip="{x:Static language:Match.DrawCardTooltip}"/>
                     <Border.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding DrawCardCommand}" />
                     </Border.InputBindings>
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
+                    </Border.Effect>
                 </Border>
-                <Image Source="{Binding DiscardPileTopCard.ImagePath}" Width="90" Height="140" Margin="10" />
+
+                <Image Source="{Binding DiscardPileTopCard.ImagePath}" Width="100" Height="150" Margin="15">
+                    <Image.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
+                    </Image.Effect>
+                </Image>
             </StackPanel>
-            
+
             <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                           HorizontalScrollBarVisibility="Auto" 
                           VerticalScrollBarVisibility="Disabled"
-                          Margin="150,0,150,0">
+                          Padding="0,0,0,20"
+                          Margin="50,0,50,0">
                 <ItemsControl ItemsSource="{Binding PlayerHand}"
                               ItemTemplate="{StaticResource PlayerCardTemplate}">
                     <ItemsControl.ItemsPanel>
@@ -75,34 +94,79 @@
             </ScrollViewer>
 
             <Border Grid.Column="2" Grid.Row="0"
-                    BorderBrush="#80000000"
-                    CornerRadius="15"
-                    Width="Auto"
-                    Margin="10">
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Margin="10">
-                    <StackPanel Margin="0,0,10,0">
+                    Background="#99000000"
+                    CornerRadius="30" 
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="15" Padding="15,5">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                    <StackPanel Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <TextBlock Text="{x:Static language:Match.TurnLabel}" 
-                                   FontSize="14" Foreground="Gray" FontFamily="pack://application:,,,/Fonts/#lato"
+                                   FontSize="12" Foreground="#CCCCCC" 
                                    HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding CurrentTurnNickname}" 
-                                   FontSize="18" FontWeight="Bold" Foreground="White"
+                                   FontSize="16" FontWeight="Bold" Foreground="White"
                                    HorizontalAlignment="Right"
-                                   MaxWidth="110"/>
+                                   MaxWidth="110" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
-                    <Image Source="pack://application:,,,/Assets/Other/NowPlaying.png"
-                           Height="60" Width="60"
-                           Margin="0,0,0,0"/>
+
+                    <Grid>
+                        <Border CornerRadius="50" BorderBrush="White" BorderThickness="2" Width="60" Height="60">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding CurrentTurnAvatarPath}" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+
+                        <Border Width="26" Height="26" CornerRadius="13" 
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                Margin="-5,-5">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="#FF007ACC"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsTimerWarning}" Value="True">
+                                            <Setter Property="Background" Value="#FFCC0000"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock Text="{Binding CurrentTurnSeconds}" 
+                                       Foreground="White" FontWeight="Bold" FontSize="12"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
                 </StackPanel>
             </Border>
-        </Grid>
 
-        <Grid>
+            <Button Grid.Row="0" Grid.Column="0"
+                    Content="{x:Static language:Global.SettingsLabel}"
+                    Command="{Binding ToggleSettingsCommand}"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="15"
+                    Padding="10,5"
+                    Style="{DynamicResource PrimaryButtonStyle}"/>
+            <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                    Margin="0,0,60,20"
+                    Command="{Binding CallUnoCommand}"
+                    Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Background="Transparent" BorderBrush="Transparent">
+                <Button.Content>
+                    <Image Source="/Assets/Other/UNOButton.png"
+                           Stretch="Uniform"
+                           Width="80" Height="80">
+                        <Image.Effect>
+                            <DropShadowEffect Color="Yellow" BlurRadius="20" Opacity="0.8"/>
+                        </Image.Effect>
+                    </Image>
+                </Button.Content>
+            </Button>
+
             <ItemsControl ItemsSource="{Binding Items}" 
               ItemTemplate="{StaticResource ItemTemplate}"
-              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20">
+              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Grid.Row="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" Rows="2"/>
@@ -110,34 +174,66 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
-            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,50"
-                    Command="{Binding CallUnoCommand}"
-                    Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
-                    Background="Transparent">
-                <Button.Content>
-                    <Image Source="/Assets/Other/UNOButton.png"
-                           Stretch="Uniform"
-                           Width="70"
-                           Height="70"/>
-                </Button.Content>
-            </Button>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
-                <Button Content="{x:Static language:Global.SettingsLabel}"
-                        Command="{Binding ToggleSettingsCommand}"
-                        Style="{DynamicResource PrimaryButtonStyle}"/>
-            </StackPanel>
-
-            <Grid Background="#80000000"
-                  Visibility="{Binding IsSettingsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <controls:SettingsModal x:Name="GameSettingsModal" 
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Width="400"
-                                        Height="500"
-                                        CloseRequested="CloseRequestedSettingsModal"
-                                        LeaveMatchRequested="LeaveMatchRequestedSettingsModal"/>
-            </Grid>
         </Grid>
+
+        <Grid Background="#CC000000" 
+              Visibility="{Binding IsColorSelectorVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+              Panel.ZIndex="10">
+
+            <Border Background="#F0F0F0" CornerRadius="20" Width="320" Height="340"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    BorderBrush="White" BorderThickness="2">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="Black"/>
+                </Border.Effect>
+
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{x:Static language:Match.ChooseColorLabel}" 
+                               Grid.Row="0" Grid.ColumnSpan="2"
+                               FontSize="22" FontWeight="Bold" Foreground="#333"
+                               HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+                    <Button Grid.Row="1" Grid.Column="0" Margin="5" Background="#FF5555" 
+                            Command="{Binding SelectColorCommand}" CommandParameter="Red"
+                            Content="Red" FontSize="16" FontWeight="Bold" Foreground="White" BorderThickness="0"/>
+
+                    <Button Grid.Row="1" Grid.Column="1" Margin="5" Background="#5555FF"
+                            Command="{Binding SelectColorCommand}" CommandParameter="Blue"
+                            Content="Blue" FontSize="16" FontWeight="Bold" Foreground="White" BorderThickness="0"/>
+
+                    <Button Grid.Row="2" Grid.Column="0" Margin="5" Background="#55AA55"
+                            Command="{Binding SelectColorCommand}" CommandParameter="Green"
+                            Content="Green" FontSize="16" FontWeight="Bold" Foreground="White" BorderThickness="0"/>
+
+                    <Button Grid.Row="2" Grid.Column="1" Margin="5" Background="#FFAA00"
+                            Command="{Binding SelectColorCommand}" CommandParameter="Yellow"
+                            Content="Yellow" FontSize="16" FontWeight="Bold" Foreground="White" BorderThickness="0"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Background="#CC000000"
+              Visibility="{Binding IsSettingsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+              Panel.ZIndex="20">
+
+            <controls:SettingsModal x:Name="GameSettingsModal" 
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Width="400"
+                                    Height="500"
+                                    CloseRequested="CloseRequestedSettingsModal"
+                                    LeaveMatchRequested="LeaveMatchRequestedSettingsModal"/>
+        </Grid>
+
     </Grid>
 </Page>

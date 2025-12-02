@@ -8,8 +8,7 @@ using UnoLisClient.UI.ViewModels;
 namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
     /// <summary>
-    /// ViewModel que representa un "slot" o asiento de jugador en el Lobby.
-    /// Controla la visualización del avatar, nombre y estado de listo.
+    /// Viewmodel that represents a players slot in lobbby
     /// </summary>
     public class LobbyPlayerViewModel : ObservableObject
     {
@@ -47,10 +46,10 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
         }
 
         /// <summary>
-        /// Llena el slot con los datos de un jugador real.
+        /// Fills slot with player data
         /// </summary>
-        /// <param name="nickname">Nombre del jugador.</param>
-        /// <param name="avatar">Ruta o identificador del avatar.</param>
+        /// <param name="nickname">Player name.</param>
+        /// <param name="avatar">Path or avatar ID.</param>
         public void FillSlot(string nickname, string avatar)
         {
             Nickname = nickname;
