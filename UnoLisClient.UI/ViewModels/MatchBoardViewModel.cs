@@ -178,6 +178,7 @@ namespace UnoLisClient.UI.ViewModels
                 _gameplayService.TurnChanged += HandleTurnChanged;
                 _gameplayService.PlayerListReceived += HandlePlayerListReceived;
                 _gameplayService.GameMessageReceived += HandleGameMessage;
+                _gameplayService.GameEnded += HandleGameEnded;
 
                 try
                 {
@@ -337,6 +338,20 @@ namespace UnoLisClient.UI.ViewModels
             {
                 _dialogService.ShowAlert("Aviso de Juego", message, PopUpIconType.Info);
                 SoundManager.PlaySound("notification.mp3");
+            });
+        }
+
+        private void HandleGameEnded(List<ResultData> results)
+        {
+            System.Diagnostics.Debug.WriteLine("[CLIENT] GAME OVER RECEIVED!");
+
+            _localTurnTimer.Stop();
+
+            CleanupEvents();
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _navigationService.NavigateTo(new MatchResultsPage(results));
             });
         }
 
@@ -571,6 +586,18 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteReportPlayer()
         {
             // TODO: Implement report player functionality
+        }
+
+        private void CleanupEvents()
+        {
+            _gameplayService.InitialHandReceived += HandleInitialHand;
+            _gameplayService.CardsReceived += HandleCardsReceived;
+            _gameplayService.PlayerPlayedCard += HandlePlayerPlayedCard;
+            _gameplayService.PlayerDrewCard += HandlePlayerDrewCard;
+            _gameplayService.TurnChanged += HandleTurnChanged;
+            _gameplayService.PlayerListReceived += HandlePlayerListReceived;
+            _gameplayService.GameMessageReceived += HandleGameMessage;
+            _gameplayService.GameEnded += HandleGameEnded;
         }
     }
 }

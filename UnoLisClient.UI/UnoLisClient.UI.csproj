@@ -107,6 +107,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MatchBoardViewModel.cs" />
     <Compile Include="ViewModels\MatchLobbyViewModel.cs" />
+    <Compile Include="ViewModels\MatchResultsViewModel.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewViewModel.cs" />
@@ -191,6 +192,9 @@
     </Compile>
     <Compile Include="Views\UnoLisPages\MatchLobbyPage.xaml.cs">
       <DependentUpon>MatchLobbyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnoLisPages\MatchResultsPage.xaml.cs">
+      <DependentUpon>MatchResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UnoLisPages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -638,6 +642,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UnoLisPages\MatchMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnoLisPages\MatchResultsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

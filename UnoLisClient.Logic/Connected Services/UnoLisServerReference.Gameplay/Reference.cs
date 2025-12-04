@@ -269,13 +269,13 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsWinnerField;
+        private bool AvatarNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NicknameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PositionField;
+        private int RankField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ScoreField;
@@ -291,14 +291,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsWinner {
+        public bool AvatarName {
             get {
-                return this.IsWinnerField;
+                return this.AvatarNameField;
             }
             set {
-                if ((this.IsWinnerField.Equals(value) != true)) {
-                    this.IsWinnerField = value;
-                    this.RaisePropertyChanged("IsWinner");
+                if ((this.AvatarNameField.Equals(value) != true)) {
+                    this.AvatarNameField = value;
+                    this.RaisePropertyChanged("AvatarName");
                 }
             }
         }
@@ -317,14 +317,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Position {
+        public int Rank {
             get {
-                return this.PositionField;
+                return this.RankField;
             }
             set {
-                if ((this.PositionField.Equals(value) != true)) {
-                    this.PositionField = value;
-                    this.RaisePropertyChanged("Position");
+                if ((this.RankField.Equals(value) != true)) {
+                    this.RankField = value;
+                    this.RaisePropertyChanged("Rank");
                 }
             }
         }
