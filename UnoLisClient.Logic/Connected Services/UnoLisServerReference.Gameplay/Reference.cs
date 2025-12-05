@@ -269,7 +269,7 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool AvatarNameField;
+        private string AvatarNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NicknameField;
@@ -291,12 +291,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool AvatarName {
+        public string AvatarName {
             get {
                 return this.AvatarNameField;
             }
             set {
-                if ((this.AvatarNameField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.AvatarNameField, value) != true)) {
                     this.AvatarNameField = value;
                     this.RaisePropertyChanged("AvatarName");
                 }

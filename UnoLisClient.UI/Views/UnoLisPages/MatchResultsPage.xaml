@@ -18,49 +18,70 @@
                 </TextBlock.Effect>
             </TextBlock>
 
-            <Border Background="#33FFFFFF" CornerRadius="20" Padding="20" Margin="0,0,0,30" HorizontalAlignment="Center">
+            <Border Background="#33FFFFFF" CornerRadius="20" Padding="30" Margin="0,0,0,30" HorizontalAlignment="Center">
                 <StackPanel>
-                    <TextBlock Text="WINNER" Foreground="Gold" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock Text="WINNER" Foreground="Gold" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
 
-                    <Border Width="100" Height="100" CornerRadius="50" Margin="10" BorderBrush="Gold" BorderThickness="4">
+                    <Border Width="120" Height="120" CornerRadius="60" Margin="10" BorderBrush="Gold" BorderThickness="4">
                         <Border.Background>
-                            <ImageBrush ImageSource="/Assets/Other/LobbyHost.png" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="{Binding Winner.AvatarImagePath}" 
+                                        Stretch="UniformToFill"/>
                         </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Gold" BlurRadius="15" ShadowDepth="0" Opacity="0.6"/>
+                        </Border.Effect>
                     </Border>
 
                     <TextBlock Text="{Binding Winner.Nickname}" 
-                               Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                               Foreground="White" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding Winner.Score, StringFormat='+{0} Points'}" 
+                               Foreground="#FFD700" FontSize="18" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                 </StackPanel>
             </Border>
 
-            <ItemsControl ItemsSource="{Binding Results}" Margin="0,0,0,30">
+            <ItemsControl ItemsSource="{Binding Losers}" Margin="0,0,0,30">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#11FFFFFF" CornerRadius="10" Margin="5" Padding="15,5" Width="300">
+                        <Border Background="#11FFFFFF" CornerRadius="10" Margin="5" Padding="15,8" Width="350">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="{Binding Rank, StringFormat='#{0}'}" 
-                                           Foreground="Gray" FontSize="18" VerticalAlignment="Center" FontWeight="Bold"/>
+                                           Foreground="Gray" FontSize="20" VerticalAlignment="Center" FontWeight="Bold"/>
 
-                                <TextBlock Grid.Column="1" Text="{Binding Nickname}" 
+                                <Border Grid.Column="1" Width="34" Height="34" CornerRadius="17" Margin="5,0" BorderBrush="White" BorderThickness="1">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding AvatarImagePath}" Stretch="UniformToFill"/>
+                                    </Border.Background>
+                                </Border>
+
+                                <TextBlock Grid.Column="2" Text="{Binding Nickname}" 
                                            Foreground="White" FontSize="18" VerticalAlignment="Center" Margin="10,0"/>
 
-                                <TextBlock Grid.Column="2" Text="{Binding Score, StringFormat='Score: {0}'}" 
-                                           Foreground="#AAAAAA" VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Score}" Foreground="#AAAAAA" FontSize="16" FontWeight="Bold"/>
+                                    <TextBlock Text=" pts" Foreground="#AAAAAA" FontSize="14"/>
+                                </StackPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Button Content="Return to Menu" Command="{Binding BackToMenuCommand}"
-                    Width="200" Height="40" FontSize="16" FontWeight="Bold"
-                    Style="{DynamicResource PrimaryButtonStyle}"/>
+            <Button Content="Return to Menu" 
+                    Command="{Binding BackToMenuCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Width="220" 
+                    Height="80" 
+                    FontSize="18"
+                    Cursor="Hand"
+                    Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Page>

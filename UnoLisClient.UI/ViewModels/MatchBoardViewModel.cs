@@ -223,7 +223,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private void HandleInitialHand(List<Card> hand)
         {
-            // LOG CRÍTICO: ¿Llegó el mensaje?
             System.Diagnostics.Debug.WriteLine($"[CLIENT] EVENT RECEIVED: Initial Hand with {hand?.Count ?? 0} cards.");
 
             Application.Current.Dispatcher.Invoke(() =>
@@ -235,7 +234,6 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         foreach (var cardDto in hand)
                         {
-                            // LOG DETALLADO: ¿Qué carta es?
                             System.Diagnostics.Debug.WriteLine($"[CLIENT] Adding visual card: {cardDto.Color} {cardDto.Value} (ID: {cardDto.Id})");
                             AddCardToHand(cardDto);
                         }
@@ -243,7 +241,6 @@ namespace UnoLisClient.UI.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    // Si falla aquí, es un error de UI (Assets no encontrados, etc.)
                     System.Diagnostics.Debug.WriteLine($"[CLIENT] UI ERROR Rendering Cards: {ex.Message}");
                     System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 }
@@ -259,7 +256,7 @@ namespace UnoLisClient.UI.ViewModels
                     AddCardToHand(cardDto);
                 }
                 UpdateUnoButtonStatus();
-                SoundManager.PlaySound("shuffle_deck.mp3"); // Sonido opcional
+                SoundManager.PlaySound("shuffle_deck.mp3");
             });
         }
 
@@ -295,8 +292,7 @@ namespace UnoLisClient.UI.ViewModels
             {
                 if (nickname != _currentUserNickname)
                 {
-                    UpdateOpponentCardCount(nickname, 1); // Sumar 1 carta al rival
-                    // Animación visual opcional aquí
+                    UpdateOpponentCardCount(nickname, 1); 
                 }
             });
         }
@@ -323,12 +319,10 @@ namespace UnoLisClient.UI.ViewModels
 
                 foreach (var card in PlayerHand)
                 {
-                    card.IsPlayable = true; // Falta validar color/valor (lo vemos en Fase 2)
+                    card.IsPlayable = true;
                     card.UpdateCanExecute();
                 }
 
-                // Actualizar UI de oponentes (borde dorado, etc.)
-                // UpdateOpponentTurnVisuals(nickname); 
             });
         }
 
@@ -404,10 +398,9 @@ namespace UnoLisClient.UI.ViewModels
         {
             if (_pendingWildCard == null) return;
 
-            IsColorSelectorVisible = false; // Ocultar popup
+            IsColorSelectorVisible = false;
 
-            // Convertir string "Red" a int (enum)
-            int selectedColorId = (int)CardColor.Red; // Default
+            int selectedColorId = (int)CardColor.Red; 
             if (Enum.TryParse(colorName, out CardColor parsedColor))
             {
                 selectedColorId = (int)parsedColor;
@@ -415,14 +408,13 @@ namespace UnoLisClient.UI.ViewModels
 
             try
             {
-                // Enviar la jugada al servidor CON el color seleccionado
                 await _gameplayService.PlayCardAsync(
                     _currentLobbyCode,
                     _currentUserNickname,
                     _pendingWildCard.CardData.Id,
                     selectedColorId);
 
-                _pendingWildCard = null; // Limpiar
+                _pendingWildCard = null;
             }
             catch (Exception ex)
             {
@@ -432,9 +424,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private async void ExecuteDrawCard()
         {
-            // Validar turno si quieres restringir robo fuera de turno
-            // if (CurrentTurnNickname != _currentUserNickname) return;
-
             await _gameplayService.DrawCardAsync(_currentLobbyCode, _currentUserNickname);
         }
 
@@ -457,7 +446,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private void UpdateOpponentCardCount(string nickname, int delta)
         {
-            // Buscamos en los 3 espacios quién tiene ese nick
             if (OpponentLeft?.Nickname == nickname) OpponentLeft.CardCount += delta;
             else if (OpponentTop?.Nickname == nickname) OpponentTop.CardCount += delta;
             else if (OpponentRight?.Nickname == nickname) OpponentRight.CardCount += delta;
