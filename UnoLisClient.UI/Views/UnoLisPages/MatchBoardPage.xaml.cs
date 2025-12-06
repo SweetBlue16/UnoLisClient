@@ -61,16 +61,29 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             }
         }
 
-        private void MatchBoardPage_Loaded(object sender, RoutedEventArgs e)
+        private void MatchBoardPageLoaded(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(_lobbyCode))
             {
                 AnimationUtils.FadeIn(this.Content as Grid, 0.8);
                 _ = _viewModel.InitializeMatchAsync(_lobbyCode);
+                _viewModel.PlayerHand.CollectionChanged += PlayerHand_CollectionChanged;
             }
         }
 
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void PlayerHand_CollectionChanged(object sender, 
+            System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    HandScrollViewer.ScrollToRightEnd();
+                });
+            }
+        }
+
+        private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MatchBoardViewModel.IsSettingsMenuVisible))
             {
@@ -80,7 +93,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 }
                 else
                 {
-                    AnimationUtils.FadeOut(GameSettingsModal);
+                    await AnimationUtils.FadeOut(GameSettingsModal);
                 }
             }
         }
@@ -90,6 +103,14 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             await AnimationUtils.FadeOut(GameSettingsModal);
             await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.5);
             _viewModel.LeaveMatchCommand.Execute(null);
+        }
+
+        private void MatchBoardPageUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel != null)
+            {
+                _viewModel.PlayerHand.CollectionChanged -= PlayerHand_CollectionChanged;
+            }
         }
     }
 }

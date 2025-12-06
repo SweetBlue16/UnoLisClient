@@ -24,11 +24,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SayUnoAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CardPlayed">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="card" nillable="true" type="q2:Card" />
+        <xs:element minOccurs="0" name="cardsLeft" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -36,6 +45,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardsLeft" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,6 +88,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerShoutedUno">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

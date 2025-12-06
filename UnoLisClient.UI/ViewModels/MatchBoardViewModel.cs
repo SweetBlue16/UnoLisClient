@@ -35,6 +35,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private string _currentLobbyCode;
         private string _currentUserNickname;
+        private bool _hasShoutedUnoLocal = false;
         private List<GamePlayer> _allPlayersData;
         private CardModel _pendingWildCard;
         private OpponentModel _opponentTop;
@@ -128,6 +129,13 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _isTimerWarning, value);
         }
 
+        private bool _isGameClockwise = true;
+        public bool IsGameClockwise
+        {
+            get => _isGameClockwise;
+            set => SetProperty(ref _isGameClockwise, value);
+        }
+
         public ICommand DrawCardCommand { get; }
         public ICommand CallUnoCommand { get; }
         public ICommand ToggleSettingsCommand { get; }
@@ -179,6 +187,7 @@ namespace UnoLisClient.UI.ViewModels
                 _gameplayService.PlayerListReceived += HandlePlayerListReceived;
                 _gameplayService.GameMessageReceived += HandleGameMessage;
                 _gameplayService.GameEnded += HandleGameEnded;
+                _gameplayService.PlayerShoutedUnoReceived += HandlePlayerShoutedUno;
 
                 try
                 {
@@ -251,16 +260,18 @@ namespace UnoLisClient.UI.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                foreach (var cardDto in cards)
+                foreach (var card in cards)
                 {
-                    AddCardToHand(cardDto);
+                    AddCardToHand(card);
                 }
+
+                _hasShoutedUnoLocal = false;
                 UpdateUnoButtonStatus();
                 SoundManager.PlaySound("shuffle_deck.mp3");
             });
         }
 
-        private void HandlePlayerPlayedCard(string nickname, Card card)
+        private void HandlePlayerPlayedCard(string nickname, Card card, int cardsLeft)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -276,23 +287,83 @@ namespace UnoLisClient.UI.ViewModels
                 {
                     var cardToRemove = PlayerHand.FirstOrDefault(c => c.CardData.Id == card.Id);
                     if (cardToRemove != null) PlayerHand.Remove(cardToRemove);
+                    UpdateUnoButtonStatus();
                 }
                 else
                 {
-                    UpdateOpponentCardCount(nickname, -1);
+                    SetOpponentCardCount(nickname, cardsLeft);
                 }
+
+                if (card.Value == CardValue.Reverse)
+                {
+                    IsGameClockwise = !IsGameClockwise;
+                }
+                else if (card.Value == CardValue.Skip)
+                {
+                    IdentifyAndAnimateSkip(nickname); 
+                }
+
                 SoundManager.PlaySound("card_flip.mp3");
                 UpdateUnoButtonStatus();
             });
         }
 
-        private void HandlePlayerDrewCard(string nickname)
+        private void IdentifyAndAnimateSkip(string attackerNickname)
+        {
+            if (_allPlayersData == null || _allPlayersData.Count == 0)
+            {
+                return;
+            }
+
+            var attackerObj = _allPlayersData.FirstOrDefault(p => p.Nickname == attackerNickname);
+            if (attackerObj == null)
+            {
+                return;
+            }
+
+            int attackerIndex = _allPlayersData.IndexOf(attackerObj);
+            int totalPlayers = _allPlayersData.Count;
+            int victimIndex;
+
+            if (IsGameClockwise)
+            {
+                victimIndex = (attackerIndex + 1) % totalPlayers;
+            }
+            else
+            {
+                victimIndex = (attackerIndex - 1 + totalPlayers) % totalPlayers;
+            }
+
+            var victimObj = _allPlayersData[victimIndex];
+            string victimNickname = victimObj.Nickname;
+
+            if (victimNickname == _currentUserNickname)
+            {
+                SoundManager.PlayClick();
+                return;
+            }
+
+            if (OpponentLeft != null && OpponentLeft.Nickname == victimNickname)
+            {
+                OpponentLeft.TriggerSkipAnimation();
+            }
+            else if (OpponentTop != null && OpponentTop.Nickname == victimNickname)
+            {
+                OpponentTop.TriggerSkipAnimation();
+            }
+            else if (OpponentRight != null && OpponentRight.Nickname == victimNickname)
+            {
+                OpponentRight.TriggerSkipAnimation();
+            }
+        }
+
+        private void HandlePlayerDrewCard(string nickname, int cardsLeft)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 if (nickname != _currentUserNickname)
                 {
-                    UpdateOpponentCardCount(nickname, 1); 
+                    SetOpponentCardCount(nickname, cardsLeft);
                 }
             });
         }
@@ -394,6 +465,22 @@ namespace UnoLisClient.UI.ViewModels
             }
         }
 
+        private void SetOpponentCardCount(string nickname, int exactCount)
+        {
+            if (OpponentLeft?.Nickname == nickname)
+            {
+                OpponentLeft.CardCount = exactCount;
+            }
+            else if (OpponentTop?.Nickname == nickname)
+            {
+                OpponentTop.CardCount = exactCount;
+            }
+            else if (OpponentRight?.Nickname == nickname)
+            {
+                OpponentRight.CardCount = exactCount;
+            }
+        }
+
         private async void ExecuteSelectColor(string colorName)
         {
             if (_pendingWildCard == null) return;
@@ -451,16 +538,25 @@ namespace UnoLisClient.UI.ViewModels
             else if (OpponentRight?.Nickname == nickname) OpponentRight.CardCount += delta;
         }
 
-        private void ExecuteCallUno()
+        private async void ExecuteCallUno()
         {
             SoundManager.PlayClick();
-            IsUnoButtonVisible = false;
-            _dialogService.ShowAlert(Global.AppNameLabel, string.Format(Match.PlayerDeclaredUnoMessageLabel, CurrentTurnNickname), PopUpIconType.Info);
+            _hasShoutedUnoLocal = true;
+            UpdateUnoButtonStatus();
+
+            try
+            {
+                await _gameplayService.SayUnoAsync(_currentLobbyCode, _currentUserNickname);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error saying UNO: {ex.Message}");
+            }
         }
 
         private void UpdateUnoButtonStatus()
         {
-            IsUnoButtonVisible = (PlayerHand.Count == 2);
+            IsUnoButtonVisible = (PlayerHand.Count == 1 && !_hasShoutedUnoLocal);
         }
 
         private void HandlePlayerListReceived(List<GamePlayer> players)
@@ -470,6 +566,17 @@ namespace UnoLisClient.UI.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 InitializeOpponents();
+            });
+        }
+
+        private void HandlePlayerShoutedUno(string nickname)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                string message = string.Format(Match.PlayerDeclaredUnoMessageLabel, nickname);
+                _dialogService.ShowAlert(Global.AppNameLabel, message, PopUpIconType.Info);
+
+                SoundManager.PlaySound("buttonClick.mp3");
             });
         }
 

@@ -48,6 +48,13 @@
                 </Ellipse.Fill>
             </Ellipse>
 
+            <Grid Width="60" Height="60" Margin="0,-60,0,0" 
+                  Visibility="{Binding IsSkipped, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Ellipse Fill="#AAFF0000" />
+                <TextBlock Text="🚫" FontSize="40" Foreground="White" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            </Grid>
+
             <Border Background="#80000000" CornerRadius="5" Padding="5" Margin="0,5,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                     <Image Source="/Assets/Other/LobbyHost.png" Width="16" Height="16" Margin="0,0,5,0"

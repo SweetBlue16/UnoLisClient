@@ -11,7 +11,8 @@
       xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       d:DataContext="{d:DesignInstance vm:MatchBoardViewModel}"
       Title="MatchBoardPage"
-      Loaded="MatchBoardPage_Loaded">
+      Loaded="MatchBoardPageLoaded"
+      Unloaded="MatchBoardPageUnloaded">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -58,27 +59,76 @@
                                           VerticalAlignment="Center"
                                           Margin="0,0,10,0"/>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" 
-                        HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <Border Width="100" Height="150" Margin="15" Cursor="Hand">
-                    <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" ToolTip="{x:Static language:Match.DrawCardTooltip}"/>
-                    <Border.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding DrawCardCommand}" />
-                    </Border.InputBindings>
-                    <Border.Effect>
-                        <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
-                    </Border.Effect>
-                </Border>
+                <Viewbox Width="380" Height="380" IsHitTestVisible="False" Opacity="0.15">
+                    <Path Data="M 250, 50 A 200,200 0 1,1 50,250 L 10,250 L 75,175 L 140,250 L 100,250 A 150,150 0 1,0 250,100 Z" 
+                          Fill="White" RenderTransformOrigin="0.5,0.5">
+                        <Path.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
+                        </Path.Effect>
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsGameClockwise}" Value="False">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                     To="-1" Duration="0:0:0.6">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <BackEase EasingMode="EaseInOut" Amplitude="0.3"/>
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                     To="1" Duration="0:0:0.6">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <BackEase EasingMode="EaseInOut" Amplitude="0.3"/>
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
 
-                <Image Source="{Binding DiscardPileTopCard.ImagePath}" Width="100" Height="150" Margin="15">
-                    <Image.Effect>
-                        <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
-                    </Image.Effect>
-                </Image>
-            </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                    <Border Width="100" Height="150" Margin="15" Cursor="Hand">
+                        <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" 
+                               ToolTip="{x:Static language:Match.DrawCardTooltip}"/>
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding DrawCardCommand}" />
+                        </Border.InputBindings>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
+                        </Border.Effect>
+                    </Border>
+
+                    <Image Source="{Binding DiscardPileTopCard.ImagePath}" Width="100" Height="150" Margin="15">
+                        <Image.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
+                        </Image.Effect>
+                    </Image>
+                </StackPanel>
+            </Grid>
+
+            <ScrollViewer x:Name="HandScrollViewer" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                           HorizontalScrollBarVisibility="Auto" 
                           VerticalScrollBarVisibility="Disabled"
                           Padding="0,0,0,20"

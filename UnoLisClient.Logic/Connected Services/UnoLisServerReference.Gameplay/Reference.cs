@@ -450,16 +450,22 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/ConnectToGame")]
         System.Threading.Tasks.Task ConnectToGameAsync(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/SayUnoAsync")]
+        void SayUnoAsync(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/SayUnoAsync")]
+        System.Threading.Tasks.Task SayUnoAsyncAsync(string lobbyCode, string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGameplayManagerCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/CardPlayed")]
-        void CardPlayed(string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card card);
+        void CardPlayed(string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.Card card, int cardsLeft);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/CardDrawn")]
-        void CardDrawn(string nickname);
+        void CardDrawn(string nickname, int cardsLeft);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/TurnChanged")]
         void TurnChanged(string nextPlayerNickname);
@@ -478,6 +484,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/GameMessage")]
         void GameMessage(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/PlayerShoutedUno")]
+        void PlayerShoutedUno(string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -530,6 +539,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         public System.Threading.Tasks.Task ConnectToGameAsync(string lobbyCode, string nickname) {
             return base.Channel.ConnectToGameAsync(lobbyCode, nickname);
+        }
+        
+        public void SayUnoAsync(string lobbyCode, string nickname) {
+            base.Channel.SayUnoAsync(lobbyCode, nickname);
+        }
+        
+        public System.Threading.Tasks.Task SayUnoAsyncAsync(string lobbyCode, string nickname) {
+            return base.Channel.SayUnoAsyncAsync(lobbyCode, nickname);
         }
     }
 }

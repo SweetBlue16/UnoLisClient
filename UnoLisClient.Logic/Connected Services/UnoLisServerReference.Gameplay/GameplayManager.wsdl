@@ -46,6 +46,9 @@
   <wsdl:message name="IGameplayManager_ConnectToGame_InputMessage">
     <wsdl:part name="parameters" element="tns:ConnectToGame" />
   </wsdl:message>
+  <wsdl:message name="IGameplayManager_SayUnoAsync_InputMessage">
+    <wsdl:part name="parameters" element="tns:SayUnoAsync" />
+  </wsdl:message>
   <wsdl:message name="IGameplayManager_CardPlayed_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CardPlayed" />
   </wsdl:message>
@@ -70,6 +73,9 @@
   <wsdl:message name="IGameplayManager_GameMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GameMessage" />
   </wsdl:message>
+  <wsdl:message name="IGameplayManager_PlayerShoutedUno_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerShoutedUno" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IGameplayManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/PlayCard" message="tns:IGameplayManager_PlayCard_InputMessage" />
@@ -79,6 +85,9 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConnectToGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/ConnectToGame" message="tns:IGameplayManager_ConnectToGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SayUnoAsync">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/SayUnoAsync" message="tns:IGameplayManager_SayUnoAsync_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CardPlayed">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/CardPlayed" message="tns:IGameplayManager_CardPlayed_OutputCallbackMessage" />
@@ -104,6 +113,9 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GameMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/GameMessage" message="tns:IGameplayManager_GameMessage_OutputCallbackMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerShoutedUno">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/PlayerShoutedUno" message="tns:IGameplayManager_PlayerShoutedUno_OutputCallbackMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameplayManager" type="tns:IGameplayManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IGameplayManager_policy" />
@@ -122,6 +134,12 @@
     </wsdl:operation>
     <wsdl:operation name="ConnectToGame">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/ConnectToGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SayUnoAsync">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/SayUnoAsync" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -170,6 +188,12 @@
     </wsdl:operation>
     <wsdl:operation name="GameMessage">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/GameMessage" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerShoutedUno">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/PlayerShoutedUno" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -21,25 +21,27 @@ namespace UnoLisClient.Logic.Services
         private GameplayCallback _callback;
         private string _currentUserNickname;
 
-        public event Action<string, Card> PlayerPlayedCard;
-        public event Action<string> PlayerDrewCard;
+        public event Action<string, Card, int> PlayerPlayedCard;
+        public event Action<string, int> PlayerDrewCard;
         public event Action<string> TurnChanged;
         public event Action<List<Card>> InitialHandReceived;
         public event Action<List<GamePlayer>> PlayerListReceived;
         public event Action<List<Card>> CardsReceived;
         public event Action<List<ResultData>> GameEnded;
         public event Action<string> GameMessageReceived;
+        public event Action<string> PlayerShoutedUnoReceived;
 
         private GameplayService()
         {
-            GameplayCallback.OnCardPlayed += (nick, card) => PlayerPlayedCard?.Invoke(nick, card);
-            GameplayCallback.OnCardDrawn += (nick) => PlayerDrewCard?.Invoke(nick);
+            GameplayCallback.OnCardPlayed += (nick, card, count) => PlayerPlayedCard?.Invoke(nick, card, count);
+            GameplayCallback.OnCardDrawn += (nick, count) => PlayerDrewCard?.Invoke(nick, count);
             GameplayCallback.OnTurnChanged += (nick) => TurnChanged?.Invoke(nick);
             GameplayCallback.OnInitialHandReceived += (hand) => InitialHandReceived?.Invoke(hand);
             GameplayCallback.OnPlayerListReceived += (list) => PlayerListReceived?.Invoke(list);
             GameplayCallback.OnCardsReceived += (cards) => CardsReceived?.Invoke(cards);
             GameplayCallback.OnMatchEnded += (results) => GameEnded?.Invoke(results);
             GameplayCallback.OnGameMessageReceived += (msg) => GameMessageReceived?.Invoke(msg);
+            GameplayCallback.OnPlayerShoutedUno += (nick) => PlayerShoutedUnoReceived?.Invoke(nick);
         }
 
         public void Initialize(string nickname)
@@ -105,6 +107,12 @@ namespace UnoLisClient.Logic.Services
         {
             EnsureConnection();
             return Task.Run(() => _proxy.DrawCard(lobbyCode, nickname));
+        }
+
+        public Task SayUnoAsync(string lobbyCode, string nickname)
+        {
+            EnsureConnection();
+            return Task.Run(() => _proxy.SayUnoAsync(lobbyCode, nickname));
         }
 
         private void EnsureConnection()
