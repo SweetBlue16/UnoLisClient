@@ -34,7 +34,8 @@
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
-      <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
+      <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" />
+      <xsd:import schemaLocation="http://localhost:8114/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameplayManager_PlayCard_InputMessage">
@@ -48,6 +49,12 @@
   </wsdl:message>
   <wsdl:message name="IGameplayManager_SayUnoAsync_InputMessage">
     <wsdl:part name="parameters" element="tns:SayUnoAsync" />
+  </wsdl:message>
+  <wsdl:message name="IGameplayManager_DisconnectPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IGameplayManager_UseItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:UseItem" />
   </wsdl:message>
   <wsdl:message name="IGameplayManager_CardPlayed_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CardPlayed" />
@@ -88,6 +95,12 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SayUnoAsync">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/SayUnoAsync" message="tns:IGameplayManager_SayUnoAsync_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DisconnectPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/DisconnectPlayer" message="tns:IGameplayManager_DisconnectPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UseItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/UseItem" message="tns:IGameplayManager_UseItem_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CardPlayed">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/CardPlayed" message="tns:IGameplayManager_CardPlayed_OutputCallbackMessage" />
@@ -140,6 +153,18 @@
     </wsdl:operation>
     <wsdl:operation name="SayUnoAsync">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/SayUnoAsync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DisconnectPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/DisconnectPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UseItem">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/UseItem" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -19,6 +19,8 @@ using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
 
+using ServiceItemType = UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType;
+
 namespace UnoLisClient.UI.ViewModels
 {
     public class MatchBoardViewModel : BaseViewModel
@@ -43,9 +45,9 @@ namespace UnoLisClient.UI.ViewModels
         private OpponentModel _opponentRight;
 
         private CardModel _discardPileTopCard;
-        public CardModel DiscardPileTopCard 
-        { 
-            get => _discardPileTopCard; 
+        public CardModel DiscardPileTopCard
+        {
+            get => _discardPileTopCard;
             set => SetProperty(ref _discardPileTopCard, value);
         }
 
@@ -88,7 +90,7 @@ namespace UnoLisClient.UI.ViewModels
             = new ObservableCollection<ItemModel>();
 
         private bool _isUnoButtonVisible;
-        public bool IsUnoButtonVisible 
+        public bool IsUnoButtonVisible
         {
             get => _isUnoButtonVisible;
             set => SetProperty(ref _isUnoButtonVisible, value);
@@ -140,6 +142,7 @@ namespace UnoLisClient.UI.ViewModels
         public ICommand CallUnoCommand { get; }
         public ICommand ToggleSettingsCommand { get; }
         public ICommand LeaveMatchCommand { get; }
+        public ICommand OpenReportWindowCommand { get; }
         public ICommand ReportPlayerCommand { get; }
         public ICommand SelectColorCommand { get; }
 
@@ -161,6 +164,7 @@ namespace UnoLisClient.UI.ViewModels
             CallUnoCommand = new RelayCommand(ExecuteCallUno);
             ToggleSettingsCommand = new RelayCommand(ExecuteToggleSettings);
             LeaveMatchCommand = new RelayCommand(ExecuteExitGame);
+            OpenReportWindowCommand = new RelayCommand(ExecuteOpenReport);
             ReportPlayerCommand = new RelayCommand(ExecuteReportPlayer);
             SelectColorCommand = new RelayCommand<string>(ExecuteSelectColor);
 
@@ -169,65 +173,99 @@ namespace UnoLisClient.UI.ViewModels
 
         public async Task InitializeMatchAsync(string lobbyCode)
         {
-            if (string.IsNullOrEmpty(lobbyCode)) return;
+            if (string.IsNullOrEmpty(lobbyCode))
+            {
+                return;
+            }
 
             _currentLobbyCode = lobbyCode;
-
-            System.Diagnostics.Debug.WriteLine($"[CLIENT] Initializing match for: {lobbyCode}");
-
             await Task.Delay(1000);
 
             try
             {
-                _gameplayService.InitialHandReceived += HandleInitialHand;
-                _gameplayService.CardsReceived += HandleCardsReceived;
-                _gameplayService.PlayerPlayedCard += HandlePlayerPlayedCard;
-                _gameplayService.PlayerDrewCard += HandlePlayerDrewCard;
-                _gameplayService.TurnChanged += HandleTurnChanged;
-                _gameplayService.PlayerListReceived += HandlePlayerListReceived;
-                _gameplayService.GameMessageReceived += HandleGameMessage;
-                _gameplayService.GameEnded += HandleGameEnded;
-                _gameplayService.PlayerShoutedUnoReceived += HandlePlayerShoutedUno;
+                UnsubscribeFromGameEvents();
+                SubscribeToGameEvents();
+                
+                await LoadMatchSettingsAsync(lobbyCode);
+                await ConnectWithRetriesAsync(lobbyCode);
 
-                try
+                LoadItems();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[CLIENT] Background error (ignored): {ex.Message}");
+            }
+        }
+
+        private async Task LoadMatchSettingsAsync(string lobbyCode)
+        {
+            try
+            {
+                var settings = await _matchmakingService.GetLobbySettingsAsync(lobbyCode);
+                if (settings != null && !string.IsNullOrEmpty(settings.BackgroundVideoName))
                 {
-                    var settings = await _matchmakingService.GetLobbySettingsAsync(lobbyCode);
-                    if (settings != null && !string.IsNullOrEmpty(settings.BackgroundVideoName))
-                    {
-                        RequestSetBackground?.Invoke(settings.BackgroundVideoName);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"[CLIENT] Background error (ignored): {ex.Message}");
-                }
-
-                int retries = 3;
-                while (retries > 0)
-                {
-                    try
-                    {
-                        System.Diagnostics.Debug.WriteLine($"[CLIENT] Connecting... (Attempt {4 - retries}/3)");
-
-                        await _gameplayService.ConnectToGameAsync(lobbyCode, _currentUserNickname);
-
-                        System.Diagnostics.Debug.WriteLine("[CLIENT] Connect command sent successfully.");
-                        break;
-                    }
-                    catch (Exception ex)
-                    {
-                        retries--;
-                        System.Diagnostics.Debug.WriteLine($"[CLIENT] Connection failed: {ex.Message}. Retries left: {retries}");
-                        if (retries == 0) throw;
-                        await Task.Delay(1000);
-                    }
+                    RequestSetBackground?.Invoke(settings.BackgroundVideoName);
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[CLIENT] FATAL INIT ERROR: {ex.Message}");
-                _dialogService.ShowAlert("Game Error", $"Could not connect: {ex.Message}", PopUpIconType.Error);
+                System.Diagnostics.Debug.WriteLine($"[CLIENT] Background error (ignored): {ex.Message}");
             }
+        }
+
+        private async Task ConnectWithRetriesAsync(string lobbyCode)
+        {
+            int retries = 3;
+            while (retries > 0)
+            {
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine($"[CLIENT] Connecting... (Attempt {4 - retries}/3)");
+
+                    await _gameplayService.ConnectToGameAsync(lobbyCode, _currentUserNickname);
+
+                    System.Diagnostics.Debug.WriteLine("[CLIENT] Connect command sent successfully.");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    retries--;
+                    System.Diagnostics.Debug.WriteLine($"[CLIENT] Connection failed: {ex.Message}. Retries left: {retries}");
+
+                    if (retries == 0)
+                    {
+                        throw new Exception("Server unreachable after 3 attempts.", ex);
+                    }
+
+                    await Task.Delay(1000);
+                }
+            }
+        }
+
+        private void UnsubscribeFromGameEvents()
+        {
+            _gameplayService.InitialHandReceived -= HandleInitialHand;
+            _gameplayService.CardsReceived -= HandleCardsReceived;
+            _gameplayService.PlayerPlayedCard -= HandlePlayerPlayedCard;
+            _gameplayService.PlayerDrewCard -= HandlePlayerDrewCard;
+            _gameplayService.TurnChanged -= HandleTurnChanged;
+            _gameplayService.PlayerListReceived -= HandlePlayerListReceived;
+            _gameplayService.GameMessageReceived -= HandleGameMessage;
+            _gameplayService.GameEnded -= HandleGameEnded;
+            _gameplayService.PlayerShoutedUnoReceived -= HandlePlayerShoutedUno;
+        }
+
+        private void SubscribeToGameEvents()
+        {
+            _gameplayService.InitialHandReceived += HandleInitialHand;
+            _gameplayService.CardsReceived += HandleCardsReceived;
+            _gameplayService.PlayerPlayedCard += HandlePlayerPlayedCard;
+            _gameplayService.PlayerDrewCard += HandlePlayerDrewCard;
+            _gameplayService.TurnChanged += HandleTurnChanged;
+            _gameplayService.PlayerListReceived += HandlePlayerListReceived;
+            _gameplayService.GameMessageReceived += HandleGameMessage;
+            _gameplayService.GameEnded += HandleGameEnded;
+            _gameplayService.PlayerShoutedUnoReceived += HandlePlayerShoutedUno;
         }
 
         private void HandleInitialHand(List<Card> hand)
@@ -300,7 +338,7 @@ namespace UnoLisClient.UI.ViewModels
                 }
                 else if (card.Value == CardValue.Skip)
                 {
-                    IdentifyAndAnimateSkip(nickname); 
+                    IdentifyAndAnimateSkip(nickname);
                 }
 
                 SoundManager.PlaySound("card_flip.mp3");
@@ -420,6 +458,74 @@ namespace UnoLisClient.UI.ViewModels
             });
         }
 
+        private async void ExecuteUseItem(UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType localType)
+        {
+            // 1. TRADUCCIÓN: Convertir tu Enum local al del Servidor
+            // Esto es necesario porque tu enum dice 'Swap' y el server dice 'SwapHands'
+            ServiceItemType serverType;
+
+            switch (localType)
+            {
+                case UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Swap:
+                    serverType = ServiceItemType.SwapHands;
+                    break;
+                case UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Shield:
+                    serverType = ServiceItemType.Shield;
+                    break;
+                case UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Thief:
+                    serverType = ServiceItemType.Thief;
+                    break;
+                default:
+                    return; // Si es ExtraTurn u otro no soportado aún
+            }
+
+            // 2. Validación de Turno
+            if (CurrentTurnNickname != _currentUserNickname)
+            {
+                // Opcional: _dialogService.ShowAlert(...)
+                return;
+            }
+
+            // 3. Lógica de Selección (Igual que antes)
+            string target = null;
+
+            if (serverType == ServiceItemType.SwapHands)
+            {
+                if (_allPlayersData.Count == 2)
+                {
+                    target = _allPlayersData.FirstOrDefault(p => p.Nickname != _currentUserNickname)?.Nickname;
+                }
+                else
+                {
+                    // TODO: Popup Selector para 3+ jugadores
+                    target = OpponentTop?.Nickname ?? OpponentLeft?.Nickname ?? OpponentRight?.Nickname;
+                }
+            }
+            // Agregar lógica para Thief aquí si es necesario
+
+            // 4. Enviar al Servidor
+            if (target != null)
+            {
+                try
+                {
+                    await _gameplayService.UseItemAsync(_currentLobbyCode, _currentUserNickname, serverType, target);
+
+                    // Restar item visualmente (Opcional, el servidor mandará actualización luego)
+                    var item = Items.FirstOrDefault(i => i.Type == localType);
+                    if (item != null && item.Count > 0)
+                    {
+                        item.Count--;
+                        item.UpdateCanExecute(); // Deshabilita el botón si llega a 0
+                    }
+
+                    SoundManager.PlayClick();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[CLIENT] Error using item: {ex.Message}");
+                }
+            }
+        }
         private void LocalTurnTimer_Tick(object sender, EventArgs e)
         {
             if (CurrentTurnSeconds > 0)
@@ -446,14 +552,14 @@ namespace UnoLisClient.UI.ViewModels
                 return;
             }
 
-            
-                if (IsWild(cardModel.CardData.Value))
-                {
-                    _pendingWildCard = cardModel;
-                    IsColorSelectorVisible = true;
-                    SoundManager.PlayClick();
-                    return;
-                }
+
+            if (IsWild(cardModel.CardData.Value))
+            {
+                _pendingWildCard = cardModel;
+                IsColorSelectorVisible = true;
+                SoundManager.PlayClick();
+                return;
+            }
             try
             {
 
@@ -487,7 +593,7 @@ namespace UnoLisClient.UI.ViewModels
 
             IsColorSelectorVisible = false;
 
-            int selectedColorId = (int)CardColor.Red; 
+            int selectedColorId = (int)CardColor.Red;
             if (Enum.TryParse(colorName, out CardColor parsedColor))
             {
                 selectedColorId = (int)parsedColor;
@@ -562,7 +668,7 @@ namespace UnoLisClient.UI.ViewModels
         private void HandlePlayerListReceived(List<GamePlayer> players)
         {
             System.Diagnostics.Debug.WriteLine($"[CLIENT] Player List Received: {string.Join(", ", players)}");
-            _allPlayersData = players; 
+            _allPlayersData = players;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 InitializeOpponents();
@@ -619,7 +725,7 @@ namespace UnoLisClient.UI.ViewModels
                         if (i == 1) OpponentLeft = CreateOpponent(rivalData);
                         else if (i == 2) OpponentRight = CreateOpponent(rivalData);
                     }
-                    else 
+                    else
                     {
                         if (i == 1) OpponentLeft = CreateOpponent(rivalData);
                         else if (i == 2) OpponentTop = CreateOpponent(rivalData);
@@ -644,17 +750,19 @@ namespace UnoLisClient.UI.ViewModels
             };
         }
 
-        private void ExecuteUseItem(ItemType itemType)
+        private void LoadItems()
         {
-            SoundManager.PlayClick();
-            var item = Items.FirstOrDefault(i => i.Type == itemType);
-            if (item != null)
-            {
-                item.Count--;
-                item.UpdateCanExecute();
-            }
-            _dialogService.ShowAlert(Match.ItemUsedLabel, string.Format(Match.ItemUsedMessageLabel, 
-                CurrentTurnNickname, item.Type), PopUpIconType.Info);
+            Items.Clear();
+
+            var Swap = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Swap;
+            var Shield = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Shield;
+            var Thief = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Thief;
+
+            Items.Add(new ItemModel(Swap, 1, (t) => ExecuteUseItem(t)));
+
+            Items.Add(new ItemModel(Shield, 1, (t) => ExecuteUseItem(t)));
+
+            Items.Add(new ItemModel(Thief, 1, (t) => ExecuteUseItem(t)));
         }
 
         private void UpdatePlayableCards()
@@ -672,10 +780,29 @@ namespace UnoLisClient.UI.ViewModels
             IsSettingsMenuVisible = !IsSettingsMenuVisible;
         }
 
-        private void ExecuteExitGame()
+        private void ExecuteOpenReport()
         {
-            _navigationService.NavigateTo(new MainMenuPage());
+            // TODO: Implementar ventana de reportes
+            System.Diagnostics.Debug.WriteLine("Reportar jugador clicado");
+        }
+
+        private async void ExecuteExitGame()
+        {
             _localTurnTimer.Stop();
+
+            if (!string.IsNullOrEmpty(_currentLobbyCode) && !string.IsNullOrEmpty(_currentUserNickname))
+            {
+                try
+                {
+                    await _gameplayService.LeaveGameAsync(_currentLobbyCode, _currentUserNickname);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error leaving game gracefully: {ex.Message}");
+                }
+            }
+            CleanupEvents();
+            _navigationService.NavigateTo(new MainMenuPage());
         }
 
         private void ExecuteReportPlayer()
@@ -683,16 +810,12 @@ namespace UnoLisClient.UI.ViewModels
             // TODO: Implement report player functionality
         }
 
-        private void CleanupEvents()
+        public void CleanupEvents()
         {
-            _gameplayService.InitialHandReceived += HandleInitialHand;
-            _gameplayService.CardsReceived += HandleCardsReceived;
-            _gameplayService.PlayerPlayedCard += HandlePlayerPlayedCard;
-            _gameplayService.PlayerDrewCard += HandlePlayerDrewCard;
-            _gameplayService.TurnChanged += HandleTurnChanged;
-            _gameplayService.PlayerListReceived += HandlePlayerListReceived;
-            _gameplayService.GameMessageReceived += HandleGameMessage;
-            _gameplayService.GameEnded += HandleGameEnded;
+            if (_gameplayService != null)
+            {
+                UnsubscribeFromGameEvents();
+            }
         }
     }
 }

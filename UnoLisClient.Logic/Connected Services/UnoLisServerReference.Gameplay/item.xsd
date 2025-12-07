@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:simpleType name="CardColor">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ItemType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Red" />
-      <xs:enumeration value="Yellow" />
-      <xs:enumeration value="Green" />
-      <xs:enumeration value="Blue" />
-      <xs:enumeration value="Wild" />
+      <xs:enumeration value="SwapHands" />
+      <xs:enumeration value="Shield" />
+      <xs:enumeration value="Thief" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:element name="CardColor" nillable="true" type="tns:CardColor" />
-  <xs:simpleType name="CardValue">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Zero" />
-      <xs:enumeration value="One" />
-      <xs:enumeration value="Two" />
-      <xs:enumeration value="Three" />
-      <xs:enumeration value="Four" />
-      <xs:enumeration value="Five" />
-      <xs:enumeration value="Six" />
-      <xs:enumeration value="Seven" />
-      <xs:enumeration value="Eight" />
-      <xs:enumeration value="Nine" />
-      <xs:enumeration value="Skip" />
-      <xs:enumeration value="Reverse" />
-      <xs:enumeration value="DrawTwo" />
-      <xs:enumeration value="Wild" />
-      <xs:enumeration value="WildDrawFour" />
-      <xs:enumeration value="WildDrawTen" />
-      <xs:enumeration value="WildDrawSkipReverseFour" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CardValue" nillable="true" type="tns:CardValue" />
+  <xs:element name="ItemType" nillable="true" type="tns:ItemType" />
 </xs:schema>

@@ -115,6 +115,27 @@ namespace UnoLisClient.Logic.Services
             return Task.Run(() => _proxy.SayUnoAsync(lobbyCode, nickname));
         }
 
+        public Task LeaveGameAsync(string lobbyCode, string nickname)
+        {
+            EnsureConnection();
+            return Task.Run(() =>
+            {
+                try
+                {
+                    _proxy.DisconnectPlayer(lobbyCode, nickname);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("[CLIENT] Error leaving game", ex);
+                }
+            });
+        }
+
+        public async Task UseItemAsync(string lobbyCode, string nickname, ItemType itemType, string targetNickname)
+        {
+            await _proxy.UseItemAsync(lobbyCode, nickname, itemType, targetNickname);
+        }
+
         private void EnsureConnection()
         {
             if (_proxy == null || (_proxy as ICommunicationObject).State != CommunicationState.Opened)

@@ -22,5 +22,7 @@ namespace UnoLisClient.Logic.Services
         Task PlayCardAsync(string lobbyCode, string nickname, string cardId, int? colorId);
         Task DrawCardAsync(string lobbyCode, string nickname);
         Task SayUnoAsync(string lobbyCode, string nickname);
+        Task LeaveGameAsync(string lobbyCode, string nickname);
+        Task UseItemAsync(string lobbyCode, string nickname, ItemType itemType, string targetNickname);
     }
 }

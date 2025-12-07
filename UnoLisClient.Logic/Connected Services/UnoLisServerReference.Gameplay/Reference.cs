@@ -106,6 +106,20 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemType", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums")]
+    public enum ItemType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SwapHands = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Shield = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Thief = 2,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
@@ -456,6 +470,18 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/SayUnoAsync")]
         System.Threading.Tasks.Task SayUnoAsyncAsync(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/DisconnectPlayer")]
+        void DisconnectPlayer(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/DisconnectPlayer")]
+        System.Threading.Tasks.Task DisconnectPlayerAsync(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/UseItem")]
+        void UseItem(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/UseItem")]
+        System.Threading.Tasks.Task UseItemAsync(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -547,6 +573,22 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         public System.Threading.Tasks.Task SayUnoAsyncAsync(string lobbyCode, string nickname) {
             return base.Channel.SayUnoAsyncAsync(lobbyCode, nickname);
+        }
+        
+        public void DisconnectPlayer(string lobbyCode, string nickname) {
+            base.Channel.DisconnectPlayer(lobbyCode, nickname);
+        }
+        
+        public System.Threading.Tasks.Task DisconnectPlayerAsync(string lobbyCode, string nickname) {
+            return base.Channel.DisconnectPlayerAsync(lobbyCode, nickname);
+        }
+        
+        public void UseItem(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname) {
+            base.Channel.UseItem(lobbyCode, nickname, itemType, targetNickname);
+        }
+        
+        public System.Threading.Tasks.Task UseItemAsync(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname) {
+            return base.Channel.UseItemAsync(lobbyCode, nickname, itemType, targetNickname);
         }
     }
 }

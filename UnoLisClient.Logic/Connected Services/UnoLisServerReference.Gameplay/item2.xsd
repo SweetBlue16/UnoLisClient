@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8114/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" />
+  <xs:import schemaLocation="http://localhost:8114/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" />
   <xs:element name="PlayCard">
     <xs:complexType>
       <xs:sequence>
@@ -32,11 +33,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DisconnectPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UseItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" minOccurs="0" name="itemType" type="q2:ItemType" />
+        <xs:element minOccurs="0" name="targetNickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CardPlayed">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="card" nillable="true" type="q2:Card" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="card" nillable="true" type="q3:Card" />
         <xs:element minOccurs="0" name="cardsLeft" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -59,28 +78,28 @@
   <xs:element name="MatchEnded">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="results" nillable="true" type="q3:ArrayOfResultData" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="results" nillable="true" type="q4:ArrayOfResultData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReceiveInitialHand">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="hand" nillable="true" type="q4:ArrayOfCard" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="hand" nillable="true" type="q5:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReceiveCards">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="cards" nillable="true" type="q5:ArrayOfCard" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="cards" nillable="true" type="q6:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReceivePlayerList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="players" nillable="true" type="q6:ArrayOfGamePlayer" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="players" nillable="true" type="q7:ArrayOfGamePlayer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -7,6 +7,7 @@
       mc:Ignorable="d"
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       xmlns:vm="clr-namespace:UnoLisClient.UI.ViewModels"
+      xmlns:entities="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
       xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
       xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       d:DataContext="{d:DesignInstance vm:MatchBoardViewModel}"
@@ -215,11 +216,89 @@
             </Button>
 
             <ItemsControl ItemsSource="{Binding Items}" 
-              ItemTemplate="{StaticResource ItemTemplate}"
-              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Grid.Row="1">
+              Grid.Row="1" 
+              Grid.Column="1" 
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Bottom" 
+              Width="130" Height="130"
+              Margin="20,0,0,20">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type entities:ItemModel}">
+
+                        <Button Margin="5"
+                    Background="Transparent" 
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Width="50" Height="50"
+                    Command="{Binding UseItemCommand}">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <Image Source="{Binding ImagePath}" 
+                                   RenderOptions.BitmapScalingMode="HighQuality">
+                                            <Image.Effect>
+                                                <DropShadowEffect Color="Black" BlurRadius="5" Opacity="0.6"/>
+                                            </Image.Effect>
+                                        </Image>
+
+                                        <Grid x:Name="BlockedOverlay" Visibility="Collapsed">
+                                            <Viewbox Stretch="Uniform" Margin="2">
+                                                <Grid>
+                                                    <Ellipse Fill="#99FF0000" Width="100" Height="100"/>
+                                                    <TextBlock Text="🚫" 
+                                                   Foreground="White" 
+                                                   FontWeight="Bold"
+                                                   FontSize="90" 
+                                                   HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Viewbox>
+                                        </Grid>
+
+                                        <Border x:Name="CounterBorder"
+                                    Background="#CC000000"
+                                    BorderBrush="White"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    Padding="3,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Margin="-2,-2">
+                                            <TextBlock Text="{Binding Count}"
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="11"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Count}" Value="0">
+                                            <Setter TargetName="BlockedOverlay" Property="Visibility" Value="Visible"/>
+                                            <Setter TargetName="CounterBorder" Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Opacity" Value="0.7"/>
+                                        </DataTrigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+
+                            <Button.ToolTip>
+                                <ToolTip Content="{Binding Type}"/>
+                            </Button.ToolTip>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" Rows="2"/>
+                        <UniformGrid Columns="2" Rows="2" 
+                         VerticalAlignment="Bottom"
+                         HorizontalAlignment="Left"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

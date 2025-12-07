@@ -260,6 +260,9 @@
     <None Include="Connected Services\UnoLisServerReference.Gameplay\item3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UnoLisServerReference.Gameplay\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UnoLisServerReference.Leaderboards\item.xsd">
       <SubType>Designer</SubType>
     </None>

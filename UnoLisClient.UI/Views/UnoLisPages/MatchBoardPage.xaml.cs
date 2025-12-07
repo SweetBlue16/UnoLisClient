@@ -17,6 +17,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     {
         private readonly MatchBoardViewModel _viewModel;
         private readonly string _lobbyCode;
+        private bool _isInitialized = false;
 
         public MatchBoardPage(string lobbyCode)
         {
@@ -24,8 +25,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             _lobbyCode = lobbyCode;
             _viewModel = new MatchBoardViewModel(this, new AlertManager());
             _viewModel.RequestSetBackground += OnBackgroundRequested;
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
             DataContext = _viewModel;
-            _viewModel.PropertyChanged += (s, e) => ViewModel_PropertyChanged(s, e);
+            this.Loaded += MatchBoardPageLoaded;
+            this.Unloaded += MatchBoardPageUnloaded;
+
         }
 
         public void NavigateTo(Page page)
@@ -63,11 +67,17 @@ namespace UnoLisClient.UI.Views.UnoLisPages
 
         private void MatchBoardPageLoaded(object sender, RoutedEventArgs e)
         {
+            if (_isInitialized)
+            {
+                return;
+            }
+
             if (!string.IsNullOrEmpty(_lobbyCode))
             {
                 AnimationUtils.FadeIn(this.Content as Grid, 0.8);
                 _ = _viewModel.InitializeMatchAsync(_lobbyCode);
                 _viewModel.PlayerHand.CollectionChanged += PlayerHand_CollectionChanged;
+                _isInitialized = true;
             }
         }
 
@@ -109,7 +119,14 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             if (_viewModel != null)
             {
-                _viewModel.PlayerHand.CollectionChanged -= PlayerHand_CollectionChanged;
+                if (_viewModel.PlayerHand != null)
+                {
+                    _viewModel.PlayerHand.CollectionChanged -= PlayerHand_CollectionChanged;
+                }
+
+                _viewModel.RequestSetBackground -= OnBackgroundRequested;
+                _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                _viewModel.CleanupEvents();
             }
         }
     }
