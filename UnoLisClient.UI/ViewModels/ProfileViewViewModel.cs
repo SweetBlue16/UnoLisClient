@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.Mappers;
 using UnoLisClient.Logic.Models;
@@ -213,7 +214,9 @@ namespace UnoLisClient.UI.ViewModels
 
             if (!string.IsNullOrWhiteSpace(targetUrl))
             {
-                BrowserHelper.OpenUrl(targetUrl);
+                Clipboard.SetText(targetUrl);
+
+                _dialogService.ShowAlert(Global.SuccessLabel, Global.SocialMediaCopiedLabel, PopUpIconType.Success);
             }
             else
             {
@@ -296,7 +299,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             if (string.IsNullOrWhiteSpace(url) || !Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
             {
-                return null; //REVISAR LA FORMA DE CAMBIAR EL RETURN NULL POR ALGO MAS ADECUADO
+                return null;
             }
             return uri;
         }

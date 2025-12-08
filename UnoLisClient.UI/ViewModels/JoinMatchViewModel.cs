@@ -61,7 +61,6 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (response.Success)
                 {
-                    // TODO (Fase 4): Pasar el 'response.LobbyCode' al constructor
                     _navigationService.NavigateTo(new MatchLobbyPage(response.LobbyCode));
                 }
                 else

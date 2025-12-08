@@ -574,6 +574,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Social Network link copied to clipboard!.
+        /// </summary>
+        public static string SocialMediaCopiedLabel {
+            get {
+                return ResourceManager.GetString("SocialMediaCopiedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can stack Draw cards! If someone plays a +2 or a +4 on you, you can play another Draw card (equal or greater) to pass the penalty to the next player. The last player who can&apos;t respond draws the total accumulated sum..
         /// </summary>
         public static string StackingLabel {

@@ -327,4 +327,7 @@
   <data name="Msg_ServerConnectionLost" xml:space="preserve">
     <value>Se ha perdido la conexión con el servidor. Tu sesión ha sido cerrada por seguridad.</value>
   </data>
+  <data name="SocialMediaCopiedLabel" xml:space="preserve">
+    <value>Red social copiada al portapapeles!</value>
+  </data>
 </root>

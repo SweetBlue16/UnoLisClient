@@ -42,7 +42,6 @@ namespace UnoLisClient.UI.ViewModels
             set
             {
                 SetProperty(ref _isMusicEnabled, value);
-                // TODO: Conectar con SoundManager
             }
         }
 
@@ -53,7 +52,6 @@ namespace UnoLisClient.UI.ViewModels
             set
             {
                 SetProperty(ref _isSfxEnabled, value);
-                // TODO: Conectar con SoundManager
             }
         }
 

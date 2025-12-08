@@ -327,4 +327,7 @@
   <data name="Msg_ServerConnectionLost" xml:space="preserve">
     <value>Connection with the server lost. Your session has been closed for security.</value>
   </data>
+  <data name="SocialMediaCopiedLabel" xml:space="preserve">
+    <value>Social Network link copied to clipboard!</value>
+  </data>
 </root>

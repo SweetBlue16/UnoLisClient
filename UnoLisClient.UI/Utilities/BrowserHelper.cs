@@ -1,18 +1,24 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using UnoLisClient.UI.Views.PopUpWindows;
-using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.Logic.Helpers;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
+using UnoLisClient.Logic.Helpers;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.Views.PopUpWindows;
 
-// TODO: Debug
 namespace UnoLisClient.UI.Utilities
 {
     public static class BrowserHelper
     {
         private const string HttpPrefix = "http://";
         private const string HttpsPrefix = "https://";
+
+        private static readonly string[] BlockedDomains =
+        {
+            "bit.ly", "tinyurl.com", "shorturl.at", "t.co"
+        };
 
         public static void OpenUrl(string url)
         {
@@ -29,31 +35,88 @@ namespace UnoLisClient.UI.Utilities
                     url = HttpsPrefix + url;
                 }
 
-                if (!Uri.TryCreate(url, UriKind.Absolute, out _))
+                if (!IsSafeUrl(url))
                 {
-                    Logger.Warn($"Intento de abrir URL mal formada: {url}");
-                    ShowBrowserError();
+                    Logger.Warn($"Intento de abrir URL insegura o mal formada: {url}");
+                    HandleBrowserFallback(url);
                     return;
                 }
 
-                var processStartInfo = new ProcessStartInfo
+                var startInfo = new ProcessStartInfo
                 {
                     FileName = url,
                     UseShellExecute = true
                 };
 
-                Process.Start(processStartInfo);
+                Process.Start(startInfo);
             }
             catch (Win32Exception winEx)
             {
                 Logger.Error($"Error de Win32 al abrir URL '{url}'.", winEx);
-                ShowBrowserError();
+                HandleBrowserFallback(url);
             }
             catch (Exception ex)
             {
                 Logger.Error($"Error inesperado al abrir URL '{url}'.", ex);
-                ShowBrowserError();
+                HandleBrowserFallback(url);
             }
+        }
+
+        private static bool IsSafeUrl(string url)
+        {
+            if (!Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+            {
+                return false;
+            }
+
+            if (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
+            {
+                return false;
+            }
+
+            if (url.StartsWith("javascript:", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            if (url.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            if (url.StartsWith("file:", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            if (Regex.IsMatch(url, @"[\u0000-\u001F]"))
+            {
+                return false;
+            }
+
+            foreach (var domain in BlockedDomains)
+            {
+                if (uri.Host.IndexOf(domain, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static void HandleBrowserFallback(string url)
+        {
+            try
+            {
+                Clipboard.SetText(url);
+            }
+            catch (Exception clipboardEx)
+            {
+                Logger.Error("No se pudo copiar la URL al portapapeles.", clipboardEx);
+            }
+
+            ShowBrowserError();
         }
 
         private static void ShowBrowserError()
