@@ -205,6 +205,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not {0} the request. Please try again..
+        /// </summary>
+        public static string CouldNotProcessRequestMessageLabel {
+            get {
+                return ResourceManager.GetString("CouldNotProcessRequestMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database error..
         /// </summary>
         public static string DatabaseErrorMessageLabel {

@@ -183,4 +183,16 @@
   <data name="ActionColumnLabel" xml:space="preserve">
     <value>Acción</value>
   </data>
+  <data name="EnterFriendsNicknameMessageLabel" xml:space="preserve">
+    <value>Ingresa el nombre del jugador que deseas agregar:</value>
+  </data>
+  <data name="ActionRequestMessageLabel" xml:space="preserve">
+    <value>Petición de {0}</value>
+  </data>
+  <data name="ConfirmationRequestMessageLabel" xml:space="preserve">
+    <value>¿Estás seguro de que quieres {0} la petición de {1}?</value>
+  </data>
+  <data name="RequestSuccessMessageLabel" xml:space="preserve">
+    <value>La solicitud de {0} fue {1}da.</value>
+  </data>
 </root>

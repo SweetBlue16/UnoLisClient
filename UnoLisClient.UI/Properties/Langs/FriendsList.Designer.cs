@@ -70,6 +70,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} request.
+        /// </summary>
+        public static string ActionRequestMessageLabel {
+            get {
+                return ResourceManager.GetString("ActionRequestMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string AddButton {
@@ -84,6 +93,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string AddFriendButton {
             get {
                 return ResourceManager.GetString("AddFriendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to {0} the request from {1}?.
+        /// </summary>
+        public static string ConfirmationRequestMessageLabel {
+            get {
+                return ResourceManager.GetString("ConfirmationRequestMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the nickname of the player you wish to add:.
+        /// </summary>
+        public static string EnterFriendsNicknameMessageLabel {
+            get {
+                return ResourceManager.GetString("EnterFriendsNicknameMessageLabel", resourceCulture);
             }
         }
         
@@ -246,6 +273,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string RemoveFriendMessageLabel {
             get {
                 return ResourceManager.GetString("RemoveFriendMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request from {0} was {1}ed..
+        /// </summary>
+        public static string RequestSuccessMessageLabel {
+            get {
+                return ResourceManager.GetString("RequestSuccessMessageLabel", resourceCulture);
             }
         }
         

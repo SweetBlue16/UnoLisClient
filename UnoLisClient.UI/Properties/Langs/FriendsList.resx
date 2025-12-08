@@ -183,4 +183,16 @@
   <data name="ActionColumnLabel" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="EnterFriendsNicknameMessageLabel" xml:space="preserve">
+    <value>Enter the nickname of the player you wish to add:</value>
+  </data>
+  <data name="ActionRequestMessageLabel" xml:space="preserve">
+    <value>{0} request</value>
+  </data>
+  <data name="ConfirmationRequestMessageLabel" xml:space="preserve">
+    <value>Are you sure you want to {0} the request from {1}?</value>
+  </data>
+  <data name="RequestSuccessMessageLabel" xml:space="preserve">
+    <value>Request from {0} was {1}ed.</value>
+  </data>
 </root>

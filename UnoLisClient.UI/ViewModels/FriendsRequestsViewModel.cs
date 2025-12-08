@@ -11,6 +11,7 @@ using UnoLisClient.UI.Services;
 using System.ServiceModel;
 using UnoLisServer.Common.Enums;
 using UnoLisClient.Logic.Enums;
+using UnoLisClient.UI.Properties.Langs;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -66,11 +67,18 @@ namespace UnoLisClient.UI.ViewModels
             try
             {
                 var requests = await _friendsService.GetPendingRequestsAsync(CurrentSession.CurrentUserNickname);
-                await App.Current.Dispatcher.InvokeAsync(() =>
+                if (requests != null || requests.Count > 0)
                 {
-                    foreach (var req in requests.OrderBy(r => r.RequesterNickname))
-                        FriendRequests.Add(req);
-                });
+                    await App.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        foreach (var req in requests.OrderBy(r => r.RequesterNickname))
+                            FriendRequests.Add(req);
+                    });
+                }
+                else
+                {
+                    _dialogService.ShowWarning(ErrorMessages.FriendsInternalErrorMessageLabel);
+                }
             }
             catch (TimeoutException timeoutEx)
             {
@@ -97,10 +105,10 @@ namespace UnoLisClient.UI.ViewModels
         {
             if (request == null) return;
 
-            var actionText = accepted ? "Accept" : "Decline";
+            var actionText = accepted ? FriendsList.FriendRequestAcceptButton : FriendsList.FriendRequestDeclineButton;
             bool confirmed = _dialogService.ShowQuestionDialog(
-                $"{actionText} Request",
-                $"Are you sure you want to {actionText.ToLower()} the request from {request.RequesterNickname}?",
+                string.Format(FriendsList.ActionRequestMessageLabel, actionText),
+                string.Format(FriendsList.ConfirmationRequestMessageLabel, actionText.ToLower(), request.RequesterNickname),
                 PopUpIconType.Question);
 
             if (!confirmed) return;
@@ -124,13 +132,14 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         FriendRequests.Remove(request);
                         SelectedRequest = null;
-
-                        _dialogService.ShowAlert("Success", $"Request from {request.RequesterNickname} was {actionText.ToLower()}ed.", PopUpIconType.Success);
+                        string message = string.Format(FriendsList.RequestSuccessMessageLabel, request.RequesterNickname, actionText.ToLower());
+                        _dialogService.ShowAlert(Global.SuccessLabel, message, PopUpIconType.Success);
                     });
                 }
                 else
                 {
-                    _dialogService.ShowAlert("Error", $"Could not {actionText.ToLower()} the request. Please try again.", PopUpIconType.Warning);
+                    string message = string.Format(ErrorMessages.CouldNotProcessRequestMessageLabel, actionText.ToLower());
+                    _dialogService.ShowAlert(Global.OopsLabel, message, PopUpIconType.Warning);
                 }
             }
             catch (TimeoutException timeoutEx)

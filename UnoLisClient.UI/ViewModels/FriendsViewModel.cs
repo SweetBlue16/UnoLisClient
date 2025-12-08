@@ -15,6 +15,7 @@ using UnoLisClient.UI.Utilities;
 using System.ServiceModel;
 using UnoLisServer.Common.Enums;
 using UnoLisClient.Logic.Enums;
+using UnoLisClient.UI.Properties.Langs;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -56,12 +57,20 @@ namespace UnoLisClient.UI.ViewModels
             {
                 var resultList = await _friendsService.GetFriendsListAsync(CurrentSession.CurrentUserNickname);
 
-                await App.Current.Dispatcher.InvokeAsync(() =>
+                if (resultList != null && resultList.Count > 0)
                 {
-                    Friends.Clear();
-                    foreach (var f in resultList.OrderBy(x => x.Nickname))
-                        Friends.Add(f);
-                });
+                    await App.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        Friends.Clear();
+                        foreach (var f in resultList.OrderBy(x => x.Nickname))
+                            Friends.Add(f);
+                    });
+                }
+                else
+                {
+                    _dialogService.ShowWarning(ErrorMessages.FriendsInternalErrorMessageLabel);
+                }
+                IsLoading = false;
             }
             catch (TimeoutException timeoutEx)
             {
@@ -90,10 +99,10 @@ namespace UnoLisClient.UI.ViewModels
             {
                 return;
             }
-
+            
             bool confirmed = _dialogService.ShowQuestionDialog(
-                "Confirm Removal",
-                $"Are you sure you want to remove {friend.Nickname}?",
+                Global.ConfirmationLabel,
+                string.Format(FriendsList.RemoveFriendMessageLabel, friend.Nickname),
                 PopUpIconType.Question);
 
             if (!confirmed) return;
@@ -147,8 +156,9 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteOpenAddFriendModal()
         {
             string targetNickname = _dialogService.ShowInputDialog(
-                "Add a Friend",
-                "Enter the nickname of the player you wish to add:", "Nickname...",
+                FriendsList.AddFriendButton,
+                FriendsList.EnterFriendsNicknameMessageLabel,
+                FriendsList.EnterNicknameMessageLabel,
                 PopUpIconType.CreateAccount);
 
             if (!string.IsNullOrWhiteSpace(targetNickname))

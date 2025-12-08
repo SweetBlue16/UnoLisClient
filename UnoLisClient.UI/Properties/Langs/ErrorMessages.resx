@@ -165,6 +165,9 @@
   <data name="CouldNotLoadRankingMessageLabel" xml:space="preserve">
     <value>The global ranking couldn't be loaded.</value>
   </data>
+  <data name="CouldNotProcessRequestMessageLabel" xml:space="preserve">
+    <value>Could not {0} the request. Please try again.</value>
+  </data>
   <data name="DatabaseErrorMessageLabel" xml:space="preserve">
     <value>Database error.</value>
   </data>
