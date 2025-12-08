@@ -79,6 +79,51 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blue.
+        /// </summary>
+        public static string ColorBlue {
+            get {
+                return ResourceManager.GetString("ColorBlue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} changed the color to {1}..
+        /// </summary>
+        public static string ColorChangedMessageLabel {
+            get {
+                return ResourceManager.GetString("ColorChangedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Green.
+        /// </summary>
+        public static string ColorGreen {
+            get {
+                return ResourceManager.GetString("ColorGreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Red.
+        /// </summary>
+        public static string ColorRed {
+            get {
+                return ResourceManager.GetString("ColorRed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow.
+        /// </summary>
+        public static string ColorYellow {
+            get {
+                return ResourceManager.GetString("ColorYellow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Write the reason for the report:.
         /// </summary>
         public static string DescriptionReportLabel {
@@ -102,6 +147,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string ExitMatchConfirmationLabel {
             get {
                 return ResourceManager.GetString("ExitMatchConfirmationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game notification!.
+        /// </summary>
+        public static string GameNotificationMessageLabel {
+            get {
+                return ResourceManager.GetString("GameNotificationMessageLabel", resourceCulture);
             }
         }
         
