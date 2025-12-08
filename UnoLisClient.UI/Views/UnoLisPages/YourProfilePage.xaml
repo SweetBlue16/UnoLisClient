@@ -86,46 +86,51 @@
                     </StackPanel>
                     <StackPanel Grid.Row="3" Margin="0,10,0,10">
                         <TextBlock Text="{x:Static language:Profile.SocialMediaLabel}"
-                                   FontFamily="pack://application:,,,/Fonts/#Lato"
-                                   Foreground="#B0B0B0"
-                                   FontSize="16"/>
+               FontFamily="pack://application:,,,/Fonts/#Lato"
+               Foreground="#B0B0B0"
+               FontSize="16"/>
+
                         <StackPanel Orientation="Horizontal">
+
+                            <!-- FACEBOOK -->
                             <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
-                                       Foreground="White"
-                                       FontSize="15"
-                                       Margin="0,0,15,0">
-                                <Hyperlink x:Name="UserFacebookLink"
-                                           Foreground="LightBlue"
-                                           NavigateUri="{Binding FacebookUrl}"
-                                           Command="{Binding OpenSocialLinkCommand}"
-                                           CommandParameter="Facebook">
-                                    <Run Text="Facebook"/>
-                                </Hyperlink>
+                   Foreground="White"
+                   FontSize="15"
+                   Margin="0,0,15,0">
+            <Hyperlink x:Name="UserFacebookLink"
+                       Foreground="LightBlue"
+                       Command="{Binding OpenSocialLinkCommand}"
+                       CommandParameter="Facebook">
+                <Run Text="Facebook"/>
+            </Hyperlink>
                             </TextBlock>
+
+                            <!-- INSTAGRAM -->
                             <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
-                                       Foreground="White"
-                                       FontSize="15"
-                                       Margin="0,0,15,0">
-                                <Hyperlink x:Name="UserInstagramLink"
-                                           Foreground="LightPink"
-                                           NavigateUri="{Binding InstagramUrl}"
-                                           Command="{Binding OpenSocialLinkCommand}"
-                                           CommandParameter="Instagram">
-                                    <Run Text="Instagram"/>
-                                </Hyperlink>
+                   Foreground="White"
+                   FontSize="15"
+                   Margin="0,0,15,0">
+            <Hyperlink x:Name="UserInstagramLink"
+                       Foreground="LightPink"
+                       Command="{Binding OpenSocialLinkCommand}"
+                       CommandParameter="Instagram">
+                <Run Text="Instagram"/>
+            </Hyperlink>
                             </TextBlock>
+
+                            <!-- TIKTOK -->
                             <TextBlock FontFamily="pack://application:,,,/Fonts/#Lato"
-                                       Foreground="White"
-                                       FontSize="15"
-                                       Margin="0,0,15,0">
-                                <Hyperlink x:Name="UserTikTokLink"
-                                           Foreground="HotPink"
-                                           NavigateUri="{Binding TikTokUrl}"
-                                           Command="{Binding OpenSocialLinkCommand}"
-                                           CommandParameter="TikTok">
-                                    <Run Text="TikTok"/>
-                                </Hyperlink>
+                   Foreground="White"
+                   FontSize="15"
+                   Margin="0,0,15,0">
+            <Hyperlink x:Name="UserTikTokLink"
+                       Foreground="HotPink"
+                       Command="{Binding OpenSocialLinkCommand}"
+                       CommandParameter="TikTok">
+                <Run Text="TikTok"/>
+            </Hyperlink>
                             </TextBlock>
+
                         </StackPanel>
                     </StackPanel>
                 </Grid>

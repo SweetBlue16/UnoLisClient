@@ -192,37 +192,39 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteOpenSocialLink(string linkName)
         {
             SoundManager.PlayClick();
+
             if (CurrentSession.CurrentUserProfileData == null)
             {
                 _dialogService.ShowWarning(ErrorMessages.ProfileNotLoadedMessageLabel);
                 return;
             }
 
-            string targetUrl = null;
-            switch (linkName)
+            Uri targetUri = null;
+
+            if (linkName == "Facebook")
             {
-                case "Facebook":
-                    targetUrl = CurrentSession.CurrentUserProfileData.FacebookUrl;
-                    break;
-                case "Instagram":
-                    targetUrl = CurrentSession.CurrentUserProfileData.InstagramUrl;
-                    break;
-                case "TikTok":
-                    targetUrl = CurrentSession.CurrentUserProfileData.TikTokUrl;
-                    break;
+                targetUri = FacebookUrl;
             }
+            else if (linkName == "Instagram")
+            {
+                targetUri = InstagramUrl;
+            }
+            else if (linkName == "TikTok")
+            {
+                targetUri = TikTokUrl;
+            }
+
+            string targetUrl = targetUri != null ? targetUri.ToString() : null;
 
             if (!string.IsNullOrWhiteSpace(targetUrl))
             {
-                Clipboard.SetText(targetUrl);
+                BrowserHelper.CopyUrl(targetUrl);
+                return;
+            }
 
-                _dialogService.ShowAlert(Global.SuccessLabel, Global.SocialMediaCopiedLabel, PopUpIconType.Success);
-            }
-            else
-            {
-                _dialogService.ShowWarning(ErrorMessages.SocialNetworkNotConfiguredMessageLabel);
-            }
+            _dialogService.ShowWarning(ErrorMessages.SocialNetworkNotConfiguredMessageLabel);
         }
+
 
         private void SetLoading(bool isLoading)
         {
