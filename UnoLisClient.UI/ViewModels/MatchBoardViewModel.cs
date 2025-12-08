@@ -535,12 +535,11 @@ namespace UnoLisClient.UI.ViewModels
                 {
                     await _gameplayService.UseItemAsync(_currentLobbyCode, _currentUserNickname, serverType, target);
 
-                    // Restar item visualmente (Opcional, el servidor mandará actualización luego)
                     var item = Items.FirstOrDefault(i => i.Type == localType);
                     if (item != null && item.Count > 0)
                     {
                         item.Count--;
-                        item.UpdateCanExecute(); // Deshabilita el botón si llega a 0
+                        item.UpdateCanExecute(); 
                     }
 
                     SoundManager.PlayClick();
@@ -557,12 +556,6 @@ namespace UnoLisClient.UI.ViewModels
             {
                 CurrentTurnSeconds--;
                 IsTimerWarning = CurrentTurnSeconds <= 10;
-
-                if (CurrentTurnSeconds <= 5)
-                {
-                    // Opcional: Sonido de tictac
-                    // SoundManager.PlaySound("tick.mp3"); 
-                }
             }
             else
             {
@@ -807,7 +800,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteOpenReport()
         {
-            // TODO: Implementar ventana de reportes
             System.Diagnostics.Debug.WriteLine("Reportar jugador clicado");
         }
 
@@ -832,7 +824,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteReportPlayer()
         {
-            // TODO: Implement report player functionality
         }
 
         public void CleanupEvents()

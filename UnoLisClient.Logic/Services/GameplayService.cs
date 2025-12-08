@@ -146,7 +146,7 @@ namespace UnoLisClient.Logic.Services
                 try
                 {
                     EnsureConnection();
-                    _proxy.DrawCard(lobbyCode, nickname);
+                    _proxy.SayUnoAsync(lobbyCode, nickname);
                 }
                 catch (CommunicationException ex)
                 {
