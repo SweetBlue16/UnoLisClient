@@ -332,6 +332,14 @@ namespace UnoLisClient.UI.ViewModels
                     SetOpponentCardCount(nickname, cardsLeft);
                 }
 
+                if (IsWild(card.Value))
+                {
+                    string colorName = GetLocalizedColorName(card.Color);
+                    string message = string.Format(Match.ColorChangedMessageLabel, nickname, colorName);
+                    _gameplayService.GameMessageReceived += (msg) => { };
+                    _dialogService.ShowAlert(Match.GameNotificationMessageLabel, message, PopUpIconType.Info);
+                }
+
                 if (card.Value == CardValue.Reverse)
                 {
                     IsGameClockwise = !IsGameClockwise;
@@ -344,6 +352,23 @@ namespace UnoLisClient.UI.ViewModels
                 SoundManager.PlaySound("card_flip.mp3");
                 UpdateUnoButtonStatus();
             });
+        }
+
+        private string GetLocalizedColorName(CardColor color)
+        {
+            switch (color)
+            {
+                case CardColor.Red:
+                    return Match.ColorRed;
+                case CardColor.Blue:
+                    return Match.ColorBlue;
+                case CardColor.Green:
+                    return Match.ColorGreen;
+                case CardColor.Yellow:
+                    return Match.ColorYellow;
+                default:
+                    return color.ToString();
+            }
         }
 
         private void IdentifyAndAnimateSkip(string attackerNickname)
@@ -439,7 +464,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _dialogService.ShowAlert("Aviso de Juego", message, PopUpIconType.Info);
+                _dialogService.ShowAlert(Match.GameNotificationMessageLabel, message, PopUpIconType.Info);
                 SoundManager.PlaySound("notification.mp3");
             });
         }

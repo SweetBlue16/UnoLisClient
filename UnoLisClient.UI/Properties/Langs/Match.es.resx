@@ -123,6 +123,21 @@
   <data name="ChooseColorLabel" xml:space="preserve">
     <value>Elige un Color</value>
   </data>
+  <data name="ColorBlue" xml:space="preserve">
+    <value>Azul</value>
+  </data>
+  <data name="ColorChangedMessageLabel" xml:space="preserve">
+    <value>{0} cambió el color a {1}.</value>
+  </data>
+  <data name="ColorGreen" xml:space="preserve">
+    <value>Verde</value>
+  </data>
+  <data name="ColorRed" xml:space="preserve">
+    <value>Rojo</value>
+  </data>
+  <data name="ColorYellow" xml:space="preserve">
+    <value>Amarillo</value>
+  </data>
   <data name="DescriptionReportLabel" xml:space="preserve">
     <value>Escribe el motivo del reporte:</value>
   </data>
@@ -131,6 +146,9 @@
   </data>
   <data name="ExitMatchConfirmationLabel" xml:space="preserve">
     <value>¿Estás seguro de que deseas abandonar la partida?</value>
+  </data>
+  <data name="GameNotificationMessageLabel" xml:space="preserve">
+    <value>¡Aviso del juego!</value>
   </data>
   <data name="InvalidMoveMessageLabel" xml:space="preserve">
     <value>El movimiento realizado no es válido.</value>
