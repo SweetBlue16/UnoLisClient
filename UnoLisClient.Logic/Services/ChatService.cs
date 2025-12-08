@@ -37,7 +37,15 @@ namespace UnoLisClient.Logic.Services
 
         public void Initialize(string nickname)
         {
-            if (_factory != null) return;
+            if (_factory != null && _factory.State != CommunicationState.Opened)
+            {
+                Cleanup();
+            }
+
+            if (_factory != null)
+            {
+                return;
+            }
 
             try
             {
@@ -48,6 +56,12 @@ namespace UnoLisClient.Logic.Services
                 _factory = new DuplexChannelFactory<IChatManager>(context, "NetTcpBinding_IChatManager");
 
                 _proxy = _factory.CreateChannel();
+
+                if (_proxy is ICommunicationObject channel)
+                {
+                    ServerConnectionMonitor.Monitor(channel);
+                }
+
                 _proxy.RegisterPlayer(_currentUserNickname);
             }
             catch (TimeoutException ex)

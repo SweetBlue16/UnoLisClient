@@ -46,7 +46,15 @@ namespace UnoLisClient.Logic.Services
 
         public void Initialize(string nickname)
         {
-            if (_factory != null && _factory.State == CommunicationState.Opened) return;
+            if (_factory != null && _factory.State == CommunicationState.Opened)
+            {
+                Cleanup();
+            }
+
+            if (_factory != null)
+            {
+                return;
+            }
 
             try
             {
@@ -56,6 +64,11 @@ namespace UnoLisClient.Logic.Services
                 _factory = new DuplexChannelFactory<IGameplayManager>(context, "NetTcpBinding_IGameplayManager");
 
                 _proxy = _factory.CreateChannel();
+
+                if (_proxy is ICommunicationObject channel)
+                {
+                    ServerConnectionMonitor.Monitor(channel);
+                }
             }
             catch (InvalidOperationException configEx)
             {
@@ -91,16 +104,33 @@ namespace UnoLisClient.Logic.Services
 
         public Task PlayCardAsync(string lobbyCode, string nickname, string cardId, int? colorId)
         {
-            EnsureConnection();
-            var data = new PlayCardData
+            return Task.Run(() =>
             {
-                LobbyCode = lobbyCode,
-                Nickname = nickname,
-                CardId = cardId,
-                SelectedColorId = colorId
-            };
-
-            return Task.Run(() => _proxy.PlayCard(data));
+                try
+                {
+                    EnsureConnection();
+                    var data = new PlayCardData
+                    {
+                        LobbyCode = lobbyCode,
+                        Nickname = nickname,
+                        CardId = cardId,
+                        SelectedColorId = colorId
+                    };
+                    _proxy.PlayCard(data);
+                }
+                catch (CommunicationException ex)
+                {
+                    Logger.Warn($"[GAME-CLIENT] Cannot play card. Connection unstable/lost: {ex.Message}");
+                }
+                catch (TimeoutException ex)
+                {
+                    Logger.Warn($"[GAME-CLIENT] Timeout playing card: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"[GAME-CLIENT] Unexpected error playing card", ex);
+                }
+            });
         }
 
         public Task DrawCardAsync(string lobbyCode, string nickname)
@@ -111,22 +141,40 @@ namespace UnoLisClient.Logic.Services
 
         public Task SayUnoAsync(string lobbyCode, string nickname)
         {
-            EnsureConnection();
-            return Task.Run(() => _proxy.SayUnoAsync(lobbyCode, nickname));
-        }
-
-        public Task LeaveGameAsync(string lobbyCode, string nickname)
-        {
-            EnsureConnection();
             return Task.Run(() =>
             {
                 try
                 {
-                    _proxy.DisconnectPlayer(lobbyCode, nickname);
+                    EnsureConnection();
+                    _proxy.DrawCard(lobbyCode, nickname);
+                }
+                catch (CommunicationException ex)
+                {
+                    Logger.Warn($"[GAME-CLIENT] Cannot draw card. Connection faulted: {ex.Message}");
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("[CLIENT] Error leaving game", ex);
+                    Logger.Error($"[GAME-CLIENT] Error drawing card", ex);
+                }
+            });
+        }
+
+        public Task LeaveGameAsync(string lobbyCode, string nickname)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    EnsureConnection();
+                    _proxy.SayUnoAsync(lobbyCode, nickname);
+                }
+                catch (CommunicationException ex)
+                {
+                    Logger.Warn($"[GAME-CLIENT] Cannot say UNO. Connection faulted: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"[GAME-CLIENT] Error saying UNO", ex);
                 }
             });
         }

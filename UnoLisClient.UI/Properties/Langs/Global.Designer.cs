@@ -394,6 +394,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection with the server lost. Your session has been closed for security..
+        /// </summary>
+        public static string Msg_ServerConnectionLost {
+            get {
+                return ResourceManager.GetString("Msg_ServerConnectionLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string NoButton {

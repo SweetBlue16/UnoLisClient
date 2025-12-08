@@ -27,6 +27,7 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
         public MainWindow()
         {
             InitializeComponent();
+            NavigationProxy.Initialize(MainFrame);
 
             _viewModel = new MainViewModel(this, new AlertManager(), new LogoutService());
             DataContext = _viewModel;
@@ -114,7 +115,7 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             }
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindowLoaded(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -165,13 +166,13 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
             }
         }
 
-        private void VideoBackground_MediaEnded(object sender, RoutedEventArgs e)
+        private void VideoBackgroundMediaEnded(object sender, RoutedEventArgs e)
         {
             VideoBackground.Position = TimeSpan.Zero;
             VideoBackground.Play();
         }
 
-        private void MusicPlayer_MediaEnded(object sender, RoutedEventArgs e)
+        private void MusicPlayerMediaEnded(object sender, RoutedEventArgs e)
         {
             MusicPlayer.Position = TimeSpan.Zero;
             MusicPlayer.Play();

@@ -324,4 +324,7 @@
   <data name="ReportSubmittedMessageLabel" xml:space="preserve">
     <value>Reporte a {0} enviado.</value>
   </data>
+  <data name="Msg_ServerConnectionLost" xml:space="preserve">
+    <value>Se ha perdido la conexión con el servidor. Tu sesión ha sido cerrada por seguridad.</value>
+  </data>
 </root>

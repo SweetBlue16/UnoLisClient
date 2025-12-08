@@ -29,9 +29,6 @@ namespace UnoLisClient.UI.Utilities
             }
         }
 
-        /// <summary>
-        /// Crossfade Media Arguments.
-        /// </summary>
         public readonly struct CrossfadeMediaArgs
         {
             public readonly MediaElement VideoPlayer;
@@ -167,7 +164,7 @@ namespace UnoLisClient.UI.Utilities
 
         public static async Task RestoreDefaultMediaAsync(MediaElement videoPlayer, MediaElement musicPlayer)
         {
-            string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/marioDesktop.mp4");
+            string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/econexBack.mp4");
             string defaultMusic = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/jazzBackground.mp3");
 
             await Task.Delay(600);

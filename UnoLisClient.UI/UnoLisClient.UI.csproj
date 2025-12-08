@@ -91,6 +91,7 @@
     <Compile Include="Utilities\AlertManager.cs" />
     <Compile Include="Utilities\AutoScrollBehavior.cs" />
     <Compile Include="Utilities\CardAssetHelper.cs" />
+    <Compile Include="Utilities\NavigationProxy.cs" />
     <Compile Include="Utilities\PopUpIconHelper.cs" />
     <Compile Include="Utilities\SessionReportTracker.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
@@ -393,8 +394,17 @@
     <Resource Include="Fonts\Lato.ttf" />
     <Resource Include="Fonts\Luckiest-Guy.ttf" />
     <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
+    <Content Include="Assets\bonfireLobbyBackground.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\card_flip.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\econexBack.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\econexBackground.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\shuffle_deck.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -15,49 +15,28 @@ namespace UnoLisClient.Logic.Services
             var taskCompletion = new TaskCompletionSource<ServiceResponse<ProfileData>>();
             ProfileEditManagerClient profileEditClient = null;
 
-            try
+            Action<ServiceResponse<ProfileData>> callbackAction = (response) =>
             {
-                Action<ServiceResponse<ProfileData>> callbackAction = (response) =>
+                try
                 {
-                    try
-                    {
-                        taskCompletion.TrySetResult(response);
-                    }
-                    finally
-                    {
-                        CloseClientHelper.CloseClient(profileEditClient);
-                    }
-                };
-                var callbackHandler = new ProfileEditCallback(callbackAction);
-                var context = new InstanceContext(callbackHandler);
-                profileEditClient = new ProfileEditManagerClient(context);
+                    taskCompletion.TrySetResult(response);
+                }
+                finally
+                {
+                    CloseClientHelper.CloseClient(profileEditClient);
+                }
+            };
+            var callbackHandler = new ProfileEditCallback(callbackAction);
+            var context = new InstanceContext(callbackHandler);
+            profileEditClient = new ProfileEditManagerClient(context);
 
-                profileEditClient.UpdateProfileData(profileData);
-            }
-            catch (EndpointNotFoundException enfEx)
-            {
-                Logger.Error("Error de conexión (ProfileEdit): No se encontró el endpoint.", enfEx);
-                taskCompletion.TrySetException(enfEx);
-                CloseClientHelper.CloseClient(profileEditClient);
-            }
-            catch (TimeoutException timeoutEx)
-            {
-                Logger.Error("Error de conexión (ProfileEdit): Tiempo de espera agotado.", timeoutEx);
-                taskCompletion.TrySetException(timeoutEx);
-                CloseClientHelper.CloseClient(profileEditClient);
-            }
-            catch (CommunicationException commEx)
-            {
-                Logger.Error("Error de comunicación al actualizar los datos del perfil.", commEx);
-                taskCompletion.TrySetException(commEx);
-                CloseClientHelper.CloseClient(profileEditClient);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Error inesperado al actualizar los datos del perfil.", ex);
-                taskCompletion.TrySetException(ex);
-                CloseClientHelper.CloseClient(profileEditClient);
-            }
+            WcfServiceHelper.ExecuteSafe(
+                action: () => profileEditClient.UpdateProfileData(profileData),
+                taskCompletionSource: taskCompletion,
+                client: profileEditClient,
+                operationName: "UpdateProfile"
+            );
+
             return taskCompletion.Task;
         }
     }

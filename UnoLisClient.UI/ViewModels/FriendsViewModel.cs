@@ -86,7 +86,10 @@ namespace UnoLisClient.UI.ViewModels
 
         private async Task ExecuteRemoveFriendAsync(Friend friend)
         {
-            if (friend == null) return;
+            if (friend == null)
+            {
+                return;
+            }
 
             bool confirmed = _dialogService.ShowQuestionDialog(
                 "Confirm Removal",
@@ -227,7 +230,7 @@ namespace UnoLisClient.UI.ViewModels
             {
                 message = string.Format(message, targetNickname);
             }
-            catch (FormatException) //¿Esta excepción puede quedarse sin nada dentro, sugerencia de la IA?
+            catch (FormatException)
             {
                 Logger.Error("String format error in HandleFriendRequestResult message formatting.");
             }

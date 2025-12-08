@@ -10,23 +10,23 @@
         Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Loaded="MainWindow_Loaded"
+        Loaded="MainWindowLoaded"
         Closing="MainWindowClosing">
 
     <Grid>
         <MediaElement x:Name="VideoBackground"
-                      Source="Assets/marioDesktop.mp4"
+                      Source="Assets/econexBack.mp4"
                       LoadedBehavior="Play"
                       UnloadedBehavior="Manual"
                       Stretch="Fill"
                       IsHitTestVisible="False"
-                      MediaEnded="VideoBackground_MediaEnded"/>
+                      MediaEnded="VideoBackgroundMediaEnded"/>
         <MediaElement x:Name="MusicPlayer"
                       Source="Assets/jazzBackground.mp3"
                       LoadedBehavior="Manual"
                       UnloadedBehavior="Manual"
                       Volume="0.5"
-                      MediaEnded="MusicPlayer_MediaEnded"
+                      MediaEnded="MusicPlayerMediaEnded"
                       Visibility="Hidden"/>
         <Frame x:Name="MainFrame"
                NavigationUIVisibility="Hidden"

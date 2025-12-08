@@ -18,9 +18,9 @@ namespace UnoLisClient.Logic.Services
     {
         public async Task<ServiceResponse<List<LeaderboardEntry>>> GetGlobalLeaderboardAsync()
         {
-            Console.WriteLine("[DEBUG] Llamando Leaderboards...");
+            var client = new LeaderboardsManagerClient();
 
-            using (var client = new LeaderboardsManagerClient())
+            try
             {
                 var result = await client.GetGlobalLeaderboardAsync();
 
@@ -28,11 +28,36 @@ namespace UnoLisClient.Logic.Services
                     ? new List<LeaderboardEntry>(result.Data)
                     : new List<LeaderboardEntry>();
 
+                CloseClientHelper.CloseClient(client);
+
                 return new ServiceResponse<List<LeaderboardEntry>>
                 {
                     Code = result.Code,
                     Success = result.Success,
                     Data = list
+                };
+            }
+            catch (TimeoutException ex)
+            {
+                Logger.Warn($"[LEADERBOARD] Timeout occurred while fetching global leaderboard.'{ex.Message}'");
+                CloseClientHelper.CloseClient(client);
+                return new ServiceResponse<List<LeaderboardEntry>>
+                {
+                    Success = false,
+                    Code = UnoLisServer.Common.Enums.MessageCode.Timeout,
+                    Data = new List<LeaderboardEntry>()
+                };
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"[LEADERBOARD] Error fetching data: {ex.Message}", ex);
+                CloseClientHelper.CloseClient(client);
+
+                return new ServiceResponse<List<LeaderboardEntry>>
+                {
+                    Success = false,
+                    Code = UnoLisServer.Common.Enums.MessageCode.ConnectionFailed,
+                    Data = new List<LeaderboardEntry>()
                 };
             }
         }

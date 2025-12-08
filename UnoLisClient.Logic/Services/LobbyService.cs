@@ -53,8 +53,21 @@ namespace UnoLisClient.Logic.Services
 
                 _context = new InstanceContext(_callback);
                 _proxy = new LobbyDuplexManagerClient(_context, "NetTcpBinding_ILobbyDuplexManager");
+                ServerConnectionMonitor.Monitor(_proxy.InnerChannel);
 
                 await _proxy.ConnectToLobbyAsync(lobbyCode, nickname);
+            }
+            catch (EndpointNotFoundException enfe)
+            {
+                Logger.Error($"Lobby server endpoint not found for lobby {lobbyCode}: {enfe.Message}", enfe);
+                AbortProxy();
+                throw;
+            }
+            catch (TimeoutException tex)
+            {
+                Logger.Error($"Timeout connecting to lobby {lobbyCode}: {tex.Message}", tex);
+                AbortProxy();
+                throw;
             }
             catch (Exception ex)
             {
@@ -93,9 +106,6 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Closes and cleans up the WCF proxy safely if a communication error occurs.
-        /// </summary>
         private void AbortProxy()
         {
             if (_proxy != null)
@@ -111,5 +121,6 @@ namespace UnoLisClient.Logic.Services
                 _proxy = null;
             }
         }
+
     }
 }

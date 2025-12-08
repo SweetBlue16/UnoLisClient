@@ -46,6 +46,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             await _viewModel.OnPageUnloaded();
             _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                _ = mainWindow.RestoreDefaultBackground();
+            }
+            AnimationUtils.FadeIn(this.Content as Grid, 0.8);
         }
 
         private static async Task SetLobbyBackgroundAsync()
@@ -53,10 +58,10 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
-                await mainWindow.SetBackgroundMedia("Assets/lobbyVideo.mp4", "Assets/lobbyMusic.mp3");
+                await mainWindow.SetBackgroundMedia("Assets/bonfireLobbyBackground.mp4", "Assets/lobbyMusic.mp3");
             }
         }
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MatchLobbyViewModel.IsChatVisible))
             {
@@ -66,7 +71,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 }
                 else
                 {
-                    AnimationUtils.FadeOut(ChatControl);
+                    await AnimationUtils.FadeOut(ChatControl);
                 }
             }
             else if (e.PropertyName == nameof(MatchLobbyViewModel.IsSettingsVisible))
@@ -77,7 +82,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 }
                 else
                 {
-                    AnimationUtils.FadeOut(SettingsModal);
+                    await AnimationUtils.FadeOut(SettingsModal);
                 }
             }
         }
@@ -105,17 +110,18 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             {
                 _viewModel.ToggleSettingsCommand.Execute(null);
             }
-            await AnimationUtils.FadeOut(SettingsModal); // Espera a que se vaya
-
-            // 2. Animar la salida de la página
+            await AnimationUtils.FadeOut(SettingsModal);
             await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.8);
 
-            // 3. Dejar que el VM navegue (esto estaba perfecto)
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                _ = mainWindow.RestoreDefaultBackground();
+            }
+
             _viewModel.LeaveMatchCommand.Execute(null);
         }
 
 
-        // --- Implementación de INavigationService (Estaba perfecta) ---
         public void NavigateTo(Page page)
         {
             NavigationService?.Navigate(page);

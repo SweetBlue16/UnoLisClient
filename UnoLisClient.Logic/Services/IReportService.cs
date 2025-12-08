@@ -38,6 +38,18 @@ namespace UnoLisClient.Logic.Services
                 );
                 return taskCompletion.Task;
             }
+            catch (CommunicationException commEx)
+            {
+                Console.WriteLine($"[ERROR] Comunicación fallida en ReportPlayerAsync: {commEx.Message}");
+                taskCompletion.TrySetException(commEx);
+                return taskCompletion.Task;
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                Console.WriteLine($"[ERROR] Tiempo de espera agotado en ReportPlayerAsync: {timeoutEx.Message}");
+                taskCompletion.TrySetException(timeoutEx);
+                return taskCompletion.Task;
+            }
             catch (Exception ex)
             {
                 taskCompletion.TrySetException(ex);
@@ -68,6 +80,18 @@ namespace UnoLisClient.Logic.Services
                 _reportManagerClient.SuscrbeToBanNotifications(nickname);
                 IsConnected = true;
             }
+            catch (CommunicationException commEx)
+            {
+                Console.WriteLine($"[ERROR] Comunicación fallida al inicializar " +
+                    $"ReportSessionService: {commEx.Message}");
+                IsConnected = false;
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                Console.WriteLine($"[ERROR] Tiempo de espera agotado al inicializar " +
+                    $"ReportSessionService: {timeoutEx.Message}");
+                IsConnected = false;
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"[ERROR] No se pudo inicializar ReportSessionService: {ex.Message}");
@@ -88,6 +112,14 @@ namespace UnoLisClient.Logic.Services
                 _reportManagerClient.ReportPlayer(reportData);
                 Console.WriteLine($"[DEBUG] Reporte enviado para: {reportData.ReportedNickname}");
             }
+            catch (CommunicationException commEx)
+            {
+                Console.WriteLine($"[ERROR] Comunicación fallida al enviar el reporte: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                Console.WriteLine($"[ERROR] Tiempo de espera agotado al enviar el reporte: {timeoutEx.Message}");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"[ERROR] Error al enviar el reporte: {ex.Message}");
@@ -103,6 +135,18 @@ namespace UnoLisClient.Logic.Services
                     _reportManagerClient.UnsubscribeFromBanNotifications(nickname);
                     CloseClientHelper.CloseClient(_reportManagerClient);
                 }
+            }
+            catch (CommunicationException commEx)
+            {
+                _reportManagerClient.Abort();
+                Console.WriteLine($"[ERROR] Comunicación fallida al desconectar " +
+                    $"ReportSessionService: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                _reportManagerClient.Abort();
+                Console.WriteLine($"[ERROR] Tiempo de espera agotado al desconectar " +
+                    $"ReportSessionService: {timeoutEx.Message}");
             }
             catch (Exception ex)
             {

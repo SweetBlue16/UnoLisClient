@@ -26,7 +26,15 @@ namespace UnoLisClient.Logic.Services
 
         public void Initialize(string nickname)
         {
-            if (_factory != null) return;
+            if (_factory != null && _factory.State != CommunicationState.Opened)
+            {
+                Cleanup();
+            }
+
+            if (_factory != null)
+            {
+                return;
+            }
 
             try
             {
@@ -35,6 +43,11 @@ namespace UnoLisClient.Logic.Services
 
                 _factory = new DuplexChannelFactory<IFriendsManager>(context, "FriendsManagerEndpoint");
                 _proxy = _factory.CreateChannel();
+
+                if (_proxy is ICommunicationObject channel)
+                {
+                    ServerConnectionMonitor.Monitor(channel);
+                }
 
                 _proxy.SubscribeToFriendUpdates(_currentUserNickname);
             }
@@ -64,12 +77,10 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Send a Friend Request to another player and returns the result from the server.
-        /// </summary>
         public async Task<FriendRequestResult> SendFriendRequestAsync(string requesterNickname, string targetNickname)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. " +
+                "Llama a Initialize() primero.");
 
             try
             {
@@ -92,15 +103,18 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Accepts a friend request.
-        /// </summary>
         public async Task<bool> AcceptFriendRequestAsync(FriendRequestData request)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado." +
+                " Llama a Initialize() primero.");
             try
             {
                 return await _proxy.AcceptFriendRequestAsync(request);
+            }
+            catch (CommunicationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"WCF Error on AcceptFriendRequest: {ex.Message}");
+                return false;
             }
             catch (Exception ex)
             {
@@ -109,15 +123,18 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Declines a friend request.
-        /// </summary>
         public async Task<bool> RejectFriendRequestAsync(FriendRequestData request)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado." +
+                " Llama a Initialize() primero.");
             try
             {
                 return await _proxy.RejectFriendRequestAsync(request);
+            }
+            catch (CommunicationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"WCF Error on RejectFriendRequest: {ex.Message}");
+                return false;
             }
             catch (Exception ex)
             {
@@ -126,15 +143,18 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Remove a friend from the player's friends list.
-        /// </summary>
         public async Task<bool> RemoveFriendAsync(FriendRequestData request)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está " +
+                "inicializado. Llama a Initialize() primero.");
             try
             {
                 return await _proxy.RemoveFriendAsync(request);
+            }
+            catch (CommunicationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"WCF Error on RemoveFriend: {ex.Message}");
+                return false;
             }
             catch (Exception ex)
             {
@@ -142,16 +162,20 @@ namespace UnoLisClient.Logic.Services
                 return false;
             }
         }
-        /// <summary>
-        /// Get confirmed friends list for the player.
-        /// </summary>
+
         public async Task<List<Friend>> GetFriendsListAsync(string nickname)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. " +
+                "Llama a Initialize() primero.");
             try
             {
                 var resultDtos = await _proxy.GetFriendsListAsync(nickname);
                 return resultDtos.Select(f => new Friend(f)).ToList();
+            }
+            catch (CommunicationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"WCF Error on GetFriendsList: {ex.Message}");
+                return new List<Friend>();
             }
             catch (Exception ex)
             {
@@ -160,9 +184,6 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Get pending friend requests for the player.
-        /// </summary>
         public async Task<List<FriendRequestData>> GetPendingRequestsAsync(string nickname)
         {
             if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
@@ -171,6 +192,11 @@ namespace UnoLisClient.Logic.Services
                 var resultDtos = await _proxy.GetPendingRequestsAsync(nickname);
                 return resultDtos.ToList();
             }
+            catch (CommunicationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"WCF Error on GetPendingRequests: {ex.Message}");
+                return new List<FriendRequestData>();
+            }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"WCF Error on GetPendingRequests: {ex.Message}");
@@ -178,12 +204,13 @@ namespace UnoLisClient.Logic.Services
             }
         }
 
-        /// <summary>
-        /// Implementation for cleaning up WCF resources.
-        /// </summary>
         public void Cleanup()
         {
-            if (_factory == null) return;
+            if (_factory == null)
+            {
+                return;
+            }
+
             if (!string.IsNullOrEmpty(_currentUserNickname) && _proxy != null)
             {
                 try
@@ -192,6 +219,11 @@ namespace UnoLisClient.Logic.Services
                     {
                         _proxy.UnsubscribeFromFriendUpdates(_currentUserNickname);
                     }
+                }
+                catch (CommunicationException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[FriendsService.Cleanup] Communication error " +
+                        $"unsubscribing: {ex.Message}");
                 }
                 catch (Exception ex)
                 {
@@ -208,6 +240,14 @@ namespace UnoLisClient.Logic.Services
                 {
                     _factory.Abort();
                 }
+            }
+            catch (TimeoutException)
+            {
+                _factory.Abort();
+            }
+            catch (CommunicationException)
+            {
+                _factory.Abort();
             }
             catch (Exception)
             {

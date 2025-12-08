@@ -180,6 +180,7 @@
     <Compile Include="Services\ProfileViewService.cs" />
     <Compile Include="Services\RegisterService.cs" />
     <Compile Include="Services\ISessionContext.cs" />
+    <Compile Include="Services\ServerConnectionMonitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validators\" />

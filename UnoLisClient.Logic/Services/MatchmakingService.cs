@@ -176,7 +176,6 @@ namespace UnoLisClient.Logic.Services
 
                 proxy.Close();
 
-                // Null Object Pattern: Si el servidor devuelve null, entregamos objeto vacío
                 return result ?? new LobbySettings();
             }
             catch (TimeoutException ex)

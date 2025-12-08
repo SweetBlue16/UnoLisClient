@@ -8,6 +8,7 @@ using UnoLisClient.UI.ViewModels;
 using UnoLisClient.UI.Views.Controls;
 using UnoLisClient.UI.Views.UnoLisWindows;
 
+
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
     /// <summary>
@@ -112,6 +113,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             await AnimationUtils.FadeOut(GameSettingsModal);
             await AnimationUtils.FadeOutTransition(this.Content as Grid, 0.5);
+
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                _ = mainWindow.RestoreDefaultBackground();
+            }
             _viewModel.LeaveMatchCommand.Execute(null);
         }
 
@@ -128,6 +134,12 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
                 _viewModel.CleanupEvents();
             }
+
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                _ = mainWindow.RestoreDefaultBackground();
+            }
+            AnimationUtils.FadeIn(this.Content as Grid, 0.8);
         }
     }
 }

@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows;
-using UnoLisClient.Logic.Models;
-using UnoLisClient.Logic.UnoLisServerReference.Logout;
-using UnoLisClient.UI.Utilities;
-using UnoLisServer.Common.Models;
+using System.Windows.Controls;
+using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Helpers;
+using UnoLisClient.Logic.Models;
+using UnoLisClient.Logic.Services;
+using UnoLisClient.Logic.UnoLisServerReference.Logout;
 using UnoLisClient.Logic.UnoLisServerReference.Report;
+using UnoLisClient.UI.Properties.Langs;
+using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.Views.PopUpWindows;
+using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisClient.UI.Views.UnoLisWindows;
 using UnoLisServer.Common.Enums;
-using UnoLisClient.UI.Views.PopUpWindows;
-using UnoLisClient.UI.Properties.Langs;
-using UnoLisClient.Logic.Enums;
-using System.Linq;
-using UnoLisClient.UI.Views.UnoLisPages;
-using System.Windows.Controls;
+using UnoLisServer.Common.Models;
 
 namespace UnoLisClient.UI
 {
@@ -25,6 +26,13 @@ namespace UnoLisClient.UI
     /// </summary>
     public partial class App : Application, ILogoutManagerCallback
     {
+        public App()
+        {
+            this.DispatcherUnhandledException += OnDispatcherUnhandledException;
+
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+        }
+
         private LogoutManagerClient _logoutClient;
 
         public void LogoutResponse(ServiceResponse<object> response)
@@ -52,6 +60,11 @@ namespace UnoLisClient.UI
             {
                 langCode = "en-US";
             }
+
+            ServerConnectionMonitor.OnServerConnectionLost = (messageKey) =>
+            {
+                UnoLisClient.UI.Utilities.NavigationProxy.ForceLogoutToLogin(messageKey);
+            };
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(langCode);
@@ -137,6 +150,23 @@ namespace UnoLisClient.UI
                 }
                 ExecuteExitLogout();
             });
+        }
+
+        private void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            Logger.Error("CRASH AVOIDED (UI): Exception occured in the interface.", e.Exception);
+
+            string errorMessage = $"An unexpected error occurred: {e.Exception.Message}\n\nThe application will try to continue.";
+
+            MessageBox.Show(errorMessage, "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            e.Handled = true;
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = e.ExceptionObject as Exception;
+            Logger.Error("CRITICAL CRASH (UI). Exception occured in secondary thread", ex);
         }
     }
 }

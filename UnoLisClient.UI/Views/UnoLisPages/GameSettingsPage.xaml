@@ -181,9 +181,7 @@
                 </StackPanel>
                 <Button Grid.Row="2"
                         Content="Crear Partida"
-                        Background="#2ECC71"
-                        Foreground="White"
-                        FontWeight="Bold"
+                        Style="{StaticResource PrimaryButtonStyle}"
                         FontSize="16"
                         BorderThickness="0"
                         Height="45"
@@ -195,29 +193,7 @@
                     <Button.Effect>
                         <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
                     </Button.Effect>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
-                                                CornerRadius="10">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#3FEA88"/>
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter Property="Background" Value="#28B463"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
+                    
                 </Button>
             </Grid>
         </Border>

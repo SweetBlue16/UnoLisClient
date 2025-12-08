@@ -15,49 +15,30 @@ namespace UnoLisClient.Logic.Services
             var taskCompletion = new TaskCompletionSource<ServiceResponse<object>>();
             RegisterManagerClient registerClient = null;
 
-            try
+            Action<ServiceResponse<object>> callbackAction = (response) =>
             {
-                Action<ServiceResponse<object>> callbackAction = (response) =>
+                try
                 {
-                    try
-                    {
-                        taskCompletion.TrySetResult(response);
-                    }
-                    finally
-                    {
-                        CloseClientHelper.CloseClient(registerClient);
-                    }
-                };
-                var callbackHandler = new RegisterCallback(callbackAction);
-                var context = new InstanceContext(callbackHandler);
-                registerClient = new RegisterManagerClient(context);
+                    taskCompletion.TrySetResult(response);
+                }
+                finally
+                {
+                    CloseClientHelper.CloseClient(registerClient);
+                }
+            };
+            var callbackHandler = new RegisterCallback(callbackAction);
+            var context = new InstanceContext(callbackHandler);
+            registerClient = new RegisterManagerClient(context);
 
-                registerClient.Register(data);
-            }
-            catch (EndpointNotFoundException enfEx)
-            {
-                Logger.Error("Error de conexión (Register): No se encontró el endpoint.", enfEx);
-                taskCompletion.TrySetException(enfEx);
-                CloseClientHelper.CloseClient(registerClient);
-            }
-            catch (TimeoutException timeoutEx)
-            {
-                Logger.Error("Error de conexión (Register): Tiempo de espera agotado.", timeoutEx);
-                taskCompletion.TrySetException(timeoutEx);
-                CloseClientHelper.CloseClient(registerClient);
-            }
-            catch (CommunicationException commEx)
-            {
-                Logger.Error("Error de comunicación durante el registro.", commEx);
-                taskCompletion.TrySetException(commEx);
-                CloseClientHelper.CloseClient(registerClient);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Error inesperado durante el registro.", ex);
-                taskCompletion.TrySetException(ex);
-                CloseClientHelper.CloseClient(registerClient);
-            }
+
+            WcfServiceHelper.ExecuteSafe(
+                action: () => registerClient.Register(data),
+                taskCompletionSource: taskCompletion,
+                client: registerClient,
+                operationName: "UpdateProfile"
+            );
+
+
             return taskCompletion.Task;
         }
     }
