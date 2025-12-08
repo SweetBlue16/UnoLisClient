@@ -52,33 +52,5 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 NavigationService.GoBack();
             }
         }
-
-        private void CheckedMusicToggle(object sender, RoutedEventArgs e)
-        {
-            if (MusicToggle.Content is TextBlock tb)
-                tb.Text = "🎵"; 
-        }
-
-        private void UncheckedMusicToggle(object sender, RoutedEventArgs e)
-        {
-            if (MusicToggle.Content is TextBlock tb)
-                tb.Text = "🔇";
-            // Aquí: pausar/detener música
-            // NOTA: Mejor silenciarla que detenerla para evitar retrasos al reanudar
-            //TODO: Implementar la funcionalidad
-        }
-
-        private void CheckedSoundToggle(object sender, RoutedEventArgs e)
-        {
-            if (SoundToggle.Content is TextBlock tb)
-                tb.Text = "🔊";
-        }
-
-        private void UncheckedSoundToggle(object sender, RoutedEventArgs e)
-        {
-            if (SoundToggle.Content is TextBlock tb)
-                tb.Text = "🔈";
-
-        }
     }
 }
