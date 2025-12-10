@@ -241,7 +241,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve been banned, time remaining: {0}.
+        ///   Looks up a localized string similar to You&apos;ve been banned due to multiple reports, time remaining: {0}.
         /// </summary>
         public static string PlayerBannedMessageLabel {
             get {

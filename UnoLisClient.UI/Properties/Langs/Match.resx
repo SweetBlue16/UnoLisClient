@@ -178,7 +178,7 @@
     <value>Place</value>
   </data>
   <data name="PlayerBannedMessageLabel" xml:space="preserve">
-    <value>You've been banned, time remaining: {0}</value>
+    <value>You've been banned due to multiple reports, time remaining: {0}</value>
   </data>
   <data name="PlayerBlockedMessageLabel" xml:space="preserve">
     <value>{0} has been successfully blocked.</value>
