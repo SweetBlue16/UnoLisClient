@@ -6,7 +6,7 @@ using System.Linq;
 namespace UnoLisClient.Logic.Callbacks
 {
     /// <summary>
-    /// Callback del cliente para manejar eventos enviados por el servidor FriendsManager.
+    /// Callback implementation for handling friends-related events from the server.
     /// </summary>
     public class FriendsCallback : IFriendsManagerCallback
     {

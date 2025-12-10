@@ -16,12 +16,12 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             DataContext = new FriendsViewModel(FriendsService.Instance, new AlertManager());
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MainMenuPage());
         }
 
-        private void OpenFriendRequests_Click(object sender, RoutedEventArgs e)
+        private void OpenFriendRequestsClick(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new FriendRequestsPage());
         }

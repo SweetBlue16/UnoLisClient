@@ -147,4 +147,7 @@
   <data name="UserSettingsUpdatedMessageLabel" xml:space="preserve">
     <value>Configuraciones del usuario actualizadas con éxito.</value>
   </data>
+  <data name="CreateMatchLabel" xml:space="preserve">
+    <value>CREAR PARTIDA</value>
+  </data>
 </root>

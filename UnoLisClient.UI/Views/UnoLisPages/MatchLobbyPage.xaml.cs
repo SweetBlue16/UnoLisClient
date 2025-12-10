@@ -35,14 +35,14 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
-        private async void MatchLobbyPage_Loaded(object sender, RoutedEventArgs e)
+        private async void MatchLobbyPageLoaded(object sender, RoutedEventArgs e)
         {
             await _viewModel.OnPageLoaded();
             await SetLobbyBackgroundAsync();
             AnimationUtils.FadeIn(this.Content as Grid, 0.8);
         }
 
-        private async void MatchLobbyPage_Unloaded(object sender, RoutedEventArgs e)
+        private async void MatchLobbyPageUnloaded(object sender, RoutedEventArgs e)
         {
             await _viewModel.OnPageUnloaded();
             _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
@@ -87,7 +87,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             }
         }
 
-        private void ChatOverlay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ChatOverlayMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_viewModel.IsChatVisible)
             {

@@ -6,22 +6,61 @@
       xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
       xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       mc:Ignorable="d"
-      Title="GameSettingsPage">
+      Background="Transparent">
 
     <Page.Resources>
         <converters:EqualityConverter x:Key="EqualityConverter"/>
+        <Style x:Key="RadioOptionStyle" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Lato"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="12,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border x:Name="Circle"
+                                    Width="22" Height="22"
+                                    CornerRadius="11"
+                                    BorderBrush="#FFD60A"
+                                    BorderThickness="2"
+                                    Background="Transparent"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       VerticalAlignment="Center"
+                                       FontWeight="SemiBold"
+                                       Foreground="White"/>
+
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Circle" Property="Background" Value="#FFD60A"/>
+                                <Setter TargetName="Circle" Property="BorderBrush" Value="White"/>
+                                <Setter Property="Foreground" Value="#FFD60A"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Circle" Property="BorderBrush" Value="#FFF08A"/>
+                                <Setter Property="Foreground" Value="#FFEAD672"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid>
-        <Border Background="#AA000000"
-                CornerRadius="15"
-                Padding="24"
-                MinWidth="350" MinHeight="300"
-                MaxWidth="600" MaxHeight="500"
+        <Border Background="#CC101010"
+                CornerRadius="18"
+                Padding="30"
+                Width="520"
+                MinHeight="450"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Margin="20">
+                BorderBrush="#FF303030"
+                BorderThickness="2">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="15" ShadowDepth="4" Color="Black" Opacity="0.5"/>
+                <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="4" Opacity="0.6"/>
             </Border.Effect>
             <Grid>
                 <Grid.RowDefinitions>
@@ -31,24 +70,19 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="SettingsIcon"
-                           Source="pack://application:,,,/Assets/Other/Settings.png"
-                           Width="40" Height="40"
-                           Grid.Column="0"
-                           VerticalAlignment="Center"
-                           Margin="0,0,20,0"/>
-                    <TextBlock Text="{x:Static language:Global.GameSettingsLabel}"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               Grid.Column="1"
-                               FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                               Foreground="White"
-                               HorizontalAlignment="Center"
-                               Margin="0,0,20,10"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Source="pack://application:,,,/Assets/Other/Settings.png"
+                               Width="40" Height="40"
+                               Margin="0,0,12,0"/>
+                        <TextBlock Text="{x:Static language:Global.GameSettingsLabel}"
+                                   FontSize="30"
+                                   Foreground="White"
+                                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
                     <Button x:Name="CloseButton"
                             Grid.Column="2"
                             Content="✖"
@@ -68,9 +102,9 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}"
-                                                    CornerRadius="5">
+                                CornerRadius="5">
                                                 <ContentPresenter HorizontalAlignment="Center"
-                                                                  VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
@@ -88,46 +122,56 @@
                         </Button.Style>
                     </Button>
                 </Grid>
-                <StackPanel Grid.Row="1">
-                    <StackPanel Orientation="Vertical" Margin="0,0,0,0">
-                        <Label Content="{x:Static language:Settings.PlayerSettingsLabel}"
-                               Foreground="White" FontSize="16" FontFamily="pack://application:,,,/Fonts/#Lato"/>
-
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <RadioButton GroupName="Players" Content="2" Foreground="White"
-                                         FontFamily="pack://application:,,,/Fonts/#Lato"
-                                         Margin="0,0,10,0"
+                <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="0,40,0,40">
+                    <TextBlock Text="{x:Static language:Settings.PlayerSettingsLabel}"
+                               Foreground="#FFD60A"
+                               FontSize="22"
+                               FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,18"/>
+                    <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Center"
+                                Margin="0,10,0,10">
+                        <RadioButton Content="2 jugadores"
+                                         GroupName="Players"
+                                         Margin="0,0,0,20"
+                                         Style="{StaticResource RadioOptionStyle}"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=2}"
-                                         Command="{Binding SetPlayerCountCommand}" CommandParameter="2"/>
-
-                            <RadioButton GroupName="Players" Content="3" Foreground="White"
-                                         FontFamily="pack://application:,,,/Fonts/#Lato"
-                                         Margin="0,0,10,0"
+                                         Command="{Binding SetPlayerCountCommand}"
+                                         CommandParameter="2"/>
+                        <RadioButton Content="3 jugadores"
+                                         GroupName="Players"
+                                         Margin="0,0,0,20"
+                                         Style="{StaticResource RadioOptionStyle}"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=3}"
-                                         Command="{Binding SetPlayerCountCommand}" CommandParameter="3"/>
+                                         Command="{Binding SetPlayerCountCommand}"
+                                         CommandParameter="3"/>
 
-                            <RadioButton GroupName="Players" Content="4" Foreground="White"
-                                         FontFamily="pack://application:,,,/Fonts/#Lato"
+                        <RadioButton Content="4 jugadores"
+                                         GroupName="Players"
+                                         Margin="0,0,0,20"
+                                         Style="{StaticResource RadioOptionStyle}"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=4}"
-                                         Command="{Binding SetPlayerCountCommand}" CommandParameter="4"/>
-                        </StackPanel>
+                                         Command="{Binding SetPlayerCountCommand}"
+                                         CommandParameter="4"/>
+
                     </StackPanel>
                 </StackPanel>
                 <Button Grid.Row="2"
-                        Content="Crear Partida"
-                        Style="{StaticResource PrimaryButtonStyle}"
-                        FontSize="16"
-                        BorderThickness="0"
-                        Height="45"
-                        Width="180"
+                        Content="{x:Static language:Settings.CreateMatchLabel}"
+                        FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                        FontSize="22"
+                        Padding="10"
+                        Width="260" Height="55"
                         HorizontalAlignment="Center"
-                        Margin="0,0,0,0"
                         Cursor="Hand"
-                        Command="{Binding CreateMatchCommand}">
+                        Command="{Binding CreateMatchCommand}"
+                        Background="#FFD60A"
+                        Foreground="Black"
+                        BorderThickness="0">
                     <Button.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                        <DropShadowEffect BlurRadius="10" Opacity="0.6"/>
                     </Button.Effect>
-                    
                 </Button>
             </Grid>
         </Border>

@@ -70,6 +70,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE MATCH.
+        /// </summary>
+        public static string CreateMatchLabel {
+            get {
+                return ResourceManager.GetString("CreateMatchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string EnglishComboItem {

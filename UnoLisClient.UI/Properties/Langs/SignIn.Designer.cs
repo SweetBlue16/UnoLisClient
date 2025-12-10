@@ -205,7 +205,8 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login successful. Welcome to UNO-LIS {0}!.
+        ///   Looks up a localized string similar to            Login successful. 
+        ///Welcome to UNO-LIS {0}!.
         /// </summary>
         public static string UserLoggedInSuccessfullyLabel {
             get {

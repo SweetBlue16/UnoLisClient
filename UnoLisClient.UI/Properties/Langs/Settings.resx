@@ -147,4 +147,7 @@
   <data name="UserSettingsUpdatedMessageLabel" xml:space="preserve">
     <value>User's settings updated successfully.</value>
   </data>
+  <data name="CreateMatchLabel" xml:space="preserve">
+    <value>CREATE MATCH</value>
+  </data>
 </root>
