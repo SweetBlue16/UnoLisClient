@@ -271,10 +271,10 @@ namespace UnoLisClient.UI.ViewModels
         {
             return new RegistrationData
             {
-                Nickname = this.Nickname ?? string.Empty,
-                FullName = this.FullName ?? string.Empty,
-                Email = this.Email ?? string.Empty,
-                Password = this.Password ?? string.Empty
+                Nickname = this.Nickname.Trim() ?? string.Empty,
+                FullName = this.FullName.Trim() ?? string.Empty,
+                Email = this.Email.Trim() ?? string.Empty,
+                Password = this.Password.Trim() ?? string.Empty
             };
         }
     }

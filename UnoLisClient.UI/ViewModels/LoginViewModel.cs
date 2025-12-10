@@ -69,7 +69,7 @@ namespace UnoLisClient.UI.ViewModels
         private async Task ExecuteLoginAsync()
         {
             ErrorMessage = null;
-            var credentials = new AuthCredentials { Nickname = this.Nickname, Password = this.Password };
+            var credentials = new AuthCredentials { Nickname = this.Nickname.Trim(), Password = this.Password.Trim() };
 
             var validationErrors = UserValidator.ValidateLogin(credentials);
             if (validationErrors.Any())
@@ -181,7 +181,7 @@ namespace UnoLisClient.UI.ViewModels
         private void HandleBannedPlayer(object data)
         {
             BanInfo banInfo = data as BanInfo;
-            if (banInfo == null)
+            if (banInfo == null || string.IsNullOrWhiteSpace(banInfo.FormattedTimeRemaining))
             {
                 return;
             }

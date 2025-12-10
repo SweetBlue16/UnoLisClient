@@ -122,7 +122,7 @@ namespace UnoLisClient.UI.ViewModels
                 {
                     ReporterNickname = _sessionContext.CurrentUserNickname,
                     ReportedNickname = SelectedPlayer,
-                    Description = reportDescription
+                    Description = reportDescription.Trim()
                 };
                 var response = await _reportService.ReportPlayerAsync(reportData);
                 var message = MessageTranslator.GetMessage(response.Code);
