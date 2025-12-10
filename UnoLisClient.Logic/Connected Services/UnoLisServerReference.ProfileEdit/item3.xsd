@@ -9,10 +9,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RequestEmailChangeVerification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newEmail" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ProfileUpdateResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" minOccurs="0" name="response" nillable="true" type="q2:ServiceResponseOfProfileDatavXwyyaSB" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmailChangeVerificationCodeSentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Models" minOccurs="0" name="response" nillable="true" type="q3:ServiceResponseOfanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

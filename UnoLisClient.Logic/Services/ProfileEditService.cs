@@ -26,7 +26,7 @@ namespace UnoLisClient.Logic.Services
                     CloseClientHelper.CloseClient(profileEditClient);
                 }
             };
-            var callbackHandler = new ProfileEditCallback(callbackAction);
+            var callbackHandler = new ProfileEditCallback(callbackAction, null);
             var context = new InstanceContext(callbackHandler);
             profileEditClient = new ProfileEditManagerClient(context);
 
@@ -37,6 +37,34 @@ namespace UnoLisClient.Logic.Services
                 operationName: "UpdateProfile"
             );
 
+            return taskCompletion.Task;
+        }
+
+        public Task<ServiceResponse<object>> RequestVerificationCodeAsync(string nickname, string newEmail)
+        {
+            var taskCompletion = new TaskCompletionSource<ServiceResponse<object>>();
+            ProfileEditManagerClient profileEditClient = null;
+            Action<ServiceResponse<object>> callbackAction = (response) =>
+            {
+                try
+                {
+                    taskCompletion.TrySetResult(response);
+                }
+                finally
+                {
+                    CloseClientHelper.CloseClient(profileEditClient);
+                }
+            };
+            var callbackHandler = new ProfileEditCallback(null, callbackAction);
+            var context = new InstanceContext(callbackHandler);
+            profileEditClient = new ProfileEditManagerClient(context);
+
+            WcfServiceHelper.ExecuteSafe(
+                action: () => profileEditClient.RequestEmailChangeVerification(nickname, newEmail),
+                taskCompletionSource: taskCompletion,
+                client: profileEditClient,
+                operationName: "RequestEmailChangeVerification"
+            );
             return taskCompletion.Task;
         }
     }

@@ -41,15 +41,27 @@
   <wsdl:message name="IProfileEditManager_UpdateProfileData_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateProfileData" />
   </wsdl:message>
+  <wsdl:message name="IProfileEditManager_RequestEmailChangeVerification_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestEmailChangeVerification" />
+  </wsdl:message>
   <wsdl:message name="IProfileEditManager_ProfileUpdateResponse_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ProfileUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileEditManager_EmailChangeVerificationCodeSentResponse_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EmailChangeVerificationCodeSentResponse" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IProfileEditManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateProfileData">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileEditManager/UpdateProfileData" message="tns:IProfileEditManager_UpdateProfileData_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestEmailChangeVerification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileEditManager/RequestEmailChangeVerification" message="tns:IProfileEditManager_RequestEmailChangeVerification_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ProfileUpdateResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileEditManager/ProfileUpdateResponse" message="tns:IProfileEditManager_ProfileUpdateResponse_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="EmailChangeVerificationCodeSentResponse">
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileEditManager/EmailChangeVerificationCodeSentResponse" message="tns:IProfileEditManager_EmailChangeVerificationCodeSentResponse_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IProfileEditManager" type="tns:IProfileEditManager">
@@ -61,8 +73,20 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="RequestEmailChangeVerification">
+      <soap12:operation soapAction="http://tempuri.org/IProfileEditManager/RequestEmailChangeVerification" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ProfileUpdateResponse">
       <soap12:operation soapAction="http://tempuri.org/IProfileEditManager/ProfileUpdateResponse" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmailChangeVerificationCodeSentResponse">
+      <soap12:operation soapAction="http://tempuri.org/IProfileEditManager/EmailChangeVerificationCodeSentResponse" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
