@@ -17,27 +17,26 @@ namespace UnoLisClient.Logic.Services
             var taskCompletion = new TaskCompletionSource<ServiceResponse<ProfileData>>();
             ProfileViewManagerClient profileViewClient = null;
 
-                Action<ServiceResponse<ProfileData>> callbackAction = (response) =>
+            Action<ServiceResponse<ProfileData>> callbackAction = (response) =>
+            {
+                try
                 {
-                    try
-                    {
-                        taskCompletion.TrySetResult(response);
-                    }
-                    finally
-                    {
-                        CloseClientHelper.CloseClient(profileViewClient);
-                    }
-                };
+                    taskCompletion.TrySetResult(response);
+                }
+                finally
+                {
+                    CloseClientHelper.CloseClient(profileViewClient);
+                }
+            };
 
-                var callbackHandler = new ProfileViewCallback(callbackAction);
-                var context = new InstanceContext(callbackHandler);
-                profileViewClient = new ProfileViewManagerClient(context);
-
-                WcfServiceHelper.ExecuteSafe(
-                    action: () => profileViewClient.GetProfileData(nickname),taskCompletionSource: taskCompletion,
-                    client: profileViewClient, operationName: "ProfileView"
-                );
-                return taskCompletion.Task;
+            var callbackHandler = new ProfileViewCallback(callbackAction);
+            var context = new InstanceContext(callbackHandler);
+            profileViewClient = new ProfileViewManagerClient(context);
+            WcfServiceHelper.ExecuteSafe(
+                action: () => profileViewClient.GetProfileData(nickname),taskCompletionSource: taskCompletion,
+                client: profileViewClient, operationName: "ProfileView"
+            );
+            return taskCompletion.Task;
         }
     }
 }

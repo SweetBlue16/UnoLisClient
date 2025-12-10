@@ -10,10 +10,20 @@ namespace UnoLisClient.Logic.Callbacks
     public class ProfileEditCallback : IProfileEditManagerCallback
     {
         private readonly Action<ServiceResponse<ProfileData>> _onResponse;
+        private readonly Action<ServiceResponse<object>> _onEmailCodeSentResponse;
 
-        public ProfileEditCallback(Action<ServiceResponse<ProfileData>> onResponse)
+        public ProfileEditCallback(Action<ServiceResponse<ProfileData>> onResponse, Action<ServiceResponse<object>> onEmailCodeSentResponse)
         {
             _onResponse = onResponse;
+            _onEmailCodeSentResponse = onEmailCodeSentResponse;
+        }
+
+        public void EmailChangeVerificationCodeSentResponse(ServiceResponse<object> response)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _onEmailCodeSentResponse?.Invoke(response);
+            });
         }
 
         public void ProfileUpdateResponse(ServiceResponse<ProfileData> response)

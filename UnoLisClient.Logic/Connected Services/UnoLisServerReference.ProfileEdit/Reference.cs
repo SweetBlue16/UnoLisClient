@@ -65,6 +65,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         private string TikTokUrlField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VerificationCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int WinsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -260,6 +263,19 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VerificationCode {
+            get {
+                return this.VerificationCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VerificationCodeField, value) != true)) {
+                    this.VerificationCodeField = value;
+                    this.RaisePropertyChanged("VerificationCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Wins {
             get {
                 return this.WinsField;
@@ -291,6 +307,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProfileEditManager/UpdateProfileData")]
         System.Threading.Tasks.Task UpdateProfileDataAsync(UnoLisClient.Logic.UnoLisServerReference.ProfileEdit.ProfileData data);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProfileEditManager/RequestEmailChangeVerification")]
+        void RequestEmailChangeVerification(string nickname, string newEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProfileEditManager/RequestEmailChangeVerification")]
+        System.Threading.Tasks.Task RequestEmailChangeVerificationAsync(string nickname, string newEmail);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -298,6 +320,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProfileEditManager/ProfileUpdateResponse")]
         void ProfileUpdateResponse(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.ProfileEdit.ProfileData> response);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProfileEditManager/EmailChangeVerificationCodeSentResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Enums.MessageCode))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisServer.Common.Models.ServiceResponse<UnoLisClient.Logic.UnoLisServerReference.ProfileEdit.ProfileData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(UnoLisClient.Logic.UnoLisServerReference.ProfileEdit.ProfileData))]
+        void EmailChangeVerificationCodeSentResponse(UnoLisServer.Common.Models.ServiceResponse<object> response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -334,6 +362,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.ProfileEdit {
         
         public System.Threading.Tasks.Task UpdateProfileDataAsync(UnoLisClient.Logic.UnoLisServerReference.ProfileEdit.ProfileData data) {
             return base.Channel.UpdateProfileDataAsync(data);
+        }
+        
+        public void RequestEmailChangeVerification(string nickname, string newEmail) {
+            base.Channel.RequestEmailChangeVerification(nickname, newEmail);
+        }
+        
+        public System.Threading.Tasks.Task RequestEmailChangeVerificationAsync(string nickname, string newEmail) {
+            return base.Channel.RequestEmailChangeVerificationAsync(nickname, newEmail);
         }
     }
 }
