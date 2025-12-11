@@ -39,6 +39,7 @@
                             Background="Transparent"
                             Foreground="White"
                             BorderThickness="0"
+                            Cursor="Hand"
                             VerticalAlignment="Top"
                             Click="BackButtonClick"/>
 
@@ -58,6 +59,7 @@
                             FontSize="15"
                             FontWeight="Bold"
                             VerticalAlignment="Top"
+                            Cursor="Hand"
                             Command="{Binding OpenAddFriendModalCommand}"/>
                 </Grid>
 
@@ -107,6 +109,7 @@
                             Style="{StaticResource PrimaryButtonStyle}"
                             FontSize="16"
                             Padding="10,5"
+                            Cursor="Hand"
                             Click="OpenFriendRequestsClick"/>
                 </StackPanel>
             </Grid>

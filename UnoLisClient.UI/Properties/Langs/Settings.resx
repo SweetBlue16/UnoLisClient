@@ -150,4 +150,13 @@
   <data name="CreateMatchLabel" xml:space="preserve">
     <value>CREATE MATCH</value>
   </data>
+  <data name="TwoPlayersLabel" xml:space="preserve">
+    <value>2 players</value>
+  </data>
+  <data name="threePlayersLabel" xml:space="preserve">
+    <value>3 players</value>
+  </data>
+  <data name="fourPlayersLabel" xml:space="preserve">
+    <value>4 players</value>
+  </data>
 </root>

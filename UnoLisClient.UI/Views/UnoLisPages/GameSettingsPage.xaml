@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:language="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      xmlns:Langs="clr-namespace:UnoLisClient.UI.Properties.Langs"
       xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       mc:Ignorable="d"
       Background="Transparent">
@@ -77,7 +77,7 @@
                         <Image Source="pack://application:,,,/Assets/Other/Settings.png"
                                Width="40" Height="40"
                                Margin="0,0,12,0"/>
-                        <TextBlock Text="{x:Static language:Global.GameSettingsLabel}"
+                        <TextBlock Text="{x:Static Langs:Global.GameSettingsLabel}"
                                    FontSize="30"
                                    Foreground="White"
                                    FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
@@ -123,7 +123,7 @@
                     </Button>
                 </Grid>
                 <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="0,40,0,40">
-                    <TextBlock Text="{x:Static language:Settings.PlayerSettingsLabel}"
+                    <TextBlock Text="{x:Static Langs:Settings.PlayerSettingsLabel}"
                                Foreground="#FFD60A"
                                FontSize="22"
                                FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
@@ -132,14 +132,14 @@
                     <StackPanel Orientation="Vertical"
                                 HorizontalAlignment="Center"
                                 Margin="0,10,0,10">
-                        <RadioButton Content="2 jugadores"
+                        <RadioButton Content="2"
                                          GroupName="Players"
                                          Margin="0,0,0,20"
                                          Style="{StaticResource RadioOptionStyle}"
                                          IsChecked="{Binding PlayerCount, Converter={StaticResource EqualityConverter}, ConverterParameter=2}"
                                          Command="{Binding SetPlayerCountCommand}"
                                          CommandParameter="2"/>
-                        <RadioButton Content="3 jugadores"
+                        <RadioButton Content="3"
                                          GroupName="Players"
                                          Margin="0,0,0,20"
                                          Style="{StaticResource RadioOptionStyle}"
@@ -147,7 +147,7 @@
                                          Command="{Binding SetPlayerCountCommand}"
                                          CommandParameter="3"/>
 
-                        <RadioButton Content="4 jugadores"
+                        <RadioButton Content="4 "
                                          GroupName="Players"
                                          Margin="0,0,0,20"
                                          Style="{StaticResource RadioOptionStyle}"
@@ -157,13 +157,12 @@
 
                     </StackPanel>
                 </StackPanel>
-                <Button Grid.Row="2"
-                        Content="{x:Static language:Settings.CreateMatchLabel}"
-                        FontSize="22"
-                        Padding="10"
+                <Button Content="{x:Static Langs:Global.CreateMatchButton}"
                         Style="{StaticResource PrimaryButtonStyle}"
+                        FontSize="16"
+                        Padding="10,5"
                         Cursor="Hand"
-                        Command="{Binding CreateMatchCommand}">
+                        Command="{Binding CreateMatchCommand}" Margin="0,276,0,30" Grid.Row="1">
                     <Button.Effect>
                         <DropShadowEffect BlurRadius="10" Opacity="0.6"/>
                     </Button.Effect>

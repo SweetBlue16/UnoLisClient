@@ -88,6 +88,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 4 players.
+        /// </summary>
+        public static string fourPlayersLabel {
+            get {
+                return ResourceManager.GetString("fourPlayersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string LanguageLabel {
@@ -147,6 +156,24 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string SpecialRulesSettingsLabel {
             get {
                 return ResourceManager.GetString("SpecialRulesSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 players.
+        /// </summary>
+        public static string threePlayersLabel {
+            get {
+                return ResourceManager.GetString("threePlayersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 players.
+        /// </summary>
+        public static string TwoPlayersLabel {
+            get {
+                return ResourceManager.GetString("TwoPlayersLabel", resourceCulture);
             }
         }
         
