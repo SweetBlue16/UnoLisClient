@@ -42,13 +42,13 @@
                        Height="40"
                        Margin="0,0,0,0"/>
                 <Label Grid.ColumnSpan="2"
-                   Grid.Row="0"
-                   Content="{x:Static language:Profile.ChangeDataLabel}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                   Foreground="White"
-                   FontSize="30"/>
+                       Grid.Row="0"
+                       Content="{x:Static language:Profile.ChangeDataLabel}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                       Foreground="White"
+                       FontSize="30"/>
             </StackPanel>
             <StackPanel Grid.Column="0"
                         Grid.Row="1"
@@ -64,7 +64,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,32,16"
                          Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
-                         MaxLength="45"/>
+                         MaxLength="45"
+                         PreviewTextInput="StrongFullNamePreviewTextInput"/>
                 <Label Content="{x:Static language:SignIn.NicknameLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -78,7 +79,8 @@
                          Margin="0,0,32,16"
                          IsReadOnly="True"
                          Text="{Binding Nickname, Mode=OneWay}"
-                         MaxLength="45"/>
+                         MaxLength="45"
+                         PreviewTextInput="StrongNicknamePreviewTextInput"/>
                 <Label Content="{x:Static language:Global.EmailLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -90,7 +92,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,32,16"
                          Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                         MaxLength="100"/>
+                         MaxLength="100"
+                         PreviewTextInput="StrongEmailPreviewTextInput"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -118,7 +121,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,0,16"
                          Text="{Binding FacebookUrl, UpdateSourceTrigger=PropertyChanged}"
-                         MaxLength="255"/>
+                         MaxLength="255"
+                         PreviewTextInput="StrongFacebookLinkPreviewTextInput"/>
                 <Label Content="{x:Static language:Profile.InstagramLinkLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -130,7 +134,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,0,16"
                          Text="{Binding InstagramUrl, UpdateSourceTrigger=PropertyChanged}"
-                         MaxLength="255"/>
+                         MaxLength="255"
+                         PreviewTextInput="StrongInstagramLinkPreviewTextInput"/>
                 <Label Content="{x:Static language:Profile.TikTokLinkLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -142,7 +147,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,0,16"
                          Text="{Binding TikTokUrl, UpdateSourceTrigger=PropertyChanged}"
-                         MaxLength="255"/>
+                         MaxLength="255"
+                         PreviewTextInput="StrongTikTokLinkPreviewTextInput"/>
             </StackPanel>
             <Button Content="{x:Static language:Global.SaveButton}"
                     Grid.Column="0"

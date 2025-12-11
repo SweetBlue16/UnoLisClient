@@ -58,7 +58,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,34,16"
                          Text="{Binding FullName}"
-                         MaxLength="45"/>
+                         MaxLength="45"
+                         PreviewTextInput="StrongFullNamePreviewTextInput"/>
                 <Label Content="{x:Static language:SignIn.NicknameLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -70,7 +71,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,34,16"
                          Text="{Binding Nickname}"
-                         MaxLength="45"/>
+                         MaxLength="45"
+                         PreviewTextInput="StrongNicknamePreviewTextInput"/>
                 <Label Content="{x:Static language:Global.EmailLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -82,7 +84,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,34,16"
                          Text="{Binding Email}"
-                         MaxLength="100"/>
+                         MaxLength="100"
+                         PreviewTextInput="StrongEmailPreviewTextInput"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"

@@ -1,10 +1,11 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
-using UnoLisClient.UI.Views.PopUpWindows;
-using UnoLisClient.UI.Utilities;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels;
+using UnoLisClient.UI.Views.PopUpWindows;
 
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
@@ -13,7 +14,9 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     /// </summary>
     public partial class JoinMatchPage : Page, INavigationService
     {
+        public static readonly Regex LobbyCodeRegex = new Regex("^[a-zA-Z0-9]{5}$");
         private readonly JoinMatchViewModel _viewModel;
+
         public JoinMatchPage()
         {
             InitializeComponent();
@@ -38,6 +41,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             {
                 NavigationService.GoBack();
             }
+        }
+
+        private void StrongLobbyCodePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = LobbyCodeRegex.IsMatch(e.Text);
         }
     }
 }

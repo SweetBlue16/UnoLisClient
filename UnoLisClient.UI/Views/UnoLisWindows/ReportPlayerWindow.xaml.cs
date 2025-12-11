@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Services;
@@ -12,6 +13,8 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
     /// </summary>
     public partial class ReportPlayerWindow : Window
     {
+        public static readonly Regex ReportDescriptionRegex = new Regex(@"^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{1,255}$");
+
         public ReportPlayerWindow(List<string> playersList)
         {
             InitializeComponent();
@@ -29,6 +32,11 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
         {
             DataContext = viewModel;
             viewModel.RequestClose += () => Close();
+        }
+
+        private void StrongReportDescriptionPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !ReportDescriptionRegex.IsMatch(e.Text);
         }
     }
 }

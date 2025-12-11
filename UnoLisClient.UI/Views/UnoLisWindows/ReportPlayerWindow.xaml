@@ -50,7 +50,8 @@
                          VerticalScrollBarVisibility="Auto"
                          MaxLength="255"
                          VerticalContentAlignment="Top"
-                         Tag="{x:Static language:Match.DescriptionReportLabel}"/>
+                         Tag="{x:Static language:Match.DescriptionReportLabel}"
+                         PreviewTextInput="StrongReportDescriptionPreviewTextInput"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
