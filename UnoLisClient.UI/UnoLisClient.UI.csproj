@@ -108,6 +108,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MatchBoardViewModel.cs" />
     <Compile Include="ViewModels\MatchLobbyViewModel.cs" />
+    <Compile Include="ViewModels\MatchMenuViewModel.cs" />
     <Compile Include="ViewModels\MatchResultsViewModel.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ReportPlayerViewModel.cs" />
     <Compile Include="ViewModels\SelectBackgroundViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\AvatarModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\BackgroundItemViewModel.cs" />
     <Compile Include="ViewModels\ViewModelEntities\CardModel.cs" />
