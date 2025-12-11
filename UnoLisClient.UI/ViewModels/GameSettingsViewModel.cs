@@ -10,6 +10,7 @@ using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.Matchmaking;
 using UnoLisClient.UI.Commands;
+using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisServer.Common.Enums;
@@ -85,6 +86,13 @@ namespace UnoLisClient.UI.ViewModels
 
         private async Task ExecuteCreateMatchAsync()
         {
+
+            if (IsGuest())
+            {
+                _dialogService.ShowWarning(ErrorMessages.OperationNotSupportedMessageLabel);
+                return;
+            }
+
             IsLoading = true;
             try
             {
@@ -122,6 +130,11 @@ namespace UnoLisClient.UI.ViewModels
             {
                 IsLoading = false;
             }
+        }
+
+        private static bool IsGuest()
+        {
+            return CurrentSession.CurrentUserNickname.Contains("Guest"); ;
         }
     }
 }
