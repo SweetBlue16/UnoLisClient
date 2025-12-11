@@ -62,6 +62,21 @@ namespace UnoLisClient.UI.Commands
                     Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unable to cast parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in CanExecute.");
                     return false;
                 }
+                catch (FormatException)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unable to convert parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in CanExecute.");
+                    return false;
+                }
+                catch (OverflowException)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Overflow occurred while converting parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in CanExecute.");
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unexpected error while converting parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in CanExecute. Exception: {ex.Message}");
+                    return false;
+                }
             }
             return _canExecute(typedParameter);
         }
@@ -78,6 +93,21 @@ namespace UnoLisClient.UI.Commands
                 catch (InvalidCastException) 
                 {
                     Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unable to cast parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in Execute.");
+                    return;
+                }
+                catch (FormatException)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unable to convert parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in Execute.");
+                    return;
+                }
+                catch (OverflowException)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Overflow occurred while converting parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in Execute.");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unexpected error while converting parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in Execute. Exception: {ex.Message}");
                     return;
                 }
             }

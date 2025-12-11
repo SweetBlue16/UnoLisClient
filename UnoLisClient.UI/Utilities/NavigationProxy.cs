@@ -51,7 +51,7 @@ namespace UnoLisClient.UI.Utilities
                     }
                 }
 
-                string message = UnoLisClient.UI.Properties.Langs.Global.ResourceManager.GetString(messageKey)
+                string message = Global.ResourceManager.GetString(messageKey)
                  ?? "Connection lost. Please log in again.";
 
                 new SimplePopUpWindow(Global.OopsLabel, message, PopUpIconType.Error).ShowDialog();
@@ -67,7 +67,6 @@ namespace UnoLisClient.UI.Utilities
                 ChatService.Instance.Cleanup();
                 FriendsService.Instance.Cleanup();
                 GameplayService.Instance.Cleanup();
-
             }
             catch (InvalidOperationException invEx)
             {

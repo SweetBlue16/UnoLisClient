@@ -17,6 +17,14 @@ namespace UnoLisClient.UI.Utilities
         private const int MinPasswordLength = 8;
         private const int MaxPasswordLength = 255;
 
+        private const string facebookDomain = "facebook.com";
+        private const string instagramDomain = "instagram.com";
+        private const string tikTokDomain = "tiktok.com";
+
+        private const string facebookPlatformName = "Facebook";
+        private const string instagramPlatformName = "Instagram";
+        private const string tikTokPlatformName = "TikTok";
+
         private static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]+$");
         private static readonly Regex _strongPasswordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_])[A-Za-z\d@$!%*?&\-_]{8,255}$");
 
@@ -109,9 +117,9 @@ namespace UnoLisClient.UI.Utilities
                 }
             }
 
-            errors.AddRange(ValidateSocialMediaLink(profileData.FacebookUrl, "facebook.com", "Facebook"));
-            errors.AddRange(ValidateSocialMediaLink(profileData.InstagramUrl, "instagram.com", "Instagram"));
-            errors.AddRange(ValidateSocialMediaLink(profileData.TikTokUrl, "tiktok.com", "TikTok"));
+            errors.AddRange(ValidateSocialMediaLink(profileData.FacebookUrl, facebookDomain, facebookPlatformName));
+            errors.AddRange(ValidateSocialMediaLink(profileData.InstagramUrl, instagramDomain, instagramPlatformName));
+            errors.AddRange(ValidateSocialMediaLink(profileData.TikTokUrl, tikTokDomain, tikTokPlatformName));
 
             return errors;
         }

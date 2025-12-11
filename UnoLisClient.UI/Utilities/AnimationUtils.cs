@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +12,18 @@ namespace UnoLisClient.UI.Utilities
         private const double FadeInDuration = 0.3;
         private const double FadeOutDuration = 0.25;
         private const double FadeOutTransitionDuration = 0.8;
+
+        private const double IntroLogoFadeInSeconds = 3.0;
+        private const double IntroLogoFadeOutSeconds = 1.8;
+        private const double IntroMaskFadeOutSeconds = 2.5;
+        private const int IntroPreMusicDelayMs = 2000;
+
+        private const double CrossfadeSeconds = 1.0;
+
+        private const string DefaultVideoAssetPath = "Assets/econexBack.mp4";
+        private const string DefaultMusicAssetPath = "Assets/jazzBackground.mp3";
+
+        private const int MediaSwapDelayMs = 600;
 
         /// <summary>
         /// Parameters for Intro Animation.
@@ -106,22 +115,24 @@ namespace UnoLisClient.UI.Utilities
             args.Logo.Visibility = Visibility.Visible;
             args.Logo.Opacity = 0;
 
-            var fadeInLogo = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromSeconds(3.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
-            var scaleLogo = new DoubleAnimation { From = 0.8, To = 1.0, Duration = TimeSpan.FromSeconds(3.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut } };
+            var durationIn = TimeSpan.FromSeconds(IntroLogoFadeInSeconds);
+
+            var fadeInLogo = new DoubleAnimation { From = 0, To = 1, Duration = durationIn, EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
+            var scaleLogo = new DoubleAnimation { From = 0.8, To = 1.0, Duration = durationIn, EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut } };
 
             args.Logo.BeginAnimation(UIElement.OpacityProperty, fadeInLogo);
             args.Logo.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleLogo);
             args.Logo.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleLogo);
 
-            await Task.Delay(3000);
+            await Task.Delay((int)(IntroLogoFadeInSeconds * 1000));
 
-            var fadeOutLogo = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(1.8), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
+            var fadeOutLogo = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(IntroLogoFadeOutSeconds), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
             args.Logo.BeginAnimation(UIElement.OpacityProperty, fadeOutLogo);
 
-            await Task.Delay(2000);
+            await Task.Delay(IntroPreMusicDelayMs);
             args.MusicPlayer.Play();
 
-            var fadeOutMask = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(2.5), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut } };
+            var fadeOutMask = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(IntroMaskFadeOutSeconds), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut } };
 
             fadeOutMask.Completed += (s, _) =>
             {
@@ -133,19 +144,19 @@ namespace UnoLisClient.UI.Utilities
         }
 
         /// <summary>
-        ///Makes a crossfade transition between two media sources.
+        /// Makes a crossfade transition between two media sources.
         /// </summary>
-
         public static async Task CrossfadeMediaAsync(CrossfadeMediaArgs args)
         {
-            var fadeOut = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
+            var duration = TimeSpan.FromSeconds(CrossfadeSeconds);
+            var fadeOut = new DoubleAnimation { From = 1, To = 0, Duration = duration, EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
             args.VideoPlayer.BeginAnimation(UIElement.OpacityProperty, fadeOut);
 
             double oldVolume = args.MusicPlayer.Volume;
-            var fadeOutMusic = new DoubleAnimation { From = oldVolume, To = 0, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
+            var fadeOutMusic = new DoubleAnimation { From = oldVolume, To = 0, Duration = duration, EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
             args.MusicPlayer.BeginAnimation(MediaElement.VolumeProperty, fadeOutMusic);
 
-            await Task.Delay(1000);
+            await Task.Delay((int)(CrossfadeSeconds * 1000));
 
             args.VideoPlayer.Stop();
             args.MusicPlayer.Stop();
@@ -159,19 +170,19 @@ namespace UnoLisClient.UI.Utilities
             args.VideoPlayer.Play();
             args.MusicPlayer.Play();
 
-            var fadeIn = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
+            var fadeIn = new DoubleAnimation { From = 0, To = 1, Duration = duration, EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
             args.VideoPlayer.BeginAnimation(UIElement.OpacityProperty, fadeIn);
 
-            var fadeInMusic = new DoubleAnimation { From = 0, To = oldVolume, Duration = TimeSpan.FromSeconds(1.0), EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
+            var fadeInMusic = new DoubleAnimation { From = 0, To = oldVolume, Duration = duration, EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } };
             args.MusicPlayer.BeginAnimation(MediaElement.VolumeProperty, fadeInMusic);
         }
 
         public static async Task RestoreDefaultMediaAsync(MediaElement videoPlayer, MediaElement musicPlayer)
         {
-            string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/econexBack.mp4");
-            string defaultMusic = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/jazzBackground.mp3");
+            string defaultVideo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultVideoAssetPath);
+            string defaultMusic = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultMusicAssetPath);
 
-            await Task.Delay(600);
+            await Task.Delay(MediaSwapDelayMs);
 
             videoPlayer.Stop();
             musicPlayer.Stop();

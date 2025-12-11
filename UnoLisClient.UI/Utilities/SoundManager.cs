@@ -11,9 +11,20 @@ namespace UnoLisClient.UI.Utilities
 {
     public static class SoundManager
     {
-        public static void PlaySound(string fileName, double volume = 0.6)
+        private const string AssetsFolderName = "Assets";
+
+        private const string ButtonClickFileName = "buttonClick.mp3";
+        private const string ErrorFileName = "buttonClick.mp3";
+        private const string SuccessFileName = "buttonClick.mp3";
+
+        private const double DefaultVolume = 0.6;
+        private const double ClickVolume = 2.0;
+        private const double ErrorVolume = 0.8;
+        private const double SuccessVolume = 0.7;
+
+        public static void PlaySound(string fileName, double volume = DefaultVolume)
         {
-            string soundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", fileName);
+            string soundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AssetsFolderName, fileName);
 
             try
             {
@@ -61,17 +72,17 @@ namespace UnoLisClient.UI.Utilities
 
         public static void PlayClick()
         {
-            PlaySound("buttonClick.mp3", 2.0);
+            PlaySound(ButtonClickFileName, ClickVolume);
         }
 
         public static void PlayError()
         {
-            PlaySound("buttonClick.mp3", 0.8);
+            PlaySound(ErrorFileName, ErrorVolume);
         }
 
         public static void PlaySuccess()
         {
-            PlaySound("buttonClick.mp3", 0.7);
+            PlaySound(SuccessFileName, SuccessVolume);
         }
     }
 }

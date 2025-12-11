@@ -12,7 +12,9 @@ namespace UnoLisClient.UI.Utilities
         public static void CopyUrl(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
+            {
                 return;
+            }
 
             try
             {

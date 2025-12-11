@@ -6,6 +6,11 @@ namespace UnoLisClient.UI.Utilities
     public static class CardAssetHelper
     {
         private const string BasePath = "pack://application:,,,/Assets/Cards/";
+        private const string WildCardPath = "WildCard.png";
+        private const string WildDrawFourCardPath = "WildDrawFourCard.png";
+        private const string WildDrawTenCardPath = "WildDrawTenCard.png";
+        private const string WildDrawSkipReverseCardPath = "WildDrawSkipReverseCard.png";
+        private const string BackCardPath = "BackUNOCard.png";
 
         public static string GetImagePath(CardColor color, CardValue value)
         {
@@ -18,16 +23,16 @@ namespace UnoLisClient.UI.Utilities
                     switch (value)
                     {
                         case CardValue.Wild:
-                            fileName = "WildCard.png";
+                            fileName = WildCardPath;
                             break;
                         case CardValue.WildDrawFour:
-                            fileName = "WildDrawFourCard.png";
+                            fileName = WildDrawFourCardPath;
                             break;
                         case CardValue.WildDrawTen:
-                            fileName = "WildDrawTenCard.png";
+                            fileName = WildDrawTenCardPath;
                             break;
                         case CardValue.WildDrawSkipReverseFour:
-                            fileName = "WildDrawSkipReverseCard.png";
+                            fileName = WildDrawSkipReverseCardPath;
                             break;
                     }
                 }
@@ -43,7 +48,7 @@ namespace UnoLisClient.UI.Utilities
             }
             catch
             {
-                return $"{BasePath}BackUNOCard.png";
+                return $"{BasePath}{BackCardPath}";
             }
         }
 
