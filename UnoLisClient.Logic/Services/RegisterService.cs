@@ -37,8 +37,6 @@ namespace UnoLisClient.Logic.Services
                 client: registerClient,
                 operationName: "UpdateProfile"
             );
-
-
             return taskCompletion.Task;
         }
     }

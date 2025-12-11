@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IGameplayManager" contract="UnoLisServerReference.Gameplay.IGameplayManager" bindingType="netTcpBinding" address="net.tcp://172.20.10.2:8115/GameplayManager" bindingConfiguration="NetTcpBinding_IGameplayManager">
+    <endpoint name="NetTcpBinding_IGameplayManager" contract="UnoLisServerReference.Gameplay.IGameplayManager" bindingType="netTcpBinding" address="net.tcp://localhost:8115/GameplayManager" bindingConfiguration="NetTcpBinding_IGameplayManager">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://172.20.10.2:8115/GameplayManager</serializedValue>
+          <serializedValue>net.tcp://localhost:8115/GameplayManager</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -92,7 +92,10 @@ namespace UnoLisClient.Logic.Services
 
         public void Cleanup()
         {
-            if (_factory == null) return;
+            if (_factory == null)
+            {
+                return;
+            }
 
             try
             {
@@ -160,7 +163,9 @@ namespace UnoLisClient.Logic.Services
         public Task SendMessageAsync(ChatMessageData message)
         {
             if (string.IsNullOrWhiteSpace(message.Message) || _proxy == null)
+            {
                 return Task.CompletedTask;
+            }
 
             try
             {

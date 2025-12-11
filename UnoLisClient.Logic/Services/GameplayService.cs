@@ -202,7 +202,10 @@ namespace UnoLisClient.Logic.Services
 
         public void Cleanup()
         {
-            if (_factory == null) return;
+            if (_factory == null)
+            {
+                return;
+            }
 
             try
             {
