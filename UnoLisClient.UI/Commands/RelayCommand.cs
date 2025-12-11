@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using UnoLisClient.Logic.Helpers;
 
 namespace UnoLisClient.UI.Commands
 {
@@ -56,7 +57,11 @@ namespace UnoLisClient.UI.Commands
                 {
                     typedParameter = (T)Convert.ChangeType(parameter, typeof(T));
                 }
-                catch (InvalidCastException) {}
+                catch (InvalidCastException)
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unable to cast parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in CanExecute.");
+                    return false;
+                }
             }
             return _canExecute(typedParameter);
         }
@@ -70,7 +75,11 @@ namespace UnoLisClient.UI.Commands
                 {
                     typedParameter = (T)Convert.ChangeType(parameter, typeof(T));
                 }
-                catch (InvalidCastException) {}
+                catch (InvalidCastException) 
+                {
+                    Logger.Warn($"RelayCommand<{typeof(T).Name}>: Unable to cast parameter of type {parameter.GetType().Name} to type {typeof(T).Name} in Execute.");
+                    return;
+                }
             }
             _execute(typedParameter);
         }

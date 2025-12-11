@@ -10,7 +10,10 @@ namespace UnoLisClient.Logic.Services
 
         public static void Monitor(ICommunicationObject channel)
         {
-            if (channel == null) return;
+            if (channel == null)
+            {
+                return;
+            }
             channel.Faulted -= OnChannelFaulted;
             channel.Faulted += OnChannelFaulted;
         }

@@ -29,10 +29,15 @@ namespace UnoLisClient.UI.Commands
 
         public bool CanExecute(object parameter)
         {
-            if (_canExecute == null) return true;
+            if (_canExecute == null)
+            {
+                return true;
+            }
 
             if (parameter == null && typeof(T).IsValueType)
+            {
                 return _canExecute(default);
+            }
 
             return _canExecute((T)parameter);
         }
@@ -40,9 +45,13 @@ namespace UnoLisClient.UI.Commands
         public void Execute(object parameter)
         {
             if (parameter == null && typeof(T).IsValueType)
+            {
                 _execute(default);
+            }
             else
+            {
                 _execute((T)parameter);
+            }
         }
 
         public void RaiseCanExecuteChanged() => CommandManager.InvalidateRequerySuggested();

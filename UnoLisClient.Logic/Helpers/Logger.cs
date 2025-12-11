@@ -19,7 +19,9 @@ namespace UnoLisClient.Logic.Helpers
                 XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
 
                 if (!Directory.Exists("Logs"))
+                {
                     Directory.CreateDirectory("Logs");
+                }
 
                 _logger = LogManager.GetLogger(typeof(Logger));
                 _logger.Info("✅ Client logger initialized successfully.");
@@ -43,9 +45,13 @@ namespace UnoLisClient.Logic.Helpers
         public static void Error(string message, Exception ex = null)
         {
             if (ex == null)
+            {
                 _logger.Error(message);
+            }
             else
+            {
                 _logger.Error(message + $" → {ex.GetType().Name}: {ex.Message}", ex);
+            }
         }
     }
 }

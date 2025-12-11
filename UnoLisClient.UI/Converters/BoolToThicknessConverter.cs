@@ -7,8 +7,11 @@ namespace UnoLisClient.UI.Converters
 {
     public class BoolToThicknessConverter : IValueConverter
     {
-        public Thickness TrueThickness { get; set; } = new Thickness(3);
-        public Thickness FalseThickness { get; set; } = new Thickness(1);
+        private const int TrueThicknessDefault = 3;
+        private const int FalseThicknessDefault = 1;
+
+        public Thickness TrueThickness { get; set; } = new Thickness(TrueThicknessDefault);
+        public Thickness FalseThickness { get; set; } = new Thickness(FalseThicknessDefault);
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -11,9 +11,11 @@ namespace UnoLisClient.UI.Utilities
 {
     public class ProgressBarWidthConverter : IMultiValueConverter
     {
+        private const int MaxLength = 4;
+
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values == null || values.Length < 4 ||
+            if (values == null || values.Length < MaxLength ||
                 values[0] == DependencyProperty.UnsetValue ||
                 values[1] == DependencyProperty.UnsetValue ||
                 values[2] == DependencyProperty.UnsetValue ||

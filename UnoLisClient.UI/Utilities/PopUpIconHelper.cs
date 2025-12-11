@@ -14,22 +14,7 @@ namespace UnoLisClient.UI.Utilities
                 return null;
             }
 
-            string imageName = string.Empty;
-            switch (iconType)
-            {
-                case PopUpIconType.Success: imageName = "OkAlert.png"; break;
-                case PopUpIconType.Error: imageName = "ErrorAlert.png"; break;
-                case PopUpIconType.Warning: imageName = "WarningAlert.png"; break;
-                case PopUpIconType.Info: imageName = "Info.png"; break;
-                case PopUpIconType.Question: imageName = "QuestionAlert.png"; break;
-                case PopUpIconType.Logout: imageName = "Logout.png"; break;
-                case PopUpIconType.Login: imageName = "Login.png"; break;
-                case PopUpIconType.EmailVerification: imageName = "EmailVerification.png"; break;
-                case PopUpIconType.CreateAccount: imageName = "CreateAccount.png"; break;
-                case PopUpIconType.RecoverPassword: imageName = "RecoverPassword.png"; break;
-                case PopUpIconType.ReportPlayer: imageName = "ReportPlayer.png"; break;
-                default: return null;
-            }
+            string imageName = GetImagePath(iconType);
 
             if (string.IsNullOrEmpty(imageName))
             {
@@ -43,6 +28,25 @@ namespace UnoLisClient.UI.Utilities
             catch
             {
                 return null;
+            }
+        }
+
+        private static string GetImagePath(PopUpIconType iconType)
+        {
+            switch (iconType)
+            {
+                case PopUpIconType.Success: return "OkAlert.png";
+                case PopUpIconType.Error: return "ErrorAlert.png";
+                case PopUpIconType.Warning: return "WarningAlert.png";
+                case PopUpIconType.Info: return "Info.png";
+                case PopUpIconType.Question: return "QuestionAlert.png";
+                case PopUpIconType.Logout: return "Logout.png";
+                case PopUpIconType.Login: return "Login.png";
+                case PopUpIconType.EmailVerification: return "EmailVerification.png";
+                case PopUpIconType.CreateAccount: return "CreateAccount.png";
+                case PopUpIconType.RecoverPassword: return "RecoverPassword.png";
+                case PopUpIconType.ReportPlayer: return "ReportPlayer.png";
+                default: return string.Empty;
             }
         }
     }

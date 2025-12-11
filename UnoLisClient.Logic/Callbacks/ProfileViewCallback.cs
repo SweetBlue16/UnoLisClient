@@ -20,7 +20,6 @@ namespace UnoLisClient.Logic.Callbacks
         {
             Console.WriteLine($"[DEBUG] Callback recibido - Success: {response.Success}");
 
-            // Ejecutar directamente sin Dispatcher
             try
             {
                 _onResponse?.Invoke(response);

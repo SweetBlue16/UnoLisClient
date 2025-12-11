@@ -65,11 +65,11 @@ namespace UnoLisClient.Logic.Helpers
         }
 
         private ServiceResponse<object> CreateFail(MessageCode code) =>
-            new ServiceResponse<object>
-            {
-                Success = false,
-                Code = code
-            };
+        new ServiceResponse<object>
+        {
+            Success = false,
+            Code = code
+        };
 
         public void Dispose()
         {

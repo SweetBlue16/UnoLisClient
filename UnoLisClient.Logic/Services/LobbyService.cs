@@ -79,7 +79,10 @@ namespace UnoLisClient.Logic.Services
 
         public async Task DisconnectFromLobbyAsync(string lobbyCode, string nickname)
         {
-            if (_proxy == null) return;
+            if (_proxy == null)
+            {
+                return;
+            }
 
             try
             {
@@ -95,7 +98,11 @@ namespace UnoLisClient.Logic.Services
 
         public async Task SetReadyStatusAsync(string lobbyCode, string nickname, bool isReady)
         {
-            if (_proxy == null) return;
+            if (_proxy == null)
+            {
+                return;
+            }
+
             try
             {
                 await _proxy.SetReadyStatusAsync(lobbyCode, nickname, isReady);

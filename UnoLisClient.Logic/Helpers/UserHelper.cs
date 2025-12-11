@@ -10,7 +10,10 @@ namespace UnoLisClient.Logic.Helpers
     {
         public static bool IsGuest(string nickname)
         {
-            if (string.IsNullOrEmpty(nickname)) return false;
+            if (string.IsNullOrEmpty(nickname))
+            {
+                return false;
+            }
             return nickname.StartsWith("Guest_", StringComparison.OrdinalIgnoreCase);
         }
     }

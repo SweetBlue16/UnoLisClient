@@ -12,6 +12,10 @@ namespace UnoLisClient.UI.Utilities
 {
     public static class AnimationUtils
     {
+        private const double FadeInDuration = 0.3;
+        private const double FadeOutDuration = 0.25;
+        private const double FadeOutTransitionDuration = 0.8;
+
         /// <summary>
         /// Parameters for Intro Animation.
         /// </summary>
@@ -45,7 +49,7 @@ namespace UnoLisClient.UI.Utilities
             }
         }
 
-        public static void FadeIn(UIElement element, double duration = 0.3)
+        public static void FadeIn(UIElement element, double duration = FadeInDuration)
         {
             element.Visibility = Visibility.Visible;
             element.Opacity = 0;
@@ -61,7 +65,7 @@ namespace UnoLisClient.UI.Utilities
             element.BeginAnimation(UIElement.OpacityProperty, fade);
         }
 
-        public static async Task FadeOut(UIElement element, double duration = 0.25)
+        public static async Task FadeOut(UIElement element, double duration = FadeOutDuration)
         {
             var fade = new DoubleAnimation
             {
@@ -76,7 +80,7 @@ namespace UnoLisClient.UI.Utilities
             element.Visibility = Visibility.Collapsed;
         }
 
-        public static async Task FadeOutTransition(UIElement element, double duration = 0.8)
+        public static async Task FadeOutTransition(UIElement element, double duration = FadeOutTransitionDuration)
         {
             if (element == null) return;
 

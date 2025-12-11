@@ -79,8 +79,11 @@ namespace UnoLisClient.Logic.Services
 
         public async Task<FriendRequestResult> SendFriendRequestAsync(string requesterNickname, string targetNickname)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. " +
+            if (_proxy == null)
+            {
+                throw new InvalidOperationException("FriendsService no está inicializado. " +
                 "Llama a Initialize() primero.");
+            }
 
             try
             {
@@ -105,8 +108,12 @@ namespace UnoLisClient.Logic.Services
 
         public async Task<bool> AcceptFriendRequestAsync(FriendRequestData request)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado." +
+            if (_proxy == null)
+            {
+                throw new InvalidOperationException("FriendsService no está inicializado." +
                 " Llama a Initialize() primero.");
+            }
+
             try
             {
                 return await _proxy.AcceptFriendRequestAsync(request);
@@ -125,8 +132,12 @@ namespace UnoLisClient.Logic.Services
 
         public async Task<bool> RejectFriendRequestAsync(FriendRequestData request)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado." +
+            if (_proxy == null)
+            {
+                throw new InvalidOperationException("FriendsService no está inicializado." +
                 " Llama a Initialize() primero.");
+            }
+
             try
             {
                 return await _proxy.RejectFriendRequestAsync(request);
@@ -145,8 +156,12 @@ namespace UnoLisClient.Logic.Services
 
         public async Task<bool> RemoveFriendAsync(FriendRequestData request)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está " +
+            if (_proxy == null)
+            {
+                throw new InvalidOperationException("FriendsService no está " +
                 "inicializado. Llama a Initialize() primero.");
+            }
+
             try
             {
                 return await _proxy.RemoveFriendAsync(request);
@@ -165,8 +180,12 @@ namespace UnoLisClient.Logic.Services
 
         public async Task<List<Friend>> GetFriendsListAsync(string nickname)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. " +
+            if (_proxy == null)
+            {
+                throw new InvalidOperationException("FriendsService no está inicializado. " +
                 "Llama a Initialize() primero.");
+            }
+
             try
             {
                 var resultDtos = await _proxy.GetFriendsListAsync(nickname);
@@ -186,7 +205,11 @@ namespace UnoLisClient.Logic.Services
 
         public async Task<List<FriendRequestData>> GetPendingRequestsAsync(string nickname)
         {
-            if (_proxy == null) throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            if (_proxy == null)
+            {
+                throw new InvalidOperationException("FriendsService no está inicializado. Llama a Initialize() primero.");
+            }
+
             try
             {
                 var resultDtos = await _proxy.GetPendingRequestsAsync(nickname);

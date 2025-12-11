@@ -12,10 +12,10 @@ namespace UnoLisClient.UI.Utilities
     public static class UserValidator
     {
         private const int MinNicknameLength = 3;
-        private const int MaxNicknameLength = 20;
-        private const int MaxFullnameLength = 100;
+        private const int MaxNicknameLength = 45;
+        private const int MaxFullnameLength = 45;
         private const int MinPasswordLength = 8;
-        private const int MaxPasswordLength = 16;
+        private const int MaxPasswordLength = 255;
 
         private static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]+$");
         private static readonly Regex _strongPasswordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_])[A-Za-z\d@$!%*?&\-_]{8,255}$");

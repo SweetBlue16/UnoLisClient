@@ -18,7 +18,9 @@ namespace UnoLisClient.UI.Utilities
             try
             {
                 if (!File.Exists(soundPath))
+                {
                     throw new FileNotFoundException("El archivo de sonido no existe.", soundPath);
+                }
 
                 var player = new MediaPlayer();
                 player.Open(new Uri(soundPath, UriKind.Absolute));
