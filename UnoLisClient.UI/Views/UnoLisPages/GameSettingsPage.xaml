@@ -159,16 +159,11 @@
                 </StackPanel>
                 <Button Grid.Row="2"
                         Content="{x:Static language:Settings.CreateMatchLabel}"
-                        FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                         FontSize="22"
                         Padding="10"
-                        Width="260" Height="55"
-                        HorizontalAlignment="Center"
+                        Style="{StaticResource PrimaryButtonStyle}"
                         Cursor="Hand"
-                        Command="{Binding CreateMatchCommand}"
-                        Background="#FFD60A"
-                        Foreground="Black"
-                        BorderThickness="0">
+                        Command="{Binding CreateMatchCommand}">
                     <Button.Effect>
                         <DropShadowEffect BlurRadius="10" Opacity="0.6"/>
                     </Button.Effect>
