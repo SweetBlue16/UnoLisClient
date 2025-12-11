@@ -14,7 +14,7 @@ namespace UnoLisClient.Logic.Callbacks
 
         public void OnPlayerBanned(ServiceResponse<BanInfo> response)
         {
-            BanSessionManager.TriggerBan(response.Data as BanInfo);
+            BanSessionManager.TriggerBan(response.Data);
         }
 
         public void ReportPlayerResponse(ServiceResponse<object> response)

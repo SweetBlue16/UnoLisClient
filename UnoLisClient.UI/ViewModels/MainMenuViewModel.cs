@@ -81,6 +81,7 @@ namespace UnoLisClient.UI.ViewModels
                     ChatService.Instance.Cleanup();
                     FriendsService.Instance.Cleanup();
                     ClearLocalSessionAndNavigate();
+                    SessionReportTracker.Clear();
                 }
                 else
                 {
@@ -116,6 +117,7 @@ namespace UnoLisClient.UI.ViewModels
                 SetLoading(false);
             }
             ClearLocalSessionAndNavigate();
+            SessionReportTracker.Clear();
         }
 
         private void ExecuteGoToPlay()
