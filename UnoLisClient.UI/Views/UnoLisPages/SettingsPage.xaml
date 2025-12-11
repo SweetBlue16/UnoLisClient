@@ -22,19 +22,14 @@
             </Border.Effect>
 
             <Grid>
-                <!-- 🧱 Definición de filas -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Header con título + botón -->
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
-                    <!-- Language -->
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
-                    <!-- Volume -->
                 </Grid.RowDefinitions>
 
-                <!-- 🔝 Header: Título + botón de cerrar -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -58,7 +53,6 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,10"/>
 
-                    <!-- Botón de cerrar -->
                     <Button x:Name="CloseButton"
                             Grid.Column="2"
                             Content="✖"
@@ -71,7 +65,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Cursor="Hand"
-                            Click="ClickCloseButton">
+                            Command="{Binding CloseCommand}">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -102,7 +96,6 @@
                     </Button>
                 </Grid>
 
-                <!-- Idioma -->
                 <Grid Grid.Row="2" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -122,14 +115,13 @@
                               Width="150" Height="35"
                               FontSize="14"
                               HorizontalAlignment="Right"
-                              SelectionChanged="SelectionChangedLanguageComboBox"
-                              Grid.Column="1">
-                        <ComboBoxItem Content="{x:Static language:Settings.EnglishComboItem}" Tag="en-US"/>
-                        <ComboBoxItem Content="{x:Static language:Settings.SpanishComboItem}" Tag="es-MX"/>
-                    </ComboBox>
+                              ItemsSource="{Binding AvailableLanguages}"
+                              SelectedItem="{Binding SelectedLanguage}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Code"
+                              Grid.Column="1"/>
                 </Grid>
 
-                <!-- Volumen -->
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -145,13 +137,13 @@
                            HorizontalAlignment="Left"/>
 
                     <Slider x:Name="VolumeSlider"
-                            Minimum="0" Maximum="100" Value="50"
+                            Minimum="0" Maximum="100"
+                            Value="{Binding Volume, Mode=TwoWay}"
                             TickFrequency="5" IsSnapToTickEnabled="True"
                             Width="150" Height="24"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
-                            Grid.Column="1"
-                            ValueChanged="ValueChangedVolumeSlider"/>
+                            Grid.Column="1"/>
                 </Grid>
             </Grid>
         </Border>
