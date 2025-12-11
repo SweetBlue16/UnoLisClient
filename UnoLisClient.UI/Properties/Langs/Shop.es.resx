@@ -148,9 +148,12 @@
     <value>Caja especial</value>
   </data>
   <data name="PurchaseSuccessfulLabel" xml:space="preserve">
-    <value>Compra realizada correctamente.</value>
+    <value>¡Compra realizada correctamente, compraste: {0}!</value>
   </data>
   <data name="ItemAlreadyOwnedMessageLabel" xml:space="preserve">
     <value>Ya tienes el avatar {0}.</value>
+  </data>
+  <data name="CongratulationsLabel" xml:space="preserve">
+    <value>¡Felicidades!</value>
   </data>
 </root>

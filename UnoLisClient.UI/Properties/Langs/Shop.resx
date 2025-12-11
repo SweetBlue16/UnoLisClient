@@ -148,9 +148,12 @@
     <value>Special box</value>
   </data>
   <data name="PurchaseSuccessfulLabel" xml:space="preserve">
-    <value>Purchase completed successfully.</value>
+    <value>Purchase completed successfully, you bought: {0}!</value>
   </data>
   <data name="ItemAlreadyOwnedMessageLabel" xml:space="preserve">
     <value>You already have the avatar {0}.</value>
+  </data>
+  <data name="CongratulationsLabel" xml:space="preserve">
+    <value>Congratulations!</value>
   </data>
 </root>

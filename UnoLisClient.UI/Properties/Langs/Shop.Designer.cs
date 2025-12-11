@@ -79,6 +79,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Congratulations!.
+        /// </summary>
+        public static string CongratulationsLabel {
+            get {
+                return ResourceManager.GetString("CongratulationsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Epic box.
         /// </summary>
         public static string EpicBoxLabel {
@@ -124,7 +133,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Purchase completed successfully..
+        ///   Looks up a localized string similar to Purchase completed successfully, you bought: {0}!.
         /// </summary>
         public static string PurchaseSuccessfulLabel {
             get {
