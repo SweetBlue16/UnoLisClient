@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.Logic.Services
 {

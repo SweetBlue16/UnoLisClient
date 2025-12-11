@@ -26,6 +26,17 @@
             get => _isSkipped;
             set => SetProperty(ref _isSkipped, value);
         }
+
+        private bool _isConnected = true;
+        public bool IsConnected
+        {
+            get => _isConnected;
+            set
+            {
+                _isConnected = value;
+                OnPropertyChanged();
+            }
+        }
         public async void TriggerSkipAnimation()
         {
             IsSkipped = true;

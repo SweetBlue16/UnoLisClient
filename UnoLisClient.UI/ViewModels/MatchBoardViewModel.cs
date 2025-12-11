@@ -18,8 +18,9 @@ using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
 using UnoLisClient.UI.Views.UnoLisPages;
+using ServiceItemType = UnoLisServer.Common.Enums.ItemType;
 
-using ServiceItemType = UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType;
+using LocalItemType = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -323,7 +324,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (nickname == _currentUserNickname)
                 {
-                    var cardToRemove = PlayerHand.FirstOrDefault(c => c.CardData.Id == card.Id);
+                    var cardToRemove = PlayerHand.FirstOrDefault(cardMatch => cardMatch.CardData.Id == card.Id);
                     if (cardToRemove != null) PlayerHand.Remove(cardToRemove);
                     UpdateUnoButtonStatus();
                 }
@@ -483,52 +484,46 @@ namespace UnoLisClient.UI.ViewModels
             });
         }
 
-        private async void ExecuteUseItem(UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType localType)
+        private async void ExecuteUseItem(LocalItemType localType)
         {
-            // 1. TRADUCCIÓN: Convertir tu Enum local al del Servidor
-            // Esto es necesario porque tu enum dice 'Swap' y el server dice 'SwapHands'
             ServiceItemType serverType;
 
             switch (localType)
             {
-                case UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Swap:
-                    serverType = ServiceItemType.SwapHands;
+                case LocalItemType.Swap:
+                    serverType = ServiceItemType.SwapHands; 
                     break;
-                case UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Shield:
+                case LocalItemType.Shield:
                     serverType = ServiceItemType.Shield;
                     break;
-                case UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Thief:
+                case LocalItemType.Thief:
                     serverType = ServiceItemType.Thief;
                     break;
                 default:
-                    return; // Si es ExtraTurn u otro no soportado aún
+                    return; 
             }
 
-            // 2. Validación de Turno
             if (CurrentTurnNickname != _currentUserNickname)
             {
-                // Opcional: _dialogService.ShowAlert(...)
                 return;
             }
 
-            // 3. Lógica de Selección (Igual que antes)
             string target = null;
+            int minumumOpponents = 2;
 
             if (serverType == ServiceItemType.SwapHands)
             {
-                if (_allPlayersData.Count == 2)
+                if (_allPlayersData.Count == minumumOpponents)
                 {
                     target = _allPlayersData.FirstOrDefault(p => p.Nickname != _currentUserNickname)?.Nickname;
                 }
                 else
                 {
-                    // TODO: Popup Selector para 3+ jugadores
                     target = OpponentTop?.Nickname ?? OpponentLeft?.Nickname ?? OpponentRight?.Nickname;
+
                 }
             }
-            // Agregar lógica para Thief aquí si es necesario
 
-            // 4. Enviar al Servidor
             if (target != null)
             {
                 try
@@ -539,7 +534,7 @@ namespace UnoLisClient.UI.ViewModels
                     if (item != null && item.Count > 0)
                     {
                         item.Count--;
-                        item.UpdateCanExecute(); 
+                        item.UpdateCanExecute();
                     }
 
                     SoundManager.PlayClick();
@@ -655,13 +650,6 @@ namespace UnoLisClient.UI.ViewModels
                    value == CardValue.WildDrawTen || value == CardValue.WildDrawSkipReverseFour;
         }
 
-        private void UpdateOpponentCardCount(string nickname, int delta)
-        {
-            if (OpponentLeft?.Nickname == nickname) OpponentLeft.CardCount += delta;
-            else if (OpponentTop?.Nickname == nickname) OpponentTop.CardCount += delta;
-            else if (OpponentRight?.Nickname == nickname) OpponentRight.CardCount += delta;
-        }
-
         private async void ExecuteCallUno()
         {
             SoundManager.PlayClick();
@@ -671,6 +659,10 @@ namespace UnoLisClient.UI.ViewModels
             try
             {
                 await _gameplayService.SayUnoAsync(_currentLobbyCode, _currentUserNickname);
+            }
+            catch (TimeoutException)
+            {
+                System.Diagnostics.Debug.WriteLine("Timeout while saying UNO.");
             }
             catch (Exception ex)
             {
@@ -685,7 +677,6 @@ namespace UnoLisClient.UI.ViewModels
 
         private void HandlePlayerListReceived(List<GamePlayer> players)
         {
-            System.Diagnostics.Debug.WriteLine($"[CLIENT] Player List Received: {string.Join(", ", players)}");
             _allPlayersData = players;
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -725,8 +716,6 @@ namespace UnoLisClient.UI.ViewModels
                 OnPropertyChanged(nameof(OpponentTop));
                 OnPropertyChanged(nameof(OpponentRight));
 
-                System.Diagnostics.Debug.WriteLine($"[CLIENT] Rendering Opponents. Total Players in List: {totalPlayers}");
-
                 for (int i = 1; i < totalPlayers; i++)
                 {
                     int rivalIndex = (myIndex + i) % totalPlayers;
@@ -740,14 +729,29 @@ namespace UnoLisClient.UI.ViewModels
                     }
                     else if (totalPlayers == trio)
                     {
-                        if (i == 1) OpponentLeft = CreateOpponent(rivalData);
-                        else if (i == 2) OpponentRight = CreateOpponent(rivalData);
+                        if (i == 1)
+                        {
+                            OpponentLeft = CreateOpponent(rivalData);
+                        }
+                        else if (i == 2)
+                        {
+                            OpponentRight = CreateOpponent(rivalData);
+                        }
                     }
                     else
                     {
-                        if (i == 1) OpponentLeft = CreateOpponent(rivalData);
-                        else if (i == 2) OpponentTop = CreateOpponent(rivalData);
-                        else if (i == 3) OpponentRight = CreateOpponent(rivalData);
+                        if (i == 1)
+                        {
+                            OpponentLeft = CreateOpponent(rivalData);
+                        }
+                        else if (i == 2)
+                        {
+                            OpponentTop = CreateOpponent(rivalData);
+                        }
+                        else if (i == 3)
+                        {
+                            OpponentRight = CreateOpponent(rivalData);
+                        }
                     }
                 }
 
@@ -764,7 +768,8 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Nickname = playerData.Nickname,
                 CardCount = playerData.CardCount,
-                AvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png"
+                AvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png",
+                IsConnected = playerData.IsConnected
             };
         }
 
@@ -781,15 +786,6 @@ namespace UnoLisClient.UI.ViewModels
             Items.Add(new ItemModel(Shield, 1, (t) => ExecuteUseItem(t)));
 
             Items.Add(new ItemModel(Thief, 1, (t) => ExecuteUseItem(t)));
-        }
-
-        private void UpdatePlayableCards()
-        {
-            foreach (var card in PlayerHand)
-            {
-                card.IsPlayable = true;
-                card.UpdateCanExecute();
-            }
         }
 
         private void ExecuteToggleSettings()
@@ -812,6 +808,10 @@ namespace UnoLisClient.UI.ViewModels
                 try
                 {
                     await _gameplayService.LeaveGameAsync(_currentLobbyCode, _currentUserNickname);
+                }
+                catch (TimeoutException)
+                {
+                    System.Diagnostics.Debug.WriteLine("Timeout while leaving game.");
                 }
                 catch (Exception ex)
                 {

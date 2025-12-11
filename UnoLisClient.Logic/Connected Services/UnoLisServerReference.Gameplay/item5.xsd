@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8114/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
+  <xs:import schemaLocation="http://172.20.10.2:8114/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.Enums" />
   <xs:complexType name="PlayCardData">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardId" nillable="true" type="xs:string" />
@@ -49,6 +49,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="AvatarName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CardCount" type="xs:int" />
+      <xs:element minOccurs="0" name="IsConnected" type="xs:boolean" />
       <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

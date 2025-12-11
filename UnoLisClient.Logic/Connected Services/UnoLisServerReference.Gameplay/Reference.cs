@@ -106,20 +106,6 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ItemType", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums")]
-    public enum ItemType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SwapHands = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Shield = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Thief = 2,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
@@ -382,6 +368,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         private int CardCountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsConnectedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NicknameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -416,6 +405,19 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
                 if ((this.CardCountField.Equals(value) != true)) {
                     this.CardCountField = value;
                     this.RaisePropertyChanged("CardCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsConnected {
+            get {
+                return this.IsConnectedField;
+            }
+            set {
+                if ((this.IsConnectedField.Equals(value) != true)) {
+                    this.IsConnectedField = value;
+                    this.RaisePropertyChanged("IsConnected");
                 }
             }
         }
@@ -478,10 +480,10 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         System.Threading.Tasks.Task DisconnectPlayerAsync(string lobbyCode, string nickname);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/UseItem")]
-        void UseItem(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname);
+        void UseItem(string lobbyCode, string nickname, UnoLisServer.Common.Enums.ItemType itemType, string targetNickname);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/UseItem")]
-        System.Threading.Tasks.Task UseItemAsync(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname);
+        System.Threading.Tasks.Task UseItemAsync(string lobbyCode, string nickname, UnoLisServer.Common.Enums.ItemType itemType, string targetNickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -583,11 +585,11 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
             return base.Channel.DisconnectPlayerAsync(lobbyCode, nickname);
         }
         
-        public void UseItem(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname) {
+        public void UseItem(string lobbyCode, string nickname, UnoLisServer.Common.Enums.ItemType itemType, string targetNickname) {
             base.Channel.UseItem(lobbyCode, nickname, itemType, targetNickname);
         }
         
-        public System.Threading.Tasks.Task UseItemAsync(string lobbyCode, string nickname, UnoLisClient.Logic.UnoLisServerReference.Gameplay.ItemType itemType, string targetNickname) {
+        public System.Threading.Tasks.Task UseItemAsync(string lobbyCode, string nickname, UnoLisServer.Common.Enums.ItemType itemType, string targetNickname) {
             return base.Channel.UseItemAsync(lobbyCode, nickname, itemType, targetNickname);
         }
     }

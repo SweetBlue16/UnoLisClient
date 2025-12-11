@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnoLisClient.Logic.Callbacks;
 using UnoLisClient.Logic.Helpers;
 using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.Logic.Services
 {

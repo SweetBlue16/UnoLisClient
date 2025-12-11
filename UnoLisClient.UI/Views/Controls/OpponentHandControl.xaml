@@ -42,11 +42,41 @@
                 </Image>
             </Grid>
 
-            <Ellipse Width="60" Height="60" Margin="0,-30,0,0" Stroke="White" StrokeThickness="2">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding AvatarImagePath}" Stretch="UniformToFill"/>
-                </Ellipse.Fill>
-            </Ellipse>
+            <Grid Margin="0,-30,0,0">
+                <Ellipse Width="60" Height="60" Stroke="White" StrokeThickness="2">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Setter Property="Opacity" Value="1.0" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="0"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsConnected}" Value="False">
+                                    <Setter Property="Opacity" Value="0.4" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding AvatarImagePath}" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <TextBlock Text="❌" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="Red">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsConnected}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
 
             <Grid Width="60" Height="60" Margin="0,-60,0,0" 
                   Visibility="{Binding IsSkipped, Converter={StaticResource BoolToVisibilityConverter}}">
@@ -58,7 +88,7 @@
             <Border Background="#80000000" CornerRadius="5" Padding="5" Margin="0,5,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                     <Image Source="/Assets/Other/LobbyHost.png" Width="16" Height="16" Margin="0,0,5,0"
-                       Visibility="{Binding IsHost, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        Visibility="{Binding IsHost, Converter={StaticResource BoolToVisibilityConverter}}" />
                     <TextBlock Text="{Binding Nickname}" Foreground="White" />
                     <TextBlock Text=" (" Foreground="Gold" />
                     <TextBlock Text="{Binding CardCount}" Foreground="Gold" FontWeight="Bold"/>
