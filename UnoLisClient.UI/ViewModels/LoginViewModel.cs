@@ -25,14 +25,14 @@ namespace UnoLisClient.UI.ViewModels
 
         private readonly Page _view;
 
-        private string _nickname = "";
+        private string _nickname = string.Empty;
         public string Nickname
         {
             get => _nickname;
             set => SetProperty(ref _nickname, value);
         }
 
-        private string _password = "";
+        private string _password = string.Empty;
         public string Password
         {
             get => _password;
@@ -176,7 +176,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private void HandleBannedPlayer(object data)
         {
-            BanInfo banInfo = data as BanInfo;
+            var banInfo = data as BanInfo;
             if (banInfo == null || string.IsNullOrWhiteSpace(banInfo.FormattedTimeRemaining))
             {
                 return;

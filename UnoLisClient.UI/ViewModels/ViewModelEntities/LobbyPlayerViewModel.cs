@@ -12,6 +12,8 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
     /// </summary>
     public class LobbyPlayerViewModel : ObservableObject
     {
+        private const string DefaultNickname = "Esperando...";
+
         private bool _isSlotFilled;
         public bool IsSlotFilled
         {
@@ -61,7 +63,7 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
         public void ClearSlot()
         {
             IsSlotFilled = false;
-            Nickname = "Esperando...";
+            Nickname = DefaultNickname;
             AvatarUrl = null;
             IsReady = false;
         }

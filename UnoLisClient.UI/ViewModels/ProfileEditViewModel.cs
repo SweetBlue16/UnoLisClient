@@ -231,15 +231,15 @@ namespace UnoLisClient.UI.ViewModels
             _navigationService.GoBack();
         }
 
+        private bool AreDifferent(string currentValue, string originalValue)
+        {
+            string normalizedCurrent = string.IsNullOrWhiteSpace(currentValue) ? null : currentValue.Trim();
+            string normalizedOriginal = string.IsNullOrWhiteSpace(originalValue) ? null : originalValue.Trim();
+            return normalizedCurrent != normalizedOriginal;
+        }
+
         private bool HasChanges()
         {
-            bool AreDifferent(string currentValue, string originalValue)
-            {
-                string normalizedCurrent = string.IsNullOrWhiteSpace(currentValue) ? null : currentValue.Trim();
-                string normalizedOriginal = string.IsNullOrWhiteSpace(originalValue) ? null : originalValue.Trim();
-                return normalizedCurrent != normalizedOriginal;
-            }
-
             if (AreDifferent(FullName, _originalProfileData.FullName))
             {
                 return true;
@@ -265,7 +265,6 @@ namespace UnoLisClient.UI.ViewModels
             {
                 return true;
             }
-
             return false;
         }
 
@@ -274,7 +273,7 @@ namespace UnoLisClient.UI.ViewModels
             Nickname = _originalProfileData.Nickname;
             FullName = _originalProfileData.FullName;
             Email = _originalProfileData.Email;
-            Password = "";
+            Password = string.Empty;
             FacebookUrl = _originalProfileData.FacebookUrl;
             InstagramUrl = _originalProfileData.InstagramUrl;
             TikTokUrl = _originalProfileData.TikTokUrl;

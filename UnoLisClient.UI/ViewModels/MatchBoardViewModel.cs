@@ -33,6 +33,15 @@ namespace UnoLisClient.UI.ViewModels
         private readonly Page _view;
 
         private const int TurnDuration = 30;
+        private const int DelayMilliseconds = 1000;
+        private const int NumberOfItemsPerType = 1;
+
+        private const string ShuffleSoundPath = "shuffle_deck.mp3";
+        private const string CardFlipSoundPath = "card_flip.mp3";
+        private const string DefaultAvatar = "LogoUNO";
+        private const string AvatarsBasePathFormat = "pack://application:,,,/Avatars/";
+        private const string AvatarFileExtension = ".png";
+        private const string ButtonClickSoundPath = "buttonClick.mp3";
 
         public event Action<string> RequestSetBackground;
 
@@ -180,7 +189,7 @@ namespace UnoLisClient.UI.ViewModels
             }
 
             _currentLobbyCode = lobbyCode;
-            await Task.Delay(1000);
+            await Task.Delay(DelayMilliseconds);
 
             try
             {
@@ -238,7 +247,7 @@ namespace UnoLisClient.UI.ViewModels
                         throw new Exception("Server unreachable after 3 attempts.", ex);
                     }
 
-                    await Task.Delay(1000);
+                    await Task.Delay(DelayMilliseconds);
                 }
             }
         }
@@ -306,7 +315,7 @@ namespace UnoLisClient.UI.ViewModels
 
                 _hasShoutedUnoLocal = false;
                 UpdateUnoButtonStatus();
-                SoundManager.PlaySound("shuffle_deck.mp3");
+                SoundManager.PlaySound(ShuffleSoundPath);
             });
         }
 
@@ -350,7 +359,7 @@ namespace UnoLisClient.UI.ViewModels
                     IdentifyAndAnimateSkip(nickname);
                 }
 
-                SoundManager.PlaySound("card_flip.mp3");
+                SoundManager.PlaySound(CardFlipSoundPath);
                 UpdateUnoButtonStatus();
             });
         }
@@ -691,7 +700,7 @@ namespace UnoLisClient.UI.ViewModels
                 string message = string.Format(Match.PlayerDeclaredUnoMessageLabel, nickname);
                 _dialogService.ShowAlert(Global.AppNameLabel, message, PopUpIconType.Info);
 
-                SoundManager.PlaySound("buttonClick.mp3");
+                SoundManager.PlaySound(ButtonClickSoundPath);
             });
         }
 
@@ -763,12 +772,12 @@ namespace UnoLisClient.UI.ViewModels
 
         private OpponentModel CreateOpponent(GamePlayer playerData)
         {
-            string avatarName = string.IsNullOrEmpty(playerData.AvatarName) ? "LogoUNO" : playerData.AvatarName;
+            string avatarName = string.IsNullOrEmpty(playerData.AvatarName) ? DefaultAvatar : playerData.AvatarName;
             return new OpponentModel
             {
                 Nickname = playerData.Nickname,
                 CardCount = playerData.CardCount,
-                AvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png",
+                AvatarImagePath = $"{AvatarsBasePathFormat}{avatarName}{AvatarFileExtension}",
                 IsConnected = playerData.IsConnected
             };
         }
@@ -777,15 +786,15 @@ namespace UnoLisClient.UI.ViewModels
         {
             Items.Clear();
 
-            var Swap = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Swap;
-            var Shield = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Shield;
-            var Thief = UnoLisClient.UI.ViewModels.ViewModelEntities.ItemType.Thief;
+            var Swap = ItemType.Swap;
+            var Shield = ItemType.Shield;
+            var Thief = ItemType.Thief;
 
-            Items.Add(new ItemModel(Swap, 1, (t) => ExecuteUseItem(t)));
+            Items.Add(new ItemModel(Swap, NumberOfItemsPerType, (t) => ExecuteUseItem(t)));
 
-            Items.Add(new ItemModel(Shield, 1, (t) => ExecuteUseItem(t)));
+            Items.Add(new ItemModel(Shield, NumberOfItemsPerType, (t) => ExecuteUseItem(t)));
 
-            Items.Add(new ItemModel(Thief, 1, (t) => ExecuteUseItem(t)));
+            Items.Add(new ItemModel(Thief, NumberOfItemsPerType, (t) => ExecuteUseItem(t)));
         }
 
         private void ExecuteToggleSettings()

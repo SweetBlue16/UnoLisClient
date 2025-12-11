@@ -330,4 +330,10 @@
   <data name="SocialMediaCopiedLabel" xml:space="preserve">
     <value>Red social copiada al portapapeles!</value>
   </data>
+  <data name="SystemLabel" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="PlayerDisconnectedMessageLabel" xml:space="preserve">
+    <value>{0} se ha desconectado.</value>
+  </data>
 </root>

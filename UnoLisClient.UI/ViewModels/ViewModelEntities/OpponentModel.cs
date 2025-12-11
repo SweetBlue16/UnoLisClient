@@ -2,6 +2,8 @@
 {
     public class OpponentModel : ObservableObject
     {
+        private const int SkippedAnimationDurationMs = 2000;
+
         public string Nickname { get; set; }
         public string AvatarImagePath { get; set; }
         public bool IsHost { get; set; }
@@ -40,7 +42,7 @@
         public async void TriggerSkipAnimation()
         {
             IsSkipped = true;
-            await System.Threading.Tasks.Task.Delay(2000);
+            await System.Threading.Tasks.Task.Delay(SkippedAnimationDurationMs);
             IsSkipped = false;
         }
     }

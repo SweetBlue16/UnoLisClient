@@ -16,6 +16,8 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class JoinMatchViewModel : BaseViewModel
     {
+        private const int MaxLobbyCodeLength = 5;
+
         private readonly INavigationService _navigationService;
         private readonly IMatchmakingService _matchmakingService;
 
@@ -47,7 +49,7 @@ namespace UnoLisClient.UI.ViewModels
 
         private bool CanJoinMatch()
         {
-            return !IsLoading && !string.IsNullOrWhiteSpace(LobbyCode) && LobbyCode.Length == 5;
+            return !IsLoading && !string.IsNullOrWhiteSpace(LobbyCode) && LobbyCode.Length == MaxLobbyCodeLength;
         }
 
         private async Task ExecuteJoinMatchAsync()

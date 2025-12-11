@@ -61,6 +61,51 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your session has expired. You cannot send any more messages..
+        /// </summary>
+        public static string CantSendMoreMessagesLabel {
+            get {
+                return ResourceManager.GetString("CantSendMoreMessagesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting channel {0}..
+        /// </summary>
+        public static string ConnectingChannelMessageLabel {
+            get {
+                return ResourceManager.GetString("ConnectingChannelMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t set background. Please try again..
+        /// </summary>
+        public static string CouldNotSetBackgroundMessageLabel {
+            get {
+                return ResourceManager.GetString("CouldNotSetBackgroundMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invitations Sent.
+        /// </summary>
+        public static string InvitationsSentLabel {
+            get {
+                return ResourceManager.GetString("InvitationsSentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email invitations have been sent successfully!.
+        /// </summary>
+        public static string InvitationsSentMessageLabel {
+            get {
+                return ResourceManager.GetString("InvitationsSentMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INVITE FRIENDS.
         /// </summary>
         public static string InviteFriendsLabel {
@@ -75,6 +120,33 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string LeaveMatchButton {
             get {
                 return ResourceManager.GetString("LeaveMatchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lobby code: {0}.
+        /// </summary>
+        public static string LobbyCodeLabel {
+            get {
+                return ResourceManager.GetString("LobbyCodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match Created.
+        /// </summary>
+        public static string LobbyCreatedLabel {
+            get {
+                return ResourceManager.GetString("LobbyCreatedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success! Room code: {0}.
+        /// </summary>
+        public static string LobbyCreatedMessageLabel {
+            get {
+                return ResourceManager.GetString("LobbyCreatedMessageLabel", resourceCulture);
             }
         }
         
@@ -165,6 +237,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string PlayersListUpdated {
             get {
                 return ResourceManager.GetString("PlayersListUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to players ready.
+        /// </summary>
+        public static string PlayersReadyLabel {
+            get {
+                return ResourceManager.GetString("PlayersReadyLabel", resourceCulture);
             }
         }
         

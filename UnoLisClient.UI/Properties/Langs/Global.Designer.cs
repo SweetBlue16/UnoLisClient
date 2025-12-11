@@ -466,6 +466,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has disconnected..
+        /// </summary>
+        public static string PlayerDisconnectedMessageLabel {
+            get {
+                return ResourceManager.GetString("PlayerDisconnectedMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player.
         /// </summary>
         public static string PlayerNameColumn {
@@ -624,6 +633,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string SuccessLabel {
             get {
                 return ResourceManager.GetString("SuccessLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System.
+        /// </summary>
+        public static string SystemLabel {
+            get {
+                return ResourceManager.GetString("SystemLabel", resourceCulture);
             }
         }
         

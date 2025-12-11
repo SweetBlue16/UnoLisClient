@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CantSendMoreMessagesLabel" xml:space="preserve">
+    <value>Tu sesión ha expirado. No puedes enviar más mensajes.</value>
+  </data>
+  <data name="ConnectingChannelMessageLabel" xml:space="preserve">
+    <value>Conectado al canal {0}.</value>
+  </data>
+  <data name="CouldNotSetBackgroundMessageLabel" xml:space="preserve">
+    <value>No se pudo configurar el fondo. Inténtalo de nuevo.</value>
+  </data>
+  <data name="InvitationsSentLabel" xml:space="preserve">
+    <value>Invitaciones Enviadas</value>
+  </data>
+  <data name="InvitationsSentMessageLabel" xml:space="preserve">
+    <value>¡Las invitaciones por correo electrónico se han enviado correctamente!</value>
+  </data>
   <data name="InviteFriendsLabel" xml:space="preserve">
     <value>INVITAR AMIGOS</value>
   </data>
   <data name="LeaveMatchButton" xml:space="preserve">
     <value>ABANDONAR PARTIDA</value>
+  </data>
+  <data name="LobbyCodeLabel" xml:space="preserve">
+    <value>Código del lobby: {0}</value>
+  </data>
+  <data name="LobbyCreatedLabel" xml:space="preserve">
+    <value>Partida Creada</value>
+  </data>
+  <data name="LobbyCreatedMessageLabel" xml:space="preserve">
+    <value>¡Éxito! Código de sala: {0}</value>
   </data>
   <data name="LobbyCreatedSuccessfullyLabel" xml:space="preserve">
     <value>Partida {0} creada exitosamente.</value>
@@ -152,6 +176,9 @@
   </data>
   <data name="PlayersListUpdated" xml:space="preserve">
     <value>Lista de jugadores actualizada.</value>
+  </data>
+  <data name="PlayersReadyLabel" xml:space="preserve">
+    <value>jugadores listos</value>
   </data>
   <data name="ReadyButton" xml:space="preserve">
     <value>¡LISTO!</value>

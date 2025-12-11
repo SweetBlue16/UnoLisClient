@@ -4,6 +4,15 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
 {
     public class LootBoxChancesItem : ObservableObject
     {
+        private const string RaritySpecial = "special";
+        private const string RarityEpic = "epic";
+        private const string RarityLegendary = "legendary";
+
+        private const string BrushSpecial = "LightGreen";
+        private const string BrushEpic = "DodgerBlue";
+        private const string BrushLegendary = "Gold";
+        private const string BrushDefault = "#AAAAAA";
+
         public string BoxName { get; set; }
         public string Rarity { get; set; }
         public int Price { get; set; }
@@ -18,10 +27,10 @@ namespace UnoLisClient.UI.ViewModels.ViewModelEntities
             {
                 switch (Rarity?.ToLower())
                 {
-                    case "special": return "LightGreen";
-                    case "epic": return "DodgerBlue";
-                    case "legendary": return "Gold";
-                    default: return "#AAAAAA";
+                    case RaritySpecial: return BrushSpecial;
+                    case RarityEpic: return BrushEpic;
+                    case RarityLegendary: return BrushLegendary;
+                    default: return BrushDefault;
                 }
             }
         }

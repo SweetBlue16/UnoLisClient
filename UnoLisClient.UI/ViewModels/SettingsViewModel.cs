@@ -24,6 +24,11 @@ namespace UnoLisClient.UI.ViewModels
 
     public class SettingsViewModel : BaseViewModel
     {
+        private const string EnglishCode = "en-US";
+        private const string SpanishCode = "es-MX";
+
+        private const int DefaultVolume = 50;
+
         private readonly INavigationService _navigationService;
         private readonly Page _view;
 
@@ -70,21 +75,21 @@ namespace UnoLisClient.UI.ViewModels
         {
             AvailableLanguages = new ObservableCollection<LanguageItem>
             {
-                new LanguageItem { Name = Settings.EnglishComboItem, Code = "en-US" },
-                new LanguageItem { Name = Settings.SpanishComboItem, Code = "es-MX" }
+                new LanguageItem { Name = Settings.EnglishComboItem, Code = EnglishCode },
+                new LanguageItem { Name = Settings.SpanishComboItem, Code = SpanishCode }
             };
 
             var savedLang = Properties.Settings.Default.languageCode;
             if (string.IsNullOrWhiteSpace(savedLang))
             {
-                savedLang = "en-US";
+                savedLang = EnglishCode;
             }
 
             _selectedLanguage = AvailableLanguages.FirstOrDefault(l => l.Code == savedLang) ?? AvailableLanguages[0];
             OnPropertyChanged(nameof(SelectedLanguage));
 
             double savedVol = Properties.Settings.Default.lastVolume;
-            _volume = savedVol > 0 ? savedVol : 50;
+            _volume = savedVol > 0 ? savedVol : DefaultVolume;
             OnPropertyChanged(nameof(Volume));
         }
 

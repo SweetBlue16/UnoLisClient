@@ -63,7 +63,9 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         Friends.Clear();
                         foreach (var f in resultList.OrderBy(x => x.Nickname))
+                        {
                             Friends.Add(f);
+                        }
                     });
                 }
                 else
@@ -105,7 +107,10 @@ namespace UnoLisClient.UI.ViewModels
                 string.Format(FriendsList.RemoveFriendMessageLabel, friend.Nickname),
                 PopUpIconType.Question);
 
-            if (!confirmed) return;
+            if (!confirmed)
+            {
+                return;
+            }
 
             IsLoading = true;
             try

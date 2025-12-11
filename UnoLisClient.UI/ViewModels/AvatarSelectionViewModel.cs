@@ -20,6 +20,11 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class AvatarSelectionViewModel : BaseViewModel
     {
+        private const string RarityCommon = "common";
+        private const string RaritySpecial = "special";
+        private const string RarityEpic = "epic";
+        private const string RarityLegendary = "legendary";
+
         private readonly AvatarService _avatarService;
         private readonly INavigationService _navigationService;
         private readonly Page _view;
@@ -89,12 +94,12 @@ namespace UnoLisClient.UI.ViewModels
                         IsSelected = data.IsSelected
                     };
 
-                    switch (model.Rarity?.ToLower() ?? "common")
+                    switch (model.Rarity?.ToLower() ?? RarityCommon)
                     {
-                        case "special": SpecialAvatars.Add(model); break;
-                        case "epic": EpicAvatars.Add(model); break;
-                        case "legendary": LegendaryAvatars.Add(model); break;
-                        case "common":
+                        case RaritySpecial: SpecialAvatars.Add(model); break;
+                        case RarityEpic: EpicAvatars.Add(model); break;
+                        case RarityLegendary: LegendaryAvatars.Add(model); break;
+                        case RarityCommon:
                         default: CommonAvatars.Add(model); break;
                     }
 

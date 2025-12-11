@@ -12,9 +12,13 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class MatchResultsViewModel : BaseViewModel
     {
+        private const string VictorySoundFile = "victoryMatch.mp3";
+        private const string DefaultAvatar = "LogoUNO";
+        private const string AvatarsBasePathFormat = "pack://application:,,,/Avatars/";
+        private const string AvatarFileExtension = ".png";
+
         private readonly INavigationService _navigationService;
 
-        // Propiedades para la Vista
         public ObservableCollection<ResultDisplayModel> Losers { get; set; }
         public ResultDisplayModel Winner { get; set; }
         public ICommand BackToMenuCommand { get; }
@@ -26,7 +30,7 @@ namespace UnoLisClient.UI.ViewModels
             BackToMenuCommand = new RelayCommand(ExecuteBackToMenu);
 
             ProcessMatchResults(results);
-            SoundManager.PlaySound("victoryMatch.mp3");
+            SoundManager.PlaySound(VictorySoundFile);
         }
 
         private void ProcessMatchResults(List<ResultData> rawResults)
@@ -50,8 +54,8 @@ namespace UnoLisClient.UI.ViewModels
 
         private ResultDisplayModel CreateDisplayModel(ResultData data)
         {
-            string avatarName = string.IsNullOrEmpty(data.AvatarName) ? "LogoUNO" : data.AvatarName;
-            string fullPath = $"pack://application:,,,/Avatars/{avatarName}.png";
+            string avatarName = string.IsNullOrEmpty(data.AvatarName) ? DefaultAvatar : data.AvatarName;
+            string fullPath = $"{AvatarsBasePathFormat}{avatarName}{AvatarFileExtension}";
 
             return new ResultDisplayModel
             {

@@ -23,6 +23,15 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class ProfileViewViewModel : BaseViewModel
     {
+        private const string LoadingFieldLabel = "...";
+        private const string FacebookFieldLabel = "Facebook";
+        private const string InstagramFieldLabel = "Instagram";
+        private const string TikTokFieldLabel = "TikTok";
+
+        private const string DefaultAvatar = "LogoUNO";
+        private const string AvatarsBasePathFormat = "pack://application:,,,/Avatars/";
+        private const string AvatarFileExtension = ".png";
+
         private readonly INavigationService _navigationService;
         private readonly IProfileViewService _profileService;
 
@@ -33,21 +42,21 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _isGuest, value);
         }
 
-        private string _nickname = "...";
+        private string _nickname = LoadingFieldLabel;
         public string Nickname
         {
             get => _nickname;
             set => SetProperty(ref _nickname, value);
         }
 
-        private string _fullName = "...";
+        private string _fullName = LoadingFieldLabel;
         public string FullName
         {
             get => _fullName;
             set => SetProperty(ref _fullName, value);
         }
 
-        private string _email = "...";
+        private string _email = LoadingFieldLabel;
         public string Email
         {
             get => _email;
@@ -201,15 +210,15 @@ namespace UnoLisClient.UI.ViewModels
 
             Uri targetUri = null;
 
-            if (linkName == "Facebook")
+            if (linkName == FacebookFieldLabel)
             {
                 targetUri = FacebookUrl;
             }
-            else if (linkName == "Instagram")
+            else if (linkName == InstagramFieldLabel)
             {
                 targetUri = InstagramUrl;
             }
-            else if (linkName == "TikTok")
+            else if (linkName == TikTokFieldLabel)
             {
                 targetUri = TikTokUrl;
             }
@@ -253,8 +262,8 @@ namespace UnoLisClient.UI.ViewModels
             Nickname = profileData.Nickname;
             FullName = profileData.FullName;
             Email = profileData.Email;
-            string avatarName = string.IsNullOrEmpty(profileData.SelectedAvatarName) ? "LogoUNO" : profileData.SelectedAvatarName;
-            SelectedAvatarImagePath = $"pack://application:,,,/Avatars/{avatarName}.png";
+            string avatarName = string.IsNullOrEmpty(profileData.SelectedAvatarName) ? DefaultAvatar : profileData.SelectedAvatarName;
+            SelectedAvatarImagePath = $"{AvatarsBasePathFormat}{avatarName}{AvatarFileExtension}";
             FacebookUrl = CreateUri(profileData.FacebookUrl);
             InstagramUrl = CreateUri(profileData.InstagramUrl);
             TikTokUrl = CreateUri(profileData.TikTokUrl);

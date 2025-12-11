@@ -9,6 +9,7 @@ using System.Windows.Input;
 using UnoLisClient.Logic.Enums;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Commands;
+using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
@@ -19,6 +20,21 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class SelectBackgroundViewModel : BaseViewModel
     {
+        private const string Fei = "FEI";
+        private const string Anfiteatro = "Anfiteatro";
+        private const string Canchas = "Canchas";
+        private const string Banca = "Banca";
+
+        private const string FeiVideo = "FeiVideo.mp4"; 
+        private const string AnfiteatroVideo = "AnfiteatroVideo.mp4";
+        private const string CanchaVideo = "CanchaVideo.mp4";
+        private const string BancaVideo = "BancaVideo.mp4";
+
+        private const string FeiImage = "/Assets/FeiImage.png";
+        private const string AnfiteatroImage = "/Assets/AnfiteatroImage.png";
+        private const string CanchasImage = "/Assets/CanchasImage.png";
+        private const string BancaImage = "/Assets/BancaImage.png";
+
         private readonly INavigationService _navigationService;
         private readonly IMatchmakingService _matchmakingService;
         private readonly string _lobbyCode;
@@ -66,10 +82,10 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Backgrounds.Clear();
 
-                Backgrounds.Add(new BackgroundItemViewModel("FEI", "/Assets/FeiImage.png", "FeiVideo.mp4"));
-                Backgrounds.Add(new BackgroundItemViewModel("Anfiteatro", "/Assets/AnfiteatroImage.png", "AnfiteatroVideo.mp4"));
-                Backgrounds.Add(new BackgroundItemViewModel("Canchas", "/Assets/CanchasImage.png", "CanchaVideo.mp4"));
-                Backgrounds.Add(new BackgroundItemViewModel("Banca", "/Assets/BancaImage.png", "BancaVideo.mp4"));
+                Backgrounds.Add(new BackgroundItemViewModel(Fei, FeiImage, FeiVideo));
+                Backgrounds.Add(new BackgroundItemViewModel(Anfiteatro, AnfiteatroImage, AnfiteatroVideo));
+                Backgrounds.Add(new BackgroundItemViewModel(Canchas, CanchasImage, CanchaVideo));
+                Backgrounds.Add(new BackgroundItemViewModel(Banca, BancaImage, BancaVideo));
 
                 if (Backgrounds.Any())
                 {
@@ -92,14 +108,20 @@ namespace UnoLisClient.UI.ViewModels
 
         private void ExecuteSelectBackground(BackgroundItemViewModel item)
         {
-            if (item == null) return;
+            if (item == null)
+            {
+                return;
+            }
             SoundManager.PlayClick();
             SelectedBackground = item;
         }
 
         private async Task ExecuteConfirmAsync()
         {
-            if (SelectedBackground == null) return;
+            if (SelectedBackground == null)
+            {
+                return;
+            }
 
             IsLoading = true;
             SoundManager.PlayClick();
@@ -110,12 +132,12 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (success)
                 {
-                    _dialogService.ShowAlert("Partida Creada", $"¡Éxito! Código de sala: {_lobbyCode}", PopUpIconType.Success);
+                    _dialogService.ShowAlert(Lobby.LobbyCreatedLabel, string.Format(Lobby.LobbyCreatedMessageLabel, _lobbyCode), PopUpIconType.Success);
                     _navigationService.NavigateTo(new MatchLobbyPage(_lobbyCode));
                 }
                 else
                 {
-                    _dialogService.ShowWarning("Could not set background. Please try again.");
+                    _dialogService.ShowWarning(Lobby.CouldNotSetBackgroundMessageLabel);
                 }
             }
             catch (TimeoutException ex)

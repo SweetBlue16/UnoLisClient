@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using UnoLisClient.Logic.Helpers;
 
 namespace UnoLisClient.UI.Utilities
 {
@@ -30,6 +31,7 @@ namespace UnoLisClient.UI.Utilities
             {
                 if (!File.Exists(soundPath))
                 {
+                    Logger.Warn($"⚠️ El archivo de sonido no existe: {soundPath}");
                     throw new FileNotFoundException("El archivo de sonido no existe.", soundPath);
                 }
 

@@ -168,6 +168,9 @@
   <data name="CouldNotProcessRequestMessageLabel" xml:space="preserve">
     <value>Could not {0} the request. Please try again.</value>
   </data>
+  <data name="CouldNotSentInvitationsMessageLabel" xml:space="preserve">
+    <value>Couldn't send some invitations. Please check connection.</value>
+  </data>
   <data name="DatabaseErrorMessageLabel" xml:space="preserve">
     <value>Database error.</value>
   </data>

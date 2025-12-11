@@ -14,6 +14,7 @@ using UnoLisClient.Logic.Models;
 using UnoLisClient.Logic.Services;
 using UnoLisClient.Logic.UnoLisServerReference.LobbyDuplex;
 using UnoLisClient.UI.Commands;
+using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels.ViewModelEntities;
@@ -25,6 +26,10 @@ namespace UnoLisClient.UI.ViewModels
 {
     public class MatchLobbyViewModel : BaseViewModel
     {
+        private const string DefaultAvatar = "LogoUNO";
+        private const string AvatarsBasePathFormat = "pack://application:,,,/Avatars/";
+        private const string AvatarFileExtension = ".png";
+
         private readonly INavigationService _navigationService;
         private readonly IFriendsService _friendsService;
         private readonly ILobbyService _lobbyService;
@@ -92,7 +97,7 @@ namespace UnoLisClient.UI.ViewModels
 
             IsChatVisible = false;
             IsSettingsVisible = false;
-            LobbyCodeDisplay = $"Lobby Code: {_currentLobbyCode}";
+            LobbyCodeDisplay = string.Format(Lobby.LobbyCodeLabel, _currentLobbyCode);
 
             ChatVM = new ChatViewModel(chatService, dialogService, _currentLobbyCode, _currentUserNickname);
 
@@ -129,8 +134,6 @@ namespace UnoLisClient.UI.ViewModels
                 PlayersInLobby.Add(new LobbyPlayerViewModel());
             }
         }
-
-
 
         public async Task OnPageLoaded()
         {
@@ -208,8 +211,8 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         var player = players[i];
                         string nick = player.Nickname;
-                        string avatarName = string.IsNullOrEmpty(player.AvatarName) ? "LogoUNO" : player.AvatarName;
-                        string avatarPath = $"pack://application:,,,/Avatars/{avatarName}.png";
+                        string avatarName = string.IsNullOrEmpty(player.AvatarName) ? DefaultAvatar : player.AvatarName;
+                        string avatarPath = $"{AvatarsBasePathFormat}{avatarName}{AvatarFileExtension}";
 
                         PlayersInLobby[i].FillSlot(nick, avatarPath);
                         PlayersInLobby[i].IsReady = player.IsReady;
@@ -243,7 +246,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             int totalPlayers = PlayersInLobby.Count(player => player.IsSlotFilled);
             int readyCount = PlayersInLobby.Count(player => player.IsSlotFilled && player.IsReady);
-            ReadyStatusText = $"{readyCount} / {totalPlayers} Players Ready";
+            ReadyStatusText = $"{readyCount} / {totalPlayers} {Lobby.PlayerReadyLabel}";
         }
 
         private void HandleGameStarted()
@@ -337,12 +340,15 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (success)
                 {
-                    _dialogService.ShowAlert("Invitations Sent", "Email invitations have been sent successfully!", PopUpIconType.Success);
-                    foreach (var friend in Friends) friend.Invited = false;
+                    _dialogService.ShowAlert(Lobby.InvitationsSentLabel, Lobby.InvitationsSentMessageLabel, PopUpIconType.Success);
+                    foreach (var friend in Friends)
+                    {
+                        friend.Invited = false;
+                    }
                 }
                 else
                 {
-                    _dialogService.ShowWarning("Could not send some invitations. Please check connection.");
+                    _dialogService.ShowWarning(ErrorMessages.CouldNotSentInvitationsMessageLabel);
                 }
             }
             catch (Exception ex)

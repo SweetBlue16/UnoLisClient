@@ -9,6 +9,7 @@ using UnoLisClient.Logic.UnoLisServerReference.Chat;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Services;
 using UnoLisServer.Common.Enums;
+using UnoLisClient.UI.Properties.Langs;
 
 namespace UnoLisClient.UI.ViewModels
 {
@@ -54,7 +55,7 @@ namespace UnoLisClient.UI.ViewModels
             _chatService.OnSessionExpired += HandleSessionExpired;
 
             Messages.Clear();
-            Messages.Add(new ChatMessageData { Nickname = "System", Message = $"Conectado al canal '{_channelId}'." });
+            Messages.Add(new ChatMessageData { Nickname = Global.SystemLabel, Message = string.Format(Lobby.ConnectingChannelMessageLabel, _channelId) });
 
             try
             {
@@ -73,8 +74,7 @@ namespace UnoLisClient.UI.ViewModels
             _chatService.OnChatHistoryReceived -= HandleChatHistoryReceived;
             _chatService.OnPlayerDisconnected -= HandlePlayerDisconnected;
             _chatService.OnSessionExpired -= HandleSessionExpired;
-            
-            // (Opcional: llamar a _chatService.LeaveChannelAsync(_channelId) si el servidor lo implementa)
+
             return Task.CompletedTask;
         }
 
@@ -110,17 +110,13 @@ namespace UnoLisClient.UI.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Messages.Add(message);
-                // TODO Add auto-scroll to bottom
             });
         }
 
         private void HandleChatHistoryReceived(ChatMessageData[] messages)
         {
-            // (Filtro futuro: comprobar si el historial es para este channelId)
-            
             Application.Current.Dispatcher.Invoke(() =>
             {
-                //Messages.Clear(); // (Opcional, depende de si quieres borrar el "Conectado a...")
                 foreach (var message in messages)
                 {
                     if (message.ChannelId == _channelId)
@@ -137,8 +133,8 @@ namespace UnoLisClient.UI.ViewModels
             {
                 Messages.Add(new ChatMessageData 
                 { 
-                    Nickname = "System", 
-                    Message = $"{nickname} se ha desconectado.",
+                    Nickname = Global.SystemLabel, 
+                    Message = string.Format(Global.PlayerDisconnectedMessageLabel, nickname),
                     ChannelId = _channelId
                 });
             });
@@ -148,7 +144,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                CurrentMessage = "Tu sesión ha expirado. No puedes enviar más mensajes.";
+                CurrentMessage = Lobby.CantSendMoreMessagesLabel;
                 IsLoading = true;
             });
         }

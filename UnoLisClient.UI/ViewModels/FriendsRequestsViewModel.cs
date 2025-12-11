@@ -103,7 +103,10 @@ namespace UnoLisClient.UI.ViewModels
 
         private async Task RespondToRequestAsync(FriendRequestData request, bool accepted)
         {
-            if (request == null) return;
+            if (request == null)
+            {
+                return;
+            }
 
             var actionText = accepted ? FriendsList.FriendRequestAcceptButton : FriendsList.FriendRequestDeclineButton;
             bool confirmed = _dialogService.ShowQuestionDialog(
@@ -111,7 +114,10 @@ namespace UnoLisClient.UI.ViewModels
                 string.Format(FriendsList.ConfirmationRequestMessageLabel, actionText.ToLower(), request.RequesterNickname),
                 PopUpIconType.Question);
 
-            if (!confirmed) return;
+            if (!confirmed)
+            {
+                return;
+            }
 
             IsLoading = true;
             try

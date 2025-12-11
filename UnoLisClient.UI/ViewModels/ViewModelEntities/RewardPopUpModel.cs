@@ -2,6 +2,9 @@
 {
     public class RewardPopUpModel : ObservableObject
     {
+        private const string DefaultAvatarImagePath = "pack://application:,,,/Avatars/LogoUNO.png";
+        private const string DefaultAvatarName = "Error";
+
         public string AvatarName { get; set; }
         public string AvatarImagePath { get; set; }
 
@@ -14,8 +17,8 @@
             }
             else
             {
-                AvatarName = "Error";
-                AvatarImagePath = "pack://application:,,,/Avatars/LogoUNO.png";
+                AvatarName = DefaultAvatarName;
+                AvatarImagePath = DefaultAvatarImagePath;
             }
         }
     }

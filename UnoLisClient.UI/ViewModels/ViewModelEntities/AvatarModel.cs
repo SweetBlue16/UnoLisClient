@@ -2,6 +2,18 @@
 {
     public class AvatarModel : ObservableObject
     {
+        private const string ImageBasePath = "pack://application:,,,/Avatars/";
+        private const string ImageExtension = ".png";
+
+        private const string RaritySpecial = "special";
+        private const string RarityEpic = "epic";
+        private const string RarityLegendary = "legendary";
+
+        private const string BrushSpecial = "LightGreen";
+        private const string BrushEpic = "DodgerBlue";
+        private const string BrushLegendary = "Gold";
+        private const string BrushDefault = "#AAAAAA";
+
         public int AvatarId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -19,7 +31,7 @@
         {
             get
             {
-                return $"pack://application:,,,/Avatars/{this.Name}.png";
+                return $"{ImageBasePath}{Name}{ImageExtension}";
             }
         }
 
@@ -29,10 +41,10 @@
             {
                 switch (Rarity?.ToLower())
                 {
-                    case "special": return "LightGreen";
-                    case "epic": return "DodgerBlue";
-                    case "legendary": return "Gold";
-                    default: return "#AAAAAA";
+                    case RaritySpecial: return BrushSpecial;
+                    case RarityEpic: return BrushEpic;
+                    case RarityLegendary: return BrushLegendary;
+                    default: return BrushDefault;
                 }
             }
         }

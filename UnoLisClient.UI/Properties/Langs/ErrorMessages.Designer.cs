@@ -214,6 +214,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t send some invitations. Please check connection..
+        /// </summary>
+        public static string CouldNotSentInvitationsMessageLabel {
+            get {
+                return ResourceManager.GetString("CouldNotSentInvitationsMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database error..
         /// </summary>
         public static string DatabaseErrorMessageLabel {
