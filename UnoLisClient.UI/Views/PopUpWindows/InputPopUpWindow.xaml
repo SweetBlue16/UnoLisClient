@@ -41,7 +41,8 @@
             <TextBox x:Name="InputTextBox"
                      Style="{DynamicResource TextBoxStyle}"
                      Margin="0,0,0,16"
-                     TextChanged="InputTextBoxTextChanged"/>
+                     TextChanged="InputTextBoxTextChanged"
+                     MaxLength="255"/>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,30,0,0">

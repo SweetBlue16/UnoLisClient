@@ -63,7 +63,8 @@
                 <TextBox x:Name="FullNameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,32,16"
-                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="45"/>
                 <Label Content="{x:Static language:SignIn.NicknameLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -76,7 +77,8 @@
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,32,16"
                          IsReadOnly="True"
-                         Text="{Binding Nickname, Mode=OneWay}"/>
+                         Text="{Binding Nickname, Mode=OneWay}"
+                         MaxLength="45"/>
                 <Label Content="{x:Static language:Global.EmailLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -87,7 +89,8 @@
                 <TextBox x:Name="EmailTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,32,16"
-                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="100"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -114,7 +117,8 @@
                 <TextBox x:Name="FacebookLinkTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,0,16"
-                         Text="{Binding FacebookUrl, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding FacebookUrl, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="255"/>
                 <Label Content="{x:Static language:Profile.InstagramLinkLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -125,7 +129,8 @@
                 <TextBox x:Name="InstagramLinkTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,0,16"
-                         Text="{Binding InstagramUrl, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding InstagramUrl, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="255"/>
                 <Label Content="{x:Static language:Profile.TikTokLinkLabel}"
                        HorizontalAlignment="Left"
                        Margin="0,0,0,5"
@@ -136,7 +141,8 @@
                 <TextBox x:Name="TikTokLinkTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,0,16"
-                         Text="{Binding TikTokUrl, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding TikTokUrl, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="255"/>
             </StackPanel>
             <Button Content="{x:Static language:Global.SaveButton}"
                     Grid.Column="0"

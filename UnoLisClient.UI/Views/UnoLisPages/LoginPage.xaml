@@ -49,7 +49,8 @@
                      Margin="9,0,0,16"
                      Width="298"
                      HorizontalAlignment="Left"
-                     Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="45"/>
             <Label Content="{x:Static language:Global.PasswordLabel}"
                    HorizontalAlignment="Left"
                    Margin="0,0,65,0"

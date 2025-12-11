@@ -40,12 +40,12 @@
                            Height="50"
                            Margin="0,0,10,0"/>
                     <Label Content="{x:Static language:SignIn.RegisterLabel}"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,0"
-                       VerticalAlignment="Top"
-                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                       Foreground="White"
-                       FontSize="30"/>
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,0"
+                           VerticalAlignment="Top"
+                           FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
+                           Foreground="White"
+                           FontSize="30"/>
                 </StackPanel>
                 <Label Content="{x:Static language:SignIn.FullNameLabel}"
                        HorizontalAlignment="Left"
@@ -57,7 +57,8 @@
                 <TextBox x:Name="FullNameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,34,16"
-                         Text="{Binding FullName}"/>
+                         Text="{Binding FullName}"
+                         MaxLength="45"/>
                 <Label Content="{x:Static language:SignIn.NicknameLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -68,7 +69,8 @@
                 <TextBox x:Name="NicknameTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,34,16"
-                         Text="{Binding Nickname}"/>
+                         Text="{Binding Nickname}"
+                         MaxLength="45"/>
                 <Label Content="{x:Static language:Global.EmailLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
@@ -79,7 +81,8 @@
                 <TextBox x:Name="EmailTextBox"
                          Style="{DynamicResource TextBoxStyle}"
                          Margin="0,0,34,16"
-                         Text="{Binding Email}"/>
+                         Text="{Binding Email}"
+                         MaxLength="100"/>
                 <Label Content="{x:Static language:Global.PasswordLabel}"
                        HorizontalAlignment="Left"
                        Margin="8,0,34,0"
