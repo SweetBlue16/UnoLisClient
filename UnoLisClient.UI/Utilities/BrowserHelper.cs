@@ -29,7 +29,7 @@ namespace UnoLisClient.UI.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Error($"No se pudo copiar la URL al portapapeles: {url}", ex);
+                Logger.Error($"No se pudo copiar la URL al PORTAPAPELES: {url}", ex);
 
                 Application.Current?.Dispatcher.Invoke(() =>
                 {
