@@ -68,7 +68,7 @@ namespace UnoLisClient.UI.ViewModels
                 }
                 else
                 {
-                    _dialogService.ShowWarning(ErrorMessages.FriendsInternalErrorMessageLabel);
+                    _dialogService.ShowWarning(FriendsList.FriendListEmptyMessageLabel);
                 }
                 IsLoading = false;
             }
@@ -124,12 +124,12 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         Friends.Remove(friend);
                     });
-
-                    _dialogService.ShowAlert("Success", $"{friend.Nickname} was successfully removed.", PopUpIconType.Success);
+                    string message = string.Format(FriendsList.FriendRemovedMessageLabel, friend.Nickname);
+                    _dialogService.ShowAlert(Global.SuccessLabel, message, PopUpIconType.Success);
                 }
                 else
                 {
-                    _dialogService.ShowAlert("Error", $"Could not remove {friend.Nickname}. Please try again.", PopUpIconType.Warning);
+                    _dialogService.ShowWarning(string.Format(FriendsList.CouldNotRemoveFriendMessageLabel, friend.Nickname));
                 }
             }
             catch (TimeoutException timeoutEx)
@@ -247,7 +247,7 @@ namespace UnoLisClient.UI.ViewModels
 
             if (result == FriendRequestResult.Success)
             {
-                _dialogService.ShowAlert("Friend Request", message, PopUpIconType.Success);
+                _dialogService.ShowAlert(FriendsList.MyFriendsLabel, message, PopUpIconType.Success);
             }
             else
             {

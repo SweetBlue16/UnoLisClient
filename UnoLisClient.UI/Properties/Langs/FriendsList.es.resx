@@ -195,4 +195,10 @@
   <data name="RequestSuccessMessageLabel" xml:space="preserve">
     <value>La solicitud de {0} fue {1}da.</value>
   </data>
+  <data name="FriendListEmptyMessageLabel" xml:space="preserve">
+    <value>Parece que no tienes amigos o hubo un error al cargarlos...</value>
+  </data>
+  <data name="CouldNotRemoveFriendMessageLabel" xml:space="preserve">
+    <value>No pudimos remover a {0}. Por favor intenta nuevamente.</value>
+  </data>
 </root>

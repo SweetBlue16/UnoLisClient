@@ -106,6 +106,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We couldn&apos;t remove {0}. Please try again..
+        /// </summary>
+        public static string CouldNotRemoveFriendMessageLabel {
+            get {
+                return ResourceManager.GetString("CouldNotRemoveFriendMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter the nickname of the player you wish to add:.
         /// </summary>
         public static string EnterFriendsNicknameMessageLabel {
@@ -120,6 +129,15 @@ namespace UnoLisClient.UI.Properties.Langs {
         public static string EnterNicknameMessageLabel {
             get {
                 return ResourceManager.GetString("EnterNicknameMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It appears you have no friends or there was an error loading them....
+        /// </summary>
+        public static string FriendListEmptyMessageLabel {
+            get {
+                return ResourceManager.GetString("FriendListEmptyMessageLabel", resourceCulture);
             }
         }
         
