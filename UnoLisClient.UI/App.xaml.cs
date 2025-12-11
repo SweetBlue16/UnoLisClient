@@ -86,6 +86,7 @@ namespace UnoLisClient.UI
                     return;
                 }
                 ClearLocalSession();
+                SessionReportTracker.Clear();
 
                 var context = new InstanceContext(this);
                 _logoutClient = new LogoutManagerClient(context);

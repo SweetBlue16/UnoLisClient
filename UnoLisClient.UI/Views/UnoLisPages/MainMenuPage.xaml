@@ -10,21 +10,16 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Header -->
             <RowDefinition Height="*"/>
-            <!-- Centro -->
             <RowDefinition Height="Auto"/>
-            <!-- Footer -->
         </Grid.RowDefinitions>
 
-        <!-- 🔝 Header con íconos -->
         <Grid Grid.Row="0" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- 👤 Perfil -->
             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Cursor="Hand">
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToProfileCommand}"/>
@@ -36,13 +31,13 @@
                 <Label x:Name="ProfileLabel"
                        Content="{x:Static language:Global.ProfileLabel}"
                        FontSize="16"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        FontWeight="Bold"
                        Foreground="White"
                        VerticalAlignment="Center">
                 </Label>
             </StackPanel>
 
-            <!-- 👥 Amigos -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" 
                         Cursor="Hand">
                 <StackPanel.InputBindings>
@@ -55,6 +50,7 @@
                 <Label x:Name="FriendsLabel"
                        Content="{x:Static language:Global.FriendsListLabel}"
                        FontSize="16"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        FontWeight="Bold"
                        Foreground="White"
                        VerticalAlignment="Center">
@@ -62,13 +58,11 @@
             </StackPanel>
         </Grid>
 
-        <!-- 🟡 Centro: logo UNO animado + botón -->
         <StackPanel Grid.Row="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="0,0,0,60">
 
-            <!-- Logo UNO con animación -->
             <Image Source="/Assets/unoLogoPixelArt.png"
                    Width="250" Height="230"
                    HorizontalAlignment="Center"
@@ -121,7 +115,6 @@
                 </Image.Triggers>
             </Image>
 
-            <!-- Botón Play más abajo -->
             <Button x:Name="PlayButton"
                     Style="{StaticResource PrimaryButtonStyle}"
                     Content="{x:Static language:Global.PlayButton}"
@@ -133,14 +126,12 @@
                     Command="{Binding PlayCommand}"/>
         </StackPanel>
 
-        <!-- 🔻 Footer con íconos -->
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Margin="0,20,0,20">
 
-            <!-- 🛍️ Tienda -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToShopCommand}"/>
@@ -151,11 +142,11 @@
                 <Label x:Name="ShopLabel"
                        Content="{x:Static language:Global.ShopLabel}"
                        FontSize="14"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <!-- ⚙️ Ajustes -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToSettingsCommand}"/>
@@ -166,11 +157,11 @@
                 <Label x:Name="SettingsLabel"
                        Content="{x:Static language:Global.SettingsLabel}"
                        FontSize="14"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <!-- 📊 Estadísticas -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToLeaderboardsCommand}"/>
@@ -181,11 +172,11 @@
                 <Label x:Name="StatisticsLabel"
                        Content="{x:Static language:Global.StatisticsLabel}"
                        FontSize="14"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <!-- ❓ Cómo jugar -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding GoToHowToPlayCommand}"/>
@@ -196,11 +187,11 @@
                 <Label x:Name="HowToPlayLabel"
                        Content="{x:Static language:Global.HowToPlayLabel}"
                        FontSize="14"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <!-- 🚪 Salir -->
             <StackPanel Cursor="Hand" HorizontalAlignment="Center" Margin="20,0">
                 <StackPanel.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding LogoutCommand}"/>
@@ -211,6 +202,7 @@
                 <Label x:Name="ExitLabel"
                        Content="{x:Static language:Global.ExitLabel}"
                        FontSize="14"
+                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             </StackPanel>

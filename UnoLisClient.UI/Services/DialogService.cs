@@ -11,6 +11,11 @@ namespace UnoLisClient.UI.Services
     public class DialogService : IModalService
     {
         private Window _loadingWindow;
+
+        public DialogService()
+        {
+        }
+
         public void ShowLoading()
         {
             _loadingWindow = new Window

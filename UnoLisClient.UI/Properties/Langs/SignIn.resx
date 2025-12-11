@@ -133,7 +133,7 @@
     <value>◆ At least one capital letter (A-Z).</value>
   </data>
   <data name="PasswordValidationLengthLabel" xml:space="preserve">
-    <value>◆ Between 8 and 16 characters.</value>
+    <value>◆ Between 8 and 255 characters.</value>
   </data>
   <data name="PasswordValidationHeaderLabel" xml:space="preserve">
     <value>The password must contain:</value>

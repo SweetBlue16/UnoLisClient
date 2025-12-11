@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnoLisClient.Logic.Enums;
+using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.Views.PopUpWindows;
 
@@ -36,19 +38,28 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         private void ClickBuySpecial(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            new SimplePopUpWindow("Purchase Successful", "You bought a Special Box!").ShowDialog();
+            new SimplePopUpWindow(Shop.CongratulationsLabel,
+                string.Format(Shop.PurchaseSuccessfulLabel, Shop.SpecialBoxLabel),
+                PopUpIconType.Success)
+            .ShowDialog();
         }
 
         private void ClickBuyEpic(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            new SimplePopUpWindow("Purchase Successful", "You bought an Epic Box!").ShowDialog();
+            new SimplePopUpWindow(Shop.CongratulationsLabel,
+                string.Format(Shop.PurchaseSuccessfulLabel, Shop.EpicBoxLabel),
+                PopUpIconType.Success)
+            .ShowDialog();
         }
 
         private void ClickBuyLegendary(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            new SimplePopUpWindow("Purchase Successful", "You bought a Legendary Box!").ShowDialog();
+            new SimplePopUpWindow(Shop.CongratulationsLabel,
+                string.Format(Shop.PurchaseSuccessfulLabel, Shop.LegendaryBoxLabel),
+                PopUpIconType.Success)
+            .ShowDialog();
         }
     }
 }

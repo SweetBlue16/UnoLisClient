@@ -124,7 +124,7 @@ namespace UnoLisClient.UI.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ◆ Between 8 and 16 characters..
+        ///   Looks up a localized string similar to ◆ Between 8 and 255 characters..
         /// </summary>
         public static string PasswordValidationLengthLabel {
             get {

@@ -216,28 +216,26 @@
             </Button>
 
             <ItemsControl ItemsSource="{Binding Items}" 
-              Grid.Row="1" 
-              Grid.Column="1" 
-              HorizontalAlignment="Left" 
-              VerticalAlignment="Bottom" 
-              Width="130" Height="130"
-              Margin="20,0,0,20">
+                          Grid.Row="1" 
+                          Grid.Column="1" 
+                          HorizontalAlignment="Left" 
+                          VerticalAlignment="Bottom" 
+                          Width="130" Height="130"
+                          Margin="20,0,0,20">
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type entities:ItemModel}">
-
                         <Button Margin="5"
-                    Background="Transparent" 
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Width="50" Height="50"
-                    Command="{Binding UseItemCommand}">
-
+                                Background="Transparent" 
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Width="50" Height="50"
+                                Command="{Binding UseItemCommand}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>
                                         <Image Source="{Binding ImagePath}" 
-                                   RenderOptions.BitmapScalingMode="HighQuality">
+                                               RenderOptions.BitmapScalingMode="HighQuality">
                                             <Image.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="5" Opacity="0.6"/>
                                             </Image.Effect>
@@ -248,28 +246,28 @@
                                                 <Grid>
                                                     <Ellipse Fill="#99FF0000" Width="100" Height="100"/>
                                                     <TextBlock Text="🚫" 
-                                                   Foreground="White" 
-                                                   FontWeight="Bold"
-                                                   FontSize="90" 
-                                                   HorizontalAlignment="Center" 
-                                                   VerticalAlignment="Center"/>
+                                                               Foreground="White" 
+                                                               FontWeight="Bold"
+                                                               FontSize="90" 
+                                                               HorizontalAlignment="Center" 
+                                                               VerticalAlignment="Center"/>
                                                 </Grid>
                                             </Viewbox>
                                         </Grid>
 
                                         <Border x:Name="CounterBorder"
-                                    Background="#CC000000"
-                                    BorderBrush="White"
-                                    BorderThickness="1"
-                                    CornerRadius="5"
-                                    Padding="3,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom"
-                                    Margin="-2,-2">
+                                                Background="#CC000000"
+                                                BorderBrush="White"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Padding="3,0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                Margin="-2,-2">
                                             <TextBlock Text="{Binding Count}"
-                                           Foreground="White"
-                                           FontWeight="Bold"
-                                           FontSize="11"/>
+                                                       Foreground="White"
+                                                       FontWeight="Bold"
+                                                       FontSize="11"/>
                                         </Border>
                                     </Grid>
 
@@ -297,8 +295,8 @@
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" Rows="2" 
-                         VerticalAlignment="Bottom"
-                         HorizontalAlignment="Left"/>
+                                     VerticalAlignment="Bottom"
+                                     HorizontalAlignment="Left"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

@@ -29,6 +29,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             _dialogService = dialogService;
         }
+
         protected void HandleException(MessageCode code, string logMessage, Exception ex)
         {
             IsLoading = false;

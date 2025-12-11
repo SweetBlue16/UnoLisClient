@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,8 @@ namespace UnoLisClient.UI.Views.Controls
     {
         public event Action<string> FriendAdded;
         public event Action Canceled;
+
+        private static readonly Regex NicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
 
         public AddFriendModal()
         {
@@ -50,6 +53,11 @@ namespace UnoLisClient.UI.Views.Controls
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Canceled?.Invoke();
+        }
+
+        private void StrongNicknamePreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !NicknameRegex.IsMatch(e.Text);
         }
     }
 }

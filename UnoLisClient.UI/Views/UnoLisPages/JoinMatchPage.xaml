@@ -42,7 +42,8 @@
                          TextAlignment="Center"
                          MaxLength="5"
                          CharacterCasing="Upper"
-                         Text="{Binding LobbyCode, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding LobbyCode, UpdateSourceTrigger=PropertyChanged}"
+                         PreviewTextInput="StrongLobbyCodePreviewTextInput"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
                     <Button Content="{x:Static Langs:Global.JoinButton}"

@@ -13,6 +13,7 @@ using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Properties.Langs;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
+using UnoLisClient.UI.Views.PopUpWindows;
 using UnoLisClient.UI.Views.UnoLisPages;
 using UnoLisServer.Common.Enums;
 
@@ -24,6 +25,9 @@ namespace UnoLisClient.UI.ViewModels
         private readonly ProfileEditService _profileEditService;
         private readonly Page _view;
         private readonly ClientProfileData _originalProfileData;
+
+        private string _originalEmail;
+        private string _verificationCode;
 
         public string Nickname { get; private set; }
 
@@ -104,6 +108,17 @@ namespace UnoLisClient.UI.ViewModels
                 return;
             }
 
+            bool emailChanged = _originalEmail != updatedProfileData.Email;
+            if (emailChanged)
+            {
+                bool isVerified = await HandleEmailChanged();
+                if (!isVerified)
+                {
+                    return;
+                }
+                updatedProfileData.VerificationCode = _verificationCode;
+            }
+
             SetLoading(true);
             try
             {
@@ -138,11 +153,75 @@ namespace UnoLisClient.UI.ViewModels
             catch (Exception ex)
             {
                 string logMessage = $"Fallo al actualizar los datos del perfil: {ex.Message}";
-                HandleException(MessageCode.ProfileUpdateFailed, logMessage, ex); // Código más específico
+                HandleException(MessageCode.ProfileUpdateFailed, logMessage, ex);
             }
             finally
             {
                 SetLoading(false);
+            }
+        }
+
+        private async Task<bool> HandleEmailChanged()
+        {
+            SetLoading(true);
+            try
+            {
+                var response = await _profileEditService.RequestVerificationCodeAsync(Nickname, Email.Trim());
+                if (!response.Success)
+                {
+                    string errorMessage = MessageTranslator.GetMessage(response.Code);
+                    _dialogService.ShowWarning(errorMessage);
+                    return false;
+                }
+                SetLoading(false);
+                var inputDialogPopUp = new InputPopUpWindow(Global.ConfirmationLabel,
+                    Global.ConfirmationMessageLabel,
+                    Global.CodeLabel,
+                    PopUpIconType.EmailVerification
+                );
+                bool? result = inputDialogPopUp.ShowDialog();
+
+                if (result == true || !string.IsNullOrWhiteSpace(inputDialogPopUp.UserInput))
+                {
+                    _verificationCode = inputDialogPopUp.UserInput.Trim();
+                    return true;
+                }
+                else
+                {
+                    _dialogService.ShowWarning(Global.TaskCanceledLabel);
+                    return false;
+                }
+            }
+            catch (EndpointNotFoundException enfEx)
+            {
+                string logMessage = $"Fallo al enviar el código de verificación por correo electrónico: {enfEx.Message}";
+                HandleException(MessageCode.ConnectionRejected, logMessage, enfEx);
+                return false;
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                string logMessage = $"Fallo al enviar el código de verificación por correo electrónico: {timeoutEx.Message}";
+                HandleException(MessageCode.Timeout, logMessage, timeoutEx);
+                return false;
+            }
+            catch (CommunicationException commEx)
+            {
+                string logMessage = $"Fallo al enviar el código de verificación por correo electrónico: {commEx.Message}";
+                HandleException(MessageCode.ConnectionFailed, logMessage, commEx);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                string logMessage = $"Fallo al enviar el código de verificación por correo electrónico: {ex.Message}";
+                HandleException(MessageCode.EmailSendingFailed, logMessage, ex);
+                return false;
+            }
+            finally
+            {
+                if (IsLoading)
+                {
+                    SetLoading(false);
+                }
             }
         }
 
@@ -199,6 +278,8 @@ namespace UnoLisClient.UI.ViewModels
             FacebookUrl = _originalProfileData.FacebookUrl;
             InstagramUrl = _originalProfileData.InstagramUrl;
             TikTokUrl = _originalProfileData.TikTokUrl;
+
+            _originalEmail = _originalProfileData.Email;
         }
 
         private ProfileData GetProfileDataFromViewModel()

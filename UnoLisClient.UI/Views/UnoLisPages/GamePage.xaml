@@ -65,35 +65,48 @@
             </Image>
         </StackPanel>
 
-        <!--  Contenedor para botones -->
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
+        <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
-                    Margin="0,0,0,50">
-            <!-- Botón Login -->
-            <Button x:Name="LoginButton"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Content="{x:Static Langs:SignIn.LoginButton}"
-                    FontSize="15"
-                    Cursor="Hand"
-                    HorizontalContentAlignment="Center"
-                    Height="60"
-                    Width="230"
-                    Margin="0,0,20,0"
-                    RenderTransformOrigin="0.505,0.772"
-                    Click="ClickLoginButton"/>
-
-            <!-- Botón Invitado -->
-            <Button x:Name="PlayGuestButton"
-                    Style="{StaticResource SecondaryButtonStyle}"
-                    Content="{x:Static Langs:SignIn.PlayAsGuestButton}"
-                    Cursor="Hand"
-                    FontSize="15"
-                    HorizontalContentAlignment="Center"
-                    Height="60"
-                    Width="230"
-                    RenderTransformOrigin="0.497,0.751"
-                    Click="ClickPlayGuestButton"/>
+                    Margin="5">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,50">
+                <Button x:Name="LoginButton"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Content="{x:Static Langs:SignIn.LoginButton}"
+                        FontSize="15"
+                        Cursor="Hand"
+                        HorizontalContentAlignment="Center"
+                        Height="60"
+                        Width="230"
+                        Margin="0,0,20,0"
+                        RenderTransformOrigin="0.505,0.772"
+                        Click="ClickLoginButton"/>
+                <Button x:Name="PlayGuestButton"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Content="{x:Static Langs:SignIn.PlayAsGuestButton}"
+                        Cursor="Hand"
+                        FontSize="15"
+                        HorizontalContentAlignment="Center"
+                        Height="60"
+                        Width="230"
+                        RenderTransformOrigin="0.497,0.751"
+                        Click="ClickPlayGuestButton"/>
+            </StackPanel>
+            <Border Background="#80000000"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    CornerRadius="5"
+                    Padding="7"
+                    Width="320">
+                <TextBlock Text="{x:Static Langs:Global.CopyrightLabel}"
+                           FontSize="12"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           FontFamily="pack://application:,,,/Fonts/#Lato"/>
+            </Border>
         </StackPanel>
     </Grid>
 </Page>

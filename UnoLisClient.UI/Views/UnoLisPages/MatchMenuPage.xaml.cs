@@ -1,47 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Controls;
+using UnoLisClient.UI.ViewModels;
+using UnoLisClient.UI.Services;
+using UnoLisClient.UI.Utilities;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using UnoLisClient.UI.Utilities; 
 
 namespace UnoLisClient.UI.Views.UnoLisPages
 {
     /// <summary>
     /// Interaction logic for MatchMenuPage.xaml
     /// </summary>
-    public partial class MatchMenuPage : Page
+    public partial class MatchMenuPage : Page, INavigationService
     {
         public MatchMenuPage()
         {
             InitializeComponent();
+            DataContext = new MatchMenuViewModel(this, new AlertManager());
         }
 
-        private void BackIcon_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void NavigateTo(Page page)
         {
-            NavigationService?.Navigate(new MainMenuPage());
+            Application.Current.Dispatcher.Invoke(() =>
+                NavigationService?.Navigate(page)
+            );
         }
 
-        private void ClickCreateMatchButton(object sender, RoutedEventArgs e)
+        public void GoBack()
         {
-            SoundManager.PlayClick();
-            NavigationService?.Navigate(new GameSettingsPage()); 
-        }
-
-        private void ClickJoinMatchButton(object sender, RoutedEventArgs e)
-        {
-            SoundManager.PlayClick(); 
-            NavigationService?.Navigate(new JoinMatchPage()); 
+            Application.Current.Dispatcher.Invoke(() =>
+                NavigationService?.GoBack()
+            );
         }
     }
 }

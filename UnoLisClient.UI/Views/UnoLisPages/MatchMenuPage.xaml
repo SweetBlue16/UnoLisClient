@@ -4,11 +4,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:Langs="clr-namespace:UnoLisClient.UI.Properties.Langs"
+      xmlns:viewModels="clr-namespace:UnoLisClient.UI.ViewModels"
       mc:Ignorable="d"
       Title="MatchMenuPage"
       Background="Transparent">
 
-    <!--  Animación de entrada -->
     <Page.Triggers>
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
@@ -26,7 +26,6 @@
     </Page.Triggers>
 
     <Grid>
-        <!-- Contenedor principal -->
         <Border Background="#AA000000"
                 CornerRadius="15"
                 Padding="40"
@@ -41,14 +40,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Encabezado con icono de regresar -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Ícono de regresar -->
                     <TextBlock Grid.Column="0"
                                Text="⮌"
                                FontSize="28"
@@ -56,8 +53,12 @@
                                Foreground="White"
                                Cursor="Hand"
                                VerticalAlignment="Top"
-                               MouseDown="BackIcon_MouseDown"
-                               Margin="0,0,0,10"/>
+                               Margin="0,0,0,10">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Gesture="LeftClick"
+                                          Command="{Binding GoBackCommand}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                     <StackPanel Grid.Column="1"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Left"
@@ -66,7 +67,6 @@
                                Width="60"
                                Height="60"
                                Margin="0,0,10,0"/>
-                        <!-- Título -->
                         <TextBlock Grid.Column="1"
                                Text="{x:Static Langs:Global.MatchMenuLabel}"
                                FontSize="34"
@@ -80,13 +80,11 @@
                     </StackPanel>
                 </Grid>
 
-                <!-- Contenido principal -->
                 <StackPanel Grid.Row="1"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="0,20,0,0">
 
-                    <!-- Botón Crear Partida -->
                     <Button x:Name="CreateMatchButton"
                             Content="{x:Static Langs:Global.CreateMatchButton}"
                             Style="{StaticResource PrimaryButtonStyle}"
@@ -94,10 +92,9 @@
                             Width="300"
                             Height="80"
                             Cursor="Hand"
-                            Click="ClickCreateMatchButton"
+                            Command="{Binding CreateMatchCommand}"
                             Margin="0,0,0,30"/>
 
-                    <!-- Botón Unirse -->
                     <Button x:Name="JoinMatchButton"
                             Content="{x:Static Langs:Global.JoinMenuButton}"
                             Style="{StaticResource SecondaryButtonStyle}"
@@ -105,7 +102,7 @@
                             Width="300"
                             Height="80"
                             Cursor="Hand"
-                            Click="ClickJoinMatchButton"/>
+                            Command="{Binding JoinMatchCommand}"/>
                 </StackPanel>
             </Grid>
         </Border>

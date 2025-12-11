@@ -134,6 +134,11 @@ namespace UnoLisClient.UI.ViewModels
                     _dialogService.ShowAlert(Global.SuccessLabel, successMessage, PopUpIconType.Success);
                     RequestClose?.Invoke();
                 }
+                else if (response.Code == MessageCode.AlreadyReportedRecently)
+                {
+                    string alreadyReportedMessage = string.Format(message, SelectedPlayer);
+                    _dialogService.ShowWarning(alreadyReportedMessage);
+                }
                 else
                 {
                     _dialogService.ShowWarning(message);

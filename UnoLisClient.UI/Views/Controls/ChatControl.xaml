@@ -56,8 +56,9 @@
 
                 <TextBox Width="200" Height="40" VerticalAlignment="Center" Margin="0,0,10,0"
                          Text="{Binding CurrentMessage, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{DynamicResource TextBoxStyle}">
-
+                         Style="{DynamicResource TextBoxStyle}"
+                         MaxLength="255"
+                         PreviewTextInput="StrongMessagePreviewTextInput">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}" />
                     </TextBox.InputBindings>
