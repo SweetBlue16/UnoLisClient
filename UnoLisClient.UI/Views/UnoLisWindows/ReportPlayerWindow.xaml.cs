@@ -13,7 +13,7 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
     /// </summary>
     public partial class ReportPlayerWindow : Window
     {
-        public static readonly Regex ReportDescriptionRegex = new Regex(@"^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{1,255}$");
+        public static readonly Regex _reportDescriptionRegex = new Regex(@"^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{1,255}$");
 
         public ReportPlayerWindow(List<string> playersList)
         {
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Views.UnoLisWindows
 
         private void StrongReportDescriptionPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = !ReportDescriptionRegex.IsMatch(e.Text);
+            e.Handled = !_reportDescriptionRegex.IsMatch(e.Text);
         }
     }
 }

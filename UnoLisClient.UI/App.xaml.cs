@@ -63,7 +63,7 @@ namespace UnoLisClient.UI
 
             ServerConnectionMonitor.OnServerConnectionLost = (messageKey) =>
             {
-                UnoLisClient.UI.Utilities.NavigationProxy.ForceLogoutToLogin(messageKey);
+                NavigationProxy.ForceLogoutToLogin(messageKey);
             };
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);

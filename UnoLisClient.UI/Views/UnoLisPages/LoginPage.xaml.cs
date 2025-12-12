@@ -12,7 +12,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     /// </summary>
     public partial class LoginPage : Page, INavigationService
     {
-        public static readonly Regex NicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
+        public static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
 
         public LoginPage()
         {
@@ -36,7 +36,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
 
         private void StrongNicknamePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = !NicknameRegex.IsMatch(e.Text);
+            e.Handled = !_nicknameRegex.IsMatch(e.Text);
         }
     }
 }

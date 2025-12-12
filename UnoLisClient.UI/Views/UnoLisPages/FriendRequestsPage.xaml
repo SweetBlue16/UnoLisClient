@@ -21,7 +21,6 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Encabezado -->
                 <Grid Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -37,7 +36,7 @@
                             Foreground="White"
                             BorderThickness="0"
                             VerticalAlignment="Top"
-                            Click="BackButton_Click"/>
+                            Click="BackButtonClick"/>
 
                     <TextBlock Grid.Column="1"
                                Text="{x:Static Langs:FriendsList.FriendsRequestsLabel}"
@@ -48,7 +47,6 @@
                                Margin="20,0,0,0"/>
                 </Grid>
 
-                <!-- Lista de solicitudes -->
                 <ItemsControl ItemsSource="{Binding FriendRequests}" Grid.Row="1">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

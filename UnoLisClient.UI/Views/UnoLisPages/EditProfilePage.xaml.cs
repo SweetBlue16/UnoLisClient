@@ -13,14 +13,14 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     /// </summary>
     public partial class EditProfilePage : Page, INavigationService
     {
-        public static readonly Regex EmailRegex = new Regex(@"^(?=^.{1,100}$)[^@\s]+@[^@\s]+\.[^@\s]+$");
-        public static readonly Regex NicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
-        public static readonly Regex FullNameRegex = new Regex(@"^[\p{L}\s]{1,45}$");
-        public static readonly Regex FacebookUrlRegex = new Regex(
+        public static readonly Regex _emailRegex = new Regex(@"^(?=^.{1,100}$)[^@\s]+@[^@\s]+\.[^@\s]+$");
+        public static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
+        public static readonly Regex _fullNameRegex = new Regex(@"^[\p{L}\s]{1,45}$");
+        public static readonly Regex _facebookUrlRegex = new Regex(
         @"^(?=^.{1,255}$)(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]+$");
-        public static readonly Regex InstagramUrlRegex = new Regex(
+        public static readonly Regex _instagramUrlRegex = new Regex(
         @"^(?=^.{1,255}$)(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.]+$");
-        public static readonly Regex TikTokUrlRegex = new Regex(
+        public static readonly Regex _tikTokUrlRegex = new Regex(
         @"^(?=^.{1,255}$)(https?:\/\/)?(www\.)?tiktok\.com\/@?[a-zA-Z0-9_.]+$");
 
         public EditProfilePage(ClientProfileData currentProfile)
@@ -45,32 +45,32 @@ namespace UnoLisClient.UI.Views.UnoLisPages
 
         private void StrongFullNamePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = !FullNameRegex.IsMatch(e.Text);
+            e.Handled = !_fullNameRegex.IsMatch(e.Text);
         }
 
         private void StrongNicknamePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = !NicknameRegex.IsMatch(e.Text);
+            e.Handled = !_nicknameRegex.IsMatch(e.Text);
         }
 
         private void StrongEmailPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = EmailRegex.IsMatch(e.Text);
+            e.Handled = _emailRegex.IsMatch(e.Text);
         }
 
         private void StrongFacebookLinkPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = FacebookUrlRegex.IsMatch(e.Text);
+            e.Handled = _facebookUrlRegex.IsMatch(e.Text);
         }
 
         private void StrongInstagramLinkPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = InstagramUrlRegex.IsMatch(e.Text);
+            e.Handled = _instagramUrlRegex.IsMatch(e.Text);
         }
 
         private void StrongTikTokLinkPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = TikTokUrlRegex.IsMatch(e.Text);
+            e.Handled = _tikTokUrlRegex.IsMatch(e.Text);
         }
     }
 }

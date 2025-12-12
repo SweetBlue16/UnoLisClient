@@ -20,6 +20,12 @@ namespace UnoLisClient.UI.Views.Controls
     /// </summary>
     public partial class LoadingProgressBar : UserControl
     {
+        private const int MaxProgress = 100;
+        private const int BeforeMaxProgress = 90;
+        private const int ProgressIncrement = 3;
+        private const int StopDelayMilliseconds = 300;
+        private const int AnimationDelayMilliseconds = 100;
+
         private bool _isRunning;
 
         public LoadingProgressBar()
@@ -41,18 +47,18 @@ namespace UnoLisClient.UI.Views.Controls
         public async void Stop()
         {
             _isRunning = false;
-            MainProgressBar.Value = 100;
-            await Task.Delay(300);
+            MainProgressBar.Value = MaxProgress;
+            await Task.Delay(StopDelayMilliseconds);
             Visibility = Visibility.Collapsed;
         }
 
         private async Task AnimateProgressAsync()
         {
             MainProgressBar.Value = 0;
-            while (_isRunning && MainProgressBar.Value < 90)
+            while (_isRunning && MainProgressBar.Value < BeforeMaxProgress)
             {
-                MainProgressBar.Value += 3;
-                await Task.Delay(100);
+                MainProgressBar.Value += ProgressIncrement;
+                await Task.Delay(AnimationDelayMilliseconds);
             }
         }
     }

@@ -14,7 +14,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     /// </summary>
     public partial class JoinMatchPage : Page, INavigationService
     {
-        public static readonly Regex LobbyCodeRegex = new Regex("^[a-zA-Z0-9]{5}$");
+        public static readonly Regex _lobbyCodeRegex = new Regex("^[a-zA-Z0-9]{5}$");
         private readonly JoinMatchViewModel _viewModel;
 
         public JoinMatchPage()
@@ -45,7 +45,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
 
         private void StrongLobbyCodePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = LobbyCodeRegex.IsMatch(e.Text);
+            e.Handled = _lobbyCodeRegex.IsMatch(e.Text);
         }
     }
 }

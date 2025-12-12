@@ -58,7 +58,9 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
-                await mainWindow.SetBackgroundMedia("Assets/bonfireLobbyBackground.mp4", "Assets/lobbyMusic.mp3");
+                string bonfireVideoPath = "Assets/bonfireLobbyBackground.mp4";
+                string lobbyMusicPath = "Assets/lobbyMusic.mp3";
+                await mainWindow.SetBackgroundMedia(bonfireVideoPath, lobbyMusicPath);
             }
         }
         private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -30,22 +30,16 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             InitializeComponent();
 
-            // 1. Instanciamos el ViewModel inyectando dependencias y el código de sala
             _viewModel = new SelectBackgroundViewModel(
                 this,
                 new AlertManager(),
                 lobbyCode
             );
 
-            // 2. Asignamos el DataContext para que el XAML pueda hacer Binding
             this.DataContext = _viewModel;
 
-            // 3. Llamamos explícitamente a la carga de datos
-            // Esto separa la construcción de la lógica de carga (mejor manejo de errores)
             _viewModel.LoadBackgrounds();
         }
-
-        // --- Implementación de INavigationService ---
 
         public void NavigateTo(Page page)
         {

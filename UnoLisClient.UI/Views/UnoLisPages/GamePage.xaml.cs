@@ -22,6 +22,9 @@ namespace UnoLisClient.UI.Views.UnoLisPages
     /// </summary>
     public partial class GamePage : Page
     {
+        private const int MinGuestNumber = 1000;
+        private const int MaxGuestNumber = 9999;
+
         public GamePage()
         {
             InitializeComponent();
@@ -30,7 +33,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         private void ClickPlayGuestButton(object sender, RoutedEventArgs e)
         {
             SoundManager.PlayClick();
-            int randomSuffix = new Random().Next(1000, 9999);
+            int randomSuffix = new Random().Next(MinGuestNumber, MaxGuestNumber);
             CurrentSession.CurrentUserNickname = $"Guest_{randomSuffix}";
             NavigationService?.Navigate(new MainMenuPage());
         }

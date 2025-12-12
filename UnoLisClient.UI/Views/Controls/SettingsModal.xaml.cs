@@ -39,7 +39,9 @@ namespace UnoLisClient.UI.Views.Controls
             }
             else
             {
-                SoundManager.PlaySound("cancel.wav", 0.5);
+                string cancelFile = "cancel.wav";
+                double volume = 0.5;
+                SoundManager.PlaySound(cancelFile, volume);
             }
         }
     }

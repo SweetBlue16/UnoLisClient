@@ -9,7 +9,7 @@ namespace UnoLisClient.UI.Views.Controls
     /// </summary>
     public partial class ChatControl : UserControl
     {
-        private static readonly Regex ChatMessageRegex = new Regex(@"^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{1,255}$");
+        private static readonly Regex _chatMessageRegex = new Regex(@"^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{1,255}$");
 
         public ChatControl()
         {
@@ -23,7 +23,7 @@ namespace UnoLisClient.UI.Views.Controls
 
         private void StrongMessagePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = !ChatMessageRegex.IsMatch(e.Text);
+            e.Handled = !_chatMessageRegex.IsMatch(e.Text);
         }
     }
 }

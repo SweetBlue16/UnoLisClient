@@ -16,7 +16,7 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             DataContext = new FriendRequestsViewModel(FriendsService.Instance, new AlertManager());
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new FriendsPage());
         }

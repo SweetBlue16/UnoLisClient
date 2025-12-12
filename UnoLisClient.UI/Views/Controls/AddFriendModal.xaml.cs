@@ -24,7 +24,7 @@ namespace UnoLisClient.UI.Views.Controls
         public event Action<string> FriendAdded;
         public event Action Canceled;
 
-        private static readonly Regex NicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
+        private static readonly Regex _nicknameRegex = new Regex("^[a-zA-Z0-9_-]{1,45}$");
 
         public AddFriendModal()
         {
@@ -57,7 +57,7 @@ namespace UnoLisClient.UI.Views.Controls
 
         private void StrongNicknamePreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !NicknameRegex.IsMatch(e.Text);
+            e.Handled = !_nicknameRegex.IsMatch(e.Text);
         }
     }
 }
