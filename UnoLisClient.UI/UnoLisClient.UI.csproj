@@ -386,11 +386,8 @@
     <Resource Include="Avatars\Gatito.png" />
     <Resource Include="Avatars\LogoUNO.png" />
     <Resource Include="Avatars\MtroWillian.png" />
-    <Resource Include="Fonts\Bangers.ttf" />
-    <Resource Include="Fonts\Bubblegum-Sans.ttf" />
     <Resource Include="Fonts\Lato.ttf" />
     <Resource Include="Fonts\Luckiest-Guy.ttf" />
-    <Resource Include="Fonts\VCR-OSD-Mono.ttf" />
     <Content Include="Assets\bonfireLobbyBackground.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

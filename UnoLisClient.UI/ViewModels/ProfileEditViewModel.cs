@@ -285,13 +285,13 @@ namespace UnoLisClient.UI.ViewModels
         {
             return new ProfileData
             {
-                Nickname = this.Nickname.Trim(),
-                FullName = this.FullName.Trim(),
-                Email = this.Email.Trim(),
-                Password = this.Password.Trim(),
-                FacebookUrl = this.FacebookUrl.Trim(),
-                InstagramUrl = this.InstagramUrl.Trim(),
-                TikTokUrl = this.TikTokUrl.Trim()
+                Nickname = this.Nickname?.Trim(),
+                FullName = this.FullName?.Trim(),
+                Email = this.Email?.Trim(),
+                Password = this.Password?.Trim(),
+                FacebookUrl = this.FacebookUrl?.Trim(),
+                InstagramUrl = this.InstagramUrl?.Trim(),
+                TikTokUrl = this.TikTokUrl?.Trim()
             };
         }
 

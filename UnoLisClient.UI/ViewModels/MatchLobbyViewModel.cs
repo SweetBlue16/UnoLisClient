@@ -246,7 +246,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             int totalPlayers = PlayersInLobby.Count(player => player.IsSlotFilled);
             int readyCount = PlayersInLobby.Count(player => player.IsSlotFilled && player.IsReady);
-            ReadyStatusText = $"{readyCount} / {totalPlayers} {Lobby.PlayerReadyLabel}";
+            ReadyStatusText = $"{readyCount} / {totalPlayers} {Lobby.PlayersReadyLabel}";
         }
 
         private void HandleGameStarted()
