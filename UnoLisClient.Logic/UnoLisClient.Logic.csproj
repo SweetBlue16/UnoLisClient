@@ -66,6 +66,7 @@
     <Compile Include="Callbacks\ProfileViewCallback.cs" />
     <Compile Include="Callbacks\RegisterCallback.cs" />
     <Compile Include="Callbacks\ReportCallback.cs" />
+    <Compile Include="Callbacks\ShopCallbacks.cs" />
     <Compile Include="Connected Services\UnoLisServerReference.Avatar\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -181,6 +182,7 @@
     <Compile Include="Services\RegisterService.cs" />
     <Compile Include="Services\ISessionContext.cs" />
     <Compile Include="Services\ServerConnectionMonitor.cs" />
+    <Compile Include="Services\ShopService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validators\" />

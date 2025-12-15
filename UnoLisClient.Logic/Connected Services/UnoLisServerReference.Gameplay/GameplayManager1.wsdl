@@ -32,6 +32,9 @@
   <wsdl:message name="IGameplayManager_DisconnectPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectPlayer" />
   </wsdl:message>
+  <wsdl:message name="IGameplayManager_LeaveGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGame" />
+  </wsdl:message>
   <wsdl:message name="IGameplayManager_UseItem_InputMessage">
     <wsdl:part name="parameters" element="tns:UseItem" />
   </wsdl:message>
@@ -77,6 +80,9 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DisconnectPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/DisconnectPlayer" message="tns:IGameplayManager_DisconnectPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="LeaveGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/LeaveGame" message="tns:IGameplayManager_LeaveGame_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UseItem">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/UseItem" message="tns:IGameplayManager_UseItem_InputMessage" />
@@ -138,6 +144,12 @@
     </wsdl:operation>
     <wsdl:operation name="DisconnectPlayer">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/DisconnectPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/LeaveGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

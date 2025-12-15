@@ -13,6 +13,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPlayerBalance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ShopItemsReceived">
     <xs:complexType>
       <xs:sequence>
@@ -28,14 +35,20 @@
   <xs:element name="PurchaseResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="success" type="xs:boolean" />
-        <xs:element minOccurs="0" name="itemName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs" minOccurs="0" name="result" nillable="true" type="q3:ShopPurchaseResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PurchaseResponseResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerBalanceReceived">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="balance" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

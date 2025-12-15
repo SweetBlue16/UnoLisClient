@@ -33,10 +33,6 @@ namespace UnoLisClient.UI.ViewModels
         /// <summary>
         /// Creates a new instance of ChatViewModel for a specific chat channel.
         /// </summary>
-        /// <param name="chatService">El servicio de chat (Singleton).</param>
-        /// <param name="dialogService">El servicio de diálogos (heredado).</param>
-        /// <param name="channelId">El ID de la sala a la que se unirá (ej. "LOBBY_123" o "MATCH_ABC").</param>
-        /// <param name="nickname">El nickname del usuario actual.</param>
         public ChatViewModel(IChatService chatService, IDialogService dialogService, string channelId, string nickname)
             : base(dialogService)
         {
@@ -44,7 +40,8 @@ namespace UnoLisClient.UI.ViewModels
             _channelId = channelId;
             _currentUserNickname = nickname;
 
-            SendMessageCommand = new RelayCommand(async () => await ExecuteSendMessageAsync(), () => !string.IsNullOrWhiteSpace(CurrentMessage) && !IsLoading);
+            SendMessageCommand = new RelayCommand(async () => await ExecuteSendMessageAsync(), () => 
+            !string.IsNullOrWhiteSpace(CurrentMessage) && !IsLoading);
         }
 
         public async Task InitializeAsync()
@@ -55,7 +52,8 @@ namespace UnoLisClient.UI.ViewModels
             _chatService.OnSessionExpired += HandleSessionExpired;
 
             Messages.Clear();
-            Messages.Add(new ChatMessageData { Nickname = Global.SystemLabel, Message = string.Format(Lobby.ConnectingChannelMessageLabel, _channelId) });
+            Messages.Add(new ChatMessageData { Nickname = Global.SystemLabel, Message = string.Format(
+                Lobby.ConnectingChannelMessageLabel, _channelId) });
 
             try
             {

@@ -4,27 +4,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -42,6 +21,9 @@
   <wsdl:message name="IShopManager_PurchaseItem_InputMessage">
     <wsdl:part name="parameters" element="tns:PurchaseItem" />
   </wsdl:message>
+  <wsdl:message name="IShopManager_GetPlayerBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerBalance" />
+  </wsdl:message>
   <wsdl:message name="IShopManager_ShopItemsReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShopItemsReceived" />
   </wsdl:message>
@@ -54,12 +36,18 @@
   <wsdl:message name="IShopManager_PurchaseResponse_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PurchaseResponseResponse" />
   </wsdl:message>
+  <wsdl:message name="IShopManager_PlayerBalanceReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerBalanceReceived" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IShopManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetShopItems">
       <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/GetShopItems" message="tns:IShopManager_GetShopItems_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PurchaseItem">
       <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/PurchaseItem" message="tns:IShopManager_PurchaseItem_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPlayerBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/GetPlayerBalance" message="tns:IShopManager_GetPlayerBalance_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ShopItemsReceived">
       <wsdl:output wsaw:Action="http://tempuri.org/IShopManager/ShopItemsReceived" message="tns:IShopManager_ShopItemsReceived_OutputCallbackMessage" />
@@ -68,6 +56,9 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PurchaseResponse">
       <wsdl:output wsaw:Action="http://tempuri.org/IShopManager/PurchaseResponse" message="tns:IShopManager_PurchaseResponse_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IShopManager/PurchaseResponseResponse" message="tns:IShopManager_PurchaseResponse_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerBalanceReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/IShopManager/PlayerBalanceReceived" message="tns:IShopManager_PlayerBalanceReceived_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IShopManager" type="tns:IShopManager">
@@ -81,6 +72,12 @@
     </wsdl:operation>
     <wsdl:operation name="PurchaseItem">
       <soap12:operation soapAction="http://tempuri.org/IShopManager/PurchaseItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerBalance">
+      <soap12:operation soapAction="http://tempuri.org/IShopManager/GetPlayerBalance" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -103,15 +100,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="PlayerBalanceReceived">
+      <soap12:operation soapAction="http://tempuri.org/IShopManager/PlayerBalanceReceived" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ShopManager">
     <wsdl:port name="NetTcpBinding_IShopManager" binding="tns:NetTcpBinding_IShopManager">
       <soap12:address location="net.tcp://localhost:8123/ShopManager" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8123/ShopManager</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>SWEETBLUE16\pswee</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

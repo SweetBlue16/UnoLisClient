@@ -183,6 +183,224 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Shop {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ShopPurchaseResult", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class ShopPurchaseResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RemainingCoinsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private UnoLisClient.Logic.UnoLisServerReference.Shop.PlayerAvatar WonAvatarField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MessageCode {
+            get {
+                return this.MessageCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageCodeField, value) != true)) {
+                    this.MessageCodeField = value;
+                    this.RaisePropertyChanged("MessageCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RemainingCoins {
+            get {
+                return this.RemainingCoinsField;
+            }
+            set {
+                if ((this.RemainingCoinsField.Equals(value) != true)) {
+                    this.RemainingCoinsField = value;
+                    this.RaisePropertyChanged("RemainingCoins");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public UnoLisClient.Logic.UnoLisServerReference.Shop.PlayerAvatar WonAvatar {
+            get {
+                return this.WonAvatarField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WonAvatarField, value) != true)) {
+                    this.WonAvatarField = value;
+                    this.RaisePropertyChanged("WonAvatar");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerAvatar", Namespace="http://schemas.datacontract.org/2004/07/UnoLisServer.Contracts.DTOs")]
+    [System.SerializableAttribute()]
+    public partial class PlayerAvatar : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AvatarIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AvatarNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSelectedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsUnlockedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RarityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AvatarId {
+            get {
+                return this.AvatarIdField;
+            }
+            set {
+                if ((this.AvatarIdField.Equals(value) != true)) {
+                    this.AvatarIdField = value;
+                    this.RaisePropertyChanged("AvatarId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AvatarName {
+            get {
+                return this.AvatarNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AvatarNameField, value) != true)) {
+                    this.AvatarNameField = value;
+                    this.RaisePropertyChanged("AvatarName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSelected {
+            get {
+                return this.IsSelectedField;
+            }
+            set {
+                if ((this.IsSelectedField.Equals(value) != true)) {
+                    this.IsSelectedField = value;
+                    this.RaisePropertyChanged("IsSelected");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsUnlocked {
+            get {
+                return this.IsUnlockedField;
+            }
+            set {
+                if ((this.IsUnlockedField.Equals(value) != true)) {
+                    this.IsUnlockedField = value;
+                    this.RaisePropertyChanged("IsUnlocked");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Rarity {
+            get {
+                return this.RarityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RarityField, value) != true)) {
+                    this.RarityField = value;
+                    this.RaisePropertyChanged("Rarity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UnoLisServerReference.Shop.IShopManager", CallbackContract=typeof(UnoLisClient.Logic.UnoLisServerReference.Shop.IShopManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IShopManager {
@@ -198,6 +416,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Shop {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IShopManager/PurchaseItem")]
         System.Threading.Tasks.Task PurchaseItemAsync(UnoLisClient.Logic.UnoLisServerReference.Shop.PurchaseRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IShopManager/GetPlayerBalance")]
+        void GetPlayerBalance(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IShopManager/GetPlayerBalance")]
+        System.Threading.Tasks.Task GetPlayerBalanceAsync(string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -207,7 +431,10 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Shop {
         void ShopItemsReceived(UnoLisClient.Logic.UnoLisServerReference.Shop.ShopItem[] items);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IShopManager/PurchaseResponse", ReplyAction="http://tempuri.org/IShopManager/PurchaseResponseResponse")]
-        void PurchaseResponse(bool success, string itemName);
+        void PurchaseResponse(UnoLisClient.Logic.UnoLisServerReference.Shop.ShopPurchaseResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IShopManager/PlayerBalanceReceived")]
+        void PlayerBalanceReceived(int balance);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -252,6 +479,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Shop {
         
         public System.Threading.Tasks.Task PurchaseItemAsync(UnoLisClient.Logic.UnoLisServerReference.Shop.PurchaseRequest request) {
             return base.Channel.PurchaseItemAsync(request);
+        }
+        
+        public void GetPlayerBalance(string nickname) {
+            base.Channel.GetPlayerBalance(nickname);
+        }
+        
+        public System.Threading.Tasks.Task GetPlayerBalanceAsync(string nickname) {
+            return base.Channel.GetPlayerBalanceAsync(nickname);
         }
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Utilities\SessionReportTracker.cs" />
     <Compile Include="Utilities\UserValidator.cs" />
     <Compile Include="ViewModels\AvatarSelectionViewModel.cs" />
+    <Compile Include="ViewModels\AvatarShopViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\GameSettingsViewModel.cs" />
     <Compile Include="ViewModels\HowToPlayViewModel.cs" />
@@ -142,6 +143,9 @@
     </Compile>
     <Compile Include="Utilities\MessageTranslator.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Views\PopUpWindows\AvatarWonPopUpWindow.xaml.cs">
+      <DependentUpon>AvatarWonPopUpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UnoLisPages\FriendRequestsPage.xaml.cs">
       <DependentUpon>FriendRequestsPage.xaml</DependentUpon>
     </Compile>
@@ -581,6 +585,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LoadingProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUpWindows\AvatarWonPopUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

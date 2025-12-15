@@ -479,6 +479,12 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/DisconnectPlayer")]
         System.Threading.Tasks.Task DisconnectPlayerAsync(string lobbyCode, string nickname);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/LeaveGame")]
+        void LeaveGame(string lobbyCode, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/LeaveGame")]
+        System.Threading.Tasks.Task LeaveGameAsync(string lobbyCode, string nickname);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/UseItem")]
         void UseItem(string lobbyCode, string nickname, UnoLisServer.Common.Enums.ItemType itemType, string targetNickname);
         
@@ -583,6 +589,14 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         public System.Threading.Tasks.Task DisconnectPlayerAsync(string lobbyCode, string nickname) {
             return base.Channel.DisconnectPlayerAsync(lobbyCode, nickname);
+        }
+        
+        public void LeaveGame(string lobbyCode, string nickname) {
+            base.Channel.LeaveGame(lobbyCode, nickname);
+        }
+        
+        public System.Threading.Tasks.Task LeaveGameAsync(string lobbyCode, string nickname) {
+            return base.Channel.LeaveGameAsync(lobbyCode, nickname);
         }
         
         public void UseItem(string lobbyCode, string nickname, UnoLisServer.Common.Enums.ItemType itemType, string targetNickname) {

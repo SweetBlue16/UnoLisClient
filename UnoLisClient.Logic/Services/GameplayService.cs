@@ -167,7 +167,7 @@ namespace UnoLisClient.Logic.Services
                 try
                 {
                     EnsureConnection();
-                    _proxy.SayUnoAsync(lobbyCode, nickname);
+                    _proxy.LeaveGame(lobbyCode, nickname);
                 }
                 catch (CommunicationException ex)
                 {
@@ -180,9 +180,25 @@ namespace UnoLisClient.Logic.Services
             });
         }
 
-        public async Task UseItemAsync(string lobbyCode, string nickname, ItemType itemType, string targetNickname)
+        public Task UseItemAsync(string lobbyCode, string nickname, ItemType itemType, string targetNickname)
         {
-            await _proxy.UseItemAsync(lobbyCode, nickname, itemType, targetNickname);
+            return Task.Run(() =>
+            {
+                try
+                {
+                    EnsureConnection();
+
+                    _proxy.UseItemAsync(lobbyCode, nickname, itemType, targetNickname).Wait();
+                }
+                catch (CommunicationException ex)
+                {
+                    Logger.Warn($"[GAME-CLIENT] Cannot use item. Connection faulted: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"[GAME-CLIENT] Error using item", ex);
+                }
+            });
         }
 
         private void EnsureConnection()

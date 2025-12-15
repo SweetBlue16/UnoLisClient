@@ -23,4 +23,24 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ShopItem" nillable="true" type="tns:ShopItem" />
+  <xs:complexType name="ShopPurchaseResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RemainingCoins" type="xs:int" />
+      <xs:element minOccurs="0" name="WonAvatar" nillable="true" type="tns:PlayerAvatar" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShopPurchaseResult" nillable="true" type="tns:ShopPurchaseResult" />
+  <xs:complexType name="PlayerAvatar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvatarId" type="xs:int" />
+      <xs:element minOccurs="0" name="AvatarName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUnlocked" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Rarity" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerAvatar" nillable="true" type="tns:PlayerAvatar" />
 </xs:schema>
