@@ -143,21 +143,56 @@
                 </StackPanel>
             </Grid>
 
+            <Grid Grid.Row="1" Grid.Column="1"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Panel.ZIndex="20"
+                  IsHitTestVisible="False"
+                  Margin="-80,0,0,60">
+                <anim:SpriteAnimationControl
+                    Visibility="{Binding IsSkipReverseAnimationActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Width="220" Height="220"
+                    SpriteSource="pack://application:,,,/Assets/docOckMakingFun.png"
+                    Rows="6"
+                    Columns="6"
+                    FrameRate="24"
+                    LoopCount="2"
+                    IsPlaying="{Binding IsSkipReverseAnimationActive, Mode=TwoWay}"/>
+            </Grid>
+
             <Grid Grid.Row="1" Grid.Column="1" 
-              HorizontalAlignment="Right" 
+              HorizontalAlignment="Left" 
               VerticalAlignment="Center"
-              Panel.ZIndex="20" 
+              Panel.ZIndex="21" 
               IsHitTestVisible="False"
-              Margin="0,0,-80,60">
+              Margin="-80,0,0,60">
+
                 <anim:SpriteAnimationControl 
-                Visibility="{Binding IsWildAnimationActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                Visibility="{Binding IsSwapAnimationActive, Converter={StaticResource BoolToVisibilityConverter}}"
                 Width="220" Height="220" 
-                SpriteSource="pack://application:,,,/Assets/revoLaugh.png"
+                SpriteSource="pack://application:,,,/Assets/draLizDisappointed.png"
                 Rows="6" 
                 Columns="6"
                 FrameRate="24"
                 LoopCount="2" 
-                IsPlaying="{Binding IsWildAnimationActive, Mode=TwoWay}"/>
+                IsPlaying="{Binding IsSwapAnimationActive, Mode=TwoWay}"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" 
+                  HorizontalAlignment="Right" 
+                  VerticalAlignment="Center"
+                  Panel.ZIndex="20" 
+                  IsHitTestVisible="False"
+                  Margin="0,0,-80,60">
+                <anim:SpriteAnimationControl 
+                    Visibility="{Binding IsWildAnimationActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Width="220" Height="220" 
+                    SpriteSource="pack://application:,,,/Assets/revoLaugh.png"
+                    Rows="6" 
+                    Columns="6"
+                    FrameRate="24"
+                    LoopCount="2" 
+                    IsPlaying="{Binding IsWildAnimationActive, Mode=TwoWay}"/>
             </Grid>
 
             <ScrollViewer x:Name="HandScrollViewer" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"

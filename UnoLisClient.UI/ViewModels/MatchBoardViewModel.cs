@@ -162,6 +162,20 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _isWildAnimationActive, value);
         }
 
+        private bool _isSkipReverseAnimationActive;
+        public bool IsSkipReverseAnimationActive
+        {
+            get => _isSkipReverseAnimationActive;
+            set => SetProperty(ref _isSkipReverseAnimationActive, value);
+        }
+
+        private bool _isSwapAnimationActive;
+        public bool IsSwapAnimationActive
+        {
+            get => _isSwapAnimationActive;
+            set => SetProperty(ref _isSwapAnimationActive, value);
+        }
+
         public ICommand DrawCardCommand { get; }
         public ICommand CallUnoCommand { get; }
         public ICommand ToggleSettingsCommand { get; }
@@ -370,10 +384,12 @@ namespace UnoLisClient.UI.ViewModels
                 if (card.Value == CardValue.Reverse)
                 {
                     IsGameClockwise = !IsGameClockwise;
+                    IsSkipReverseAnimationActive = true;
                 }
                 else if (card.Value == CardValue.Skip)
                 {
                     IdentifyAndAnimateSkip(nickname);
+                    IsSkipReverseAnimationActive = true;
                 }
 
                 SoundManager.PlaySound(CardFlipSoundPath);
@@ -547,6 +563,11 @@ namespace UnoLisClient.UI.ViewModels
                     target = OpponentTop?.Nickname ?? OpponentLeft?.Nickname ?? OpponentRight?.Nickname;
 
                 }
+            }
+
+            if (serverType == ServiceItemType.SwapHands)
+            {
+                IsSwapAnimationActive = true;
             }
 
             if (target != null)

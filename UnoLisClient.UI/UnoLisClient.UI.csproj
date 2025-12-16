@@ -401,6 +401,8 @@
     <Content Include="Assets\card_flip.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\docOckMakingFun.png" />
+    <Resource Include="Assets\draLizDisappointed.png" />
     <Content Include="Assets\econexBack.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
