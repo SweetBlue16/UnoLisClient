@@ -43,9 +43,15 @@
                          MaxLength="5"
                          CharacterCasing="Upper"
                          Text="{Binding LobbyCode, UpdateSourceTrigger=PropertyChanged}"
-                         PreviewTextInput="StrongLobbyCodePreviewTextInput"/>
+                         PreviewTextInput="StrongLobbyCodePreviewTextInput">
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding JoinMatchCommand}" />
+                    </TextBox.InputBindings>
+
+                 </TextBox>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
                     <Button Content="{x:Static Langs:Global.JoinButton}"
                             Style="{StaticResource PrimaryButtonStyle}"
                             Width="130"

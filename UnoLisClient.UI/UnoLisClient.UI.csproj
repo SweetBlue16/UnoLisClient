@@ -132,6 +132,9 @@
     <Compile Include="Views\Controls\AddFriendModal.xaml.cs">
       <DependentUpon>AddFriendModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\Animations\SpriteAnimationControl.xaml.cs">
+      <DependentUpon>SpriteAnimationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
     </Compile>
@@ -404,6 +407,7 @@
     <Content Include="Assets\econexBackground.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\revoLaugh.png" />
     <Content Include="Assets\shuffle_deck.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -569,6 +573,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Controls\AddFriendModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\Animations\SpriteAnimationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

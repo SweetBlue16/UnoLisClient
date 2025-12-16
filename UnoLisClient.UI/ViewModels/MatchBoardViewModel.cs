@@ -75,6 +75,13 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _currentTurnNickname, value);
         }
 
+        private SolidColorBrush _currentTableColor = Brushes.Transparent;
+        public SolidColorBrush CurrentTableColor
+        {
+            get => _currentTableColor;
+            set => SetProperty(ref _currentTableColor, value);
+        }
+
         public ObservableCollection<CardModel> PlayerHand { get; }
             = new ObservableCollection<CardModel>();
 
@@ -146,6 +153,13 @@ namespace UnoLisClient.UI.ViewModels
         {
             get => _isGameClockwise;
             set => SetProperty(ref _isGameClockwise, value);
+        }
+
+        private bool _isWildAnimationActive;
+        public bool IsWildAnimationActive
+        {
+            get => _isWildAnimationActive;
+            set => SetProperty(ref _isWildAnimationActive, value);
         }
 
         public ICommand DrawCardCommand { get; }
@@ -291,7 +305,8 @@ namespace UnoLisClient.UI.ViewModels
                     {
                         foreach (var cardDto in hand)
                         {
-                            System.Diagnostics.Debug.WriteLine($"[CLIENT] Adding visual card: {cardDto.Color} {cardDto.Value} (ID: {cardDto.Id})");
+                            System.Diagnostics.Debug.WriteLine($"[CLIENT] Adding visual card:" +
+                                $" {cardDto.Color} {cardDto.Value} (ID: {cardDto.Id})");
                             AddCardToHand(cardDto);
                         }
                     }
@@ -331,6 +346,8 @@ namespace UnoLisClient.UI.ViewModels
 
                 DiscardPileTopCard = playedCardModel;
 
+                UpdateTableColor(card.Color);
+
                 if (nickname == _currentUserNickname)
                 {
                     var cardToRemove = PlayerHand.FirstOrDefault(cardMatch => cardMatch.CardData.Id == card.Id);
@@ -346,8 +363,8 @@ namespace UnoLisClient.UI.ViewModels
                 {
                     string colorName = GetLocalizedColorName(card.Color);
                     string message = string.Format(Match.ColorChangedMessageLabel, nickname, colorName);
-                    _gameplayService.GameMessageReceived += (msg) => { };
-                    _dialogService.ShowAlert(Match.GameNotificationMessageLabel, message, PopUpIconType.Info);
+
+                    IsWildAnimationActive = true;
                 }
 
                 if (card.Value == CardValue.Reverse)
@@ -475,7 +492,6 @@ namespace UnoLisClient.UI.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _dialogService.ShowAlert(Match.GameNotificationMessageLabel, message, PopUpIconType.Info);
-                SoundManager.PlaySound("notification.mp3");
             });
         }
 
@@ -616,10 +632,14 @@ namespace UnoLisClient.UI.ViewModels
             IsColorSelectorVisible = false;
 
             int selectedColorId = (int)CardColor.Red;
+            var targetColorEnum = CardColor.Red;
             if (Enum.TryParse(colorName, out CardColor parsedColor))
             {
                 selectedColorId = (int)parsedColor;
+                targetColorEnum = parsedColor;
             }
+
+            UpdateTableColor(targetColorEnum);
 
             try
             {
@@ -840,6 +860,27 @@ namespace UnoLisClient.UI.ViewModels
             if (_gameplayService != null)
             {
                 UnsubscribeFromGameEvents();
+            }
+        }
+
+        private void UpdateTableColor(UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor color)
+        {
+            switch (color)
+            {
+                case UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor.Red:
+                    CurrentTableColor = new SolidColorBrush(Color.FromRgb(255, 85, 85));
+                    break;
+                case UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor.Blue:
+                    CurrentTableColor = new SolidColorBrush(Color.FromRgb(85, 85, 255));
+                    break;
+                case UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor.Green:
+                    CurrentTableColor = new SolidColorBrush(Color.FromRgb(85, 170, 85));
+                    break;
+                case UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor.Yellow:
+                    CurrentTableColor = new SolidColorBrush(Color.FromRgb(255, 170, 0));
+                    break;
+                default:
+                    break;
             }
         }
     }

@@ -9,6 +9,7 @@
       xmlns:vm="clr-namespace:UnoLisClient.UI.ViewModels"
       xmlns:entities="clr-namespace:UnoLisClient.UI.ViewModels.ViewModelEntities"
       xmlns:controls="clr-namespace:UnoLisClient.UI.Views.Controls"
+      xmlns:anim="clr-namespace:UnoLisClient.UI.Views.Controls.Animations"
       xmlns:converters="clr-namespace:UnoLisClient.UI.Converters"
       d:DataContext="{d:DesignInstance vm:MatchBoardViewModel}"
       Title="MatchBoardPage"
@@ -60,11 +61,12 @@
                                           VerticalAlignment="Center"
                                           Margin="0,0,10,0"/>
 
-            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Grid.Row="1" Grid.Column="1" 
+              HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <Viewbox Width="380" Height="380" IsHitTestVisible="False" Opacity="0.15">
                     <Path Data="M 250, 50 A 200,200 0 1,1 50,250 L 10,250 L 75,175 L 140,250 L 100,250 A 150,150 0 1,0 250,100 Z" 
-                          Fill="White" RenderTransformOrigin="0.5,0.5">
+                      Fill="White" RenderTransformOrigin="0.5,0.5">
                         <Path.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
                         </Path.Effect>
@@ -81,7 +83,7 @@
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                                     To="-1" Duration="0:0:0.6">
+                                                                 To="-1" Duration="0:0:0.6">
                                                         <DoubleAnimation.EasingFunction>
                                                             <BackEase EasingMode="EaseInOut" Amplitude="0.3"/>
                                                         </DoubleAnimation.EasingFunction>
@@ -93,7 +95,7 @@
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                                     To="1" Duration="0:0:0.6">
+                                                                 To="1" Duration="0:0:0.6">
                                                         <DoubleAnimation.EasingFunction>
                                                             <BackEase EasingMode="EaseInOut" Amplitude="0.3"/>
                                                         </DoubleAnimation.EasingFunction>
@@ -109,10 +111,9 @@
                 </Viewbox>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-
                     <Border Width="100" Height="150" Margin="15" Cursor="Hand">
                         <Image Source="pack://application:,,,/Assets/Cards/BackUNOCard.png" 
-                               ToolTip="{x:Static language:Match.DrawCardTooltip}"/>
+                           ToolTip="{x:Static language:Match.DrawCardTooltip}"/>
                         <Border.InputBindings>
                             <MouseBinding MouseAction="LeftClick" Command="{Binding DrawCardCommand}" />
                         </Border.InputBindings>
@@ -121,12 +122,42 @@
                         </Border.Effect>
                     </Border>
 
+                    <Grid VerticalAlignment="Center" Margin="5,0">
+                        <Border Width="30" Height="30" CornerRadius="15"
+                            Background="{Binding CurrentTableColor}"
+                            BorderBrush="White" BorderThickness="2">
+                            <Border.Effect>
+                                <DropShadowEffect Color="{Binding CurrentTableColor.Color}" 
+                                              BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                            </Border.Effect>
+                        </Border>
+
+                        <TextBlock Text="🎨" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                    </Grid>
+
                     <Image Source="{Binding DiscardPileTopCard.ImagePath}" Width="100" Height="150" Margin="15">
                         <Image.Effect>
                             <DropShadowEffect Color="Black" Opacity="0.4" ShadowDepth="5" />
                         </Image.Effect>
                     </Image>
                 </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" 
+              HorizontalAlignment="Right" 
+              VerticalAlignment="Center"
+              Panel.ZIndex="20" 
+              IsHitTestVisible="False"
+              Margin="0,0,-80,60">
+                <anim:SpriteAnimationControl 
+                Visibility="{Binding IsWildAnimationActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                Width="220" Height="220" 
+                SpriteSource="pack://application:,,,/Assets/revoLaugh.png"
+                Rows="6" 
+                Columns="6"
+                FrameRate="24"
+                LoopCount="2" 
+                IsPlaying="{Binding IsWildAnimationActive, Mode=TwoWay}"/>
             </Grid>
 
             <ScrollViewer x:Name="HandScrollViewer" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
