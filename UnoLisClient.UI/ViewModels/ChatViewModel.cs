@@ -30,9 +30,6 @@ namespace UnoLisClient.UI.ViewModels
 
         public ICommand SendMessageCommand { get; }
 
-        /// <summary>
-        /// Creates a new instance of ChatViewModel for a specific chat channel.
-        /// </summary>
         public ChatViewModel(IChatService chatService, IDialogService dialogService, string channelId, string nickname)
             : base(dialogService)
         {

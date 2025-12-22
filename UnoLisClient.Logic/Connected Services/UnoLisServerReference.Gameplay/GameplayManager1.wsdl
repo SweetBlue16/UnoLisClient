@@ -65,6 +65,9 @@
   <wsdl:message name="IGameplayManager_PlayerShoutedUno_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerShoutedUno" />
   </wsdl:message>
+  <wsdl:message name="IGameplayManager_PlayerUsedItem_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerUsedItem" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IGameplayManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameplayManager/PlayCard" message="tns:IGameplayManager_PlayCard_InputMessage" />
@@ -113,6 +116,9 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerShoutedUno">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/PlayerShoutedUno" message="tns:IGameplayManager_PlayerShoutedUno_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerUsedItem">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameplayManager/PlayerUsedItem" message="tns:IGameplayManager_PlayerUsedItem_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameplayManager" type="tns:IGameplayManager">
@@ -210,6 +216,12 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerShoutedUno">
       <soap12:operation soapAction="http://tempuri.org/IGameplayManager/PlayerShoutedUno" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerUsedItem">
+      <soap12:operation soapAction="http://tempuri.org/IGameplayManager/PlayerUsedItem" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

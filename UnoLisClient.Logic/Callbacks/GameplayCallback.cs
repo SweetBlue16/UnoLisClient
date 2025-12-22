@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnoLisClient.Logic.UnoLisServerReference.Gameplay;
+using UnoLisServer.Common.Enums;
 
 namespace UnoLisClient.Logic.Callbacks
 {
@@ -16,6 +17,7 @@ namespace UnoLisClient.Logic.Callbacks
         public static event Action<List<GamePlayer>> OnPlayerListReceived;
         public static event Action<string> OnGameMessageReceived;
         public static event Action<string> OnPlayerShoutedUno;
+        public static event Action<string, ItemType> OnPlayerUsedItem;
 
         public void CardPlayed(string nickname, Card card, int cardsLeft)
         {
@@ -60,6 +62,11 @@ namespace UnoLisClient.Logic.Callbacks
         public void PlayerShoutedUno(string nickname)
         {
             OnPlayerShoutedUno?.Invoke(nickname);
+        }
+
+        public void PlayerUsedItem(string nickname, ItemType itemType)
+        {
+            OnPlayerUsedItem?.Invoke(nickname, itemType);
         }
     }
 }

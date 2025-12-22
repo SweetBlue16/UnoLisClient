@@ -6,13 +6,17 @@
              xmlns:local="clr-namespace:UnoLisClient.UI.Views.Controls"
              Height="6"
              Width="200"
-             Visibility="Collapsed">
+             Visibility="Collapsed"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True">
+
     <Grid>
         <ProgressBar x:Name="MainProgressBar"
                      Minimum="0"
                      Maximum="100"
                      Value="0"
                      Height="6"
+                     MinWidth="1" 
                      BorderThickness="0"
                      Style="{StaticResource ProgressBarStyle}"/>
     </Grid>

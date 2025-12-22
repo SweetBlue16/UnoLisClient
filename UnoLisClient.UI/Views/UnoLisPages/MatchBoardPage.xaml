@@ -21,7 +21,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/GameDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         </ResourceDictionary>
@@ -29,7 +28,7 @@
 
     <Grid Background="Transparent">
 
-        <Viewbox Stretch="Uniform">
+        <Viewbox Stretch="Uniform" UseLayoutRounding="True" SnapsToDevicePixels="True">
 
             <Grid Width="1280" Height="720">
                 <Grid.RowDefinitions>
@@ -59,7 +58,6 @@
                                               HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
                 <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-
                     <Viewbox Width="380" Height="380" IsHitTestVisible="False" Opacity="0.15">
                         <Path Data="M 250, 50 A 200,200 0 1,1 50,250 L 10,250 L 75,175 L 140,250 L 100,250 A 150,150 0 1,0 250,100 Z" 
                               Fill="White" RenderTransformOrigin="0.5,0.5">
@@ -166,7 +164,7 @@
 
                 <ScrollViewer x:Name="HandScrollViewer" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                               HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
-                              Padding="0,0,0,20" Margin="50,0,50,0">
+                              Padding="0,0,0,20" Margin="50,0,50,0" MinHeight="1" MinWidth="1">
                     <ItemsControl ItemsSource="{Binding PlayerHand}" ItemTemplate="{StaticResource PlayerCardTemplate}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -175,6 +173,27 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </ScrollViewer>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" 
+                            Orientation="Vertical" 
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="20,20,0,0">
+
+                    <Button Width="42" Height="42" 
+                            Command="{Binding ToggleSettingsCommand}"
+                            Background="Transparent" BorderThickness="0"
+                            ToolTip="{x:Static language:Global.SettingsLabel}">
+                        <Image Source="/Assets/Other/Settings.png" Width="26" Height="26"/>
+                    </Button>
+
+                    <Button Width="42" Height="42" 
+                            Command="{Binding ToggleChatCommand}"
+                            Background="Transparent" BorderThickness="0"
+                            Margin="0,12,0,0"
+                            ToolTip="Chat">
+                        <Image Source="/Assets/Other/MatchHistory.png" Width="26" Height="26"/>
+                    </Button>
+                </StackPanel>
 
                 <Border Grid.Column="2" Grid.Row="0" Background="#99000000" CornerRadius="30" 
                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15" Padding="15,5">
@@ -206,16 +225,9 @@
                     </StackPanel>
                 </Border>
 
-                <Button Grid.Row="0" Grid.Column="0"
-                        Content="{x:Static language:Global.SettingsLabel}"
-                        Command="{Binding ToggleSettingsCommand}"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Margin="15" Padding="10,5" Style="{DynamicResource PrimaryButtonStyle}"/>
-
                 <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,60,20"
-                        Command="{Binding CallUnoCommand}"
-                        Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,60,20" 
+                        Command="{Binding CallUnoCommand}" Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
                         Background="Transparent" BorderBrush="Transparent">
                     <Button.Content>
                         <Image Source="/Assets/Other/UNOButton.png" Stretch="Uniform" Width="80" Height="80">
@@ -279,6 +291,22 @@
 
             </Grid>
         </Viewbox>
+
+        <Grid x:Name="ChatOverlay" 
+              Visibility="{Binding IsChatVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+              Panel.ZIndex="60">
+
+            <controls:ChatControl x:Name="GameChatControl" 
+                                  HorizontalAlignment="Left" 
+                                  VerticalAlignment="Top" 
+                                  Width="320" Height="400" 
+                                  Margin="20,120,0,0">
+                <controls:ChatControl.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="5" Opacity="0.5"/>
+                </controls:ChatControl.Effect>
+            </controls:ChatControl>
+        </Grid>
+
         <Grid Background="#CC000000" 
               Visibility="{Binding IsColorSelectorVisible, Converter={StaticResource BoolToVisibilityConverter}}"
               Panel.ZIndex="50">
@@ -303,6 +331,19 @@
                     <Button Grid.Row="2" Grid.Column="0" Margin="5" Background="#55AA55" Command="{Binding SelectColorCommand}" CommandParameter="Green" Content="Green" FontSize="16" FontWeight="Bold" Foreground="White" BorderThickness="0"/>
                     <Button Grid.Row="2" Grid.Column="1" Margin="5" Background="#FFAA00" Command="{Binding SelectColorCommand}" CommandParameter="Yellow" Content="Yellow" FontSize="16" FontWeight="Bold" Foreground="White" BorderThickness="0"/>
                 </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Visibility="{Binding IsNotificationVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+              Panel.ZIndex="80" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,100,0,0">
+            <Border x:Name="NotificationToast" Background="#CC000000" CornerRadius="20" HorizontalAlignment="Center" Padding="25,10">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                </Border.Effect>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="📢" FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding NotificationMessage}" Foreground="White" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="400" TextAlignment="Center"/>
+                </StackPanel>
             </Border>
         </Grid>
 

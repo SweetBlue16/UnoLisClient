@@ -31,6 +31,7 @@ namespace UnoLisClient.Logic.Services
         public event Action<List<ResultData>> GameEnded;
         public event Action<string> GameMessageReceived;
         public event Action<string> PlayerShoutedUnoReceived;
+        public event Action<string, ItemType> PlayerUsedItemReceived;
 
         private GameplayService()
         {
@@ -43,6 +44,7 @@ namespace UnoLisClient.Logic.Services
             GameplayCallback.OnMatchEnded += (results) => GameEnded?.Invoke(results);
             GameplayCallback.OnGameMessageReceived += (msg) => GameMessageReceived?.Invoke(msg);
             GameplayCallback.OnPlayerShoutedUno += (nick) => PlayerShoutedUnoReceived?.Invoke(nick);
+            GameplayCallback.OnPlayerUsedItem += (nick, type) => PlayerUsedItemReceived?.Invoke(nick, type);
         }
 
         public void Initialize(string nickname)

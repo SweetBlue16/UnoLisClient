@@ -21,7 +21,7 @@ namespace UnoLisClient.UI.ViewModels
         }
 
         private readonly ShopService _shopService;
-        private string _currentUserNickname;
+        private readonly string _currentUserNickname;
 
         private const int SpecialBoxId = 6;
         private const int EpicBoxId = 7;

@@ -521,6 +521,9 @@ namespace UnoLisClient.Logic.UnoLisServerReference.Gameplay {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/PlayerShoutedUno")]
         void PlayerShoutedUno(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameplayManager/PlayerUsedItem")]
+        void PlayerUsedItem(string nickname, UnoLisServer.Common.Enums.ItemType itemType);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

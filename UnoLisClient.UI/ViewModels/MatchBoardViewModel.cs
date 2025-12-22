@@ -29,6 +29,7 @@ namespace UnoLisClient.UI.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IMatchmakingService _matchmakingService;
         private readonly IGameplayService _gameplayService;
+        private readonly IChatService _chatService;
         private readonly DispatcherTimer _localTurnTimer;
         private readonly Page _view;
 
@@ -46,7 +47,7 @@ namespace UnoLisClient.UI.ViewModels
         public event Action<string> RequestSetBackground;
 
         private string _currentLobbyCode;
-        private string _currentUserNickname;
+        private readonly string _currentUserNickname;
         private bool _hasShoutedUnoLocal = false;
         private List<GamePlayer> _allPlayersData;
         private CardModel _pendingWildCard;
@@ -127,6 +128,15 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _isColorSelectorVisible, value);
         }
 
+        public ChatViewModel ChatVM { get; private set; }
+
+        private bool _isChatVisible;
+        public bool IsChatVisible
+        {
+            get => _isChatVisible;
+            set => SetProperty(ref _isChatVisible, value);
+        }
+
         private string _currentTurnAvatarPath;
         public string CurrentTurnAvatarPath
         {
@@ -176,15 +186,30 @@ namespace UnoLisClient.UI.ViewModels
             set => SetProperty(ref _isSwapAnimationActive, value);
         }
 
+        private string _notificationMessage;
+        public string NotificationMessage
+        {
+            get => _notificationMessage;
+            set => SetProperty(ref _notificationMessage, value);
+        }
+
+        private bool _isNotificationVisible;
+        public bool IsNotificationVisible
+        {
+            get => _isNotificationVisible;
+            set => SetProperty(ref _isNotificationVisible, value);
+        }
+
         public ICommand DrawCardCommand { get; }
         public ICommand CallUnoCommand { get; }
         public ICommand ToggleSettingsCommand { get; }
+        public ICommand ToggleChatCommand { get; }
         public ICommand LeaveMatchCommand { get; }
         public ICommand OpenReportWindowCommand { get; }
         public ICommand ReportPlayerCommand { get; }
         public ICommand SelectColorCommand { get; }
 
-        public MatchBoardViewModel(Page view, IDialogService dialogService) : base(dialogService)
+        public MatchBoardViewModel(Page view, IDialogService dialogService, IChatService chatService) : base(dialogService)
         {
             _view = view;
             _navigationService = (INavigationService)view;
@@ -193,6 +218,7 @@ namespace UnoLisClient.UI.ViewModels
 
             _currentUserNickname = Logic.Models.CurrentSession.CurrentUserNickname;
             _gameplayService.Initialize(_currentUserNickname);
+            _chatService = chatService ?? ChatService.Instance;
 
             _localTurnTimer = new DispatcherTimer();
             _localTurnTimer.Interval = TimeSpan.FromSeconds(1);
@@ -201,6 +227,7 @@ namespace UnoLisClient.UI.ViewModels
             DrawCardCommand = new RelayCommand(ExecuteDrawCard);
             CallUnoCommand = new RelayCommand(ExecuteCallUno);
             ToggleSettingsCommand = new RelayCommand(ExecuteToggleSettings);
+            ToggleChatCommand = new RelayCommand(ExecuteToggleChat);
             LeaveMatchCommand = new RelayCommand(ExecuteExitGame);
             OpenReportWindowCommand = new RelayCommand(ExecuteOpenReport);
             ReportPlayerCommand = new RelayCommand(ExecuteReportPlayer);
@@ -217,6 +244,19 @@ namespace UnoLisClient.UI.ViewModels
             }
 
             _currentLobbyCode = lobbyCode;
+            ChatVM = new ChatViewModel(_chatService, _dialogService, _currentLobbyCode, _currentUserNickname);
+            OnPropertyChanged(nameof(ChatVM));
+
+            try
+            {
+                await ChatVM.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[CHAT] Error connecting: {ex.Message}");
+            }
+
+
             await Task.Delay(DelayMilliseconds);
 
             try
@@ -291,6 +331,7 @@ namespace UnoLisClient.UI.ViewModels
             _gameplayService.GameMessageReceived -= HandleGameMessage;
             _gameplayService.GameEnded -= HandleGameEnded;
             _gameplayService.PlayerShoutedUnoReceived -= HandlePlayerShoutedUno;
+            _gameplayService.PlayerUsedItemReceived -= HandlePlayerUsedItem;
         }
 
         private void SubscribeToGameEvents()
@@ -304,6 +345,7 @@ namespace UnoLisClient.UI.ViewModels
             _gameplayService.GameMessageReceived += HandleGameMessage;
             _gameplayService.GameEnded += HandleGameEnded;
             _gameplayService.PlayerShoutedUnoReceived += HandlePlayerShoutedUno;
+            _gameplayService.PlayerUsedItemReceived += HandlePlayerUsedItem;
         }
 
         private void HandleInitialHand(List<Card> hand)
@@ -365,7 +407,11 @@ namespace UnoLisClient.UI.ViewModels
                 if (nickname == _currentUserNickname)
                 {
                     var cardToRemove = PlayerHand.FirstOrDefault(cardMatch => cardMatch.CardData.Id == card.Id);
-                    if (cardToRemove != null) PlayerHand.Remove(cardToRemove);
+                    if (cardToRemove != null)
+                    {
+                        PlayerHand.Remove(cardToRemove);
+                    }
+
                     UpdateUnoButtonStatus();
                 }
                 else
@@ -375,13 +421,18 @@ namespace UnoLisClient.UI.ViewModels
 
                 if (IsWild(card.Value))
                 {
-                    string colorName = GetLocalizedColorName(card.Color);
-                    string message = string.Format(Match.ColorChangedMessageLabel, nickname, colorName);
-
                     IsWildAnimationActive = true;
+
+                    if (card.Color != UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor.Wild)
+                    {
+                        string colorName = GetLocalizedColorName(card.Color);
+                        string message = string.Format(Match.ColorChangedMessageLabel, nickname, colorName);
+
+                        ShowTemporaryNotification(message);
+                    }
                 }
 
-                if (card.Value == CardValue.Reverse)
+                if (card.Value == CardValue.Reverse || card.Value == CardValue.WildDrawSkipReverseFour)
                 {
                     IsGameClockwise = !IsGameClockwise;
                     IsSkipReverseAnimationActive = true;
@@ -394,6 +445,17 @@ namespace UnoLisClient.UI.ViewModels
 
                 SoundManager.PlaySound(CardFlipSoundPath);
                 UpdateUnoButtonStatus();
+            });
+        }
+
+        private void HandlePlayerUsedItem(string nickname, ServiceItemType itemType)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (itemType == ServiceItemType.SwapHands)
+                {
+                    IsSwapAnimationActive = true;
+                }
             });
         }
 
@@ -565,11 +627,6 @@ namespace UnoLisClient.UI.ViewModels
                 }
             }
 
-            if (serverType == ServiceItemType.SwapHands)
-            {
-                IsSwapAnimationActive = true;
-            }
-
             if (target != null)
             {
                 try
@@ -648,7 +705,10 @@ namespace UnoLisClient.UI.ViewModels
 
         private async void ExecuteSelectColor(string colorName)
         {
-            if (_pendingWildCard == null) return;
+            if (_pendingWildCard == null)
+            {
+                return;
+            }
 
             IsColorSelectorVisible = false;
 
@@ -739,7 +799,7 @@ namespace UnoLisClient.UI.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 string message = string.Format(Match.PlayerDeclaredUnoMessageLabel, nickname);
-                _dialogService.ShowAlert(Global.AppNameLabel, message, PopUpIconType.Info);
+                ShowTemporaryNotification(message);
 
                 SoundManager.PlaySound(ButtonClickSoundPath);
             });
@@ -747,14 +807,14 @@ namespace UnoLisClient.UI.ViewModels
 
         private void InitializeOpponents()
         {
-            if (_allPlayersData == null || !_allPlayersData.Any(p => p.Nickname == _currentUserNickname))
+            if (_allPlayersData == null || !_allPlayersData.Any(player => player.Nickname == _currentUserNickname))
             {
                 return;
             }
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                var myPlayerObj = _allPlayersData.First(p => p.Nickname == _currentUserNickname);
+                var myPlayerObj = _allPlayersData.First(player => player.Nickname == _currentUserNickname);
                 int myIndex = _allPlayersData.IndexOf(myPlayerObj);
                 int totalPlayers = _allPlayersData.Count;
 
@@ -838,6 +898,16 @@ namespace UnoLisClient.UI.ViewModels
             Items.Add(new ItemModel(Thief, NumberOfItemsPerType, (t) => ExecuteUseItem(t)));
         }
 
+        private async void ShowTemporaryNotification(string message)
+        {
+            NotificationMessage = message;
+            IsNotificationVisible = true;
+
+            await Task.Delay(3500);
+
+            IsNotificationVisible = false;
+        }
+
         private void ExecuteToggleSettings()
         {
             SoundManager.PlayClick();
@@ -876,11 +946,22 @@ namespace UnoLisClient.UI.ViewModels
         {
         }
 
-        public void CleanupEvents()
+        private void ExecuteToggleChat()
+        {
+            SoundManager.PlayClick();
+            IsChatVisible = !IsChatVisible;
+        }
+
+        public async void CleanupEvents()
         {
             if (_gameplayService != null)
             {
                 UnsubscribeFromGameEvents();
+            }
+
+            if (ChatVM != null)
+            {
+                await ChatVM.CleanupAsync();
             }
         }
 

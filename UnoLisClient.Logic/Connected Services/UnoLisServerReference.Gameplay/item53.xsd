@@ -125,4 +125,12 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="PlayerUsedItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/UnoLisServer.Common.Enums" minOccurs="0" name="itemType" type="q8:ItemType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

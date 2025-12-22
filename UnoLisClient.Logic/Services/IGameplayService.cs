@@ -17,6 +17,7 @@ namespace UnoLisClient.Logic.Services
         event Action<List<ResultData>> GameEnded;
         event Action<string> GameMessageReceived;
         event Action<string> PlayerShoutedUnoReceived;
+        event Action<string, ItemType> PlayerUsedItemReceived;
 
         void Initialize(string nickname);
         Task ConnectToGameAsync(string lobbyCode, string nickname);

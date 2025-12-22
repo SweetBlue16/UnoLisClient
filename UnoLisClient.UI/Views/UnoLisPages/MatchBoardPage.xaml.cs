@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using UnoLisClient.UI.Services;
 using UnoLisClient.UI.Utilities;
 using UnoLisClient.UI.ViewModels;
+using UnoLisClient.Logic.Services;
 using UnoLisClient.UI.Views.Controls;
 using UnoLisClient.UI.Views.UnoLisWindows;
 
@@ -24,7 +25,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
         {
             InitializeComponent();
             _lobbyCode = lobbyCode;
-            _viewModel = new MatchBoardViewModel(this, new AlertManager());
+            _viewModel = new MatchBoardViewModel(
+                this,
+                new AlertManager(),
+                ChatService.Instance 
+            );
             _viewModel.RequestSetBackground += OnBackgroundRequested;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
             DataContext = _viewModel;
@@ -78,6 +83,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 AnimationUtils.FadeIn(this.Content as Grid, 0.8);
                 _ = _viewModel.InitializeMatchAsync(_lobbyCode);
                 _viewModel.PlayerHand.CollectionChanged += PlayerHand_CollectionChanged;
+
+                if (_viewModel.ChatVM != null)
+                {
+                    GameChatControl.SetViewModel(_viewModel.ChatVM);
+                }
                 _isInitialized = true;
             }
         }
@@ -105,6 +115,34 @@ namespace UnoLisClient.UI.Views.UnoLisPages
                 else
                 {
                     await AnimationUtils.FadeOut(GameSettingsModal);
+                }
+            }
+            else if (e.PropertyName == nameof(MatchBoardViewModel.IsChatVisible))
+            {
+                if (_viewModel.IsChatVisible)
+                {
+                    AnimationUtils.FadeIn(GameChatControl);
+                }
+                else
+                {
+                    await AnimationUtils.FadeOut(GameChatControl);
+                }
+            }
+            else if (e.PropertyName == nameof(MatchBoardViewModel.ChatVM))
+            {
+                if (_viewModel.ChatVM != null)
+                {
+                    GameChatControl.SetViewModel(_viewModel.ChatVM);
+                }
+            }
+            else if (e.PropertyName == nameof(MatchBoardViewModel.IsNotificationVisible))
+            {
+                if (NotificationToast != null)
+                {
+                    if (_viewModel.IsNotificationVisible)
+                        AnimationUtils.FadeIn(NotificationToast);
+                    else
+                        await AnimationUtils.FadeOut(NotificationToast);
                 }
             }
         }
