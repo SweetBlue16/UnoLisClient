@@ -43,5 +43,11 @@ namespace UnoLisClient.UI.Views.UnoLisPages
             SoundManager.PlayClick();
             NavigationService?.Navigate(new LoginPage());
         }
+
+        private void ClickSettingsButton(object sender, RoutedEventArgs e)
+        {
+            SoundManager.PlayClick();
+            NavigationService?.Navigate(new SettingsPage());
+        }
     }
 }

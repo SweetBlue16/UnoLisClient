@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 using UnoLisClient.UI.Commands;
 using UnoLisClient.UI.Properties.Langs;
@@ -26,11 +27,11 @@ namespace UnoLisClient.UI.ViewModels
     {
         private const string EnglishCode = "en-US";
         private const string SpanishCode = "es-MX";
-
         private const int DefaultVolume = 50;
 
         private readonly INavigationService _navigationService;
         private readonly Page _view;
+        private bool _languageChanged = false;
 
         public ObservableCollection<LanguageItem> AvailableLanguages { get; set; }
 
@@ -106,6 +107,8 @@ namespace UnoLisClient.UI.ViewModels
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(newCode);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(newCode);
 
+            _languageChanged = true;
+
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 _navigationService.NavigateTo(new SettingsPage());
@@ -124,7 +127,55 @@ namespace UnoLisClient.UI.ViewModels
         private void ExecuteClose()
         {
             SoundManager.PlayClick();
-            _navigationService.NavigateTo(new MainMenuPage());
+
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            var frame = mainWindow?.MainFrame;
+
+            if (!_languageChanged && frame != null && frame.CanGoBack)
+            {
+                frame.GoBack();
+                return;
+            }
+
+            if (frame != null && frame.BackStack.Cast<JournalEntry>().Any())
+            {
+                var previousEntry = frame.BackStack.Cast<JournalEntry>()
+                    .LastOrDefault(entry => !entry.Source.ToString().Contains("SettingsPage"));
+
+                if (previousEntry != null)
+                {
+                    string lastPageSource = previousEntry.Source.ToString();
+
+                    if (lastPageSource.Contains("MainMenuPage"))
+                    {
+                        _navigationService.NavigateTo(new MainMenuPage());
+                    }
+                    else if (lastPageSource.Contains("GamePage")) // 
+                    {
+                        _navigationService.NavigateTo(new GamePage());
+                    }
+                    else if (lastPageSource.Contains("JoinMatchPage"))
+                    {
+                        _navigationService.NavigateTo(new JoinMatchPage());
+                    }
+                    else if (lastPageSource.Contains("MatchBoardPage"))
+                    {
+                        frame.GoBack();
+                    }
+                    else
+                    {
+                        _navigationService.NavigateTo(new MainMenuPage());
+                    }
+                }
+                else
+                {
+                    _navigationService.NavigateTo(new MainMenuPage());
+                }
+            }
+            else
+            {
+                _navigationService.NavigateTo(new MainMenuPage());
+            }
         }
     }
 }

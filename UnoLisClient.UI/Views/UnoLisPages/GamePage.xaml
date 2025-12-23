@@ -8,11 +8,27 @@
       Title="GamePage">
 
     <Grid>
+        <Button HorizontalAlignment="Right" 
+                VerticalAlignment="Top" 
+                Margin="30"
+                Background="Transparent" 
+                BorderThickness="0" 
+                Cursor="Hand"
+                Click="ClickSettingsButton">
+            <Button.ToolTip>
+                <ToolTip Content="{x:Static Langs:Global.SettingsLabel}"/>
+            </Button.ToolTip>
+            <Image Source="/Assets/Other/Settings.png" Width="50" Height="50">
+                <Image.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="3" Opacity="0.6"/>
+                </Image.Effect>
+            </Image>
+        </Button>
+
         <StackPanel Grid.Row="1"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="0,0,0,60">
-            <!-- Logo UNO con animación -->
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,60">
             <Image Source="/Assets/unoLogoPixelArt.png"
                    Width="248" Height="226"
                    HorizontalAlignment="Center"
@@ -29,7 +45,6 @@
                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                         <BeginStoryboard>
                             <Storyboard RepeatBehavior="Forever">
-                                <!-- Escala X -->
                                 <DoubleAnimationUsingKeyFrames 
                                     Storyboard.TargetProperty="(RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
                                     Duration="0:0:3">
@@ -39,7 +54,7 @@
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1.0"/>
                                     <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1.0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <!-- Escala Y -->
+
                                 <DoubleAnimationUsingKeyFrames 
                                     Storyboard.TargetProperty="(RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
                                     Duration="0:0:3">
@@ -49,7 +64,7 @@
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1.0"/>
                                     <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1.0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <!-- Rotación -->
+
                                 <DoubleAnimationUsingKeyFrames 
                                     Storyboard.TargetProperty="(RenderTransform).(TransformGroup.Children)[1].(RotateTransform.Angle)"
                                     Duration="0:0:3">

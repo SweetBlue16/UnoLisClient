@@ -422,14 +422,6 @@ namespace UnoLisClient.UI.ViewModels
                 if (IsWild(card.Value))
                 {
                     IsWildAnimationActive = true;
-
-                    if (card.Color != UnoLisClient.Logic.UnoLisServerReference.Gameplay.CardColor.Wild)
-                    {
-                        string colorName = GetLocalizedColorName(card.Color);
-                        string message = string.Format(Match.ColorChangedMessageLabel, nickname, colorName);
-
-                        ShowTemporaryNotification(message);
-                    }
                 }
 
                 if (card.Value == CardValue.Reverse || card.Value == CardValue.WildDrawSkipReverseFour)
@@ -569,7 +561,7 @@ namespace UnoLisClient.UI.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _dialogService.ShowAlert(Match.GameNotificationMessageLabel, message, PopUpIconType.Info);
+                ShowTemporaryNotification(message);
             });
         }
 
@@ -903,7 +895,7 @@ namespace UnoLisClient.UI.ViewModels
             NotificationMessage = message;
             IsNotificationVisible = true;
 
-            await Task.Delay(3500);
+            await Task.Delay(5000);
 
             IsNotificationVisible = false;
         }
