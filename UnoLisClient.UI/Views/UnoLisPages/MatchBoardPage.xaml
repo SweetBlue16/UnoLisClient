@@ -57,7 +57,7 @@
                                               Visibility="{Binding DataContext.OpponentRight, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource NullToVisibilityConverter}}"
                                               HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
-                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="150">
                     <Viewbox Width="380" Height="380" IsHitTestVisible="False" Opacity="0.15">
                         <Path Data="M 250, 50 A 200,200 0 1,1 50,250 L 10,250 L 75,175 L 140,250 L 100,250 A 150,150 0 1,0 250,100 Z" 
                               Fill="White" RenderTransformOrigin="0.5,0.5">
@@ -162,13 +162,29 @@
                         IsPlaying="{Binding IsWildAnimationActive, Mode=TwoWay}"/>
                 </Grid>
 
-                <ScrollViewer x:Name="HandScrollViewer" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
-                              Padding="0,0,0,20" Margin="50,0,50,0" MinHeight="1" MinWidth="1">
+                <ScrollViewer x:Name="HandScrollViewer" 
+              Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"
+              
+              Height="310"
+              VerticalAlignment="Bottom"
+              
+              Panel.ZIndex="100"
+              Background="{x:Null}" 
+              BorderThickness="0"
+              
+              HorizontalScrollBarVisibility="Auto" 
+              VerticalScrollBarVisibility="Disabled"
+              ClipToBounds="False"
+              Padding="0">
+
                     <ItemsControl ItemsSource="{Binding PlayerHand}" ItemTemplate="{StaticResource PlayerCardTemplate}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Bottom" 
+                            Margin="50,0,50,20"
+                            ClipToBounds="False"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -228,7 +244,7 @@
                 <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,60,20" 
                         Command="{Binding CallUnoCommand}" Visibility="{Binding IsUnoButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
-                        Background="Transparent" BorderBrush="Transparent">
+                        Background="Transparent" BorderBrush="Transparent" Panel.ZIndex="150">
                     <Button.Content>
                         <Image Source="/Assets/Other/UNOButton.png" Stretch="Uniform" Width="80" Height="80">
                             <Image.Effect>
@@ -240,7 +256,7 @@
 
                 <ItemsControl ItemsSource="{Binding Items}" Grid.Row="1" Grid.Column="1" 
                               HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                              Width="130" Height="130" Margin="20,0,0,20">
+                              Width="130" Height="130" Margin="20,0,0,20" Panel.ZIndex="150">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type entities:ItemModel}">
                             <Button Margin="5" Background="Transparent" BorderThickness="0" Cursor="Hand" Width="50" Height="50" Command="{Binding UseItemCommand}">

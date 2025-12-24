@@ -7,52 +7,81 @@
     <converters:BooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
 
     <DataTemplate x:Key="PlayerCardTemplate" DataType="{x:Type vm:CardModel}">
-        <Grid Width="90" Height="140" Margin="2,0" ToolTip="{Binding CardData.Value}">
-
-            <Image RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform">
-                <Image.Source>
-                    <BitmapImage UriSource="pack://application:,,,/Assets/Cards/BackUNOCard.png" CacheOption="OnLoad"/>
-                </Image.Source>
-            </Image>
-
-            <Image RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform">
-                <Image.Source>
-                    <Binding Path="ImagePath">
-                        <Binding.TargetNullValue>
-                            <x:Null/>
-                        </Binding.TargetNullValue>
-                    </Binding>
-                </Image.Source>
-            </Image>
-
-            <Border Background="#AA000000"
-                    Visibility="{Binding IsPlayable, Converter={StaticResource InvertedBoolToVisibilityConverter}}" 
-                    CornerRadius="5"/>
+        <Grid Margin="-35,0,0,0" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
 
             <Button Command="{Binding PlayCardCommand}" 
                     IsEnabled="{Binding IsPlayable}"
-                    Background="Transparent"
+                    Cursor="Hand"
+                    Background="Transparent" 
                     BorderThickness="0"
-                    Focusable="False"
-                    Cursor="Hand">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#33FFFFFF"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+                    Focusable="False">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+
+                        <Border x:Name="CardVisual" 
+                                Width="100" Height="150" 
+                                RenderTransformOrigin="0.5,1.0"
+                                Margin="0,0,0,10">
+
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    <TranslateTransform Y="0"/>
+                                    <RotateTransform Angle="0"/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+
+                            <Grid>
+                                <Image Source="{Binding ImagePath}" RenderOptions.BitmapScalingMode="HighQuality">
+                                    <Image.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="3" Opacity="0.4"/>
+                                    </Image.Effect>
+                                </Image>
+
+                                <Border Background="#AA000000" 
+                                        Visibility="{Binding IsPlayable, Converter={StaticResource InvertedBoolToVisibilityConverter}}" 
+                                        CornerRadius="5"
+                                        IsHitTestVisible="False"/>
+                            </Grid>
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.15"/>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.15"/>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)" To="0" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" To="1.15" Duration="0:0:0.1">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)" To="-40" Duration="0:0:0.1">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" To="1.1" Duration="0:0:0.05"/>
+                                            <DoubleAnimation Storyboard.TargetName="CardVisual" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" To="1.1" Duration="0:0:0.05"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
         </Grid>
     </DataTemplate>
@@ -76,12 +105,7 @@
                             <Viewbox Stretch="Uniform" Margin="2">
                                 <Grid>
                                     <Ellipse Fill="#AAFF0000" Width="100" Height="100"/>
-                                    <TextBlock Text="🚫" 
-                                               Foreground="White" 
-                                               FontWeight="Bold"
-                                               FontSize="90" 
-                                               HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="🚫" Foreground="White" FontWeight="Bold" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </Viewbox>
                         </Grid>
@@ -95,11 +119,7 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 Margin="-5,-5">
-                            <TextBlock Text="{Binding Count}"
-                                       Foreground="White"
-                                       FontWeight="Bold"
-                                       FontFamily="pack://application:,,,/Fonts/#Luckiest Guy"
-                                       FontSize="12"/>
+                            <TextBlock Text="{Binding Count}" Foreground="White" FontWeight="Bold" FontSize="12"/>
                         </Border>
                     </Grid>
 
@@ -109,7 +129,6 @@
                             <Setter TargetName="CounterBorder" Property="Visibility" Value="Collapsed"/>
                             <Setter Property="Opacity" Value="0.7"/>
                         </DataTrigger>
-
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="0.8"/>
                         </Trigger>
